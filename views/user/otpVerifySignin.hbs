@@ -1,0 +1,23 @@
+<div class="container" style="margin-top: 10%;">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 30rem;">
+            <div class="text-center mb-4">
+                <h3>OTP VERFICATION</h3>
+            </div>
+            <form method="post" action="/signIn/verify">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Enter the otp send to your mobile number</label>
+                    <input name="otp" type="text" class="form-control" id="otp" aria-describedby="emailHelp">
+                    {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+                </div>
+                {{#if err}}
+                  <p class="text-danger">{{err}}</p>
+                {{/if }}
+                <div class="mb-3 form-check">
+                    <a href="/sign">resend otp</a>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

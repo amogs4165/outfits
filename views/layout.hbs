@@ -3,6 +3,8 @@
   <head>
     <title>{{title}}</title>
     {{!-- <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com">
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <title>Diva Classic - Minimal and Modern Multipurpose Bootstrap 5 Html Template</title>
@@ -193,12 +195,13 @@
                     aria-label="Search" style="width: 18rem;" autocomplete="off" />
                 <button class="go-btn search__button" type="submit" ><i class="icon an an-search" ></i></button>
             </form>
+            {{#if userStatus}}
             <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
                 <div class="right-action text-action d-flex-align-center justify-content-end">
                     <!-- User Links -->
                     <div class="item site-user-menu">
-                        <a href="/register" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
-                                class="icon an an-user-alt me-1"></i><span class="text align-middle"style="color: white;">Login</span></a>
+                        <a href="/profile" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
+                                class="icon an an-user-alt me-1"></i><span class="text align-middle"style="color: white;">Profile</span></a>
                     </div>
                     <!-- End User Links -->
                     <!-- Wishlist -->
@@ -219,9 +222,68 @@
                     <!-- End Minicart -->
                 </div>
             </div>
+            {{else}}
+            <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
+                <div class="right-action text-action d-flex-align-center justify-content-end">
+                    <!-- User Links -->
+                    <div class="item site-user-menu">
+                        <a href="/register" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
+                                class="icon an an-user-alt me-1"></i><span class="text align-middle"style="color: white;">LogIn</span></a>
+                    </div>
+                    <!-- End User Links -->
+                    <!-- Wishlist -->
+                    {{!-- <div class="item site-header-wishlist d-none d-lg-block">
+                        <a href="wishlist.html" class="icon-wishlist text-capitalize" style="color: white;"><i
+                                class="icon an an-heart me-1"></i><span class="text align-middle">Wishlist</span><span
+                                class="site-header-wish-count1 d-none" data-cart-render="item_count">(0)</span></a>
+                    </div>
+                    <!-- End Wishlist -->
+                    <!-- Minicart -->
+                    <div class="item site-cart d-none d-lg-block" >
+                        <a href="cart.html" class="icon-cart site-header-cart btn-minicart text-capitalize" style="color: white;"
+                            data-bs-toggle="modal" data-bs-target="#minicart-drawer"><i
+                                class="icon an an-shopping-bag me-1"></i><span
+                                class="text align-middle" >Cart</span>(<span class="site-header__cart-count1"
+                                data-cart-render="item_count" >0</span>)</a>
+                    </div> --}}
+                    <!-- End Minicart -->
+                </div>
+            </div>
+            {{/if}}
         </div>
     </div>
 </nav>
     {{{body}}}
+    <script>
+        function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/signIn/getId');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+        console.log('Signed in as: ' + xhr.responseText);
+        console.log(xhr.googleUser)
+        if(xhr.responseText=='success'){
+            signOut()
+            location.assign('/emailVerify')
+        }
+        };
+        xhr.send(JSON.stringify({token: id_token}));
+        }
+    </script>
+
+    <script>
+        function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+    }
+    </script>
+    <!-- Plugins JS -->
+        <script src="/js/plugins.js"></script>
+        <!-- Main JS -->
+        <script src="/js/main.js"></script>
   </body>
 </html>

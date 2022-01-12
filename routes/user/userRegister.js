@@ -1,9 +1,7 @@
 var express = require('express')
 var router = express.Router()
-const serviceSSID = "VAac7318af48f716701e6864d30fff2e77"
-const accountSID = "AC47a755177338b0c75eef8e299e37299b"
-const authToken = "3479c51e6d29b995f3607c15fca0f021"
-const client = require('twilio')(accountSID, authToken)
+
+const client = require('twilio')(accountSID, authToken);
 
 
 router.get('/', (req, res) => {
@@ -14,17 +12,19 @@ router.post('/userDetail', (req, res) => {
     // console.log(req.body)
     console.log(req.body.phoneNumber);
     req.session.userDetails = req.body;
-    detailss = req.session.userDetails
-    console.log(detailss);
+    details = req.session.userDetails
+    console.log(details);
     client.verify
-        .services(serviceSSID)
+        .services(serviceSID)
         .verifications.create({
             to: `+91${req.body.phoneNumber}`,
             channel: "sms"
         }).then((resp) => {
+            console.log("response",resp);
             res.render('user/otpVerification')
-        }).catch(() => {
-            res.send("something went wron")
+        }).catch((resp) => {
+            console.log("response",resp);
+            res.send("something went wrongggg")
         })
 
 })

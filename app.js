@@ -1,5 +1,11 @@
 var createError = require('http-errors');
 var express = require('express');
+
+//Google Auth
+const {OAuth2Client} = require('google-auth-library');
+
+const clients = new OAuth2Client(CLIENT_ID);
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,11 +14,13 @@ var session = require('express-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var userRegister = require('./routes/user/userRegister')
-var userLogin = require('./routes/user/userSignin')
-var otpVerify = require('./routes/user/otpVerification')
+var userRegister = require('./routes/user/userRegister');
+var userLogin = require('./routes/user/userSignin');
+var otpVerify = require('./routes/user/otpVerification');
+var emailVerify = require('./routes/user/emailVerify');
+var profilePage = require('./routes/user/profilePage')
 
-var dataBase = require('./config/connection')
+var dataBase = require('./config/connection');
 
 var app = express();
 
@@ -48,6 +56,8 @@ app.use('/users', usersRouter);
 app.use('/register', userRegister);
 app.use('/signIn', userLogin);
 app.use('/verify', otpVerify)
+app.use('/emailVerify',emailVerify)
+app.use('/profile', profilePage)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

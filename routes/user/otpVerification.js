@@ -3,9 +3,7 @@ const res = require('express/lib/response');
 const { registerHelper } = require('hbs');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
-const serviceSSID = "VAac7318af48f716701e6864d30fff2e77"
-const accountSID = "AC47a755177338b0c75eef8e299e37299b"
-const authToken = "3479c51e6d29b995f3607c15fca0f021"
+
 const client = require('twilio')(accountSID, authToken)
 
 
@@ -29,6 +27,7 @@ router.post('/', (req, res) => {
 
                 helper.userRegistration(userData).then((userStatus) => {
                     if (userStatus) {
+                        req.session.status = true;
                         res.redirect('/')
                     }
                     else {
