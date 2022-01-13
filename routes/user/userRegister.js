@@ -1,11 +1,23 @@
-var express = require('express')
-var router = express.Router()
-
+var express = require('express');
+var router = express.Router();
+require('dotenv').config();
+const serviceSID = process.env.serviceSID;
+const accountSID = process.env.accountSID;//username
+const authToken = process.env.authToken;//password
 const client = require('twilio')(accountSID, authToken);
 
 
 router.get('/', (req, res) => {
-    res.render('user/register')
+
+    let userStatus = req.session.status;
+
+    if(userStatus){
+        res.redirect('/')
+    }
+    else{
+        res.render('user/register')
+    }
+    
 });
 
 router.post('/userDetail', (req, res) => {

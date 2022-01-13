@@ -3,7 +3,7 @@ var express = require('express');
 
 //Google Auth
 const {OAuth2Client} = require('google-auth-library');
-
+const CLIENT_ID = "266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com"
 const clients = new OAuth2Client(CLIENT_ID);
 
 var path = require('path');
@@ -19,6 +19,9 @@ var userLogin = require('./routes/user/userSignin');
 var otpVerify = require('./routes/user/otpVerification');
 var emailVerify = require('./routes/user/emailVerify');
 var profilePage = require('./routes/user/profilePage')
+var admin = require('./routes/admin/dashboard')
+var userManagement = require('./routes/admin/userManagement')
+
 
 var dataBase = require('./config/connection');
 
@@ -55,9 +58,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', userRegister);
 app.use('/signIn', userLogin);
-app.use('/verify', otpVerify)
-app.use('/emailVerify',emailVerify)
-app.use('/profile', profilePage)
+app.use('/verify', otpVerify);
+app.use('/emailVerify',emailVerify);
+app.use('/profile', profilePage);
+app.use('/admin', admin);
+app.use('/userManagement', userManagement);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

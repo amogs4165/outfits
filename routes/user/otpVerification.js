@@ -2,8 +2,11 @@ const express = require('express');
 const res = require('express/lib/response');
 const { registerHelper } = require('hbs');
 const router = express.Router();
+require('dotenv').config()
 const helper = require('../../helper/connectionHelper')
-
+const serviceSSID = process.env.serviceSSID
+const accountSID = process.env.accountSID
+const authToken = process.env.authToken
 const client = require('twilio')(accountSID, authToken)
 
 

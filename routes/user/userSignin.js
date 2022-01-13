@@ -1,17 +1,29 @@
 var express = require('express');
 const { Db } = require('mongodb');
 var router = express.Router();
-var helper = require('../../helper/connectionHelper')
-
+var helper = require('../../helper/connectionHelper');
+require('dotenv').config()
+const serviceSID = process.env.serviceSID;
+const accountSID = process.env.accountSID;
+const authToken = process.env.authToken;
 const client = require('twilio')(accountSID, authToken)
 const {OAuth2Client} = require('google-auth-library');
-
+const CLIENT_ID = process.env.CLIENT_ID
 const clients = new OAuth2Client(CLIENT_ID);
 
 
 router.get('/', (req, res) => {
 
-    res.render('user/signIn')
+    let userStatus = req.session.status;
+    console.log('in signin', userStatus)
+
+    if(userStatus){
+        res.redirect('/')
+    }
+    else{
+        res.render('user/signIn')
+    }
+    
 
 })
 router.post('/verify', (req, res) => {
@@ -100,7 +112,7 @@ router.post('/getId',(req,res)=>{
     // const domain = payload['hd'];
     console.log(payload)
     req.session.email = payload.email;
-    req.session.status = true;
+    
 
 }
 verify().then(()=>{

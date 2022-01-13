@@ -25,7 +25,7 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 box">	
                             <div class="mb-4">
                                 <h3>Personal Information</h3>
-                                <form method="post" action="/register/userDetail" accept-charset="UTF-8" class="customer-form">
+                                <form id="signupform" method="post" action="/register/userDetail" accept-charset="UTF-8" class="customer-form">
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
@@ -65,7 +65,7 @@
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">                                	
                                             <div class="form-group">
                                                 <label for="CustomerPassword">Password <span class="required">*</span></label>
-                                                <input id="password" type="password" name="password" placeholder="" />
+                                                <input id="password1" type="password" name="password" placeholder="" />
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="text-left col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <input type="submit" class="btn mb-3" value="Submit" />
+                                            <input type="submit" class="btn mb-3" value="submit" />
                                         </div>
                                         <div class="text-right col-12 col-sm-12 col-md-6 col-lg-6">
                                             <a href="/signIn"><i class="icon an an-angle-double-left me-1"></i>Back To Login</a>
@@ -309,8 +309,10 @@
 
             <!-- Including Javascript -->
             <!-- Plugins JS -->
-            <script src="/js/plugins.js"></script>
+            
             <!-- Main JS -->
-            <script src="/js/main.js"></script>
+            
+
+            
 
         </div>
