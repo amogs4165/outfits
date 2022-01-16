@@ -48,11 +48,14 @@
                                                     <td></td>
                                                     <td>{{this.productname}}</td>
                                                     <td>{{this.productprice}}</td>
-                                                    <td>{{this.productquantity}}</td>
-                                                    <td><img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}.jpg"></td>
-                                                    <td><a href="/categoryManagement/viewSubcategory/{{this._id}}">View Subcategories</a></td>
+                                                    <td>{{this.manufacturerquantity}}</td>
+                                                    <td><img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image1.jpg">
+                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image2.jpg">
+                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image3.jpg">
+                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image4.jpg"></td>
                                                     <td>
-                                                        <a class="btn btn-danger mt-2 "  href="/userMement/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.categoryName}}')" type="submit">Delete</a>
+                                                        <a class="btn btn-primary mt-2 "  href="/showProducts/edit/{{this._id}}" onclick="return confirm('click Ok to confirm Edit{{this.categoryName}}')" type="submit">Edit</a>
+                                                        <a class="btn btn-danger mt-2 "  href="/showProducts/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.categoryName}}')" type="submit">Delete</a>
                                                     </td>
                                                 </tr>
                                             {{/each}}

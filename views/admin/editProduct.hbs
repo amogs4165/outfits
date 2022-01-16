@@ -29,32 +29,32 @@
                             <h4 class="card-title">Basic Information</h4>
                             <p class="card-title-desc">Fill all information below</p>
 
-                            <form action="/addProduct/add" method="post" enctype="multipart/form-data">
+                            <form action="/showProducts/edit/{{product._id}}" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label for="productname">Product Name</label>
-                                            <input id="productname" name="productname" type="text" class="form-control"
+                                            <label for="productname" >Product Name</label>
+                                            <input id="productname" name="productname" value="{{product.productname}}" type="text" class="form-control"
                                                 placeholder="Product Name">
                                         </div>
                                         <div class="mb-3">
                                             <label for="manufacturerbrand">Manufacturer Brand</label>
-                                            <input id="manufacturerbrand" name="manufacturerbrand" type="text"
+                                            <input id="manufacturerbrand" name="manufacturerbrand" value="{{product.manufacturerbrand}}" type="text"
                                                 class="form-control" placeholder="Manufacturer Brand">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productsize">Size</label>
-                                            <input id="productsize" name="productsize" type="text"
+                                            <input id="productsize" name="productsize" value="{{product.productsize}}" type="text"
                                                 class="form-control" placeholder="Size">
                                         </div>
                                         <div class="mb-3">
                                             <label for="productprice">Price</label>
-                                            <input id="productprice" name="productprice" type="text" class="form-control"
+                                            <input id="productprice" name="productprice" value="{{product.productprice}}" type="text" class="form-control"
                                                 placeholder="Price">
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    {{!-- <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="control-label">Category</label>
                                             <select name="id" class="form-control select2">
@@ -84,17 +84,17 @@
                                                 placeholder="Product Description"></textarea>
                                         </div>
 
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="fallback">
                                     <input name="image1" type="file" onchange="viewImage1(event)">
-                                    <img width="100px" height="auto" src="" id="imgView1">
+                                    <img width="100px" height="auto" src="/product-images/{{product._id}}.jpg" id="imgView1">
                                     <input name="image2" type="file" onchange="viewImage2(event)">
-                                    <img width="100px" height="auto" src="" id="imgView2">
+                                    <img width="100px" height="auto" src="/product-images/{{product._id}}.jpg" id="imgView2">
                                     <input name="image3" type="file" onchange="viewImage3(event)">
-                                    <img width="100px" height="auto" src="" id="imgView3">
+                                    <img width="100px" height="auto" src="/product-images/{{product._id}}.jpg" id="imgView3">
                                     <input name="image4" type="file" onchange="viewImage4(event)">
-                                    <img width="100px" height="auto" src="" id="imgView4">
+                                    <img width="100px" height="auto" src="/product-images/{{product._id}}.jpg" id="imgView4">
                                 </div>
 
                                 <div class="d-flex flex-wrap gap-2">

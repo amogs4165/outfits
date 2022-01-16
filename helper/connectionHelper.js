@@ -231,5 +231,34 @@ module.exports = {
                 return resolve({status:false})
             }
         })
+    },
+    getProductDetailsById:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('products').findOne({_id:ObjectId(id)}).then((product)=>{
+                resolve (product)
+            })
+        })
+    },
+    updateProduct:(id,productDetails)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('products').updateOne({_id:ObjectId(id)},{
+                $set:{
+                    productname:productDetails.productname,
+                    manufacturerbrand:productDetails.manufacturerbrand,
+                    productsize:productDetails.productsize,
+                    productprice:productDetails.productprice,
+                    manufacturerquantity:productDetails.manufacturerquantity
+                }
+            }).then((response)=>{
+                resolve()
+            })
+        })
+    },
+    deleteProduct:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('products').deleteOne({_id:ObjectId(id)}).then(()=>{
+                resolve()
+            })
+        })
     }
 }
