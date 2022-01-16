@@ -34,17 +34,19 @@ router.post('/', (req, res) => {
                         res.redirect('/')
                     }
                     else {
+                        req.session.err = "this number is not registered"
                         res.redirect('/register')
                     }
                 })
             }
             else {
-                res.redirect('/register')
+                let err = "Wrong Otp"
+                res.render('user/otpVerifySignin',{err})
             }
 
         }).catch(() => {
-            res.send("something went wrong")
-            res.redirect('/register')
+            res.send("what is this")
+            
         })
 
 

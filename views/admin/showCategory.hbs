@@ -1,0 +1,75 @@
+<div id="layout-wrapper">  
+            
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+                <div class="main-content">
+
+                    <div class="page-content">
+                        {{!-- <div class="container-fluid"> --}}
+
+                            <!-- start page title -->
+                            <div class="row">
+
+                                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                    <div class="container-fluid">
+                                                <a class="navbar-brand" href="#">USER MANAGEMENT</a>
+
+                                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                                </button>
+                                    </div>
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <form class="d-flex pt-2 mx-5">
+                                            <input class="form-control me-2" onkeyup="search()" id="Search" style="width: 20rem;" type="search" placeholder="Search" aria-label="Search">
+                                            
+                                        </form>   
+                                        <a class="btn btn-primary mt-2 mx-2 ms-5" href="/adminaction/createuser" style="width: 10rem; height:2.5rem" type="submit">Create new user</a>
+                                        <a class="btn btn-danger  mt-2 "     href="/admin/destroy" style="width: 8rem; height:2.5rem" type="submit">Log Out</a>   
+                                    </div>
+                                </nav>
+                                <table class="table" id="adminTable" >
+                                    <thead>
+                                        <tr >
+                                        <th scope="col">No</th>
+                                        <th scope="col">Category Name</th>
+                                        <th scope="col">View Details</th>
+                                        <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody >
+                                            {{#each cattDetails}}
+                                                <tr class="align-middle">
+                                                    <td></td>
+                                                    <td>{{this.categoryName}}</td>
+                                                    <td><a href="/categoryManagement/viewSubcategory/{{this._id}}">View Subcategories</a></td>
+                                                    <td>
+                                                        <a class="btn btn-danger mt-2 "  href="/userMement/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.categoryName}}')" type="submit">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            {{/each}}
+                                            
+                                        </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+
+
+
+
+{{!-- 
+<div class="container">
+    <div class="row">
+        
+    </div>
+</div> --}}
+
+

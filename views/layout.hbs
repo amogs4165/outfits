@@ -17,7 +17,6 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="/images/favicon.png" />
 
-
         <!-- Admin Side -->
 
 
@@ -457,11 +456,21 @@
                                     <span key="t-dashboards">Product Management</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="index.html" key="t-default">View Products</a></li>
-                                    <li><a href="dashboard-saas.html" key="t-saas">Add Products</a></li>
+                                    <li><a href="/showProducts" key="t-default">View Products</a></li>
+                                    <li><a href="/addProduct" key="t-saas">Add Products</a></li>
                                     <li><a href="dashboard-crypto.html" key="t-crypto">Update Products</a></li>
                                     <li><a href="dashboard-blog.html" key="t-blog">Delete Products</a></li>
-                                    <li><a href="dashboard-blog.html" key="t-blog">Manage Category</a></li>
+                                    
+                                </ul>
+                            </li>
+                              <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
+                                    <span key="t-dashboards">Manage Category</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="/categoryManagement/viewCategory" key="t-default">View or Delete Category</a></li>
+                                    <li><a href="/categoryManagement" key="t-saas">Add Category</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -485,7 +494,7 @@
                                     <li><a href="dashboard-saas.html" key="t-saas">Stock Report</a></li>
                                 </ul>
                             </li>
-                            <li><a href="index.html" key="t-default">Log Out</a></li>
+                            <li><a href="/admin/logout" key="t-default">Log Out</a></li>
 
 
                             {{!-- <li>

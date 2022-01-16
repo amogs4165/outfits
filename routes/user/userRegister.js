@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 require('dotenv').config();
-const serviceSID = process.env.serviceSID;
+const serviceSSID = process.env.serviceSSID;
 const accountSID = process.env.accountSID;//username
 const authToken = process.env.authToken;//password
 const client = require('twilio')(accountSID, authToken);
@@ -27,7 +27,7 @@ router.post('/userDetail', (req, res) => {
     details = req.session.userDetails
     console.log(details);
     client.verify
-        .services(serviceSID)
+        .services(serviceSSID)
         .verifications.create({
             to: `+91${req.body.phoneNumber}`,
             channel: "sms"

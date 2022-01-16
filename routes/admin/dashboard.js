@@ -3,14 +3,46 @@ const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
 router.get('/',(req,res)=>{
-    let admin = true;
-    res.render('admin/lbar',{admin})
+    let admin = req.session.admin
+    if(admin){
+        res.render('admin/lbar',{admin})
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+    
 })
 
 router.get('/orders',(req,res)=>{
-    let admin = true;
     
-    res.render('admin/orders',{admin})
+    let admin = req.session.admin
+    if(admin){
+        res.render('admin/orders',{admin})
+    }
+    
+})
+router.get('/login',(req,res)=>{
+    let err = req.session.err
+    res.render('admin/signin',{err})
+    req.session.err = null;
+})
+router.post('/adminverify',(req,res)=>{
+    let loginCredential = req.body;
+    helper.verifyAdmin(loginCredential).then((response)=>{
+        if(response.status){
+            req.session.admin = true;
+            res.redirect('/admin');
+        }
+        else{
+            req.session.err = "Invalid admin name or password";
+            res.redirect('/admin/login')
+        }
+        
+    })
+})
+router.get('/logout',(req,res)=>{
+    req.session.admin = false;
+    res.redirect('/admin/login')
 })
 
 module.exports = router;

@@ -3,7 +3,7 @@ const { Db } = require('mongodb');
 var router = express.Router();
 var helper = require('../../helper/connectionHelper');
 require('dotenv').config()
-const serviceSID = process.env.serviceSID;
+const serviceSSID = process.env.serviceSSID;
 const accountSID = process.env.accountSID;
 const authToken = process.env.authToken;
 const client = require('twilio')(accountSID, authToken)
@@ -21,7 +21,9 @@ router.get('/', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.render('user/signIn')
+        let err = req.session.err
+        res.render('user/signIn',{err})
+        req.session.err = null;
     }
     
 
@@ -34,10 +36,11 @@ router.post('/verify', (req, res) => {
             res.redirect('/')
         }
         else {
-            res.send('fuckoff buddy')
+            req.session.err = "invalid username or password";
+            res.redirect('/signIn')
         }
     }).catch(() => {
-        res.send('fuckoff buddy')
+        res.send('hey')
     })
 })
 router.get('/signInwithnumber', (req, res) => {
@@ -49,13 +52,17 @@ router.post('/getnumber', (req, res) => {
     let number = req.body;
     helper.verifyMobileNum(number).then((response)=>{
         if(response.status){
+            console.log('im here');
+            console.log(serviceSSID);
+            console.log(accountSID);
                 client.verify
-            .services(serviceSID)
+            .services(serviceSSID)
             .verifications.create({
                 to: `+91${req.body.phoneNumber}`,
                 channel: "sms"
             }).then((resp) => {
                 console.log("response",resp);
+                
                 res.render('user/otpVerifySignin')
             }).catch((resp) => {
                 console.log("response",resp);
@@ -69,7 +76,7 @@ router.post('/getnumber', (req, res) => {
     })
     
 })
-router.post('/verify',(req,res)=>{
+router.post('/otpverify',(req,res)=>{
     const { otp } = req.body;
 
     var userData = req.session.userDetails
@@ -77,7 +84,7 @@ router.post('/verify',(req,res)=>{
     var number = userData.phoneNumber
     console.log("helloomynumber" + number)
 
-    client.verify.services(serviceSID)
+    client.verify.services(serviceSSID)
         .verificationChecks.create({
             to: `+91${number}`,
             code: otp
@@ -85,11 +92,12 @@ router.post('/verify',(req,res)=>{
             console.log("otp res", resp);
 
             if (resp.valid) {
-                req.session.user.status = true;
+                req.session.status = true;
                 res.redirect('/')
             }
             else {
-                res.send("invalid otp")
+                let err ="wrong otp"
+                res.render('user/otpVerifySignin',{err})
             }
 
     

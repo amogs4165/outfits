@@ -1,0 +1,147 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Add Product</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Add Product</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Basic Information</h4>
+                            <p class="card-title-desc">Fill all information below</p>
+
+                            <form action="/addProduct/add" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="productname">Product Name</label>
+                                            <input id="productname" name="productname" type="text" class="form-control"
+                                                placeholder="Product Name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="manufacturerbrand">Manufacturer Brand</label>
+                                            <input id="manufacturerbrand" name="manufacturerbrand" type="text"
+                                                class="form-control" placeholder="Manufacturer Brand">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productsize">Size</label>
+                                            <input id="productsize" name="productsize" type="text"
+                                                class="form-control" placeholder="Size">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productprice">Price</label>
+                                            <input id="productprice" name="productprice" type="text" class="form-control"
+                                                placeholder="Price">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="control-label">Category</label>
+                                            <select name="id" class="form-control select2">
+                                                {{#each cattDetails}}
+                                                <option onclick="addProduct(event)" value="{{this._id}}">{{this.categoryName}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="control-label">Sub Category</label>
+                                            <select name="id" class="form-control select2">
+                                                {{#each scattDetails}}
+                                                <option onclick="function check()">{{this.subCategory}}</option>
+                                                {{/each}}
+                                            </select>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="manufacturerquantity">Quantity</label>
+                                            <input id="manufacturerquantity" name="manufacturerquantity" type="text"
+                                                class="form-control" placeholder="Quantity">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productdescription">Product Description</label>
+                                            <textarea class="form-control" id="productdescription" rows="5"
+                                                placeholder="Product Description"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="fallback">
+                                    <input name="image1" type="file" >
+                                    <input name="image2" type="file" >
+                                    <input name="image3" type="file" >
+                                    <input name="image4" type="file" >
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save
+                                        Changes</button>
+                                    <button type="button"
+                                        class="btn btn-secondary waves-effect waves-light">Cancel</button>
+                                </div>
+                                
+                            </form>
+
+                        </div>
+                    </div>
+
+                    
+
+                    
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Skote.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Design & Develop by Themesbrand
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function addProduct(data){
+        console.log("api call",id,data)
+    }
+    function check(id) {
+        console.log("api call",id)
+        $.ajax({
+            url: "http://path.to.ur/url",
+            type: "POST",
+        })
+    }
+</script>

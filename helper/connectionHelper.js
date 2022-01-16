@@ -1,3 +1,4 @@
+const { response } = require('express');
 const{ObjectId, Db} = require('mongodb');
 const dB = require('../config/connection');
 
@@ -21,7 +22,7 @@ module.exports = {
                 return resolve ({status:true,user})
             }
             else{
-                return reject ({status:false})
+                return resolve ({status:false})
             }
         })
     },
@@ -108,4 +109,127 @@ module.exports = {
             })
         })
     },
+    checkCategory:(category)=>{
+        return new Promise (async(resolve,reject)=>{
+            console.log(category.categoryName);
+            
+            await dB.get().collection('category').findOne({categoryName:category.categoryName}).then((catt)=>{
+                console.log("hii",catt);
+                if(catt){
+                    return resolve(true)
+                }
+                else{
+                    return resolve(false)
+                }
+            
+            })
+            
+          
+        })
+    },
+    addCategory:(category)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('category').insertOne(category).then(()=>{
+                return resolve(true)
+            }).catch(()=>{
+                return reject(false)
+            })
+        })
+    },
+    getCategory:()=>{
+        return new Promise((resolve,reject)=>{
+            let catt = dB.get().collection('category').find().toArray();
+            return resolve(catt);
+        })
+    },
+    addSubCategory:(data)=>{
+        return new Promise((resolve,reject)=>{
+            let id = data.category;
+            let subCategory = data.subCategoryName;
+            console.log(id,subCategory);
+            dB.get().collection('subcategory').insertOne({subCategory,category:ObjectId(id)}).then(()=>{
+                return resolve();
+            }).catch(()=>{
+                return reject();
+            })
+        })
+    },
+    checkSubCategory:(data)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(data)
+           dB.get().collection('subcategory').findOne({subCategory:data}).then((ifData)=>{
+               if(ifData){
+                   return resolve(true);
+               }
+               else{
+                   return resolve(false);
+               }
+           }) 
+        })
+    },
+    getCategoryDetails:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let cattDetails = await dB.get().collection('category').find().toArray();
+            if(cattDetails){
+                return resolve({status:true,cattDetails})
+            }
+            else{
+                return resolve({status:false})
+            }
+        })
+    },
+    getSubcategoryDetails:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cattDetails = await dB.get().collection('subcategory').find({category:ObjectId(id)}).toArray();
+            if(cattDetails){
+                return resolve({status:true,cattDetails})
+            }
+            else{
+                return resolve({status:false})
+            }
+        })
+    },
+    getSCategoryDetails:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let cattDetails = await dB.get().collection('subcategory').find().toArray();
+            if(cattDetails){
+                return resolve({status:true,cattDetails})
+            }
+            else{
+                return resolve({status:false})
+            }
+        })
+    },
+    addProduct:(product,callback)=>{
+       
+        dB.get().collection('products').insertOne(product).then((data)=>{
+            console.log(data);
+            callback(data.insertedId)
+        })
+        
+    },
+    getProducts:()=>{
+        console.log('im here 1')
+        return new Promise(async(resolve,reject)=>{
+            let products = await dB.get().collection('products').find().toArray()
+            
+                console.log((products));
+            if(products){
+                return resolve(products)
+            }
+            
+        })
+        
+    },
+    verifyAdmin:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+            let admin = await dB.get().collection('admin').findOne({adminName:data.adminName,password:data.password})
+            if(admin){
+                return resolve({status:true})
+            }
+            else{
+                return resolve({status:false})
+            }
+        })
+    }
 }

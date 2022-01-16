@@ -11,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongodb = require('mongodb')
 var session = require('express-session')
+var fileUpload = require('express-fileupload')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -18,9 +19,12 @@ var userRegister = require('./routes/user/userRegister');
 var userLogin = require('./routes/user/userSignin');
 var otpVerify = require('./routes/user/otpVerification');
 var emailVerify = require('./routes/user/emailVerify');
-var profilePage = require('./routes/user/profilePage')
-var admin = require('./routes/admin/dashboard')
-var userManagement = require('./routes/admin/userManagement')
+var profilePage = require('./routes/user/profilePage');
+var admin = require('./routes/admin/dashboard');
+var userManagement = require('./routes/admin/userManagement');
+var addProduct = require('./routes/admin/addProduct');
+var categoryManagement = require('./routes/admin/categoryManagement')
+var showProducts = require('./routes/admin/showProducts')
 
 
 var dataBase = require('./config/connection');
@@ -41,10 +45,10 @@ app.set('view engine', 'hbs');
 
 dataBase.connect((err)=>{
   if(err){
-    console.log("***DATABASE CONNECTED***");
+    console.log(("***DATABASE NOT CONNECTED***"));
   }
   else{
-    console.log(("***DATABASE NOT CONNECTED***"));
+    console.log("***DATABASE CONNECTED***");
   }
 })
 
@@ -53,6 +57,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(fileUpload())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -63,6 +68,10 @@ app.use('/emailVerify',emailVerify);
 app.use('/profile', profilePage);
 app.use('/admin', admin);
 app.use('/userManagement', userManagement);
+app.use('/addProduct', addProduct);
+app.use('/categoryManagement', categoryManagement);
+app.use('/showProducts', showProducts)
+
 
 
 // catch 404 and forward to error handler

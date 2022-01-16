@@ -1,0 +1,97 @@
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">ADD CATEGORY</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form method="post" action="/categoryManagement/addCategory">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        
+                                                        <input id="categoryName" name="categoryName" type="text" class="form-control" placeholder="Category Name">
+                                                    </div>
+                                                    {{!-- <div class="mb-3">
+                                                        
+                                                        <input id="subCategoryName" name="subCategoryName" type="text" class="form-control" placeholder="Sub Category Name">
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Add Category</button>
+                                                <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">ADD SUB CATEGORY</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form method="post" action="/categoryManagement/addSubCategory">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="control-label">Select Category</label>
+                                                        
+                                                        <select name="category" class="form-control select2">
+                                                            {{!-- <form method="post" action="/categoryManagement/addSubCategory"> --}}
+                                                           {{#each catt}}
+                                                            <option value="{{this._id}}" >{{this.categoryName}}</option>
+                                                    
+                                                            {{/each}}
+                                                            {{!-- </form> --}}
+                                                        </select>
+                                                        
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        
+                                                        <input id="subCategoryName" name="subCategoryName" type="text" class="form-control" placeholder="Sub Category Name">
+                                                    </div>
+                                                    {{!-- <div class="mb-3">
+                                                        
+                                                        <input id="subCategoryName" name="subCategoryName" type="text" class="form-control" placeholder="Sub Category Name">
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Add Sub Category</button>
+                                                <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+            </div>
+
+   

@@ -44,7 +44,10 @@
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group">
                                                 <label for="CustomerPassword">Password <span class="required">*</span></label>
-                                                <input type="password" value="" name="password" placeholder="" id="password" class="">                        	
+                                                <input type="password" value="" name="password" placeholder="" id="password" class="">        
+                                                {{#if err}}
+                                                    <p class="text-danger">{{err}}</p>
+                                                {{/if}}
                                             </div>
                                         </div>
                                     </div>
