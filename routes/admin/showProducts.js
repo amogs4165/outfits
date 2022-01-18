@@ -26,37 +26,39 @@ router.get('/edit/:id',async(req,res)=>{
 router.post('/edit/:id',(req,res)=>{
     let id = req.params.id;
     helper.updateProduct(id,req.body).then(()=>{
-        if(req.files.image1){
-            let image1 = req.files.image1
-            image1.mv('./public/product-images/'+id+'image1.jpg',(err)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
-        }
-        if(req.files.image2){
-            let image2 = req.files.image2
-            image2.mv('./public/product-images/'+id+'image2.jpg',(err)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
-        }
-        if(req.files.image3){
-            let image3 = req.files.image3
-            image3.mv('./public/product-images/'+id+'image3.jpg',(err)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
-        }
-        if(req.files.image4){
-            let image4 = req.files.image4
-            image4.mv('./public/product-images/'+id+'image4.jpg',(err)=>{
-                if(err){
-                    console.log(err)
-                }
-            })
+        if(req.files){
+            if(req.files.image1){
+                let image1 = req.files.image1
+                image1.mv('./public/product-images/'+id+'image1.jpg',(err)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                })
+            }
+            if(req.files.image2){
+                let image2 = req.files.image2
+                image2.mv('./public/product-images/'+id+'image2.jpg',(err)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                })
+            }
+            if(req.files.image3){
+                let image3 = req.files.image3
+                image3.mv('./public/product-images/'+id+'image3.jpg',(err)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                })
+            }
+            if(req.files.image4){
+                let image4 = req.files.image4
+                image4.mv('./public/product-images/'+id+'image4.jpg',(err)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                })
+            }
         }
         
         res.redirect('/showProducts')
@@ -68,13 +70,10 @@ router.get('/delete/:id',(req,res)=>{
     let id = req.params.id;
     
     helper.deleteProduct(id).then(()=>{
-       
-        for(i=1;i<5;i++){
-            var path =['./public/product-images/'+id+'image'+i+'.jpg']
-        }
 
-        for(i=0;i<4;i++){
-            fs.unlinkSync(path[i])
+        for(i=1;i<5;i++){
+            var path = './public/product-images/'+id+'image'+i+'.jpg'
+            fs.unlinkSync(path);
         }
         
         res.redirect('/showProducts')

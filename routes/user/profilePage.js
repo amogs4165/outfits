@@ -3,8 +3,9 @@ let router = express.Router();
 
 router.get('/',(req,res)=>{
     let userStatus = req.session.status
+    let user = req.session.userDetails
     if(userStatus){
-        res.render('user/userProfile',{userStatus})
+        res.render('user/userProfile',{userStatus,user})
     }
     else{
         res.redirect('/signIn')

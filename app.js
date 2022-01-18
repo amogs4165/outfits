@@ -23,16 +23,16 @@ var profilePage = require('./routes/user/profilePage');
 var admin = require('./routes/admin/dashboard');
 var userManagement = require('./routes/admin/userManagement');
 var addProduct = require('./routes/admin/addProduct');
-var categoryManagement = require('./routes/admin/categoryManagement')
-var showProducts = require('./routes/admin/showProducts')
-
+var categoryManagement = require('./routes/admin/categoryManagement');
+var showProducts = require('./routes/admin/showProducts');
+var cart = require('./routes/user/cart')
 
 var dataBase = require('./config/connection');
 
 var app = express();
 
 
-app.use(session({secret:'key',cookie:{maxAge:60000}}))
+app.use(session({secret:'key',cookie:{maxAge:600000}}))
 
 app.use((req,res,next)=>{
   res.set('Cache-Control','no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -70,7 +70,8 @@ app.use('/admin', admin);
 app.use('/userManagement', userManagement);
 app.use('/addProduct', addProduct);
 app.use('/categoryManagement', categoryManagement);
-app.use('/showProducts', showProducts)
+app.use('/showProducts', showProducts);
+app.use('/cart', cart);
 
 
 

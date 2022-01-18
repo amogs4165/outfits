@@ -15,6 +15,7 @@ const clients = new OAuth2Client(CLIENT_ID);
 router.get('/', (req, res) => {
 
     let userStatus = req.session.status;
+   
     console.log('in signin', userStatus)
 
     if(userStatus){
@@ -33,6 +34,7 @@ router.post('/verify', (req, res) => {
     helper.userVerify(loginCredential).then((response) => {
         if (response.status) {
             req.session.status = true;
+            req.session.user = response.user
             res.redirect('/')
         }
         else {
@@ -40,7 +42,7 @@ router.post('/verify', (req, res) => {
             res.redirect('/signIn')
         }
     }).catch(() => {
-        res.send('hey')
+        res.send('something went wrong');
     })
 })
 router.get('/signInwithnumber', (req, res) => {
@@ -92,8 +94,12 @@ router.post('/otpverify',(req,res)=>{
             console.log("otp res", resp);
 
             if (resp.valid) {
-                req.session.status = true;
-                res.redirect('/')
+                helper.loginUserdetailWithNum(number).then((resp)=>{
+                    req.session.user = resp
+                    req.session.status = true;
+                    res.redirect('/')
+                })
+                
             }
             else {
                 let err ="wrong otp"

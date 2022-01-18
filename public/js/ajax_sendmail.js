@@ -50,7 +50,7 @@
         if (valid) {
             $.ajax({
                 type: "POST",
-                url: "assets/php/ajax_sendmail.php",
+                url: "/php/ajax_sendmail.php",
                 data: frm.serialize(),
                 beforeSend: function () {
                     $(".loading").show();

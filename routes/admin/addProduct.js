@@ -2,6 +2,14 @@ const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('')
+    }
+}
 
 router.get('/',(req,res)=>{
     let admin = true;

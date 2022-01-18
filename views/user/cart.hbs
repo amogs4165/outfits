@@ -1,0 +1,352 @@
+
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
+        <!-- End Page Loader -->
+
+        <div class="pageWrapper">
+            <!-- Promotion Bar -->
+            
+            <!-- End Promotion Bar -->
+
+            <!-- Search Form Drawer -->
+            
+            <!-- End Mobile Menu -->
+
+            <!-- Body Content -->
+            <div id="page-content">
+                <!-- Page Title -->
+                <div class="page section-header text-center">
+                    <div class="page-title">
+                        <div class="wrapper"><h1 class="page-title">Cart Page Style1</h1></div>
+                    </div>
+                </div>
+                <!-- End Page Title -->
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Main Content -->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                            <div class="alert alert-success text-uppercase" role="alert">
+                                <i class="icon an an-truck icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
+                            </div>
+                            <form action="#" method="post" class="cart style2">
+                                <table>
+                                    <thead class="cart__row cart__header">
+                                        <tr>
+                                            <th colspan="2" class="text-center">Product</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Total</th>
+                                            <th class="action">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    {{#each products}}
+                                    <tbody>
+                                        <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                            <td class="cart__image-wrapper cart-flex-item">
+                                                <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/images/product-images/product-image16.jpg" src="assets/images/product-images/product-image16.jpg" alt="Elastic Waist Dress - Navy / Small" /></a>
+                                            </td>
+                                            <td class="cart__meta small--text-left cart-flex-item">
+                                                <div class="list-view-item__title">
+                                                    <a href="product-layout1.html">Elastic Waist Dress </a>
+                                                </div>
+                                                <div class="cart__meta-text">
+                                                    Color: Navy<br>Size: Small<br>
+                                                </div>
+                                            </td>
+                                            <td class="cart__price-wrapper cart-flex-item text-center">
+                                                <span class="money">$735.00</span>
+                                            </td>
+                                            <td class="cart__update-wrapper cart-flex-item text-center">
+                                                <div class="cart__qty text-center">
+                                                    <div class="qtyField">
+                                                        <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus"></i></a>
+                                                        <input class="cart__qty-input qty" type="text" name="updates[]" value="1" pattern="[0-9]*" />
+                                                        <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus"></i></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="small--hide cart-price text-center">
+                                                <span class="money">$735.00</span>
+                                            </td>
+                                            <td class="text-center small--hide"><a href="#" class="btn btn--secondary cart__remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times"></i></a></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    {{/each}}
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-start"><a href="#" class="btn btn--link btn--small cart-continue"><i class="icon an an-chevron-circle-left"></i> Continue shopping</a></td>
+                                            <td colspan="3" class="text-end">
+                                                <button type="submit" name="clear" class="btn btn--link btn--small small--hide"><i class="icon an an-times"></i> Clear Shoping Cart</button>
+                                                <button type="submit" name="update" class="btn btn--link btn--small cart-continue ml-2"><i class="icon an an-sync"></i> Update Cart</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table> 
+                            </form>                   
+                        </div>
+
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
+                                   
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
+                                    
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer">
+                                    <div class="solid-border">	
+                                        <div class="row border-bottom pb-2">
+                                            <span class="col-12 col-sm-6 cart__subtotal-title">Subtotal</span>
+                                            <span class="col-12 col-sm-6 text-right"><span class="money">$735.00</span></span>
+                                        </div>
+                                        <div class="row border-bottom pb-2 pt-2">
+                                            <span class="col-12 col-sm-6 cart__subtotal-title">Tax</span>
+                                            <span class="col-12 col-sm-6 text-right">$10.00</span>
+                                        </div>
+                                        <div class="row border-bottom pb-2 pt-2">
+                                            <span class="col-12 col-sm-6 cart__subtotal-title">Shipping</span>
+                                            <span class="col-12 col-sm-6 text-right">Free shipping</span>
+                                        </div>
+                                        <div class="row border-bottom pb-2 pt-2">
+                                            <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Grand Total</strong></span>
+                                            <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">$1001.00</span></span>
+                                        </div>
+                                        <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
+                                        <div class="customCheckbox cart_tearm">
+                                            <input type="checkbox" value="allen-vela" id="1532947863384-0">
+                                            <label for="1532947863384-0">I agree with the terms and conditions</label>
+                                        </div>
+                                        <a href="checkout.html" id="cartCheckout" class="btn btn--small-wide checkout">Proceed To Checkout</a>
+                                        <div class="paymnet-img"><img src="/images/payment-img.jpg" alt="Payment" /></div>
+                                 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Body Content -->
+
+            <!-- Footer -->
+            <footer id="footer">
+                <div class="site-footer">
+                    <div class="footer-top">
+                        <div class="container">
+                            <!-- Footer Links -->
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                                    <h4 class="h4">Quick Links</h4>
+                                    <ul>
+                                        <li><a href="#">Women</a></li>
+                                        <li><a href="#">Men</a></li>
+                                        <li><a href="#">Kids</a></li>
+                                        <li><a href="#">Deals</a></li>
+                                        <li><a href="#">Accessories</a></li>
+                                        <li><a href="#">New In</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                                    <h4 class="h4">Help</h4>
+                                    <ul>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">My Orders</a></li>
+                                        <li><a href="#">Terms And Conditions</a></li>
+                                        <li><a href="#">Shipping Policy</a></li>
+                                        <li><a href="#">Returns &amp; Exchange</a></li>
+                                        <li><a href="#">Ordering &amp; Payment</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
+                                    <h4 class="h4">Contact Us</h4>
+                                    <ul class="addressFooter">
+                                        <li>
+                                            <i class="icon an an-map-marker"></i>
+                                            <p>55 Gallaxy Enque,<br>2568 steet, 23568 NY</p>
+                                        </li>
+                                        <li class="phone">
+                                            <i class="icon an an-phone-volume"></i>
+                                            <p><a href="tel:(440)0000000000">(440) 000 000 0000</a></p>
+                                        </li>
+                                        <li class="email">
+                                            <i class="icon an an-envelope"></i>
+                                            <p><a href="mailto:sales@yousite.com">sales@yousite.com</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 newsletter">
+                                    <div class="display-table">
+                                        <div class="display-table-cell footer-newsletter">
+                                            <form action="#" method="post">
+                                                <label class="h4">Newsletter</label>
+                                                <p>sign up for newsletter to know our latest news and offers.</p>
+                                                <div class="input-group">
+                                                    <input type="email" class="input-group__field newsletter__input" name="EMAIL" value="" placeholder="Email address" required />
+                                                    <span class="input-group__btn">
+                                                        <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe"><span class="newsletter__submit-text--large">Sign Up</span></button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Footer Links -->
+                    </div>
+
+                    <div class="footer-middle">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-Start align-items-center">
+                                    <div class="footer-social w-100 text-start d-flex">
+                                        <h3 class="h4">Stay Connected</h3>
+                                        <ul class="list--inline site-footer__social-icons social-icons">
+                                            <li><a class="social-icons__link d-inline-block" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="icon an an-facebook"></i></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="icon an an-pinterest-p"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                                            <li><a class="social-icons__link d-inline-block" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="YouTube"><i class="icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--Footer Payment Icon-->
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end align-items-center">
+                                    <ul class="payment-icons list--inline w-100 justify-content-end text-end">
+                                        <li><i class="icon an an-cc-visa" aria-hidden="true"></i></li>
+                                        <li><i class="icon an an-cc-mastercard" aria-hidden="true"></i></li>
+                                        <li><i class="icon an an-cc-amex" aria-hidden="true"></i></li>
+                                        <li><i class="icon an an-cc-paypal" aria-hidden="true"></i></li>
+                                        <li><i class="icon an an-cc-discover" aria-hidden="true"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- End Footer Payment Icon-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Footer Copyright -->
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 copyright text-center"><span>&copy; 2021 DIVA.</span> All Rights Reserved.</div>
+                                <!-- End Footer Copyright -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer -->
+
+            <!-- Scoll Top -->
+            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+            <!-- End Scoll Top -->
+
+            <!-- Minicart Drawer -->
+            <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="minicart-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
+                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong>3</strong> items</h4>
+                        </div>
+                        <div class="minicart-body">
+                            <div class="empty-cart">
+                                <p>You have no items in your shopping cart.</p>
+                            </div>
+                            <div id="drawer-minicart" class="block block-cart">
+                                <ul class="mini-products-list">
+                                    <li class="item">
+                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-1.jpg" alt="Frayed Layered Sleeve" title=""></a>
+                                        <div class="product-details">
+                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                            <a class="pName" href="cart.html">Frayed Layered Sleeve</a>
+                                            <div class="variant-cart">Red / XL</div>
+                                            <div class="wrapQtyBtn clearfix">
+                                                <span class="label">Qty:</span>
+                                                <div class="qtyField clearfix">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="priceRow clearfix">
+                                                <div class="product-price">
+                                                    <span class="money">$199.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item">
+                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-2.jpg" alt="Floral Lined Jacket" title=""></a>
+                                        <div class="product-details">
+                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                            <a class="pName" href="cart.html">Floral Lined Jacket</a>
+                                            <div class="variant-cart">Black / M</div>
+                                            <div class="wrapQtyBtn clearfix">
+                                                <span class="label">Qty:</span>
+                                                <div class="qtyField clearfix">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="priceRow clearfix">
+                                                <div class="product-price">
+                                                    <span class="money">$129.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item">
+                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-3.jpg" alt="Fit & Flare Trim Dress" title=""></a>
+                                        <div class="product-details">
+                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                            <a class="pName" href="cart.html">Fit & Flare Trim Dress</a>
+                                            <div class="variant-cart">white / XL</div>
+                                            <div class="wrapQtyBtn clearfix">
+                                                <span class="label">Qty:</span>
+                                                <div class="qtyField clearfix">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="priceRow clearfix">
+                                                <div class="product-price">
+                                                    <span class="money">$99.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="minicart-footer minicart-action">
+                            <div class="total-in">
+                                <p class="label"><b>Subtotal:</b><span class="item product-price"><span class="money">$427.00</span></span></p>
+                                <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">$10.00</span></span></p>
+                                <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">$0.00</span></span></p>
+                                <p class="label"><b>Total:</b><span class="item product-price"><span class="totals">$437.00</span></span></p>
+                            </div>
+                            <div class="buttonSet d-flex flex-row align-items-center text-center">
+                                <a href="cart.html" class="btn btn-secondary w-50 me-3">View Cart</a>
+                                <a href="checkout.html" class="btn btn-secondary w-50">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Minicart Drawer -->
+
+
+        
+
+        </div>

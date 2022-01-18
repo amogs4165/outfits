@@ -1,4 +1,5 @@
 const { response } = require('express');
+const async = require('hbs/lib/async');
 const{ObjectId, Db} = require('mongodb');
 const dB = require('../config/connection');
 
@@ -24,6 +25,14 @@ module.exports = {
             else{
                 return resolve ({status:false})
             }
+        })
+    },
+    loginUserdetailWithNum:(number)=>{
+        return new Promise(async(resolve,reject)=>{
+            await dB.get().collection('userData').findOne({phoneNumber:number}).then((user)=>{
+                console.log(user,"heey this is the user detials logged in by number")
+                return resolve(user)
+            })
         })
     },
     verifyMobileNum:(number)=>{
@@ -259,6 +268,69 @@ module.exports = {
             dB.get().collection('products').deleteOne({_id:ObjectId(id)}).then(()=>{
                 resolve()
             })
+        })
+    },
+    getSpecificProduct:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('products').findOne({_id:ObjectId(id)}).then((resp)=>{
+                return resolve(resp);
+            })
+        })
+    },
+    addToCart:(userId,productId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let userCart = await dB.get().collection('cart').findOne({userId: ObjectId(userId)})
+
+            if(userCart){
+                let product = await dB.get().collection('cart').findOne({productId: ObjectId(productId)})
+                if(product){
+                    
+                }
+                else{
+                    dB.get().collection('cart').updateOne({userId:ObjectId(userId)},
+                    {
+                        
+                            $push:{productId:ObjectId(productId)}
+                        
+                    }).then(()=>{
+                        return resolve()
+                    })
+                }
+                
+            }
+            else{
+                dB.get().collection('cart').insertOne({userId:ObjectId(userId),productId:[ObjectId(productId)]}).then(()=>{
+                    return resolve();
+                })
+            }
+           
+        })
+    },
+    userCart:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cartItems = await dB.get().collection('cart').aggregate([
+                {
+                    $match:{userId:ObjectId(userId)}
+                },
+                {
+                    $lookup:{
+                        from:'products',
+                        
+                        let:{prodList:'$productId'},
+                        pipeline:[
+                            {
+                                $match:{
+                                    $expr:{
+                                        $in:['$_id',"$$prodList"]
+                                    }
+                                }
+                            }
+                        ],
+                        as:'cartItems'
+                    }
+                }
+            ]).toArray()
+            resolve(cartItems[0].productId)
         })
     }
 }

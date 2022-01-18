@@ -8,9 +8,9 @@ router.get('/', function(req, res, next) {
   let userStatus = req.session.status;
 
   helper.getProducts().then((resp)=>{
-    let products = resp.slice(0,3)
-    console.log("hey",products)
-    res.render('index',{userStatus});
+    let products = resp.slice(0,8)
+    
+    res.render('index',{userStatus,products});
   })
   
   
@@ -23,5 +23,15 @@ router.get('/logout',(req,res)=>{
     res.redirect('/')
   }
  
+})
+
+router.get('/productShow/:id',(req,res)=>{
+  let id = req.params.id;
+  let userStatus = req.session.status
+  helper.getSpecificProduct(id).then((resp)=>{
+    let product = resp;  
+    res.render('productView',{userStatus,product})
+  })
+  
 })
 module.exports = router;
