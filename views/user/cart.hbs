@@ -40,40 +40,46 @@
                                             <th class="action">&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    {{#each products}}
+                                    
                                     <tbody>
+                                              {{#each products}}
                                         <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                     
                                             <td class="cart__image-wrapper cart-flex-item">
-                                                <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/images/product-images/product-image16.jpg" src="assets/images/product-images/product-image16.jpg" alt="Elastic Waist Dress - Navy / Small" /></a>
+                                                <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/product-images/{{this.productId}}image1.jpg"  src="/product-images/{{this.productId}}image2.jpg" alt="Elastic Waist Dress - Navy / Small" /></a>
                                             </td>
                                             <td class="cart__meta small--text-left cart-flex-item">
                                                 <div class="list-view-item__title">
-                                                    <a href="product-layout1.html">Elastic Waist Dress </a>
+                                                    <a href="product-layout1.html">{{this.productname}}</a>
                                                 </div>
                                                 <div class="cart__meta-text">
                                                     Color: Navy<br>Size: Small<br>
                                                 </div>
                                             </td>
                                             <td class="cart__price-wrapper cart-flex-item text-center">
-                                                <span class="money">$735.00</span>
+                                                <span class="money">{{this.productprice}}</span>
                                             </td>
                                             <td class="cart__update-wrapper cart-flex-item text-center">
                                                 <div class="cart__qty text-center">
                                                     <div class="qtyField">
-                                                        <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus"></i></a>
-                                                        <input class="cart__qty-input qty" type="text" name="updates[]" value="1" pattern="[0-9]*" />
-                                                        <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus"></i></a>
+                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
+                                                        <input class="cart__qty-input qty" type="text" value="{{this.quantity}}" disabled/>
+                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1)"><i class="icon an an-plus"></i></a>
                                                     </div>
                                                 </div>
                                             </td>
+                                            
                                             <td class="small--hide cart-price text-center">
-                                                <span class="money">$735.00</span>
+                                                <span class="money total_{{ this.productId }}">{{this.total}}</span>
                                             </td>
+                                           
                                             <td class="text-center small--hide"><a href="#" class="btn btn--secondary cart__remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times"></i></a></td>
+                                        
                                         </tr>
+                                             {{/each}}
                                         
                                     </tbody>
-                                    {{/each}}
+                                    
                                     <tfoot>
                                         <tr>
                                             <td colspan="3" class="text-start"><a href="#" class="btn btn--link btn--small cart-continue"><i class="icon an an-chevron-circle-left"></i> Continue shopping</a></td>
@@ -260,72 +266,30 @@
                             </div>
                             <div id="drawer-minicart" class="block block-cart">
                                 <ul class="mini-products-list">
+                                    {{#each products}}
                                     <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-1.jpg" alt="Frayed Layered Sleeve" title=""></a>
+                                        <a class="product-image" href="cart.html"><img src="/product-images/{{this.products._id}}image1.jpg" alt="Frayed Layered Sleeve" title=""></a>
                                         <div class="product-details">
                                             <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
                                             <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Frayed Layered Sleeve</a>
+                                            <a class="pName" href="cart.html">{{this.products.productname}}</a>
                                             <div class="variant-cart">Red / XL</div>
                                             <div class="wrapQtyBtn clearfix">
                                                 <span class="label">Qty:</span>
                                                 <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
+                                                    <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',-1)"><i class="an an-minus" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="{{this.quantity}}" class="product-form__input qty">
+                                                    <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',+1)"><i class="an an-plus" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                             <div class="priceRow clearfix">
                                                 <div class="product-price">
-                                                    <span class="money">$199.00</span>
+                                                    <span class="money">{{this.products.productprice}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-2.jpg" alt="Floral Lined Jacket" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Floral Lined Jacket</a>
-                                            <div class="variant-cart">Black / M</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">$129.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="assets/images/product-images/cape-dress-3.jpg" alt="Fit & Flare Trim Dress" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Fit & Flare Trim Dress</a>
-                                            <div class="variant-cart">white / XL</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">$99.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{/each}}
                                 </ul>
                             </div>
                         </div>
@@ -350,3 +314,20 @@
         
 
         </div>
+
+<script>
+    function changeQuantity(cartId,proId,count){
+        $.ajax({
+            url:'/cart/change-product-quantity',
+            data:{
+                cart:cartId,
+                product:proId,
+                count:count
+            },
+            method:'post',
+            success:(response)=>{
+                $('.total_'+ proId).html(response.newPrice);
+            }
+        })
+    }
+</script>
