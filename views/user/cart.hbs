@@ -41,9 +41,9 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tbody>
+                                    <tbody id="mytable">
                                               {{#each products}}
-                                        <tr class="cart__row border-bottom line1 cart-flex border-top">
+                                        <tr id="{{this._id}}{{this.productId}}" class="cart__row border-bottom line1 cart-flex border-top">
                                      
                                             <td class="cart__image-wrapper cart-flex-item">
                                                 <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/product-images/{{this.productId}}image1.jpg"  src="/product-images/{{this.productId}}image2.jpg" alt="Elastic Waist Dress - Navy / Small" /></a>
@@ -62,9 +62,9 @@
                                             <td class="cart__update-wrapper cart-flex-item text-center">
                                                 <div class="cart__qty text-center">
                                                     <div class="qtyField">
-                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
+                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1,'{{userId}}')"><i class="icon an an-minus"></i></a>
                                                         <input class="cart__qty-input qty" type="text" value="{{this.quantity}}" disabled/>
-                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1)"><i class="icon an an-plus"></i></a>
+                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1,'{{userId}}')"><i class="icon an an-plus"></i></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -73,7 +73,7 @@
                                                 <span class="money total_{{ this.productId }}">{{this.total}}</span>
                                             </td>
                                            
-                                            <td class="text-center small--hide"><a href="#" class="btn btn--secondary cart__remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times"></i></a></td>
+                                            <td class="text-center small--hide"><a class="btn btn--secondary cart__remove"  onclick="remove('{{this._id}}','{{this.productId}}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times"></i></a></td>
                                         
                                         </tr>
                                              {{/each}}
@@ -85,7 +85,7 @@
                                             <td colspan="3" class="text-start"><a href="#" class="btn btn--link btn--small cart-continue"><i class="icon an an-chevron-circle-left"></i> Continue shopping</a></td>
                                             <td colspan="3" class="text-end">
                                                 <button type="submit" name="clear" class="btn btn--link btn--small small--hide"><i class="icon an an-times"></i> Clear Shoping Cart</button>
-                                                <button type="submit" name="update" class="btn btn--link btn--small cart-continue ml-2"><i class="icon an an-sync"></i> Update Cart</button>
+                                                <button  type="submit"  class="btn  btn--small cart-continue ml-2"><i class="icon an an-sync"></i> Update Cart</button>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -118,14 +118,14 @@
                                         </div>
                                         <div class="row border-bottom pb-2 pt-2">
                                             <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Grand Total</strong></span>
-                                            <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">$1001.00</span></span>
+                                            <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money totalPrice_">{{total}}</span></span>
                                         </div>
                                         <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
                                         <div class="customCheckbox cart_tearm">
                                             <input type="checkbox" value="allen-vela" id="1532947863384-0">
                                             <label for="1532947863384-0">I agree with the terms and conditions</label>
                                         </div>
-                                        <a href="checkout.html" id="cartCheckout" class="btn btn--small-wide checkout">Proceed To Checkout</a>
+                                        <a href="/cart/checkout" id="cartCheckout" class="btn btn--small-wide checkout">Proceed To Checkout</a>
                                         <div class="paymnet-img"><img src="/images/payment-img.jpg" alt="Payment" /></div>
                                  
                                     </div>
@@ -323,11 +323,48 @@
                 cart:cartId,
                 product:proId,
                 count:count
+               
+                
             },
             method:'post',
             success:(response)=>{
                 $('.total_'+ proId).html(response.newPrice);
+                $('.totalPrice_').html(response.total);
             }
         })
     }
+
+    function remove(cartId,proId){
+        $.ajax({
+            url:'/cart/remove',
+            data:{
+                cart:cartId,
+                product:proId
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                $('#'+cartId+proId).remove()
+                 $('.totalPrice_').html(response.total);
+                }
+                
+            }
+        })
+    }
+
+   
+
+  // function RefreshTable() {
+  //     $( "#mytable" ).load( "cart.hbs #mytable" );
+  // }
+
+  // $("#refresh-btn").on("click", RefreshTable);
+
+   // OR CAN THIS WAY
+   //
+   // $("#refresh-btn").on("click", function() {
+   //    $( "#mytable" ).load( "your-current-page.html #mytable" );
+   // });
+
+
 </script>

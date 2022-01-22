@@ -7,12 +7,12 @@ router.get('/',async(req,res)=>{
         let userId = req.session.user._id
         let userStatus = req.session.user.status
         let products = await helper.userCart(userId)
-        let totalPrice = helper.totalPrice(userId)
+        let total = await helper.totalPrice(userId)
         
-        console.log("this is total price",totalPrice)
+        console.log("this is total price",total)
       
         console.log(products,"hey this is carts products")
-            res.render('user/cart',{products,userStatus,});
+            res.render('user/cart',{products,userStatus,total,userId});
     }else{
         res.redirect('/')
     }
@@ -29,13 +29,34 @@ router.get('/cart-add/:id',(req,res)=>{
     })
 })
 
-router.post('/change-product-quantity',(req,res,next)=>{
+router.post('/change-product-quantity',async(req,res,next)=>{
     console.log(req.body)
-    helper.changeProductQuantity(req.body).then((newPrice)=>{
-        res.send({status : true, newPrice})
+    let userId = req.session.user._id
+    let newPrice = await helper.changeProductQuantity(req.body)
+    let total = await helper.totalPrice(userId)
+    
+    console.log(total);
 
-    })
+    res.send({status : true, newPrice,total})
+
+//     helper.changeProductQuantity(req.body).then((newPrice)=>{
+//         res.send({status : true, newPrice,total})
+ 
+//     }) 
 })
 
+router.post('/remove',async(req,res)=>{
+    
+    let userId = req.session.user._id
+    let cartId = req.body.cart
+    let productId = req.body.product
+    helper.removeFromCart(cartId,productId)
+    let total = await helper.totalPrice(userId)
+    res.send({status:true,total})
+})
+
+router.get('/checkout',(req,res)=>{
+    res.render('user/checkout')
+})
 
 module.exports = router;
