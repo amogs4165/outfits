@@ -55,8 +55,24 @@ router.post('/remove',async(req,res)=>{
     res.send({status:true,total})
 })
 
-router.get('/checkout',(req,res)=>{
-    res.render('user/checkout')
+router.get('/checkout',async(req,res)=>{
+   
+        let userStatus = req.session.user.status
+       
+        if(userStatus){
+            let userId = req.session.user._id
+            let products = await helper.userCart(userId)
+            let total = await helper.totalPrice(userId)
+            helper.findAddress(userId).then((resp)=>{
+                let address = resp;
+                res.render('user/checkout',{products,userStatus,total,userId,address})
+        })
+        
+    }
+    else{
+        res.redirect('/signIn')
+    }
+   
 })
 
 module.exports = router;

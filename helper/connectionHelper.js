@@ -465,12 +465,72 @@ module.exports = {
                 return resolve();
             })
         })
+    },
+    addAddress1:(userId,address)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('address').insertOne({_id:ObjectId(userId),address1:address}).then((resp)=>{
+                console.log(resp)
+                return resolve(resp)
+            })
+        })
+    },
+    addAddress2:(userId,address)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('address').updateOne({_id:ObjectId(userId)},{$set:{address2:address}}).then((resp)=>{
+                return resolve(resp)
+            })
+        })
+    },
+    findAddress:(userId)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('address').findOne({_id:ObjectId(userId)}).then((address)=>{
+                return resolve(address)
+            }).catch(()=>{
+                return reject;
+            })
+            
+        })
+    },
+    addBanner:(info)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('banner').insertOne({info}).then((resp)=>{
+                return resolve(resp);
+            })
+        })
+    },
+    viewBanner:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let resp = await dB.get().collection('banner').find().toArray()
+                return resolve(resp);
+         
+        })
+    },
+    selectBanner:(info)=>{
+        return new Promise(async(resolve,reject)=>{
+            let check = dB.get().collection('crrBanner').find({_id:ObjectId(123)})
+            if(check){
+                dB.get().collection('crrBanner').updateOne({_id:123},{set:{info:info}}).then(()=>{
+                    return resolve({status:true})
+                })
+            }
+            else{
+                dB.get().collection('crrBanner').insertOne({_id:ObjectId(123),info})
+            }
+            
+        })
+    },
+    getBanner:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let banner = dB.get().collection('crrBanner').find().toArray()
+            return resolve(banner)
+        })
     }
+
     // getPrice:(userId)=>{
     //     return new Promise(async(resolve,reject)=>{
     //         let total = await dB.get().collection('cart').aggregate([
     //             {
-    //                 $match:{user:ObjectId(userId)}
+    //                 $match:{user:ObjectId(userId)} 
     //             },
     //             {
     //                 $unwind:'$products'

@@ -236,35 +236,35 @@
                                     <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout page by default.</p>
                                     <div class="row">
                                         <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Shipping address</h4>
+                                            <h4 class="billing-address">Address 1</h4>
                                             <a class="view" href="#">Edit</a>
-                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
+                                            <p>{{address.address1.address_1}} <br> {{address.address1.city}}, <br> {{address.address1.postcode}}, <br> {{address.address1.country}}</p>
 
 
                                             <div class="accordion add-address mt-3" id="address1">
                                                 <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
                                                 <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="#">
+                                                    <form class="address-from mt-3" method="post" action="profile/add-address1">
                                                         <fieldset>
                                                             <h2 class="login-title mb-3">Shipping details</h2>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-firstname1">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" value="" id="input-firstname1" type="text">
+                                                                    <input name="firstname" value="{{address.address1.firstname}}" id="input-firstname1" type="text">
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" value="" id="input-lastname1" type="text">
+                                                                    <input name="lastname" value="{{address.address1.lastname}}" id="input-lastname1" type="text">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-email1">E-Mail <span class="required-f">*</span></label>
-                                                                    <input name="email" value="" id="input-email1" type="email">
+                                                                    <input name="email" value="{{address.address1.email}}" id="input-email1" type="email">
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" value="" id="input-telephone1" type="tel">
+                                                                    <input name="telephone" value="{{address.address1.telephone}}" id="input-telephone1" type="tel">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -294,15 +294,9 @@
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-country1">Country <span class="required-f">*</span></label>
-                                                                    <select name="country_id" id="input-country1">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="244">Aaland Islands</option>
-                                                                        <option value="1">Afghanistan</option>
-                                                                        <option value="2">Albania</option>
-                                                                        <option value="3">Algeria</option>
-                                                                        <option value="4">American Samoa</option>
-                                                                        <option value="5">Andorra</option>
-                                                                        <option value="6">Angola</option>
+                                                                    <select name="country" id="input-country1">
+                                                                        <option value="India">India</option>
+                                                                        
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -318,21 +312,25 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <button type="submit" class="btn mt-1"><span>Add Address</span></button>
+                                                            {{#if address.address1.status}}
+                                                            <button type="submit" class="btn mt-1"><span>Edit Address</span></button>
+                                                            {{else}}
+                                                             <button type="submit" class="btn mt-1"><span>Add Address</span></button>
+                                                             {{/if}}
                                                         </fieldset>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Billing address</h4>
+                                            <h4 class="billing-address">Address 2</h4>
                                             <a class="view" href="#">Edit</a>
-                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
+                                           <p>{{address.address2.address_1}} <br> {{address.address2.city}}, <br> {{address.address2.postcode}}, <br> {{address.address2.country}}</p>
 
                                             <div class="accordion add-address mt-3" id="address2">
                                                 <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#billing" aria-expanded="false" aria-controls="billing">Add Address</button>
                                                 <div id="billing" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="#">
+                                                    <form class="address-from mt-3" method="post" action="/profile/add-address2">
                                                         <fieldset>
                                                             <h2 class="login-title mb-3">Billing details</h2>
                                                             <div class="row">
@@ -382,15 +380,9 @@
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-country2">Country <span class="required-f">*</span></label>
-                                                                    <select name="country_id" id="input-country2">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="244">Aaland Islands</option>
-                                                                        <option value="1">Afghanistan</option>
-                                                                        <option value="2">Albania</option>
-                                                                        <option value="3">Algeria</option>
-                                                                        <option value="4">American Samoa</option>
-                                                                        <option value="5">Andorra</option>
-                                                                        <option value="6">Angola</option>
+                                                                    <select name="country" id="input-country2">
+                                                                        <option value="India">India</option>
+                                                                       
                                                                     </select>
                                                                 </div>
                                                             </div>
