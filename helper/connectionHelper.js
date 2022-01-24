@@ -493,7 +493,14 @@ module.exports = {
     },
     addBanner:(info)=>{
         return new Promise((resolve,reject)=>{
-            dB.get().collection('banner').insertOne({info}).then((resp)=>{
+            dB.get().collection('banner').insertOne({info,status:false}).then((resp)=>{
+                return resolve(resp);
+            })
+        })
+    },
+    addBannerOne:(info)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('bannerOne').insertOne({info,status:false}).then((resp)=>{
                 return resolve(resp);
             })
         })
@@ -505,24 +512,45 @@ module.exports = {
          
         })
     },
-    selectBanner:(info)=>{
+    viewBannerOne:()=>{
         return new Promise(async(resolve,reject)=>{
-            let check = dB.get().collection('crrBanner').find({_id:ObjectId(123)})
-            if(check){
-                dB.get().collection('crrBanner').updateOne({_id:123},{set:{info:info}}).then(()=>{
-                    return resolve({status:true})
-                })
-            }
-            else{
-                dB.get().collection('crrBanner').insertOne({_id:ObjectId(123),info})
-            }
+            let resp = await dB.get().collection('bannerOne').find().toArray()
+                return resolve(resp);
+         
+        })
+    },
+    selectBanner:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            dB.get().collection('banner').updateMany({}, {$set: {status: false}}) 
+            let banner = await dB.get().collection('banner').updateOne({_id:ObjectId(id)},{$set:{status:true}})
+            return resolve(banner)
+            
+        })
+    },
+    selectBannerOne:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            dB.get().collection('bannerOne').updateMany({}, {$set: {status: false}}) 
+            let banner = await dB.get().collection('bannerOne').updateOne({_id:ObjectId(id)},{$set:{status:true}})
+            return resolve(banner)
             
         })
     },
     getBanner:()=>{
         return new Promise(async(resolve,reject)=>{
-            let banner = dB.get().collection('crrBanner').find().toArray()
+            let banner = dB.get().collection('banner').findOne({status:true})
             return resolve(banner)
+        })
+    },
+    getBannerOne:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let banner = dB.get().collection('bannerOne').findOne({status:true})
+            return resolve(banner)
+        })
+    },
+    findBanner:(id)=>{
+        return new Promise((resolve,reject)=>{
+            let banner = dB.get().collection('banner').findOne({_id:ObjectId(id)})
+            resolve(banner);
         })
     }
 

@@ -34,7 +34,7 @@
                         <tr class="align-middle">
                             <td></td>
                             <td>{{this.info.bannername}}</td>
-                            <td><img src="/banner-images/{{this._id}}image1.jpg" style="width: 15rem; height: auto;" ></td>
+                            <td><img src="/banner-images1/{{this._id}}image1.jpg" style="width: 15rem; height: auto;" ></td>
                             <td>{{this.info.topContent}}</td>
                             <td>{{this.info.middleContent}}</td>
                             <td>{{this.info.bottomContent}}</td>
@@ -63,7 +63,7 @@
 <script>
     function selectBanner(id){
         $.ajax({
-            url:'/banner/selectBanner',
+            url:'/banner/selectBanner-1',
             data:{
               
                 id:id

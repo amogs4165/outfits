@@ -10,14 +10,28 @@
                     <input name="otp" type="text" class="form-control" id="otp" aria-describedby="emailHelp">
                     {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                 </div>
+                 <p class="text-danger">{{Err}}</p>
                 {{#if err}}
                   <p class="text-danger">{{err}}</p>
                 {{/if }}
+
                 <div class="mb-3 form-check">
                     <a href="/sign">resend otp</a>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onclick="validateOtp()">Submit</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function validateOtp(){
+        
+        let otp = document.getElementById('otp').value;
+        if(otp.length!=4){
+            alert("we need a valid otp")
+            
+        }
+      
+    }
+   
+</script>
