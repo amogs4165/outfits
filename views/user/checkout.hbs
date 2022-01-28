@@ -11,22 +11,104 @@
 
                 <div class="container" style="margin-top: 8rem;">
                     <!-- Main Content -->
-                    <form method="post" action="#">
+                    <form method="post" action="/placeOrder">
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="card card--grey">
                                     <div class="card-body">
                                         <h2>SHIPPING ADDRESS</h2>
-                                        
+                                        {{#each address.address}}
                                         <div class="row">
-                                      
-                                        </div><label class="text-uppercase">Address 1:</label>
-                                        <div class="form-group"><textarea type="text" value="{{address.address1.address_1}}{{address.address1.city}}" class="form-control"></textarea></div><label class="text-uppercase">Address 2:</label>
-                                        <div class="form-group"><input type="text" class="form-control"></div>
-                                        <div class="customCheckbox clearfix">
-                                            <input id="formcheckoutCheckbox1" name="checkbox1" type="checkbox" />
-                                            <label for="formcheckoutCheckbox1">Save address to my account</label>
+                                            <input type="radio" name="address"  value="{{this._id}}" onclick="changeStatus()">
+                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}<br> {{this._id}}</p>
+                                       
                                         </div>
+                                        {{/each}}
+                                        <div class="row">
+                                             <input type="radio" name="address" value="" onclick="changeStatusTo()" checked="checked"><h5 class="text-primary">Add new address</h5>
+                                        </div>
+                                         
+                                         
+                                         <div class="accordion add-address mt-3" id="address1">
+                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
+                                                
+                                                <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
+                                                    <form class="address-from mt-3" method="post" name="newAddress" action="/placeOrder/newAddress">
+                                                        {{!-- <fieldset name="newadress"> --}}
+                                                                   
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-firstname1">First Name <span class="required-f">*</span></label>
+                                                                    <input name="firstname"  id="input-firstname1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
+                                                                    <input name="lastname"  id="input-lastname1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-email1">E-Mail <span class="required-f">*</span></label>
+                                                                    <input name="email"  id="input-email1" type="email">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
+                                                                    <input name="telephone"  id="input-telephone1" type="tel">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-company1">Company</label>
+                                                                    <input name="company" id="input-company1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-address-11">Address <span class="required-f">*</span></label>
+                                                                    <input name="address_1"  id="input-address-11" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-21">Apartment <span class="required-f">*</span></label>
+                                                                    <input name="address_2"  id="input-address-21" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-city1">City <span class="required-f">*</span></label>
+                                                                    <input name="city"  id="input-city1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
+                                                                    <input name="postcode" id="input-postcode1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-country1">Country <span class="required-f">*</span></label>
+                                                                    <select name="country" id="input-country1">
+                                                                        <option value="India">India</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
+                                                                    <label for="input-zone1">Region / State <span class="required-f">*</span></label>
+                                                                    <select name="zone_id" id="input-zone1">
+                                                                        <option value="">Please Select</option>
+                                                                        <option value="3513">Aberdeen</option>
+                                                                        <option value="3514">Aberdeenshire</option>
+                                                                        <option value="3515">Anglesey</option>
+                                                                        <option value="3516">Angus</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                            <button type="submit" class="btn mt-1"><span>Save and Delivere here</span></button>
+                                                         
+                                                        {{!-- </fieldset> --}}
+                                                    </form>
+                                                </div>
+                                            </div>
+                                         
                                     </div>
                                 </div>
                                
@@ -40,19 +122,19 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio4" value="" name="radio2" type="radio" class="radio" checked="checked"> 
-                                                    <label for="formcheckoutRadio4">Credit Card</label></div>
+                                                    <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio" class="radio" checked="checked"> 
+                                                    <label for="formcheckoutRadio4">COD</label></div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio5" value="" name="radio2" type="radio" class="radio"> 
+                                                    <input id="formcheckoutRadio5" value="paypal" name="paymentMode " type="radio" class="radio"> 
                                                     <label for="formcheckoutRadio5">Paypal</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <label class="text-uppercase">Cart Number</label>
+                                                <label class="text-uppercase">Card Number</label>
                                                 <div class="form-group"><input type="text" class="form-control"></div>
                                             </div>
                                         </div>
@@ -146,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-2"></div>
-                                <div class="clearfix"><a href="checkout-success.html" class="btn btn-large btn--lg w-100">Place order</a></div>
+                                <div class="clearfix"><button type="submit" onclick="return checkButton()" class="btn btn-large btn--lg w-100">Place order</button></div>
                             </div>
                         </div>
                     </form>
@@ -362,7 +444,7 @@
                             </div>
                             <div class="buttonSet d-flex flex-row align-items-center text-center">
                                 <a href="cart.html" class="btn btn-secondary w-50 me-3">View Cart</a>
-                                <a href="checkout.html" class="btn btn-secondary w-50">Checkout</a>
+                                <a href="checkout.html" class="btn btn-secondary w-50" >Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -375,3 +457,31 @@
           
 
         </div>
+
+<script>
+    function checkButton(){
+        var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
+        if(getSelectedValue == null) {   
+           
+        alert("Selected radio button values is null: ");  
+         return false;
+        
+        } 
+    }
+
+    function changeStatus(){
+        var nodes = document.getElementById("address1").getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+        nodes[i].disabled = true;
+        nodes[i].hidden = true;
+        }
+    }
+
+     function changeStatusTo(){
+        var nodes = document.getElementById("address1").getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+        nodes[i].disabled = false;
+        nodes[i].hidden = false;
+        }
+    }
+</script>

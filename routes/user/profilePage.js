@@ -23,12 +23,13 @@ router.get('/',(req,res)=>{
     }
 })
 
-router.post('/add-address1',(req,res)=>{
+router.post('/add-address',(req,res)=>{
     let user = req.session.user
     let userId = req.session.user._id;
     let address = req.body
+    let userStatus = req.session.status
     console.log(req.body)
-    helper.addAddress1(userId,address).then(()=>{
+    helper.addAddress(userId,address).then(()=>{
         helper.findAddress(userId).then((resp)=>{
             let address = resp;
             console.log("this is address got here",address);

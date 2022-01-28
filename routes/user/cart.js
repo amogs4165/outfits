@@ -65,6 +65,7 @@ router.get('/checkout',async(req,res)=>{
             let total = await helper.totalPrice(userId)
             helper.findAddress(userId).then((resp)=>{
                 let address = resp;
+                console.log("this is address",address);
                 res.render('user/checkout',{products,userStatus,total,userId,address})
         })
         

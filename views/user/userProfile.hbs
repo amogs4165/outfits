@@ -234,15 +234,97 @@
                                 <div id="address" class="address tab-pane">
                                     <h3>Addresses</h3>
                                     <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout page by default.</p>
+
+                                            <div class="accordion add-address mt-3" id="address1">
+                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#addAddress" aria-expanded="false" aria-controls="addAddress">Add Address</button>
+                                                <div id="addAddress" class="accordion-collapse collapse" data-bs-parent="#address">
+                                                    <form class="address-from mt-3" method="post" action="/profile/add-address">
+                                                        <fieldset>
+                                                            <h2 class="login-title mb-3">Shipping details</h2>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-firstname1">First Name <span class="required-f">*</span></label>
+                                                                    <input name="firstname" value="" id="input-firstname1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
+                                                                    <input name="lastname" value="" id="input-lastname1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-email1">E-Mail <span class="required-f">*</span></label>
+                                                                    <input name="email" value="" id="input-email1" type="email">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
+                                                                    <input name="telephone" value="" id="input-telephone1" type="tel">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-company1">Company</label>
+                                                                    <input name="company" value="" id="input-company1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-address-11">Address <span class="required-f">*</span></label>
+                                                                    <input name="address_1" value="" id="input-address-11" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-21">Apartment <span class="required-f">*</span></label>
+                                                                    <input name="address_2" value="" id="input-address-21" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-city1">City <span class="required-f">*</span></label>
+                                                                    <input name="city" value="" id="input-city1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
+                                                                    <input name="postcode" value="" id="input-postcode1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                                    <label for="input-country1">Country <span class="required-f">*</span></label>
+                                                                    <select name="country" id="input-country1">
+                                                                        <option value="India">India</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
+                                                                    <label for="input-zone1">Region / State <span class="required-f">*</span></label>
+                                                                    <select name="zone_id" id="input-zone1">
+                                                                        <option value="">Please Select</option>
+                                                                        <option value="3513">Aberdeen</option>
+                                                                        <option value="3514">Aberdeenshire</option>
+                                                                        <option value="3515">Anglesey</option>
+                                                                        <option value="3516">Angus</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                           
+                                                             <button type="submit" class="btn mt-1"><span>Add Address</span></button>
+                                                            
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                    {{!-- starting --}}
+                                    
                                     <div class="row">
+                                        {{#each address.address}}
                                         <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Address 1</h4>
-                                            <a class="view" href="#">Edit</a>
-                                            <p>{{address.address1.address_1}} <br> {{address.address1.city}}, <br> {{address.address1.postcode}}, <br> {{address.address1.country}}</p>
+                                            <h4 class="billing-address">Address</h4>
+                                           
+                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}</p>
 
 
                                             <div class="accordion add-address mt-3" id="address1">
-                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
+                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Edit Address</button>
                                                 <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
                                                     <form class="address-from mt-3" method="post" action="profile/add-address1">
                                                         <fieldset>
@@ -312,98 +394,16 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            {{#if address.address1.status}}
+                                                        
                                                             <button type="submit" class="btn mt-1"><span>Edit Address</span></button>
-                                                            {{else}}
-                                                             <button type="submit" class="btn mt-1"><span>Add Address</span></button>
-                                                             {{/if}}
+                                                         
                                                         </fieldset>
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Address 2</h4>
-                                            <a class="view" href="#">Edit</a>
-                                           <p>{{address.address2.address_1}} <br> {{address.address2.city}}, <br> {{address.address2.postcode}}, <br> {{address.address2.country}}</p>
-
-                                            <div class="accordion add-address mt-3" id="address2">
-                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#billing" aria-expanded="false" aria-controls="billing">Add Address</button>
-                                                <div id="billing" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="/profile/add-address2">
-                                                        <fieldset>
-                                                            <h2 class="login-title mb-3">Billing details</h2>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-firstname2">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" value="" id="input-firstname2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-lastname2">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" value="" id="input-lastname2" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-email2">E-Mail <span class="required-f">*</span></label>
-                                                                    <input name="email" value="" id="input-email2" type="email">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-telephone2">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" value="" id="input-telephone2" type="tel">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company2">Company</label>
-                                                                    <input name="company" value="" id="input-company2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-address-12">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1" value="" id="input-address-12" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-22">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2" value="" id="input-address-22" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-city2">City <span class="required-f">*</span></label>
-                                                                    <input name="city" value="" id="input-city2" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-postcode2">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" value="" id="input-postcode2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-country2">Country <span class="required-f">*</span></label>
-                                                                    <select name="country" id="input-country2">
-                                                                        <option value="India">India</option>
-                                                                       
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
-                                                                    <label for="input-zone2">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone2">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" class="btn mt-1"><span>Add Address</span></button>
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div> 
+                                        {{!-- end point --}}
+                                        {{/each }}
                                     </div>
                                 </div>
                                 <!-- End Address -->
