@@ -62,7 +62,7 @@
                                             <td class="cart__update-wrapper cart-flex-item text-center">
                                                 <div class="cart__qty text-center">
                                                     <div class="qtyField">
-                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1,'{{userId}}')"><i class="icon an an-minus"></i></a>
+                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1,'{{userId}}','{{this.quantity}}')"><i class="icon an an-minus"></i></a>
                                                         <input class="cart__qty-input qty" type="text" value="{{this.quantity}}" disabled/>
                                                         <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1,'{{userId}}')"><i class="icon an an-plus"></i></a>
                                                     </div>
@@ -316,7 +316,7 @@
         </div>
 
 <script>
-    function changeQuantity(cartId,proId,count){
+    function changeQuantity(cartId,proId,count,quantity){
         $.ajax({
             url:'/cart/change-product-quantity',
             data:{
@@ -330,8 +330,14 @@
             success:(response)=>{
                 $('.total_'+ proId).html(response.newPrice);
                 $('.totalPrice_').html(response.total);
+                if(quantity==1){
+                    $('')
+                }
             }
-        })
+        }),
+        if(quantity==1){
+            document.getElementById('minus').style.display = "none";
+        }
     }
 
     function remove(cartId,proId){

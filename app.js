@@ -28,6 +28,7 @@ var showProducts = require('./routes/admin/showProducts');
 var cart = require('./routes/user/cart');
 var banner = require('./routes/admin/banner');
 var placeOrder = require('./routes/user/placeOrder');
+var orderManagement = require('./routes/admin/orderManagement')
 
 var dataBase = require('./config/connection');
 
@@ -76,6 +77,7 @@ app.use('/showProducts', showProducts);
 app.use('/cart', cart);
 app.use('/banner', banner);
 app.use('/placeOrder', placeOrder);
+app.use('/orderManagement', orderManagement);
 
 
 

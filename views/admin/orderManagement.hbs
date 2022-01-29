@@ -1,0 +1,56 @@
+<div id="layout-wrapper">
+
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            {{!-- <div class="container-fluid"> --}}
+
+                <!-- start page title -->
+                <div class="row">
+
+
+                    <table class="table" id="adminTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Order Id</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Products</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Order Status</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orders}}
+                            <tr class="align-middle">
+                                <td></td>
+                                <td>{{this._id}}</td>
+                                <td>{{this.date}}</td>
+                                <td>{{#each this.products}}<P>{{this.productname}}</P>{{/each}}
+                                </td>
+                                <td>{{this.address.firstname}}</td>
+                                <td></td>
+                                <td>{{this.payment}}</td>
+                                <td>{{this.total}}</td>
+                                <td>{{this.manufacturerquantity}}</td>
+                               
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -606,7 +606,12 @@ module.exports = {
             dB.get().collection('orders').insert(formattedInputs)
         })
     },
-    
+    getOrders:()=>{
+        return new Promise((resolve,reject)=>{
+            let orders = dB.get().collection('orders').find().toArray()
+            return resolve(orders)
+        })
+    }
 
     // getPrice:(userId)=>{
     //     return new Promise(async(resolve,reject)=>{
