@@ -40,7 +40,7 @@
                                             <th class="action">&nbsp;</th>
                                         </tr>
                                     </thead>
-                                    
+                                   
                                     <tbody id="mytable">
                                               {{#each products}}
                                         <tr id="{{this._id}}{{this.productId}}" class="cart__row border-bottom line1 cart-flex border-top">
@@ -62,9 +62,14 @@
                                             <td class="cart__update-wrapper cart-flex-item text-center">
                                                 <div class="cart__qty text-center">
                                                     <div class="qtyField">
-                                                        <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1,'{{userId}}','{{this.quantity}}')"><i class="icon an an-minus"></i></a>
-                                                        <input class="cart__qty-input qty" type="text" value="{{this.quantity}}" disabled/>
-                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1,'{{userId}}')"><i class="icon an an-plus"></i></a>
+                                                     {{#if this.btnStatus}}
+                                                        <a id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
+                                                        {{else}}
+                                                         <a style="visibility: hidden;" id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
+                                                        {{/if}}
+                                                       <span  class="cart__qty-input  quantity_{{this.productId}}">{{this.quantity}}</span>
+                                                       
+                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1)"><i class="icon an an-plus"></i></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -77,7 +82,7 @@
                                         
                                         </tr>
                                              {{/each}}
-                                        
+                                     
                                     </tbody>
                                     
                                     <tfoot>
@@ -277,7 +282,9 @@
                                             <div class="wrapQtyBtn clearfix">
                                                 <span class="label">Qty:</span>
                                                 <div class="qtyField clearfix">
+                                                    <div id="minuss">
                                                     <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',-1)"><i class="an an-minus" aria-hidden="true"></i></a>
+                                                    </div>
                                                     <input type="text" name="quantity" value="{{this.quantity}}" class="product-form__input qty">
                                                     <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',+1)"><i class="an an-plus" aria-hidden="true"></i></a>
                                                 </div>
@@ -316,8 +323,11 @@
         </div>
 
 <script>
-    function changeQuantity(cartId,proId,count,quantity){
+   
+    function changeQuantity(cartId,proId,count){
+        
         $.ajax({
+            
             url:'/cart/change-product-quantity',
             data:{
                 cart:cartId,
@@ -328,16 +338,20 @@
             },
             method:'post',
             success:(response)=>{
+                  console.log(response.qty)
+                if(response.qty <= 1){
+                document.getElementById(proId).style.visibility="hidden";         
+                }
+                else{
+                    document.getElementById(proId).style.visibility="visible"; 
+                }
                 $('.total_'+ proId).html(response.newPrice);
                 $('.totalPrice_').html(response.total);
-                if(quantity==1){
-                    $('')
-                }
+                $('.quantity_'+ proId).html(response.qty);
+              
             }
-        }),
-        if(quantity==1){
-            document.getElementById('minus').style.display = "none";
-        }
+        })
+        
     }
 
     function remove(cartId,proId){

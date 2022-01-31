@@ -4,10 +4,11 @@
             <div class="text-center mb-4">
                 <h3>OTP VERFICATION</h3>
             </div>
-            <form method="post" action="/verify">
+            <form method="post" action="/verify" id="validateOtp">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Enter the otp send to your mobile</label>
-                    <input name="otp" type="text" class="form-control" id="otp" aria-describedby="emailHelp">
+                    <input  name="otp" type="text" class="form-control" id="otp" aria-describedby="emailHelp">
+                     <p class="text-danger" style="visibility: hidden;" id="errr">please enter valid otp</p>
                     {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
                 </div>
                 {{#if err}}
@@ -16,8 +17,21 @@
                 <div class="mb-3 form-check">
                     <a href="/sign">resend otp</a>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button disabled id="submitButton" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+ $('#validateOtp').submit(function (e) {
+        let otp = document.getElementById('otp').value
+        console.log(otp)
+        if (otp.length != 4) {
+           document.getElementById("errr").style.visibility="visible"
+            e.preventDefault();
+        }
+        else {
+            document.getElementById("errr").style.visibility="hidden"
+        }
+    });
+</script>

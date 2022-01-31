@@ -4,17 +4,36 @@
             <div class="text-center mb-4">
                 <h3>SIGN IN WITH OTP</h3>
             </div>
-            <form method="post" action="/signIn/getnumber">
+            <form method="post" action="/signIn/getnumber" id="validateMobile">
                 <div class="mb-3">
                     <label for="examplephoneNumber" class="form-label">Enter the mobile number</label>
-                    <input name="phoneNumber" type="number" class="form-control" id="phoneNumber" aria-describedby="emailHelp">
-                    {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+                    <input name="phoneNumber" type="number" class="form-control" id="phoneNumber"
+                        aria-describedby="emailHelp">
+                     <p class="text-danger" style="visibility: hidden;" id="errr">please enter valid mobile number</p>
+                    {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    --}}
                 </div>
                 {{#if err}}
-                  <p class="text-danger">{{err}}</p>
+                <p class="text-danger">{{err}}</p>
                 {{/if }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
+
+
+<script>
+
+    $('#validateMobile').submit(function (e) {
+        let phone = document.getElementById('phoneNumber').value
+        console.log(phone)
+        if (!phone.match(/^\d{10}$/)) {
+            document.getElementById("errr").style.visibility="visible"
+            e.preventDefault();
+        }
+        else {
+            document.getElementById("errr").style.visibility="hidden"
+        }
+    });
+</script>

@@ -1,71 +1,92 @@
-<div id="layout-wrapper">  
-            
+<div id="layout-wrapper">
 
-            <!-- ========== Left Sidebar Start ========== -->
 
-            
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-                <div class="main-content">
+    <!-- ========== Left Sidebar Start ========== -->
 
-                    <div class="page-content">
-                        {{!-- <div class="container-fluid"> --}}
 
-                            <!-- start page title -->
-                            <div class="row">
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
 
-                                
-        <table class="table" id="adminTable" >
-            <thead>
-                <tr >
-                <th scope="col">No</th>
-                <th scope="col">User Name</th>
-                <th scope="col">Email Id</th>
-                <th scope="col">Permission</th>
-                <th scope="col">Actions</th>
-                </tr>
-            </thead>
-                <tbody >
-                    {{#each userDetails}}
-                        <tr class="align-middle">
-                            <td></td>
-                            <td>{{this.firstName}}</td>
-                            <td>{{this.email}}</td>
-                            {{#if this.status}}
-                            <td>Granted</td>
-                            {{else}}
-                            <td>Denied</td>
-                            {{/if}}
-                            <td>
-                                
+        <div class="page-content">
+            {{!-- <div class="container-fluid"> --}}
+
+                <!-- start page title -->
+                <div class="row">
+
+
+                    <table class="table" id="adminTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">Permission</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each userDetails}}
+                            <tr class="align-middle">
+                                <td></td>
+                                <td>{{this.firstName}}</td>
+                                <td>{{this.email}}</td>
                                 {{#if this.status}}
-                                <a class="btn btn-warning mt-2 " style="width: 5.5rem;" href="/userManagement/block/{{this._id}}" onclick="return confirm('click Ok to confirm Block {{this.firstName}}')" type="submit">Block</a>
+                                <td>Granted</td>
                                 {{else}}
-                                <a class="btn btn-danger mt-2 " style="width: 5.5rem;" href="/userManagement/unblock/{{this._id}}" onclick="return confirm('click Ok to confirm Unblock {{this.firstName}}')" type="submit">Unblock</a>
+                                <td>Denied</td>
                                 {{/if}}
-                                <a class="btn btn-danger mt-2 "  href="/userManagement/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.firstName}}')" type="submit">Delete</a>
-                            </td>
-                        </tr>
-                    {{/each}}
-                    
-                </tbody>
-        </table>
+                                <td>
 
-                            </div>
-                        </div>
-                    </div>
+                                    {{#if this.status}}
+                                    <a class="btn btn-warning mt-2 " style="width: 5.5rem;"
+                                        href="/userManagement/block/{{this._id}}"
+                                        onclick="return confirm('click Ok to confirm Block {{this.firstName}}')"
+                                        type="submit">Block</a>
+                                    {{else}}
+                                    <a class="btn btn-danger mt-2 " style="width: 5.5rem;"
+                                        href="/userManagement/unblock/{{this._id}}"
+                                        onclick="return confirm('click Ok to confirm Unblock {{this.firstName}}')"
+                                        type="submit">Unblock</a>
+                                    {{/if}}
+                                    <a class="btn btn-danger mt-2 " href="/userManagement/delete/{{this._id}}"
+                                        onclick="return sweetAlert()" type="submit">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+
                 </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
 
 
-{{!-- 
-<div class="container">
-    <div class="row">
-        
-    </div>
-</div> --}}
+<script>
+     function  sweetAlert() {
+       swal({
+            title: "Are you sure?",
+            text: "Once deleted, user will not be able to access the account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+         .then((willDelete) => {
+                if (willDelete) {
+                    swal("User has been deleted!", {
+                        icon: "success",
+                        
+                    });
+                } else {
+                    swal("Your user is safe!");
+                }
+            });
+    }
 
-
+</script>

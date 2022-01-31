@@ -32,12 +32,42 @@ router.get('/cart-add/:id',(req,res)=>{
 router.post('/change-product-quantity',async(req,res,next)=>{
     console.log(req.body)
     let userId = req.session.user._id
-    let newPrice = await helper.changeProductQuantity(req.body)
-    let total = await helper.totalPrice(userId)
-    
-    console.log(total);
+    let productId = req.body.product
+    let crrQuantity = await helper.quantity(userId,productId)
+    let currQuantity = Object.values(crrQuantity)
+    let currentQuantity = currQuantity[0];
 
-    res.send({status : true, newPrice,total})
+    if(currentQuantity==1 && req.body.count =='-1'){
+        let qty = 1
+        res.send({status : true,qty})
+    }
+    else{
+        let newPrice = await helper.changeProductQuantity(req.body)
+        let total = await helper.totalPrice(userId)
+        let quantity = await helper.quantity(userId,productId)
+    
+        console.log(productId)
+        let currQty = Object.values(quantity)
+        let qty = currQty[0];
+        console.log(qty);
+        if(qty<=1){
+            helper.changeButtonStatus(userId,productId).then(()=>{
+                res.send({status : true, newPrice,total,qty})
+            })
+        }else{
+            helper.changeButtonStatusT(userId,productId).then(()=>{
+                res.send({status : true, newPrice,total,qty})
+            })
+           
+        }
+    }
+
+
+
+   
+    
+
+    
 
 //     helper.changeProductQuantity(req.body).then((newPrice)=>{
 //         res.send({status : true, newPrice,total})

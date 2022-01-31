@@ -284,7 +284,8 @@ module.exports = {
     addToCart:(userId,productId)=>{
         let proObj = {
             item:ObjectId(productId),
-            quantity:1
+            quantity:1,
+            btnStatus:false
         }
         return new Promise(async(resolve,reject)=>{
             let userCart = await dB.get().collection('cart').findOne({user: ObjectId(userId)})
@@ -298,7 +299,7 @@ module.exports = {
                     dB.get().collection('cart')
                     .updateOne({user:ObjectId(userId),'products.item':ObjectId(productId)},
                     {
-                        $inc:{'products.$.quantity':1}
+                        $inc:{'products.$.quantity':1},"$set":{"products.$.btnStatus":true}
                     }).then(()=>{
                         resolve()
                     })
@@ -361,6 +362,7 @@ module.exports = {
                 {
                     $project:{
                         quantity : '$products.quantity',
+                        btnStatus: '$products.btnStatus',
                         total: { 
                             $multiply: [ 
                                 "$cartProducts.productprice", "$products.quantity" 
@@ -437,6 +439,51 @@ module.exports = {
 
             resolve(totalPrice[0].total)
         })
+    },
+    quantity:(userId,productId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let quantity = await dB.get().collection('cart')
+            .aggregate([
+                {
+                    $match:{user:ObjectId(userId)}
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $match:{'products.item':ObjectId(productId)}
+                },
+                {
+                    $project:{
+                        quantity:'$products.quantity'
+                        
+                    }
+                },
+                {
+                    $project:{
+                        _id:0,quantity:1
+                    }
+                }
+              
+            ]).toArray()
+            
+            resolve(...quantity);
+        })
+        
+    },
+    changeButtonStatus:(userId,productId)=>{
+        return new Promise(async(resolve,reject)=>{
+            dB.get().collection('cart').updateOne({user:ObjectId(userId),'products.item':ObjectId(productId)},{"$set":{"products.$.btnStatus":false}})
+            resolve()
+        })
+        
+    },
+    changeButtonStatusT:(userId,productId)=>{
+        return new Promise(async(resolve,reject)=>{
+            dB.get().collection('cart').updateOne({user:ObjectId(userId),'products.item':ObjectId(productId)},{"$set":{"products.$.btnStatus":true}})
+            resolve()
+        })
+        
     },
     changeProductQuantity:(details)=>{
         console.log(details.product);
