@@ -18,8 +18,10 @@ router.post('/',async (req,res)=>{
             let total = await helper.totalPrice(userId);
             console.log("its here");
             helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status).then(()=>{
-                console.log("herer")
-                res.json({status:true})
+                helper.removeCart(userId).then(()=>{
+                    res.json({status:true})
+                })
+                
             })
         }
         else{
@@ -33,7 +35,10 @@ router.post('/',async (req,res)=>{
             let products = await helper.userCart(userId);
             let total = await helper.totalPrice(userId);
             helper.orders(userId,{address},products,total,paymentMode,date,status).then(()=>{
-                res.json({status:true})
+                helper.removeCart(userId).then(()=>{
+                    res.json({status:true})
+                })
+                
             })
         }
     }else{
@@ -41,6 +46,11 @@ router.post('/',async (req,res)=>{
     }
   
 
+})
+
+router.get('/order-success',(req,res)=>{
+    
+    res.render('user/checkout-success')
 })
 
 // router.post('/newAddress',(req,res)=>{

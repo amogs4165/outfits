@@ -335,109 +335,121 @@ module.exports = {
     },
     userCart:(userId)=>{
         return new Promise(async(resolve,reject)=>{
-            let cartItems = await dB.get().collection('cart').aggregate([
-                {
-                    $match:{user:ObjectId(userId)}
-                },
-                {
-                    $unwind:'$products'
-                },
-                // {
-                //     $project:{
-                //         item:'$products.item',
-                //         quantity:'$products.quantity'
-                //     }
-                // },
-                {
-                    $lookup:{
-                        from:'products',
-                        localField:'products.item',
-                        foreignField:'_id',
-                        as:'cartProducts'
+            let checkCart = await dB.get().collection('cart').findOne({user:ObjectId(userId)})
+            if(checkCart){
+                let cartItems = await dB.get().collection('cart').aggregate([
+                    {
+                        $match:{user:ObjectId(userId)}
+                    },
+                    {
+                        $unwind:'$products'
+                    },
+                    // {
+                    //     $project:{
+                    //         item:'$products.item',
+                    //         quantity:'$products.quantity'
+                    //     }
+                    // },
+                    {
+                        $lookup:{
+                            from:'products',
+                            localField:'products.item',
+                            foreignField:'_id',
+                            as:'cartProducts'
+                        }
+                    },
+                    {
+                        $unwind:'$cartProducts'
+                    },
+                    {
+                        $project:{
+                            quantity : '$products.quantity',
+                            btnStatus: '$products.btnStatus',
+                            total: { 
+                                $multiply: [ 
+                                    "$cartProducts.productprice", "$products.quantity" 
+                                ] 
+                            } ,
+                            productname : '$cartProducts.productname',
+                            productprice : '$cartProducts.productprice',
+                            productId : '$cartProducts._id',
+                            // products:{$arrayElemAt:['$products',0]}
+                        }
                     }
-                },
-                {
-                    $unwind:'$cartProducts'
-                },
-                {
-                    $project:{
-                        quantity : '$products.quantity',
-                        btnStatus: '$products.btnStatus',
-                        total: { 
-                            $multiply: [ 
-                                "$cartProducts.productprice", "$products.quantity" 
-                            ] 
-                        } ,
-                        productname : '$cartProducts.productname',
-                        productprice : '$cartProducts.productprice',
-                        productId : '$cartProducts._id',
-                        // products:{$arrayElemAt:['$products',0]}
-                    }
-                }
-
-                // {
-                //     $lookup:{
-                //         from:'products',
-                        
-                //         let:{prodList:'$productId'},
-                //         pipeline:[
-                //             {
-                //                 $match:{
-                //                     $expr:{
-                //                         $in:['$_id',"$$prodList"]
-                //                     }
-                //                 }
-                //             }
-                //         ],
-                //         as:'cartItems'
-                //     }
-                // }
-            ]).toArray()
-            console.log(cartItems)
-            resolve(cartItems)
+    
+                    // {
+                    //     $lookup:{
+                    //         from:'products',
+                            
+                    //         let:{prodList:'$productId'},
+                    //         pipeline:[
+                    //             {
+                    //                 $match:{
+                    //                     $expr:{
+                    //                         $in:['$_id',"$$prodList"]
+                    //                     }
+                    //                 }
+                    //             }
+                    //         ],
+                    //         as:'cartItems'
+                    //     }
+                    // }
+                ]).toArray()
+                console.log(cartItems)
+                resolve(cartItems)
+            }else{
+                resolve(null)
+            }
+            
         })
     },
     totalPrice:(userId)=>{
         return new Promise (async(resolve,reject)=>{
-            totalPrice= await dB.get().collection('cart').aggregate([
-                {
-                    $match:{user:ObjectId(userId)}
-                },
-                {
-                    $unwind:'$products'
-                },
-                {
-                    $project:{
-                        item:'$products.item',
-                        quantity:'$products.quantity'
+            let checkCart = await dB.get().collection('cart').findOne({user:ObjectId(userId)})
+            if(checkCart){
+                totalPrice= await dB.get().collection('cart').aggregate([
+                    {
+                        $match:{user:ObjectId(userId)}
+                    },
+                    {
+                        $unwind:'$products'
+                    },
+                    {
+                        $project:{
+                            item:'$products.item',
+                            quantity:'$products.quantity'
+                        }
+                    },
+                    {
+                        $lookup:{
+                            from:'products',
+                            localField:'item',
+                            foreignField:'_id',
+                            as:'cartProducts'
+                        }
+                    },
+                    {
+                        $project:{
+                            item:1,quantity:1,products:{$arrayElemAt:['$cartProducts',0]}
+                        }
+                    },
+                    {
+                        $group:{
+                            _id:null,
+                            total:{$sum:{$multiply:['$quantity','$products.productprice']}}
+                        }
                     }
-                },
-                {
-                    $lookup:{
-                        from:'products',
-                        localField:'item',
-                        foreignField:'_id',
-                        as:'cartProducts'
-                    }
-                },
-                {
-                    $project:{
-                        item:1,quantity:1,products:{$arrayElemAt:['$cartProducts',0]}
-                    }
-                },
-                {
-                    $group:{
-                        _id:null,
-                        total:{$sum:{$multiply:['$quantity','$products.productprice']}}
-                    }
-                }
+                
+                
+                   
+                ]).toArray()
+                
+    
+                resolve(totalPrice[0].total)
+            }else{
+                resolve(null)
+            }
             
-            
-               
-            ]).toArray()
-            
-
-            resolve(totalPrice[0].total)
         })
     },
     quantity:(userId,productId)=>{
@@ -659,6 +671,13 @@ module.exports = {
         return new Promise((resolve,reject)=>{
             let orders = dB.get().collection('orders').find().toArray()
             return resolve(orders)
+        })
+    },
+    removeCart:(userId)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('cart').remove({user:ObjectId(userId)}).then(()=>{
+                resolve()
+            })
         })
     }
 
