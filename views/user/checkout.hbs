@@ -11,7 +11,7 @@
 
                 <div class="container" style="margin-top: 8rem;">
                     <!-- Main Content -->
-                    <form method="post" action="/placeOrder">
+                    <form method="post" action="" id="checkout-form">
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="card card--grey">
@@ -122,12 +122,12 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio" class="radio" checked="checked"> 
+                                                    <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio" checked="checked" > 
                                                     <label for="formcheckoutRadio4">COD</label></div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio5" value="paypal" name="paymentMode " type="radio" class="radio"> 
+                                                    <input id="formcheckoutRadio5" value="paypal" name="paymentMode" type="radio" > 
                                                     <label for="formcheckoutRadio5">Paypal</label>
                                                 </div>
                                             </div>
@@ -228,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-2"></div>
-                                <div class="clearfix"><button type="submit" onclick="return checkButton()" class="btn btn-large btn--lg w-100">Place order</button></div>
+                                <div class="clearfix"><button type="submit"  class="btn btn-large btn--lg w-100">Place order</button></div>
                             </div>
                         </div>
                     </form>
@@ -459,6 +459,22 @@
         </div>
 
 <script>
+    $("#checkout-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/placeOrder',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{
+                alert(response.status)
+                if(response.status){
+                    console.log("donecod")
+                }else{
+                    console.log("razorpay")
+                }
+            }
+        })
+    })
     function checkButton(){
         var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
         if(getSelectedValue == null) {   

@@ -46,7 +46,9 @@ router.post('/verify', (req, res) => {
     })
 })
 router.get('/signInwithnumber', (req, res) => {
-    res.render('user/signInWithNumber')
+    let err = req.session.err;
+    res.render('user/signInWithNumber',{err})
+    req.session.err = null
 })
 router.post('/getnumber', (req, res) => {
     req.session.userDetails = req.body
@@ -64,8 +66,8 @@ router.post('/getnumber', (req, res) => {
                 channel: "sms"
             }).then((resp) => {
                 console.log("response",resp);
+                res.redirect('/signIn/otpSigninVerify')
                 
-                res.render('user/otpVerifySignin')
             }).catch((resp) => {
                 console.log("response",resp);
                 res.send("something went wrongggg")
@@ -73,10 +75,14 @@ router.post('/getnumber', (req, res) => {
 
         }
         else{
-            res.send("mobile number not registered")
+            req.session.err = "mobile number not registered";
+            res.redirect('/signIn/signInwithnumber')
         }
     })
     
+}),
+router.get('/otpSigninVerify',(req,res)=>{
+    res.render('user/otpVerifySignin')
 })
 router.post('/otpverify',(req,res)=>{
     const { otp } = req.body;

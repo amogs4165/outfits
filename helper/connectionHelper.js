@@ -647,10 +647,12 @@ module.exports = {
             return resolve(shippingAddress)
         })
     },
-    orders:(id,address,products,total,payment)=>{
-        const formattedInputs = {id, ...address, products, total, payment}
+    orders:(id,address,products,total,payment,date,status)=>{
+        const formattedInputs = {id, ...address, products, total, payment, date, status}
         return new Promise((resolve,reject)=>{
-            dB.get().collection('orders').insert(formattedInputs)
+            dB.get().collection('orders').insertOne(formattedInputs).then(()=>{
+                resolve()
+            })
         })
     },
     getOrders:()=>{
