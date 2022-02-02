@@ -8,7 +8,7 @@
     <!-- ============================================================== -->
     <div class="main-content">
 
-        <div class="page-content">
+        <div class="page-content" style="padding: calc(70px + 24px) calc(24px / 2) 195px calc(24px / 2);;">
             {{!-- <div class="container-fluid"> --}}
 
                 <!-- start page title -->
@@ -22,9 +22,10 @@
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Products</th>
-                                <th scope="col">Username</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Order Status</th>
                                 <th scope="col">Payment</th>
+                                <th scope="col">Payment Status</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -38,8 +39,21 @@
                                 <td>{{#each this.products}}<P>{{this.productname}}</P>{{/each}}
                                 </td>
                                 <td>{{this.address.firstname}}</td>
-                                <td></td>
+                                <td>
+                                    <select class="" name="status" onchange="changeStatus(value,'{{this._id}}')" aria-label="Default select example">
+                                        <option value="{{this.OrderStatus}}" selected>{{this.OrderStatus}}</option>
+                                        <option value="Packing">Packing</option>
+                                        <option value="Shipping">Shipping</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Canceled">Canceled</option>
+                                        <option value="Getting Ready">Getting Ready</option>
+
+                                    </select>
+                              
+                          
+                                </td>
                                 <td>{{this.payment}}</td>
+                                <td>{{this.status}}</td>
                                 <td>{{this.total}}</td>
                                 <td>{{this.manufacturerquantity}}</td>
                                
@@ -54,3 +68,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    
+    function changeStatus(value,id){
+        console.log(value,id)
+        $.ajax({
+            url:'/orderManagement',
+            method:'post',
+            data:{
+                status:value,
+                id:id
+            },
+            method:'post',
+            success:(response)=>{
+                console.log(response)
+            }
+        })
+    }
+</script>

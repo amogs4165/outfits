@@ -12,12 +12,13 @@ router.post('/',async (req,res)=>{
             let userId = req.session.user._id;
             let date = new Date();
             let status = "placed";
+            let OrderStatus = "Getting ready"
             let shippingAddress1 = await helper.getShippingAddress (userId,address);
             const [shippingAddress] = shippingAddress1;
             let products = await helper.userCart(userId);
             let total = await helper.totalPrice(userId);
             console.log("its here");
-            helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status).then(()=>{
+            helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
                 helper.removeCart(userId).then(()=>{
                     res.json({status:true})
                 })

@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
       let userStatus = req.session.user.status
       let cartProducts = await helper.userCart(userId)
       let total = await helper.totalPrice(userId)
-      console.log(cartProducts);
+      
       res.render('index', { userStatus, products, banner, bannerOne, cartProducts, total });
 
     });
@@ -24,9 +24,10 @@ router.get('/', async (req, res, next) => {
   else {
     helper.getProducts().then(async (resp) => {
       let products = resp.slice(0, 8)
+      
       let banner = await helper.getBanner()
       let bannerOne = await helper.getBannerOne()
-      console.log(banner);
+      
       res.render('index', {products, banner, bannerOne });
     })
 
@@ -51,5 +52,14 @@ router.get('/productShow/:id', (req, res) => {
     res.render('productView', { userStatus, product })
   })
 
+})
+
+router.post('/search',(req,res)=>{
+  console.log(req.body.item)
+  let search = req.body.item
+  helper.searchProduct(search).then((resp)=>{
+    let products = resp;
+    res.render('user/searchProducts',{products})
+  })
 })
 module.exports = router;

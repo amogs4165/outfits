@@ -659,8 +659,8 @@ module.exports = {
             return resolve(shippingAddress)
         })
     },
-    orders:(id,address,products,total,payment,date,status)=>{
-        const formattedInputs = {id, ...address, products, total, payment, date, status}
+    orders:(id,address,products,total,payment,date,status,OrderStatus)=>{
+        const formattedInputs = {id, ...address, products, total, payment, date, status,OrderStatus}
         return new Promise((resolve,reject)=>{
             dB.get().collection('orders').insertOne(formattedInputs).then(()=>{
                 resolve()
@@ -678,6 +678,28 @@ module.exports = {
             dB.get().collection('cart').remove({user:ObjectId(userId)}).then(()=>{
                 resolve()
             })
+        })
+    },
+    searchProduct:(searchedItem)=>{
+        return new Promise((resolve,reject)=>{
+            let products = dB.get().collection('products').aggregate([
+                {
+                    $match:{
+                        $or:[
+                            {'productname':{$regex:searchedItem, $options:'i'}},
+                            {'manufacturerbrand':{$regex:searchedItem, $options:'i'}},
+                            {'id':{$regex:searchedItem, $options:'i'}},
+                        ]
+                    }
+                }
+            ]).toArray()
+            resolve(products)
+          
+        })
+    },
+    updateOrderStatus:(id,value)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('orders').updateOne({_id:ObjectId(id)})
         })
     }
 

@@ -12,6 +12,12 @@ router.get('/',(req,res)=>{
     })
     
 })
+
+router.post('/',(req,res)=>{
+
+    console.log("heyyyyy")
+    console.log(req.body)
+})
 module.exports = router;
 
 
