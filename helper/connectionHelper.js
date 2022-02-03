@@ -699,7 +699,7 @@ module.exports = {
     },
     updateOrderStatus:(id,value)=>{
         return new Promise((resolve,reject)=>{
-            dB.get().collection('orders').updateOne({_id:ObjectId(id)})
+            dB.get().collection('orders').updateOne({_id:ObjectId(id)},{$set:{OrderStatus:value}});
         })
     }
 

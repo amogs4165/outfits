@@ -93,11 +93,12 @@ router.get('/checkout',async(req,res)=>{
             let userId = req.session.user._id
             let products = await helper.userCart(userId)
             let total = await helper.totalPrice(userId)
+            let check= false;
             helper.findAddress(userId).then((resp)=>{
                 let address = resp;
                 console.log("this is address",address);
-                res.render('user/checkout',{products,userStatus,total,userId,address})
-        })
+                res.render('user/checkout',{products,userStatus,total,userId,address,check})
+            })
         
     }
     else{

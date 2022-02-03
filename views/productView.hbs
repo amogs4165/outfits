@@ -169,7 +169,7 @@
                                         <div class="saleTime product-countdown style2" data-countdown="2022/03/01"></div>
                                         <!-- End Countdown -->
                                         <!-- Form -->
-                                        <form method="post" action="https://template.annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template product-form-border hidedropdown pb-3" enctype="multipart/form-data">
+                                        <form method="post" action="/buyProduct">
                                             <!-- Size Swatch -->
                                             <div class="swatch clearfix swatch-1 option1 col-6" data-option-index="1">
                                                 <div class="product-form__item">
@@ -214,10 +214,17 @@
                                                      <a href="/cart/cart-add/{{product._id}}" name="add" class="btn product-form__cart-submit"><span>Add to cart</span></a>
                                                     
                                                 </div>
-                                                <div class="payment-button" data-shopify="payment-button">
-                                                    <button type="button" class="payment-button__button payment-button__button--unbranded">Buy it now</button>
+                                                <input name="productname" value="{{product.productname}}" hidden>
+                                                <input name="productprice" value="{{product.productprice}}" hidden>
+                                                <input name="total" value="{{product.productprice}}" hidden>
+                                                <input name="productId" value="{{product._id}}" hidden>
+
+                                                <div class="payment-button" >
+                                                    <button class="" type="submit" data-proid="{{product._id}}" data-pname="{{product.productname}}" data-price="{{product.productprice}}" >Buy it now</button>
+                                                    {{!-- <a href="/cart/cart-add/{{product._id}}" name="add" class="payment-button__button payment-button__button--unbranded"><span>Add to cart</span></a> --}}
                                                 </div>
                                             </div>
+                                          
                                             <!-- End Product Action -->
                                             <!-- Wishlist - Compare -->
                                             <div class="infolinks d-flex flex-wrap align-items-center px-0 mb-0">
@@ -1861,49 +1868,7 @@
             <script src="/js/main.js"></script>
 
             <!-- Photoswipe Gallery -->
-            <script src="/js/vendor/photoswipe.min.js"></script>
-            <script src="/js/vendor/photoswipe-ui-default.min.js"></script>
-            <script>
-                $(function () {
-                    var $pswp = $('.pswp')[0],
-                            image = [],
-                            getItems = function () {
-                                var items = [];
-                                $('.lightboximages a').each(function () {
-                                    var $href = $(this).attr('href'),
-                                            $size = $(this).data('size').split('x'),
-                                            item = {
-                                                src: $href,
-                                                w: $size[0],
-                                                h: $size[1]
-                                            }
-                                    items.push(item);
-                                });
-                                return items;
-                            }
-                    var items = getItems();
-
-                    $.each(items, function (index, value) {
-                        image[index] = new Image();
-                        image[index].src = value['src'];
-                    });
-                    $('.prlightbox').on('click', function (event) {
-                        event.preventDefault();
-
-                        var $index = $(".active-thumb").parent().attr('data-slick-index');
-                        $index++;
-                        $index = $index - 1;
-
-                        var options = {
-                            index: $index,
-                            bgOpacity: 0.9,
-                            showHideOpacity: true
-                        }
-                        var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
-                        lightBox.init();
-                    });
-                });
-            </script>
+            
 
             <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="pswp__bg"></div>
@@ -1911,3 +1876,33 @@
             </div>
 
         </div>
+
+
+<script>
+    $('.data-buyProduct').click(function(e){
+        alert("hey")
+        var proId = $(this).data('proid')
+        var pname = $(this).data('pname')
+        var price = $(this).data('price')
+        buyProduct(proId,pname,price)
+        e.preventDefault()
+    })
+
+    function buyProduct(id,pname,price){    
+        alert("hey") 
+        $.ajax({
+            url:'/buyProduct',
+            method:'post',
+            data:{
+                productId:id,
+                productname:pname,
+                productprice:price,
+                total:price
+            },
+            success:(response)=>{
+                alert(response.status)
+                
+            }
+        })
+    }
+</script>

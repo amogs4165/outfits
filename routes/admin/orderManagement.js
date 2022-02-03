@@ -6,7 +6,6 @@ router.get('/',(req,res)=>{
     let admin = req.session.admin
     helper.getOrders().then((resp)=>{
         let orders = resp;
-        console.log(orders);
         res.render('admin/orderManagement',{admin,orders})
 
     })
@@ -17,6 +16,11 @@ router.post('/',(req,res)=>{
 
     console.log("heyyyyy")
     console.log(req.body)
+    let id = req.body.id;
+    let status = req.body.status
+    helper.updateOrderStatus(id,status).then(()=>{
+
+    })
 })
 module.exports = router;
 

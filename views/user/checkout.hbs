@@ -17,6 +17,8 @@
                                 <div class="card card--grey">
                                     <div class="card-body">
                                         <h2>SHIPPING ADDRESS</h2>
+                                        <input name="check" value="{{check}}" hidden>
+                                        
                                         {{#each address.address}}
                                         <div class="row">
                                             <input type="radio" name="address"  value="{{this._id}}" onclick="changeStatus()">
@@ -27,7 +29,7 @@
                                         <div class="row">
                                              <input type="radio" name="address" value="" onclick="changeStatusTo()" checked="checked"><h5 class="text-primary">Add new address</h5>
                                         </div>
-                                         
+                                        
                                          
                                          <div class="accordion add-address mt-3" id="address1">
                                                 <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
@@ -199,6 +201,7 @@
                                         </thead>
                                         <tbody>
                                             {{#each products}}
+                                            <input name="proId" value="{{this.productId}}" hidden>
                                             <tr>
                                                 <td><a href="#;" class="thumb"><img class="cart__image" src="/product-images/{{this.productId}}image1.jpg" alt=""></a></td>
                                                 <td class="text-start">{{this.productname}}</td>
@@ -227,6 +230,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="mt-2"></div>
                                 <div class="clearfix"><button type="submit"  class="btn btn-large btn--lg w-100">Place order</button></div>
                             </div>
