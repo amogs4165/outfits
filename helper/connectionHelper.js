@@ -2,6 +2,11 @@ const { response } = require('express');
 const async = require('hbs/lib/async');
 const{ObjectId, Db} = require('mongodb');
 const dB = require('../config/connection');
+const Razorpay = require('razorpay')
+const instance = new Razorpay({
+    key_id: 'rzp_test_nUVcKdOUWrUXIZ',
+    key_secret: 'JCCNkRAJ4RRAe0opTVGwdhW8',
+  });
 
 module.exports = {
 
@@ -662,8 +667,8 @@ module.exports = {
     orders:(id,address,products,total,payment,date,status,OrderStatus)=>{
         const formattedInputs = {id, ...address, products, total, payment, date, status,OrderStatus}
         return new Promise((resolve,reject)=>{
-            dB.get().collection('orders').insertOne(formattedInputs).then(()=>{
-                resolve()
+            dB.get().collection('orders').insertOne(formattedInputs).then((resp)=>{
+                resolve(resp)
             })
         })
     },
@@ -700,6 +705,50 @@ module.exports = {
     updateOrderStatus:(id,value)=>{
         return new Promise((resolve,reject)=>{
             dB.get().collection('orders').updateOne({_id:ObjectId(id)},{$set:{OrderStatus:value}});
+        })
+    },
+    generateRazorpay:(orderId,total)=>{
+        let totalPrice = parseInt(total)
+        return new Promise((resolve,reject)=>{
+            var options = {
+                amount: totalPrice*100,  //amount in the smallest currency unit
+                currency: "INR",
+                receipt: orderId
+            };
+            instance.orders.create(options, function(err,order){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("New Order:",order);
+                    resolve(order);
+                }
+                
+            })
+        })
+    },
+    verifyPayment:(details)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(details);
+            const crypto = require('crypto');
+            let hmac = crypto.createHmac('sha256','JCCNkRAJ4RRAe0opTVGwdhW8');
+            hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']);
+            hmac = hmac.digest('hex')
+            if(hmac==details['payment[razorpay_signature]']){
+                resolve()
+            }else{
+                reject()
+            }
+
+        })
+    },
+    changePaymentStatus:(orderId,crrStatus)=>{
+        console.log(orderId);
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('orders').updateOne({_id:ObjectId(orderId)},{$set:{status:crrStatus}}).then((resp)=>{
+                console.log(resp);
+                resolve(resp)
+            })
         })
     }
 

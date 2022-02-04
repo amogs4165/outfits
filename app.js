@@ -6,6 +6,9 @@ const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = "266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com"
 const clients = new OAuth2Client(CLIENT_ID);
 
+var Razorpay = require('razorpay');
+const paypal = require('paypal-rest-sdk')
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');

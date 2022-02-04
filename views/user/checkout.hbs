@@ -1,6 +1,6 @@
 
         <!-- Page Loader -->
-        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
+        <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
         <!-- End Page Loader -->
 
         <div class="pageWrapper">
@@ -11,7 +11,7 @@
 
                 <div class="container" style="margin-top: 8rem;">
                     <!-- Main Content -->
-                    <form method="post" action="" id="checkout-form">
+                    <form method="post" action="/hey" id="checkout-form">
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="card card--grey">
@@ -122,16 +122,21 @@
                                     <div class="card-body">
                                         <h2>PAYMENT METHOD</h2>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <div class="customRadio clearfix">
                                                     <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio" checked="checked" > 
                                                     <label for="formcheckoutRadio4">COD</label></div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <div class="customRadio clearfix">
                                                     <input id="formcheckoutRadio5" value="paypal" name="paymentMode" type="radio" > 
                                                     <label for="formcheckoutRadio5">Paypal</label>
                                                 </div>
+                                            </div>
+                                             <div class="col-4">
+                                                <div class="customRadio clearfix">
+                                                    <input id="formcheckoutRadio6" value="razorpay" name="paymentMode" type="radio" > 
+                                                    <label for="formcheckoutRadio6">Razorpay</label></div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -202,12 +207,13 @@
                                         <tbody>
                                             {{#each products}}
                                             <input name="proId" value="{{this.productId}}" hidden>
+                                            <input name="productprice" value="{{this.productprice}}" hidden>
                                             <tr>
                                                 <td><a href="#;" class="thumb"><img class="cart__image" src="/product-images/{{this.productId}}image1.jpg" alt=""></a></td>
                                                 <td class="text-start">{{this.productname}}</td>
                                                 <td>{{this.productprice}}</td>
                                                 <td>{{this.quantity}}</td>
-                                                <td>{{this.total}}</td>
+                                                <td>{{this.productprice}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>
@@ -232,7 +238,7 @@
                                 </div>
                                 
                                 <div class="mt-2"></div>
-                                <div class="clearfix"><button type="submit"  class="btn btn-large btn--lg w-100">Place order</button></div>
+                                <div class="clearfix"><button type="button" id="checkout_btn"  class="btn btn-large btn--lg w-100">Place order</button></div>
                             </div>
                         </div>
                     </form>
@@ -461,24 +467,93 @@
           
 
         </div>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
-    $("#checkout-form").submit((e)=>{
+
+    $("#checkout_btn").click((e)=>{
+        console.log('entered')
+        alert('success')
+        console.log($('#checkout-form').serialize())
         e.preventDefault()
         $.ajax({
             url:'/placeOrder',
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
-                alert(response.status)
+                alert(response)
                 if(response.status){
                     location.href='/placeOrder/order-success'
                 }else{
-                    console.log("razorpay")
+                    if(response.mode == "paypal"){
+                        console.log(response.url)
+                        location.href = response.url
+                    }
+                    else{
+                        alert("ueppp")
+                         razorpay(response.response)
+                    }
+                    
                 }
             }
         })
     })
+    
+    function razorpay(order){
+        
+        var options = {
+            "key": "rzp_test_nUVcKdOUWrUXIZ", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Acme Corp",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                alert(response.razorpay_payment_id);
+                alert(response.razorpay_order_id);
+                alert(response.razorpay_signature)
+
+                verifyPayment(response,order);
+            },
+            "prefill": {
+                "name": "Outfits",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+
+    }
+
+    function verifyPayment(payment,order){
+        $.ajax({
+            url:'/placeOrder/verify-payment',
+            data:{
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/placeOrder/order-success';
+                }
+                else{
+                    alert(response.status);
+                    location.href = '/'
+                }
+            }
+          
+        })
+    }
+
     function checkButton(){
         var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
         if(getSelectedValue == null) {   
