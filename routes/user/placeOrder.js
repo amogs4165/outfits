@@ -17,7 +17,8 @@ router.post('/',async (req,res)=>{
     let paymentMode = req.body.paymentMode;
     let check = req.body.check
     
-    if(!check){
+    if(check== 'false'){
+        console.log("heyre")
         if(paymentMode =='COD'){
             if(address!=''){
                 let userId = req.session.user._id;
@@ -53,11 +54,11 @@ router.post('/',async (req,res)=>{
                     
                 })
             }
-        }else{
+        }else if(paymentMode == 'razorpay'){
             
 
             if(address!=''){
-                
+                console.log("here");
                 let userId = req.session.user._id;
                 let date = new Date();
                 let status = "pending";
@@ -87,13 +88,148 @@ router.post('/',async (req,res)=>{
                 let status = "pending";
                 let products = await helper.userCart(userId);
                 let total = await helper.totalPrice(userId);
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
-                  
+                helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
+                    let orderId = ""+resp.insertedId
                     helper.generateRazorpay(orderId,total).then((response)=>{
                         res.json({status:false,response})
                     })
                 })
             }  
+        }else{
+
+
+            if(address!=''){
+                
+                let userId = req.session.user._id;
+                let date = new Date();
+                let status = "pending";
+                let OrderStatus = "Getting ready"
+                let shippingAddress1 = await helper.getShippingAddress (userId,address);
+                const [shippingAddress] = shippingAddress1;
+                let products = await helper.userCart(userId);
+                let total = await helper.totalPrice(userId);
+                let totalPrice = total/75;
+                let totalAmount = parseInt(totalPrice);
+                // let totalPrice = totalAmount.toString();
+                console.log("tottal Pricess:",totalAmount)
+                
+                req.session.total = totalAmount;
+                
+                helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
+                    console.log("resp details.....",resp)
+                    let orderId = ""+resp.insertedId
+                    req.session.orderId = resp.insertedId
+                    const create_payment_json = {
+                        "intent": "sale",
+                        "payer": {
+                            "payment_method": "paypal"
+                        },
+                        "redirect_urls": {
+                            "return_url": "http://localhost:3000/placeOrder/order-success",
+                            "cancel_url": "http://localhost:3000/cancel"
+                        },
+                        "transactions": [{
+                            "item_list": {
+                                "items": [{
+                                    "name": "Red Sox Hat",
+                                    "sku": "001",
+                                    "price": totalAmount,
+                                    "currency": "USD",
+                                    "quantity": 1
+                                }]
+                            },
+                            "amount": {
+                                "currency": "USD",
+                                "total": totalAmount
+                            },
+                            "description": "Hat for the best team ever"
+                        }]
+                    };
+                    paypal.payment.create(create_payment_json, function (error, payment) {
+                        if (error) {
+                            throw error;
+                        } else {
+                            console.log("create paynm resp");
+                            console.log(payment);
+                            
+                            for(let i = 0;i < payment.links.length;i++){
+                              if(payment.links[i].rel === 'approval_url'){
+                                  console.log(payment.links[i].href);
+                                  let redirecturl = payment.links[i].href
+                                res.json({status:false,mode:"paypal",url:redirecturl});
+                              }
+                            }
+                        }
+                      });
+                })
+              
+            }
+            else{
+                let proId = req.body.proId
+                let userId = req.session.user._id;
+                let details = req.body
+                let address = Object.fromEntries(
+                    Object.entries(details).slice(1, 12)
+                )
+                let date = new Date();
+                let status = "pending";
+                let products = await helper.userCart(userId);
+                let total = await helper.totalPrice(userId);
+                let totalPrice = total/75;
+                let totalAmount = parseInt(totalPrice);
+                // let totalPrice = totalAmount.toString();
+                console.log("tottal Price:",totalAmount)
+                
+                req.session.total = totalAmount;
+                helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
+                  
+                    console.log("resp details.....",resp)
+                    let orderId = ""+resp.insertedId
+                    req.session.orderId = resp.insertedId
+                    const create_payment_json = {
+                        "intent": "sale",
+                        "payer": {
+                            "payment_method": "paypal"
+                        },
+                        "redirect_urls": {
+                            "return_url": "http://localhost:3000/placeOrder/order-success",
+                            "cancel_url": "http://localhost:3000/cancel"
+                        },
+                        "transactions": [{
+                            "item_list": {
+                                "items": [{
+                                    "name": "Red Sox Hat",
+                                    "sku": "001",
+                                    "price": totalAmount,
+                                    "currency": "USD",
+                                    "quantity": 1
+                                }]
+                            },
+                            "amount": {
+                                "currency": "USD",
+                                "total": totalAmount
+                            },
+                            "description": "Hat for the best team ever"
+                        }]
+                    };
+                    paypal.payment.create(create_payment_json, function (error, payment) {
+                        if (error) {
+                            throw error;
+                        } else {
+                            console.log("create paynm resp");
+                            console.log(payment);
+                            
+                            for(let i = 0;i < payment.links.length;i++){
+                              if(payment.links[i].rel === 'approval_url'){
+                                  console.log(payment.links[i].href);
+                                  let redirecturl = payment.links[i].href
+                                res.json({status:false,mode:"paypal",url:redirecturl});
+                              }
+                            }
+                        }
+                      });
+                })
+            } 
         }
     }
     else{  //  not cart
@@ -188,10 +324,16 @@ router.post('/',async (req,res)=>{
                 const [shippingAddress] = shippingAddress1;
                 let products = [await helper.getProductDetailsById(proId)];
                 let total = req.body.productprice
+                let totalAmount = parseInt(total)/75;
+                // let totalPrice = totalAmount.toString();
+                console.log("tottal Price:",totalAmount)
+                
+                req.session.total = totalAmount;
                 console.log("its here",total);
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                     console.log("resp details.....",resp)
                     let orderId = ""+resp.insertedId
+                    req.session.orderId = resp.insertedId
                     const create_payment_json = {
                         "intent": "sale",
                         "payer": {
@@ -206,14 +348,14 @@ router.post('/',async (req,res)=>{
                                 "items": [{
                                     "name": "Red Sox Hat",
                                     "sku": "001",
-                                    "price": "25.00",
+                                    "price": totalAmount,
                                     "currency": "USD",
                                     "quantity": 1
                                 }]
                             },
                             "amount": {
                                 "currency": "USD",
-                                "total": "25.00"
+                                "total": totalAmount
                             },
                             "description": "Hat for the best team ever"
                         }]
@@ -250,11 +392,58 @@ router.post('/',async (req,res)=>{
                 let status = "pending";
                 let products = [await helper.getProductDetailsById(proId)];
                 let total = req.body.productprice
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
+                let totalAmount = parseInt(total)/75;
+                // let totalPrice = totalAmount.toString();
+                console.log("tottal Price:",totalAmount)
+                
+                req.session.total = totalAmount;
+                helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
                   
-                    helper.generateRazorpay(orderId,total).then((response)=>{
-                        res.json({status:false,response})
-                    })
+                    console.log("resp details.....",resp)
+                    let orderId = ""+resp.insertedId
+                    req.session.orderId = resp.insertedId
+                    const create_payment_json = {
+                        "intent": "sale",
+                        "payer": {
+                            "payment_method": "paypal"
+                        },
+                        "redirect_urls": {
+                            "return_url": "http://localhost:3000/placeOrder/order-success",
+                            "cancel_url": "http://localhost:3000/cancel"
+                        },
+                        "transactions": [{
+                            "item_list": {
+                                "items": [{
+                                    "name": "Red Sox Hat",
+                                    "sku": "001",
+                                    "price": totalAmount,
+                                    "currency": "USD",
+                                    "quantity": 1
+                                }]
+                            },
+                            "amount": {
+                                "currency": "USD",
+                                "total": totalAmount
+                            },
+                            "description": "Hat for the best team ever"
+                        }]
+                    };
+                    paypal.payment.create(create_payment_json, function (error, payment) {
+                        if (error) {
+                            throw error;
+                        } else {
+                            console.log("create paynm resp");
+                            console.log(payment);
+                            
+                            for(let i = 0;i < payment.links.length;i++){
+                              if(payment.links[i].rel === 'approval_url'){
+                                  console.log(payment.links[i].href);
+                                  let redirecturl = payment.links[i].href
+                                res.json({status:false,mode:"paypal",url:redirecturl});
+                              }
+                            }
+                        }
+                      });
                 })
             } 
 
@@ -280,6 +469,7 @@ router.post('/verify-payment',(req,res)=>{
 
 router.get('/order-success',(req,res)=>{
     
+    console.log("paypal test",req.query)
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
 
@@ -293,7 +483,7 @@ router.get('/order-success',(req,res)=>{
             "transactions": [{
                 "amount": {
                     "currency": "USD",
-                    "total": "25.00"
+                    "total": req.session.total
                 }
             }]
           };
@@ -306,7 +496,12 @@ router.get('/order-success',(req,res)=>{
             } else {
                 console.log("get payment response")
                 console.log(JSON.stringify(payment));
-                res.send('Success');
+                let crrStatus = "placed"
+                let orderId = req.session.orderId
+                helper.changePaymentStatus(orderId,crrStatus).then(()=>{
+                    res.render('user/checkout-success',{orderId})
+                })
+                
             }
         });
     }
