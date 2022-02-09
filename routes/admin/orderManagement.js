@@ -2,7 +2,16 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
-router.get('/',(req,res)=>{
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
+
+router.get('/',verifyLogin,(req,res)=>{
     let admin = req.session.admin
     helper.getOrders().then((resp)=>{
         let orders = resp;
@@ -12,7 +21,7 @@ router.get('/',(req,res)=>{
     
 })
 
-router.post('/',(req,res)=>{
+router.post('/',verifyLogin,(req,res)=>{
 
     console.log("heyyyyy")
     console.log(req.body)

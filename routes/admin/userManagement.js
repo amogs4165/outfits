@@ -2,7 +2,16 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
-router.get('/',(req,res)=>{
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
+
+router.get('/',verifyLogin,(req,res)=>{
     let admin = true;
 
     helper.getuserDetails().then((response)=>{
@@ -15,7 +24,7 @@ router.get('/',(req,res)=>{
     
 })
 
-router.get('/delete/:id',function(req,res,next){
+router.get('/delete/:id',verifyLogin,function(req,res,next){
     console.log(req.params.id)
     var id=req.params.id;
     helper.userDelete(id).then((response)=>{
@@ -28,8 +37,8 @@ router.get('/delete/:id',function(req,res,next){
     })
 })
 
-router.get('/block/:id',function(req,res,next){
-    var id = req.params.id;
+router.post('/block',verifyLogin,function(req,res,next){
+    var id = req.body.id;
     helper.userBlock(id).then((response)=>{
         if(response){
             req.session.userConfirm=false
@@ -42,8 +51,8 @@ router.get('/block/:id',function(req,res,next){
     })
 })
 
-router.get('/unblock/:id',function(req,res,next){
-    var id = req.params.id;
+router.post('/unblock',verifyLogin,function(req,res,next){
+    var id = req.body.id;
     helper.userUnblock(id).then((response)=>{
         if(response){
             req.session.userConfirm=true

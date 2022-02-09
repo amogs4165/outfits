@@ -40,17 +40,15 @@
 
                                     {{#if this.status}}
                                     <a class="btn btn-warning mt-2 " style="width: 5.5rem;"
-                                        href="/userManagement/block/{{this._id}}"
-                                        onclick="return confirm('click Ok to confirm Block {{this.firstName}}')"
-                                        type="submit">Block</a>
+                                        
+                                        onclick="block('{{this._id}}')"
+                                        >Block</a>
                                     {{else}}
                                     <a class="btn btn-danger mt-2 " style="width: 5.5rem;"
-                                        href="/userManagement/unblock/{{this._id}}"
-                                        onclick="return confirm('click Ok to confirm Unblock {{this.firstName}}')"
-                                        type="submit">Unblock</a>
+                                                                                onclick="unblock('{{this._id}}')"
+                                        >Unblock</a>
                                     {{/if}}
-                                    <a class="btn btn-danger mt-2 " href="/userManagement/delete/{{this._id}}"
-                                        onclick="return sweetAlert()" type="submit">Delete</a>
+                                  
                                 </td>
                             </tr>
                             {{/each}}
@@ -69,6 +67,75 @@
 
 
 <script>
+
+      function block(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/userManagement/block",
+                        type: "POST",
+                        data: {
+                            id:id,          
+                        },
+
+                        success: async()=>{
+                           
+                            await swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                            
+                             location.href = '/userManagement'
+                        },
+
+                    });
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+
+    function unblock(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/userManagement/unblock",
+                        type: "POST",
+                        data: {
+                            id:id,          
+                        },
+
+                        success: async ()=>{
+   
+                            await swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                            location.href = '/userManagement'
+               
+                        },
+
+                    });
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+
      function  sweetAlert() {
        swal({
             title: "Are you sure?",

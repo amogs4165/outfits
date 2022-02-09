@@ -2,16 +2,25 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
-router.get('/',(req,res)=>{
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
+
+router.get('/',verifyLogin,(req,res)=>{
 
     res.render('admin/banner')
 })
 
-router.get('/banner-1',(req,res)=>{
+router.get('/banner-1',verifyLogin,(req,res)=>{
     res.render('admin/banner-1')
 })
 
-router.post('/add-banner',(req,res)=>{
+router.post('/add-banner',verifyLogin,(req,res)=>{
     let bannerInfo = req.body;
     let image1 = req.files.image1;
     helper.addBanner(bannerInfo).then((resp)=>{
@@ -25,7 +34,7 @@ router.post('/add-banner',(req,res)=>{
     })
 })
 
-router.post('/add-banner-1',(req,res)=>{
+router.post('/add-banner-1',verifyLogin,(req,res)=>{
     let bannerInfo = req.body;
     let image1 = req.files.image1;
     helper.addBannerOne(bannerInfo).then((resp)=>{
@@ -39,7 +48,7 @@ router.post('/add-banner-1',(req,res)=>{
     })
 })
 
-router.get('/select-banner',(req,res)=>{
+router.get('/select-banner',verifyLogin,(req,res)=>{
     helper.viewBanner().then((resp)=>{
         let admin = true;
         let banner = resp;
@@ -48,7 +57,7 @@ router.get('/select-banner',(req,res)=>{
     })
 })
 
-router.get('/select-banner-1',(req,res)=>{
+router.get('/select-banner-1',verifyLogin,(req,res)=>{
     helper.viewBannerOne().then((resp)=>{
         let admin = true;
         let banner = resp;
@@ -57,7 +66,7 @@ router.get('/select-banner-1',(req,res)=>{
     })
 })
 
-router.post('/selectBanner',async (req,res)=>{
+router.post('/selectBanner',verifyLogin,async (req,res)=>{
  
     id=req.body.id
     console.log(id);
@@ -69,7 +78,7 @@ router.post('/selectBanner',async (req,res)=>{
 
 })
 
-router.post('/selectBanner-1',async (req,res)=>{
+router.post('/selectBanner-1',verifyLogin,async (req,res)=>{
  
     id=req.body.id
     console.log(id);

@@ -2,7 +2,17 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 const Razorpay = require('razorpay')
-router.post('/',(req,res)=>{
+
+const verifyLogin = (req,res,next) =>{
+    if(req.session.status){
+        next()
+    }else{
+        res.redirect('/signIn');
+    }
+}
+
+router.post('/',verifyLogin,(req,res)=>{
+ 
     console.log("hey is hter",req.body)
     let userId = req.session.user._id;
     let userStatus = true;

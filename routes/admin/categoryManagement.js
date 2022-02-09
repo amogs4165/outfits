@@ -3,7 +3,16 @@ const { Db } = require('mongodb');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
-router.get('/',(req,res)=>{
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
+
+router.get('/',verifyLogin,(req,res)=>{
     console.log("hehwhweuhrfjcsia")
     let admin =true;
     helper.getCategory().then((response)=>{
@@ -14,7 +23,7 @@ router.get('/',(req,res)=>{
     
 })
 
-router.post('/addCategory',(req,res)=>{
+router.post('/addCategory',verifyLogin,(req,res)=>{
     
     let category = req.body
     console.log(category);
@@ -35,7 +44,7 @@ router.post('/addCategory',(req,res)=>{
    
 })
 
-router.post('/addSubCategory',(req,res)=>{
+router.post('/addSubCategory',verifyLogin,(req,res)=>{
   
     console.log(req.body);
     let cattDetails = req.body;
@@ -58,7 +67,7 @@ router.post('/addSubCategory',(req,res)=>{
     
 })
 
-router.get('/viewCategory',(req,res)=>{
+router.get('/viewCategory',verifyLogin,(req,res)=>{
     let admin = true;
     helper.getCategoryDetails().then((resp)=>{
         let cattDetails = resp.cattDetails
@@ -69,7 +78,7 @@ router.get('/viewCategory',(req,res)=>{
    
 })
 
-router.get('/viewSubcategory/:id',(req,res)=>{
+router.get('/viewSubcategory/:id',verifyLogin,(req,res)=>{
     let admin = true;
     let id = req.params.id
     helper.getSubcategoryDetails(id).then((resp)=>{

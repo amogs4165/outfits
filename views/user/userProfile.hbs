@@ -55,7 +55,7 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Account details</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Edit details</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
                                 <li><a class="nav-link" href="/logout">logout</a></li>
                             </ul>
@@ -76,7 +76,7 @@
                                     <div class="row user-profile mt-4">
                                         <div class="col-12 col-lg-6">
                                             <div class="profile-img">
-                                                <div class="img"><img src="/images/profile.jpg" alt="profile" width="65" /></div>
+                                                <div class="img"><img src="/profile-image/{{user._id}}image1.jpg" alt="profile" width="65" /></div>
                                                 <div class="detail ms-3">
                                                     <h5 class="mb-1">{{user.firstName}}</h5>
                                                     <p>Balance: <strong>$500</strong></p>
@@ -148,38 +148,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {{#each orders}}
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>Minerva Dress black</td>
-                                                    <td>March 04, 2018</td>
-                                                    <td>Completed</td>
-                                                    <td>$165.00 for 1 item </td>
+                                                    
+                                                    <td>
+                                                        {{#each this.products}}
+                                                        {{this.productname}}<br>
+                                                        {{/each}}
+                                                    </td>
+                                                    
+                                                    <td>{{this.date2}}</td>
+                                                    <td>{{this.OrderStatus}}</td>
+                                                    <td>{{this.total}}</td>
                                                     <td><a class="view" href="cart.html">View</a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Sueded Cotton Pant in Khaki</td>
-                                                    <td>May 19, 2018</td>
-                                                    <td>Completed</td>
-                                                    <td>$150.00 for 1 item </td>
-                                                    <td><a class="view" href="cart.html">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Standard chunk since</td>
-                                                    <td>June 24, 2018</td>
-                                                    <td>Processing</td>
-                                                    <td>$190.00 for 2 item </td>
-                                                    <td><a class="view" href="cart.html">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Combined with a handful</td>
-                                                    <td>July 28, 2018</td>
-                                                    <td>Processing</td>
-                                                    <td>$170.00 for 1 item </td>
-                                                    <td><a class="view" href="cart.html">View</a></td>
-                                                </tr>
+                                                {{/each}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -410,67 +394,53 @@
 
                                 <!-- Account Details -->
                                 <div id="account-details" class="tab-pane fade">
-                                    <h3>Account details </h3>
+                                    <h3>Edit details </h3>
                                     <div class="account-login-form bg-light-gray padding-20px-all">
-                                        <form>
+                                        <form action="/profile/editProfile" method="post" enctype="multipart/form-data"> 
                                             <fieldset>
-                                                <p>Already have an account? <a href="login.html"> Log in instead!</a></p>
+                                               
                                                 <div class="row">
                                                     <div class="form-group">
-                                                        <div class="d-flex mt-3 col-md-12 col-lg-12 col-xl-12">
-                                                            <label class="control-label me-3 mb-0"><strong>Title</strong></label>
-                                                            <div class="customRadio clearfix me-3 mb-0">
-                                                                <input name="mr" id="mr" value="1" checked="checked" type="radio" class="padding-10px-right">
-                                                                <label for="mr" class="mb-0">Mr. &nbsp;</label>
-                                                            </div>
-                                                            <div class="customRadio clearfix me-3 mb-0">
-                                                                <input name="mr" id="mrs" value="0" type="radio" class="padding-10px-right">
-                                                                <label for="mrs" class="mb-0">Mrs.</label>
-                                                            </div>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                                                        <input name="firstname" value="" id="input-firstname" class="form-control" type="text">
+                                                        <input name="firstName" value="{{user.firstName}}" id="input-firstname" class="form-control" type="text">
                                                     </div>
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-lastname">Last Name <span class="required-f">*</span></label>
-                                                        <input name="lastname" value="" id="input-lastname" class="form-control" type="text">
+                                                        <input name="lastName" value="{{user.lastName}}" id="input-lastname" class="form-control" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-email">E-Mail <span class="required-f">*</span></label>
-                                                        <input name="email" value="" id="input-email" class="form-control" type="email">
+                                                        <input name="email" value="{{user.email}}" id="input-email" class="form-control" type="email">
                                                     </div>
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-password">Password <span class="required-f">*</span></label>
-                                                        <input name="password" value="" id="input-password" class="form-control" type="password">
+                                                    
+                                                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-telephone">Mobile Number <span class="required-f">*</span></label>
+                                                        <input name="telephone" value="{{user.phoneNumber}}" id="input-telephone" class="form-control" type="tel" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                                                        <input name="telephone" value="" id="input-telephone" class="form-control" type="tel">
+                                                   <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-password">Password <span class="required-f">*</span></label>
+                                                        <input name="password" value="{{user.password}}" id="input-password" class="form-control" type="password">
                                                     </div>
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label>Birthdate <span class="required-f">*</span></label>
-                                                        <input name="birthdate" max="3000-01-01" min="1000-01-01" class="form-control" type="date">
+                                                   <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-password">Confirm Password <span class="required-f">*</span></label>
+                                                        <input name="confirmPassword" value="{{user.confirmPassword}}" id="input-password" class="form-control" type="password">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-12 col-xl-12 required">
-                                                        <div class="customCheckbox clearfix mb-2">
-                                                            <input id="offers" name="offers" type="checkbox" />
-                                                            <label for="offers">Receive offers from our partners</label>
-                                                        </div>
-                                                        <div class="customCheckbox clearfix">
-                                                            <input id="newsletter" name="newsletter" type="checkbox" />
-                                                            <label for="newsletter">Sign up for our newsletter</label>
-                                                        </div>
-                                                        <p class="mb-4" style="padding:0 0 0 30px;">You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</p>
+                                                        <h3>Update Profile Picture</h3>
+                                                         <img width="100px" height="auto" alt="No Profile Photo" src="profile-image/{{user._id}}image1.jpg" id="imgView1">
+                                                         <input name="image1" type="file" id="id_img1">
+                                                        
                                                     </div>
                                                 </div>
                                             </fieldset>

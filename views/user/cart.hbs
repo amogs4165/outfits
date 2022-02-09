@@ -354,22 +354,45 @@
         
     }
 
-    function remove(cartId,proId){
-        $.ajax({
-            url:'/cart/remove',
-            data:{
-                cart:cartId,
-                product:proId
-            },
-            method:'post',
-            success:(response)=>{
-                if(response.status){
-                $('#'+cartId+proId).remove()
-                 $('.totalPrice_').html(response.total);
-                }
-                
-            }
+    function remove(cartId,proId) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/cart/remove",
+                        type: "POST",
+                        data: {
+                            cart:cartId,
+                            product:proId
+                        },
+
+                        success: (response)=>{
+                             if(response.status){
+                                $('#'+cartId+proId).remove()
+                                $('.totalPrice_').html(response.total);
+                            swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+
+                            
+                             }
+                           
+                           
+                        },
+
+                    });
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
     }
+
 
 </script>

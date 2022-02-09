@@ -2,12 +2,28 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
-router.get('/',async(req,res)=>{
+const verifyLogin = (req,res,next) =>{
+    if(req.session.status){
+        next()
+    }else{
+        res.redirect('/signIn');
+    }
+}
+
+
+router.get('/',verifyLogin,async(req,res)=>{
     if(req.session.user){
         let userId = req.session.user._id
         let userStatus = req.session.user.status
         let products = await helper.userCart(userId)
-        let total = await helper.totalPrice(userId)
+        let cartProducts = await helper.userCart(userId)
+        console.log(cartProducts)
+        if(cartProducts==null){
+          var total = null;
+        }else{
+          var total = await helper.totalPrice(userId)
+        }
+        
         
         console.log("this is total price",total)
       
@@ -19,7 +35,7 @@ router.get('/',async(req,res)=>{
     
 })
 
-router.get('/cart-add/:id',(req,res)=>{
+router.get('/cart-add/:id',verifyLogin,(req,res)=>{
     console.log(req.params.id)
     let userId = req.session.user._id;
     let productId = req.params.id;
@@ -29,7 +45,7 @@ router.get('/cart-add/:id',(req,res)=>{
     })
 })
 
-router.post('/change-product-quantity',async(req,res,next)=>{
+router.post('/change-product-quantity',verifyLogin,async(req,res,next)=>{
     console.log(req.body)
     let userId = req.session.user._id
     let productId = req.body.product
@@ -75,35 +91,55 @@ router.post('/change-product-quantity',async(req,res,next)=>{
 //     }) 
 })
 
-router.post('/remove',async(req,res)=>{
+router.post('/remove',verifyLogin,async(req,res)=>{
     
     let userId = req.session.user._id
     let cartId = req.body.cart
     let productId = req.body.product
-    helper.removeFromCart(cartId,productId)
-    let total = await helper.totalPrice(userId)
-    res.send({status:true,total})
+    helper.removeFromCart(cartId,productId).then(async()=>{
+        console.log("herre ");
+        let checkCart = await helper.checkCart(userId)
+        console.log(checkCart.products.length,"here")
+        if(checkCart.products.length != 0){
+            let cartProducts = await helper.userCart(userId)
+            console.log("start",cartProducts,"end")
+            // let p = {...cartProducts}
+            // console.log("heey it is sahe", p)
+            if(cartProducts==null){
+              var total = null;
+             
+            }else{
+              var total = await helper.totalPrice(userId)
+              
+            }
+        }else{
+            helper.removeCart(userId)
+            var total = null;
+        }
+      
+      
+        res.send({status:true,total})
+    })
+  
 })
 
-router.get('/checkout',async(req,res)=>{
+router.get('/checkout',verifyLogin,async(req,res)=>{
    
-        let userStatus = req.session.user.status
+    let userStatus = req.session.user.status
+   
        
-        if(userStatus){
-            let userId = req.session.user._id
-            let products = await helper.userCart(userId)
-            let total = await helper.totalPrice(userId)
-            let check= false;
-            helper.findAddress(userId).then((resp)=>{
-                let address = resp;
-                console.log("this is address",address);
-                res.render('user/checkout',{products,userStatus,total,userId,address,check})
-            })
+    let userId = req.session.user._id
+    let products = await helper.userCart(userId)
+   
+    let total = await helper.totalPrice(userId)
+    let check= false;
+    helper.findAddress(userId).then((resp)=>{
+        let address = resp;
+        console.log("this is address",address);
+        res.render('user/checkout',{products,userStatus,total,userId,address,check})
+    })
         
-    }
-    else{
-        res.redirect('/signIn')
-    }
+    
    
 })
 

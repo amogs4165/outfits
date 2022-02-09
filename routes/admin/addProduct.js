@@ -7,11 +7,11 @@ const verifyLogin = (req,res,next)=>{
         next()
     }
     else{
-        res.redirect('')
+        res.redirect('/admin/login')
     }
 }
 
-router.get('/',(req,res)=>{
+router.get('/',verifyLogin,(req,res)=>{
     let admin = true;
     helper.getCategoryDetails().then((resp)=>{
         let cattDetails = resp.cattDetails;
@@ -25,7 +25,7 @@ router.get('/',(req,res)=>{
     
 })
 
-router.post('/add',(req,res)=>{
+router.post('/add',verifyLogin,(req,res)=>{
     console.log(req.body);
     console.log(req.files.image);
     helper.addProduct(req.body,(id)=>{

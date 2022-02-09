@@ -18,6 +18,9 @@
                                     <div class="card-body">
                                         <h2>SHIPPING ADDRESS</h2>
                                         <input name="check" value={{check}} hidden>
+                                        {{#each products}}
+                                        <input name="qty" value={{this.quantity}} hidden>
+                                        {{/each }}
                                         
                                         {{#each address.address}}
                                         <div class="row">

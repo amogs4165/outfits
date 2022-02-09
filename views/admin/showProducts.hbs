@@ -1,67 +1,100 @@
-<div id="layout-wrapper">  
-            
+<div id="layout-wrapper">
 
-            <!-- ========== Left Sidebar Start ========== -->
 
-            
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-                <div class="main-content">
+    <!-- ========== Left Sidebar Start ========== -->
 
-                    <div class="page-content">
-                        {{!-- <div class="container-fluid"> --}}
 
-                            <!-- start page title -->
-                            <div class="row">
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
 
-                                
-                                <table class="table" id="adminTable" >
-                                    <thead>
-                                        <tr >
-                                        <th scope="col">No</th>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Modify/Delete</th>
-                                        </tr>
-                                    </thead>
-                                        <tbody >
-                                            {{#each products}}
-                                                <tr class="align-middle">
-                                                    <td></td>
-                                                    <td>{{this.productname}}</td>
-                                                    <td>{{this.productprice}}</td>
-                                                    <td>{{this.manufacturerquantity}}</td>
-                                                    <td><img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image1.jpg">
-                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image2.jpg">
-                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image3.jpg">
-                                                    <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}image4.jpg"></td>
-                                                    <td>
-                                                        <a class="btn btn-primary mt-2 "  href="/showProducts/edit/{{this._id}}" onclick="return confirm('click Ok to confirm Edit{{this.categoryName}}')" type="submit">Edit</a>
-                                                        <a class="btn btn-danger mt-2 "  href="/showProducts/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.categoryName}}')" type="submit">Delete</a>
-                                                    </td>
-                                                </tr>
-                                            {{/each}}
-                                            
-                                        </tbody>
-                                </table>
+        <div class="page-content">
+            {{!-- <div class="container-fluid"> --}}
 
-                            </div>
-                        </div>
-                    </div>
+                <!-- start page title -->
+                <div class="row">
+
+
+                    <table class="table" id="adminTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Modify/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each products}}
+                            <tr class="align-middle">
+                                <td></td>
+                                <td>{{this.productname}}</td>
+                                <td>{{this.productprice}}</td>
+                                <td>{{this.manufacturerquantity}}</td>
+                                <td><img style="width: 50px; height: 50px;"
+                                        src="/product-images/{{this._id}}image1.jpg">
+                                    <img style="width: 50px; height: 50px;"
+                                        src="/product-images/{{this._id}}image2.jpg">
+                                    <img style="width: 50px; height: 50px;"
+                                        src="/product-images/{{this._id}}image3.jpg">
+                                    <img style="width: 50px; height: 50px;"
+                                        src="/product-images/{{this._id}}image4.jpg">
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary mt-2 " href="/showProducts/edit/{{this._id}}"
+                                        onclick="return confirm('click Ok to confirm Edit{{this.categoryName}}')"
+                                        type="submit">Edit</a>
+                                    <a class="btn btn-danger mt-2 " onclick="confirmDelete('{{this._id}}')">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+
                 </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
 
 
 
-{{!-- 
-<div class="container">
-    <div class="row">
-        
-    </div>
-</div> --}}
+<script>
+    function confirmDelete(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/showProducts/delete",
+                        type: "POST",
+                        data: {
+                            id: id
+                        },
 
+                        success: async ()=> {
+                            await swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                            location.href = '/showProducts'
+                        },
 
+                    });
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+</script>

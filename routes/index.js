@@ -15,9 +15,15 @@ router.get('/', async (req, res, next) => {
       let userId = req.session.user._id
       let userStatus = req.session.user.status
       let cartProducts = await helper.userCart(userId)
-      let total = await helper.totalPrice(userId)
+      console.log(cartProducts)
+      if(cartProducts==null){
+        var total = null;
+      }else{
+        var total = await helper.totalPrice(userId)
+      }
       
-      res.render('index', { userStatus, products, banner, bannerOne, cartProducts, total });
+      
+      res.render('index', { userStatus, products, banner, bannerOne, cartProducts,total});
 
     });
   }

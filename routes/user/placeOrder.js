@@ -10,7 +10,15 @@ paypal.configure({
   'client_secret': 'EM0SmG5OL1Bg3e_qXeyvCniGIZsG_3VcpPRAoiHBte0NGhBBVKGY0KyPEGB0CAQ9YJHSIMu0tZFAyGQh'
 });
 
-router.post('/',async (req,res)=>{
+const verifyLogin = (req,res,next) =>{
+    if(req.session.status){
+        next()
+    }else{
+        res.redirect('/signIn');
+    }
+}
+
+router.post('/',verifyLogin,async (req,res)=>{
     
     console.log("check is here",req.body);
     let address = req.body.address;
@@ -28,6 +36,10 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
@@ -46,6 +58,10 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "placed";
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then(()=>{
                     helper.removeCart(userId).then(()=>{
@@ -66,6 +82,10 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 console.log("its here",total);
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
@@ -87,6 +107,10 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "pending";
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
                     let orderId = ""+resp.insertedId
@@ -107,6 +131,10 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
@@ -174,6 +202,10 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "pending";
                 let products = await helper.userCart(userId);
+                products.forEach(record => {
+                    helper.quantityDecrement(record.productId,record.quantity);
+                   
+                });
                 let total = await helper.totalPrice(userId);
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
@@ -236,6 +268,7 @@ router.post('/',async (req,res)=>{
        
         if(paymentMode =='COD'){  //cod
             if(address!=''){
+                console.log("here it is",req.body)
                 let proId = req.body.proId
                 let userId = req.session.user._id;
                 let date = new Date();
@@ -244,6 +277,11 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                console.log("this is products",products)
+                products[0].quantity = parseInt(qty);
+                console.log("this is new products",products)
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.total
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
@@ -263,6 +301,9 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "placed";
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                products[0].quantity = parseInt(qty);
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.total
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then(()=>{
                     helper.removeCart(userId).then(()=>{
@@ -283,6 +324,9 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                products[0].quantity = parseInt(qty);
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.productprice
                 console.log("its here",total);
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
@@ -304,6 +348,9 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "pending";
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                products[0].quantity = parseInt(qty);
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.productprice
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
                   
@@ -323,6 +370,9 @@ router.post('/',async (req,res)=>{
                 let shippingAddress1 = await helper.getShippingAddress (userId,address);
                 const [shippingAddress] = shippingAddress1;
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                products[0].quantity = parseInt(qty);
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.productprice
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
@@ -391,6 +441,9 @@ router.post('/',async (req,res)=>{
                 let date = new Date();
                 let status = "pending";
                 let products = [await helper.getProductDetailsById(proId)];
+                let qty = req.body.qty;
+                products[0].quantity = parseInt(qty);
+                helper.quantityDecrement(proId,qty);
                 let total = req.body.productprice
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
@@ -452,7 +505,7 @@ router.post('/',async (req,res)=>{
     }
 })
 
-router.post('/verify-payment',(req,res)=>{
+router.post('/verify-payment',verifyLogin,(req,res)=>{
     console.log("verify payment",req.body);
     helper.verifyPayment(req.body).then(()=>{
         let crrStatus = "placed"
@@ -467,7 +520,7 @@ router.post('/verify-payment',(req,res)=>{
     })
 })
 
-router.get('/order-success',(req,res)=>{
+router.get('/order-success',verifyLogin,(req,res)=>{
     
     console.log("paypal test",req.query)
     const payerId = req.query.PayerID;

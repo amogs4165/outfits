@@ -338,10 +338,19 @@ module.exports = {
            
         })
     },
+    checkCart:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let checkCart = await dB.get().collection('cart').findOne({user:ObjectId(userId)})
+            return resolve(checkCart)
+        })
+    },
+    
     userCart:(userId)=>{
         return new Promise(async(resolve,reject)=>{
             let checkCart = await dB.get().collection('cart').findOne({user:ObjectId(userId)})
-            if(checkCart){
+          console.log(checkCart)
+            
+            if(checkCart!= null){
                 let cartItems = await dB.get().collection('cart').aggregate([
                     {
                         $match:{user:ObjectId(userId)}
@@ -487,6 +496,12 @@ module.exports = {
             resolve(...quantity);
         })
         
+    },
+    quantityDecrement:(proId,dcQty)=>{
+        let qty = parseInt(dcQty);
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('products').updateOne({_id:ObjectId(proId)},{ $inc: { manufacturerquantity: -qty} })
+        })
     },
     changeButtonStatus:(userId,productId)=>{
         return new Promise(async(resolve,reject)=>{
@@ -678,6 +693,12 @@ module.exports = {
             return resolve(orders)
         })
     },
+    ordersById:(userId)=>{
+        return new Promise((resolve,reject)=>{
+            let orders = dB.get().collection('orders').find({id:userId}).toArray()
+            resolve(orders)
+        })
+    },
     removeCart:(userId)=>{
         return new Promise((resolve,reject)=>{
             dB.get().collection('cart').remove({user:ObjectId(userId)}).then(()=>{
@@ -747,6 +768,20 @@ module.exports = {
         return new Promise((resolve,reject)=>{
             dB.get().collection('orders').updateOne({_id:ObjectId(orderId)},{$set:{status:crrStatus}}).then((resp)=>{
                 console.log(resp);
+                resolve(resp)
+            })
+        })
+    },
+    editUserDetail:(id,info)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('userData').updateOne({_id:ObjectId(id)},{$set:{firstName:info.firstName,lastName:info.lastName,email:info.email,password:info.password,confirmPassword:info.confirmPassword}}).then(()=>{
+                resolve();
+            })
+        })
+    },
+    getUser:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('userData').findOne({_id:ObjectId(id)}).then((resp)=>{
                 resolve(resp)
             })
         })

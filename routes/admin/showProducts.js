@@ -3,9 +3,16 @@ const router = express.Router();
 const helper = require('../../helper/connectionHelper');
 const fs = require('fs')
 
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
 
-
-router.get('/',(req,res)=>{
+router.get('/',verifyLogin,(req,res)=>{
     
     console.log("heyyyyyy");
     let admin = req.session.admin;
@@ -16,14 +23,14 @@ router.get('/',(req,res)=>{
     
 })
 
-router.get('/edit/:id',async(req,res)=>{
+router.get('/edit/:id',verifyLogin,async(req,res)=>{
     console.log(req.params.id)
     let product = await helper.getProductDetailsById(req.params.id)
     console.log(product);
     res.render('admin/editProduct',{product})
 })
 
-router.post('/edit/:id',(req,res)=>{
+router.post('/edit/:id',verifyLogin,(req,res)=>{
     let id = req.params.id;
     helper.updateProduct(id,req.body).then(()=>{
         if(req.files){
@@ -66,8 +73,8 @@ router.post('/edit/:id',(req,res)=>{
 
 })
 
-router.get('/delete/:id',(req,res)=>{
-    let id = req.params.id;
+router.post('/delete',verifyLogin,(req,res)=>{
+    let id = req.body.id;
     
     helper.deleteProduct(id).then(()=>{
 
@@ -81,3 +88,5 @@ router.get('/delete/:id',(req,res)=>{
 })
 
 module.exports = router;
+
+

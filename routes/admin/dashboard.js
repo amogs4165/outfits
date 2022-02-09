@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const helper = require('../../helper/connectionHelper')
 
+const verifyLogin = (req,res,next)=>{
+    if(req.session.admin){
+        next()
+    }
+    else{
+        res.redirect('/admin/login')
+    }
+}
+
 router.get('/',(req,res)=>{
     let admin = req.session.admin
     if(admin){
@@ -13,12 +22,12 @@ router.get('/',(req,res)=>{
     
 })
 
-router.get('/orders',(req,res)=>{
+router.get('/orders',verifyLogin,(req,res)=>{
     
     let admin = req.session.admin
-    if(admin){
+  
         res.render('admin/orders',{admin})
-    }
+   
     
 })
 router.get('/login',(req,res)=>{
