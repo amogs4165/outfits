@@ -29,18 +29,20 @@
                             <h4 class="card-title">Basic Information</h4>
                             <p class="card-title-desc">Fill all information below</p>
 
-                            <form action="/showProducts/edit/{{product._id}}" method="post" enctype="multipart/form-data">
+                            <form action="/showProducts/edit/{{product._id}}" method="post" id="product_form" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="productname" >Product Name</label>
                                             <input id="productname" name="productname" value="{{product.productname}}" type="text" class="form-control"
                                                 placeholder="Product Name">
+                                                <span class="error_form" id="productname_error_message"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="manufacturerbrand">Manufacturer Brand</label>
                                             <input id="manufacturerbrand" name="manufacturerbrand" value="{{product.manufacturerbrand}}" type="text"
                                                 class="form-control" placeholder="Manufacturer Brand">
+                                                <span class="error_form" id="brand_error_message"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="productsize">Size</label>
@@ -51,7 +53,20 @@
                                             <label for="productprice">Price</label>
                                             <input id="productprice" name="productprice" value="{{product.productprice}}" type="number" class="form-control"
                                                 placeholder="Price">
+                                                <span class="error_form" id="price_error_message"></span>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="manufacturerquantity">Quantity</label>
+                                            <input id="manufacturerquantity" name="manufacturerquantity" value="{{product.manufacturerquantity}}" type="number" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="productdescription">Product Description</label>
+                                            <textarea  class="form-control" name="description" id="productdescription" rows="5"
+                                                placeholder="Product Description">{{product.description}}</textarea>
+                                                <span class="error_form" id="description_error_message"></span>
+                                        </div>
+                                        
                                     </div>
 
                                     {{!-- <div class="col-sm-6">
@@ -491,4 +506,156 @@
 
 
     
+</script>
+
+</script>
+
+<script type="text/javascript">
+$("#productname_error_message").hide()
+$("#brand_error_message").hide()
+$("#description_error_message").hide()
+$("#price_error_message").hide()
+$("#quantity_erroer_message").hide()
+
+
+
+
+var error_productname=false;
+var error_brand=false;
+var error_description=false;
+var error_price=false;
+var error_quantity=false
+
+
+   $("#productname").focusout(function(){
+            check_productname();
+         });
+         $("#manufacturerbrand").focusout(function() {
+            check_brand();
+         });
+         $("#productdescription").focusout(function() {
+           check_description()
+         });
+         $("#productprice").focusout(function() {
+            check_price();
+         });
+          $("#manufacturerquantity").focusout(function() {
+            check_quantity();
+         });
+        
+        
+        
+
+         function check_productname() {
+            var pattern = /^[a-zA-Z" "]*$/;
+            var pname = $("#productname").val();
+            if (pattern.test(pname) && pname !== '') {
+               $("#productname_error_message").hide();
+               $("#productname").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#productname_error_message").html("Should contain only Characters");
+               $("#productname_error_message").show();
+               $("#productname").css("border-bottom","2px solid #F90A0A");
+               error_productname = true;
+            }
+         }
+
+         function check_brand() {
+            var pattern = /^[a-zA-Z " "]*$/;
+            var brand = $("#manufacturerbrand").val()
+            if (pattern.test(brand) && brand !== '') {
+               $("#brand_error_message").hide();
+               $("#manufacturerbrand").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#brand_error_message").html("Should contain only Characters");
+               $("#brand_error_message").show();
+               $("#manufacturerbrand").css("border-bottom","2px solid #F90A0A");
+               error_brand = true;
+            }
+         }
+           function check_description() {
+            var pattern = /^[a-zA-Z " "]*$/;
+            var description = $("#productdescription").val()
+            if (pattern.test(description) && description !== '') {
+               $("#description_error_message").hide();
+               $("#productdescription").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#description_error_message").html("Should contain only Characters");
+               $("#description_error_message").show();
+               $("#productdescription").css("border-bottom","2px solid #F90A0A");
+               error_description = true;
+            }
+         }
+
+        
+
+       
+       
+          function check_price() {
+            var pattern = /^[0-9]+$/
+            var price= $("#productprice").val();
+            if (pattern.test(price) && price !== '') {
+               $("#price_error_message").hide();
+               $("#productprice").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#price_error_message").html("Only Numbers");
+               $("#price_error_message").show();
+               $("#productprice").css("border-bottom","2px solid #F90A0A");
+               error_price = true;
+            }
+         }
+
+          function check_quantity() {
+            var pattern = /^[0-9]+$/
+            var price= $("#manufacturerquantity").val();
+            if (pattern.test(price) && price !== '') {
+               $("#quantity_erroer_message").hide();
+               $("#manufacturerquantity").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#quantity_erroer_message").html("Only Numbers");
+               $("#quantity_erroer_message").show();
+               $("#manufacturerquantity").css("border-bottom","2px solid #F90A0A");
+               error_quantity = true;
+            }
+         }
+
+
+
+         $("#product_form").submit(function() {
+          error_productname=false;
+           error_brand=false;
+           error_description=false;
+           error_price=false;
+           error_quantity=false
+           error_image1=false
+           error_image2=false
+           error_image3=false
+           error_image4=false
+           
+
+           
+
+            check_productname()
+            check_brand()
+            check_description()
+            check_price()
+            check_quantity()
+           
+
+            
+
+
+            if (error_productname=== false && error_brand === false && error_description === false && error_price === false&&error_quantity==false) {
+               
+               return true;
+            } else {
+               swal("Please Fill the form Correctly");
+               return false;
+            }
+
+
+         });
+     
+
+
 </script>

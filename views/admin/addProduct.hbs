@@ -29,18 +29,20 @@
                             <h4 class="card-title">Basic Information</h4>
                             <p class="card-title-desc">Fill all information below</p>
 
-                            <form action="/addProduct/add" method="post" enctype="multipart/form-data">
+                            <form action="/addProduct/add" id="product_form" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="productname">Product Name</label>
                                             <input id="productname" name="productname" type="text" class="form-control"
                                                 placeholder="Product Name">
+                                                <span class="error_form" id="productname_error_message"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="manufacturerbrand">Manufacturer Brand</label>
                                             <input id="manufacturerbrand" name="manufacturerbrand" type="text"
                                                 class="form-control" placeholder="Manufacturer Brand">
+                                                <span class="error_form" id="brand_error_message"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="productsize">Size</label>
@@ -51,6 +53,7 @@
                                             <label for="productprice">Price</label>
                                             <input id="productprice" name="productprice" type="number" class="form-control"
                                                 placeholder="Price">
+                                                <span class="error_form" id="price_error_message"></span>
                                         </div>
                                     </div>
 
@@ -77,29 +80,35 @@
                                             <label for="manufacturerquantity">Quantity</label>
                                             <input id="manufacturerquantity" name="manufacturerquantity" type="text"
                                                 class="form-control" placeholder="Quantity">
+                                                <span class="error_form" id="quantity_erroer_message"></span>
                                         </div>
                                         <div class="mb-3">
                                             <label for="productdescription">Product Description</label>
-                                            <textarea class="form-control" id="productdescription" rows="5"
+                                            <textarea class="form-control" name="description" id="productdescription" rows="5"
                                                 placeholder="Product Description"></textarea>
+                                                 <span class="error_form" id="description_error_message"></span>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="fallback">
                                     <input name="image1" type="file" id="id_img1">
+                                    <span class="error_form" id="image1_error_message"></span>
                                     <img width="100px" height="auto" src="" id="imgView1">
                                     <input name="image2" type="file" id="id_img2">
+                                    <span class="error_form" id="image2_error_message"></span>
                                     <img width="100px" height="auto" src="" id="imgView2">
                                     <input name="image3" type="file" id="id_img3">
+                                    <span class="error_form" id="image3_error_message"></span>
                                     <img width="100px" height="auto" src="" id="imgView3">
                                     <input name="image4" type="file" id="id_img4">
+                                    <span class="error_form" id="image4_error_message"></span>
                                     <img width="100px" height="auto" src="" id="imgView4">
                                 </div>
                                 
                                 <div class="d-flex flex-wrap gap-2">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="confirm-btn">Save
-                                        Changes</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="confirm-btn">Add
+                                        Product</button>
                                     <button type="button"
                                         class="btn btn-secondary waves-effect waves-light">Cancel</button>
                                 </div>
@@ -475,4 +484,227 @@
 
 
     
+</script>
+
+<script type="text/javascript">
+$("#productname_error_message").hide()
+$("#brand_error_message").hide()
+$("#description_error_message").hide()
+$("#price_error_message").hide()
+$("#quantity_erroer_message").hide()
+$("#image1_error_message").hide()
+$("#image2_error_message").hide()
+$("#image3_error_message").hide()
+$("#image4_error_message").hide()
+
+
+
+var error_productname=false;
+var error_brand=false;
+var error_description=false;
+var error_price=false;
+var error_quantity=false
+var error_image1=false
+var error_image2=false
+var error_image3=false
+var error_image4=false
+
+   $("#productname").focusout(function(){
+            check_productname();
+         });
+         $("#manufacturerbrand").focusout(function() {
+            check_brand();
+         });
+         $("#productdescription").focusout(function() {
+           check_description()
+         });
+         $("#productprice").focusout(function() {
+            check_price();
+         });
+          $("#manufacturerquantity").focusout(function() {
+            check_quantity();
+         });
+          $("#id_img1").focusout(function() {
+            check_image1();
+         });
+          $("#id_img2").focusout(function() {
+            check_image2();
+         });
+          $("#id_img3").focusout(function() {
+            check_image3();
+         });
+          $("#id_img4").focusout(function() {
+            check_image4();
+         });
+        
+        
+
+         function check_productname() {
+            var pattern = /^[a-zA-Z" "]*$/;
+            var pname = $("#productname").val();
+            if (pattern.test(pname) && pname !== '') {
+               $("#productname_error_message").hide();
+               $("#productname").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#productname_error_message").html("Should contain only Characters");
+               $("#productname_error_message").show();
+               $("#productname").css("border-bottom","2px solid #F90A0A");
+               error_productname = true;
+            }
+         }
+
+         function check_brand() {
+            var pattern = /^[a-zA-Z " "]*$/;
+            var brand = $("#manufacturerbrand").val()
+            if (pattern.test(brand) && brand !== '') {
+               $("#brand_error_message").hide();
+               $("#manufacturerbrand").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#brand_error_message").html("Should contain only Characters");
+               $("#brand_error_message").show();
+               $("#manufacturerbrand").css("border-bottom","2px solid #F90A0A");
+               error_brand = true;
+            }
+         }
+           function check_description() {
+            var pattern = /^[a-zA-Z " "]*$/;
+            var description = $("#productdescription").val()
+            if (pattern.test(description) && description !== '') {
+               $("#description_error_message").hide();
+               $("#productdescription").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#description_error_message").html("Should contain only Characters");
+               $("#description_error_message").show();
+               $("#productdescription").css("border-bottom","2px solid #F90A0A");
+               error_description = true;
+            }
+         }
+
+        
+
+       
+       
+          function check_price() {
+            var pattern = /^[0-9]+$/
+            var price= $("#productprice").val();
+            if (pattern.test(price) && price !== '') {
+               $("#price_error_message").hide();
+               $("#productprice").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#price_error_message").html("Only Numbers");
+               $("#price_error_message").show();
+               $("#productprice").css("border-bottom","2px solid #F90A0A");
+               error_price = true;
+            }
+         }
+
+          function check_quantity() {
+            var pattern = /^[0-9]+$/
+            var price= $("#manufacturerquantity").val();
+            if (pattern.test(price) && price !== '') {
+               $("#quantity_erroer_message").hide();
+               $("#manufacturerquantity").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#quantity_erroer_message").html("Only Numbers");
+               $("#quantity_erroer_message").show();
+               $("#manufacturerquantity").css("border-bottom","2px solid #F90A0A");
+               error_quantity = true;
+            }
+         }
+
+         function check_image1(){
+           var image1=$("#id_img1").val();
+           if(image1!==""){
+             $("#image1_error_message").hide();
+               $("#id_img1").css("border-bottom","2px solid #34F458");
+          
+           }else{
+                $("#image1_error_message").html("choose image");
+               $("#image1_error_message").show();
+               $("#id_img1").css("border-bottom","2px solid #F90A0A");
+               error_image1 = true;
+           }
+         }
+         function check_image2(){
+           var image1=$("#id_img2").val();
+           if(image1!==""){
+             $("#image2_error_message").hide();
+               $("#id_img2").css("border-bottom","2px solid #34F458");
+          
+           }else{
+                $("#image2_error_message").html("choose image");
+               $("#image2_error_message").show();
+               $("#id_img2").css("border-bottom","2px solid #F90A0A");
+               error_image2 = true;
+           }
+         }
+         function check_image3(){
+           var image1=$("#id_img3").val();
+           if(image1!==""){
+             $("#image3_error_message").hide();
+               $("#id_img3").css("border-bottom","2px solid #34F458");
+          
+           }else{
+                $("#image3_error_message").html("choose image");
+               $("#image3_error_message").show();
+               $("#id_img3").css("border-bottom","2px solid #F90A0A");
+               error_image3 = true;
+           }
+         }
+        function check_image4(){
+           var image1=$("#id_img4").val();
+           if(image1!==""){
+             $("#image4_error_message").hide();
+               $("#id_img4").css("border-bottom","2px solid #34F458");
+          
+           }else{
+                $("#image4_error_message").html("choose image");
+               $("#image4_error_message").show();
+               $("#id_img4").css("border-bottom","2px solid #F90A0A");
+               error_image4 = true;
+           }
+         }
+
+         $("#product_form").submit(function() {
+          error_productname=false;
+           error_brand=false;
+           error_description=false;
+           error_price=false;
+           error_quantity=false
+           error_image1=false
+           error_image2=false
+           error_image3=false
+           error_image4=false
+           
+
+           
+
+            check_productname()
+            check_brand()
+            check_description()
+            check_price()
+            check_quantity()
+            check_image1()
+             check_image1()
+
+             check_image2()         
+              check_image3()   
+              check_image4() 
+
+            
+
+
+            if (error_productname=== false && error_brand === false && error_description === false && error_price === false&&error_quantity==false &&error_image1===false &&error_image2===false  &&error_image3===false &&error_image4===false ) {
+               
+               return true;
+            } else {
+               swal("Please Fill the form Correctly");
+               return false;
+            }
+
+
+         });
+     
+
+
 </script>

@@ -408,31 +408,37 @@
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-firstname">First Name <span class="required-f">*</span></label>
                                                         <input name="firstName" value="{{user.firstName}}" id="input-firstname" class="form-control" type="text">
+                                                        <span class="error_form" id="fname_error_message"></span>
                                                     </div>
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-lastname">Last Name <span class="required-f">*</span></label>
                                                         <input name="lastName" value="{{user.lastName}}" id="input-lastname" class="form-control" type="text">
+                                                        <span class="error_form" id="sname_error_message"></span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-email">E-Mail <span class="required-f">*</span></label>
                                                         <input name="email" value="{{user.email}}" id="input-email" class="form-control" type="email">
+                                                        <span class="error_form" id="email_error_message"></span>
                                                     </div>
                                                     
                                                       <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-telephone">Mobile Number <span class="required-f">*</span></label>
                                                         <input name="telephone" value="{{user.phoneNumber}}" id="input-telephone" class="form-control" type="tel" disabled>
+                                                        <span class="error_form" id="mob_error_message"></span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-password">Password <span class="required-f">*</span></label>
                                                         <input name="password" value="{{user.password}}" id="input-password" class="form-control" type="password">
+                                                        <span class="error_form" id="password_error_message"></span>
                                                     </div>
                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                         <label for="input-password">Confirm Password <span class="required-f">*</span></label>
-                                                        <input name="confirmPassword" value="{{user.confirmPassword}}" id="input-password" class="form-control" type="password">
+                                                        <input name="confirmPassword" value="{{user.confirmPassword}}" id="input-cpassword" class="form-control" type="password">
+                                                        <span class="error_form" id="retype_password_error_message"></span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -884,3 +890,149 @@
           
 
         </div>
+
+<script type="text/javascript">
+$("#fname_error_message").hide()
+$("#lname_error_message").hide()
+$("#email_error_message").hide()
+$("#mob_error_message").hide()
+$("#password_error_message").hide()
+$("#confirmpassword_error_message").hide()
+
+
+var error_fname=false;
+var error_lname=false;
+var error_email=false;
+var error_mobno=false;
+var error_password=false;
+var error_confirmpassword=false;
+   $("#input-firstname").focusout(function(){
+            check_fname();
+         });
+         $("#input-lastname").focusout(function() {
+            check_sname();
+         });
+         $("#input-email").focusout(function() {
+            check_email();
+         });
+         $("#input-telephone").focusout(function() {
+            check_mob();
+         });
+         $("#input-password").focusout(function() {
+            check_password();
+         });
+         $("#input-cpassword").focusout(function() {
+            check_retype_password();
+         });
+
+         function check_fname() {
+            var pattern = /^[a-zA-Z]*$/;
+            var fname = $("#input-firstname").val();
+            if (pattern.test(fname) && fname !== '') {
+               $("#fname_error_message").hide();
+               $("#input-firstname").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#fname_error_message").html("Should contain only Characters");
+               $("#fname_error_message").show();
+               $("#input-firstname").css("border-bottom","2px solid #F90A0A");
+               error_fname = true;
+            }
+         }
+
+         function check_sname() {
+            var pattern = /^[a-zA-Z]*$/;
+            var sname = $("#input-lastname").val()
+            if (pattern.test(sname) && sname !== '') {
+               $("#sname_error_message").hide();
+               $("#input-lastname").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#sname_error_message").html("Should contain only Characters");
+               $("#sname_error_message").show();
+               $("#input-lastname").css("border-bottom","2px solid #F90A0A");
+               error_sname = true;
+            }
+         }
+
+         function check_password() {
+            var password_length = $("#input-password").val().length;
+            if (password_length < 5) {
+               $("#password_error_message").html("Atleast 5 Characters");
+               $("#password_error_message").show();
+               $("#input-password").css("border-bottom","2px solid #F90A0A");
+               error_password = true;
+            } else {
+               $("#password_error_message").hide();
+               $("#input-password").css("border-bottom","2px solid #34F458");
+            }
+         }
+
+         function check_retype_password() {
+            var password = $("#input-password").val();
+            var retype_password = $("#input-cpassword").val();
+            if (password !== retype_password) {
+               $("#retype_password_error_message").html("Passwords Did not Matched");
+               $("#retype_password_error_message").show();
+               $("#input-cpassword").css("border-bottom","2px solid #F90A0A");
+               error_retype_password = true;
+            } else {
+               $("#retype_password_error_message").hide();
+               $("#input-cpassword").css("border-bottom","2px solid #34F458");
+            }
+         }
+
+         function check_email() {
+            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var email = $("#input-email").val();
+            if (pattern.test(email) && email !== '') {
+               $("#email_error_message").hide();
+               $("#input-email").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#email_error_message").html("Invalid Email");
+               $("#email_error_message").show();
+               $("#input-email").css("border-bottom","2px solid #F90A0A");
+               error_email = true;
+            }
+         }
+          function check_mob() {
+            var pattern = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+            var mob= $("#input-telephone").val();
+            if (pattern.test(mob) && mob !== ''&&mob.length==10) {
+               $("#mob_error_message").hide();
+               $("#input-telephone").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#mob_error_message").html("Invalid Mobile NO");
+               $("#mob_error_message").show();
+               $("#input-telephone").css("border-bottom","2px solid #F90A0A");
+               error_mobno = true;
+            }
+         }
+
+         $("#registration_form").submit(function() {
+            error_fname = false;
+            error_sname = false;
+            error_email = false;
+            error_mobno=false;
+            error_password = false;
+            error_retype_password = false;
+
+            check_fname();
+            check_sname();
+            check_email();
+             check_mob();
+            check_password();
+            check_retype_password();
+
+            if (error_fname === false && error_sname === false && error_email === false && error_password === false && error_retype_password === false&&error_mobno===false) {
+               
+               return true;
+            } else {
+               swal("Please Fill the form Correctly");
+               return false;
+            }
+
+
+         });
+     
+
+
+</script>

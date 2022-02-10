@@ -265,7 +265,8 @@ module.exports = {
                     manufacturerbrand:productDetails.manufacturerbrand,
                     productsize:productDetails.productsize,
                     productprice:price,
-                    manufacturerquantity:productDetails.manufacturerquantity
+                    manufacturerquantity:productDetails.manufacturerquantity,
+                    description:productDetails.description
                 }
             }).then((response)=>{
                 resolve()
@@ -785,50 +786,24 @@ module.exports = {
                 resolve(resp)
             })
         })
+    },wishlist:(userId,proId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let checkWishlist = await dB.get().collection('wishlist').findOne({userId:ObjectId(userId)})
+            console.log("wishlisttt:",checkWishlist);
+            if(checkWishlist!=null){
+                console.log("hey::::::::::");
+                let status = true;
+                dB.get().collection('wishlist').findOne({userId:ObjectId(userId)},{})
+                dB.get().collection('wishlist').updateOne({userId:ObjectId(userId)},{$push:{product:proId}})
+                resolve()
+            }else{
+                dB.get().collection('wishlist').insertOne({userId:ObjectId(userId),product:[proId]})
+                resolve();
+            }
+            
+        })
     }
 
-    // getPrice:(userId)=>{
-    //     return new Promise(async(resolve,reject)=>{
-    //         let total = await dB.get().collection('cart').aggregate([
-    //             {
-    //                 $match:{user:ObjectId(userId)} 
-    //             },
-    //             {
-    //                 $unwind:'$products'
-    //             },
-    //             {
-    //                 $project:{
-    //                     item:'$products.item',
-    //                     quantity:'$products.quantity'
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:{
-    //                     from:'products',
-    //                     localField:'item',
-    //                     foreignField:'_id',
-    //                     as:'products'
-    //                 }
-    //             },
-    //             {
-    //                 $project:{
-    //                     item:1,quantity:1,products:{$arrayElemAt:['$products',0]}
-    //                 }
-    //             },
-    //             {
-    //                 $project:{
-    //                     total:{$sum:{$multiply:['$quantity','$products.productprice']}}
-    //                 }
-    //             },
-    //             {
 
-    //             }
-              
-
-    //         ]).toArray()
-           
-    //         resolve(total)
-    //     })
-    // }
 } 
     

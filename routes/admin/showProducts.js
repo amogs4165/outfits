@@ -25,9 +25,10 @@ router.get('/',verifyLogin,(req,res)=>{
 
 router.get('/edit/:id',verifyLogin,async(req,res)=>{
     console.log(req.params.id)
+    let admin = req.session.admin;
     let product = await helper.getProductDetailsById(req.params.id)
     console.log(product);
-    res.render('admin/editProduct',{product})
+    res.render('admin/editProduct',{product,admin})
 })
 
 router.post('/edit/:id',verifyLogin,(req,res)=>{
