@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="add to wishlist">
-                                            <a href="/wishlist/{{this._id}}"
+                                            <a onclick="wishlist('{{this._id}}')" 
                                                 class="btn add-to-wishlist"><i
                                                     class="icon an an-heart"></i></a>
                                         </div>
@@ -1628,6 +1628,24 @@
                     $('.totalPrice_').html(response.total);
                 }
 
+            }
+        })
+    }
+
+    function wishlist(proId){
+        
+        $.ajax({
+            url: '/wishlist',
+            data:{
+                proId:proId
+            },
+            method: 'post',
+            success:(response)=>{
+                if(response.status){
+                swal("Item added to wishlist")
+                }else{
+                    swal("Item already added")
+                }
             }
         })
     }

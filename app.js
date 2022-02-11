@@ -34,6 +34,7 @@ var placeOrder = require('./routes/user/placeOrder');
 var orderManagement = require('./routes/admin/orderManagement');
 var buyProduct = require('./routes/user/buyProduct');
 var wishlist = require('./routes/user/wishlist');
+var offerManagement = require('./routes/admin/offerManagement');
 
 var dataBase = require('./config/connection');
 
@@ -84,7 +85,8 @@ app.use('/banner', banner);
 app.use('/placeOrder', placeOrder);
 app.use('/orderManagement', orderManagement);
 app.use('/buyProduct', buyProduct);
-app.use('/wishlist', wishlist)
+app.use('/wishlist', wishlist);
+app.use('/offerManagement',offerManagement);
 
 
 
