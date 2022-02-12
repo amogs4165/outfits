@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
       let userId = req.session.user._id
       let userStatus = req.session.user.status
       let cartProducts = await helper.userCart(userId)
-      console.log(cartProducts)
+      console.log(products,"sldfkjlsdkjflskdjflkjsd")
       if(cartProducts==null){
         var total = null;
       }else{

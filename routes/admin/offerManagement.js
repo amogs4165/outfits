@@ -27,9 +27,11 @@ router.post('/add-categoryOffer',verifyLogin, (req,res)=>{
     
     console.log(req.body)
     let offer = req.body
-    
-    helper.addCategoryOffer(offer).then(()=>{
-        res.redirect('/offerManagement')
+    helper.insertCategoryOffer(offer.offercategory,offer.discount,offer.validity).then(()=>{
+
+        helper.addCategoryOffer(offer).then(()=>{
+            res.redirect('/offerManagement')
+        })
     })
 })
 

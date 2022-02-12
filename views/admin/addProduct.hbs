@@ -56,13 +56,17 @@
                                                 <span class="error_form" id="price_error_message"></span>
                                         </div>
                                     </div>
-
+                                    <input id="newPrice" name="newPrice" type="number" class="form-control" hidden>
+                                    <input id="categoryOffer" name="categoryOffer" type="text" class="form-control" value="false" hidden>
+                                    <input id="categoryDiscount" name="categoryDiscount" type="number" class="form-control" value="null" hidden>
+                                    <input id="productOffer" name="productOffer" type="text" class="form-control" value="false" hidden>
+                                    <input id="productDiscount" name="productDiscount" type="number" class="form-control" value="null" hidden>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label class="control-label">Category</label>
                                             <select name="id" class="form-control select2">
                                                 {{#each cattDetails}}
-                                                <option onclick="addProduct(event)" value="{{this._id}}">{{this.categoryName}}</option>
+                                                <option onclick="addProduct(event)" value="{{this.categoryName}}">{{this.categoryName}}</option>
                                                 {{/each}}
                                             </select>
                                         </div>

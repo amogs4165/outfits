@@ -857,7 +857,7 @@ module.exports = {
             // dB.get().collection('cart').updateOne({userId:ObjectId(userId)},{$pull:{'product':ObjectId(proId)}}).then(()=>{
             //     return resolve();
             // })
-           
+
 
             dB.get().collection('wishlist').findOne({
                 userId: ObjectId(userId)
@@ -868,28 +868,85 @@ module.exports = {
                         index = i;
                     }
                 }
-               
+
                 if (index > -1) {
                     doc.product.splice(index, 1); // 2nd parameter means remove one item only
                 }
                 console.log(doc);
-                
-                dB.get().collection('wishlist').updateOne({userId:ObjectId(userId)},{$set:{product:doc.product}})
+
+                dB.get().collection('wishlist').updateOne({ userId: ObjectId(userId) }, { $set: { product: doc.product } })
             })
             resolve()
         })
     },
-    addCategoryOffer:(details)=>{
-        return new Promise((resolve,reject)=>{
-            dB.get().collection('categoryOffer').insertOne(details).then(()=>{
+    addCategoryOffer: (details) => {
+        return new Promise((resolve, reject) => {
+            dB.get().collection('categoryOffer').insertOne(details).then(() => {
                 resolve()
             })
         })
     },
-    getCategoryOffer:()=>{
-        return new Promise(async(resolve,reject)=>{
+    getCategoryOffer: () => {
+        return new Promise(async (resolve, reject) => {
             let categoryOffer = await dB.get().collection('categoryOffer').find().toArray();
             resolve(categoryOffer);
+        })
+    },
+    insertCategoryOffer: (ctgryId, discount, validity) => {
+        console.log(ctgryId, discount, validity)
+        return new Promise(async (resolve, reject) => {
+            let products = await dB.get().collection('products').find({ id: "mens" }).toArray()
+
+
+            products.map(async (pro) => {
+                console.log(pro, "first")
+                let productprice = pro.productprice
+                let OfferPrice = productprice - ((productprice * discount) / 100)
+                console.log(pro, "second")
+                OfferPrice = parseInt(OfferPrice.toFixed(2))
+                let proId = pro._id;
+
+                if(pro.categoryOffer=='false'&&pro.productOffer=='false'){
+
+                    await dB.get().collection('products').updateOne(
+                        {
+                            _id: ObjectId(proId)
+                        },
+                        {
+                            $set: {
+                                productprice: OfferPrice,
+                                categoryOffer: true,
+                                OldPrice: productprice,
+                                categoryDiscount: parseInt(discount)
+                            }
+                        })
+                }
+                else if(pro.categoryOffer=='false'&&pro.productOffer=='true'){
+
+                    if(OfferPrice< pro.productprice){
+
+                        await dB.get().collection('products').updateOne(
+                            {
+                                _id: ObjectId(proId)
+                            },
+                            {
+                                $set: {
+                                    productprice: OfferPrice,
+                                    categoryOffer: true,
+                                    OldPrice: productprice,
+                                    categoryDiscount: parseInt(discount)
+                                }
+                            })
+                    }
+
+                }
+                else{
+                    
+                }
+
+            })
+
+
         })
     }
 
