@@ -119,13 +119,14 @@
                                             <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
                                                 <span id="ProductPrice-product-template"><span class="money">₹{{product.productprice}}</span></span>
                                             </span>
-                                            {{!-- <span class="discount-badge"> <span class="devider">|</span>&nbsp;
-                                                <span>You Save</span>
+                                            <span class="discount-badge"> <span class="devider">|</span>&nbsp;
+                                               
                                                 <span id="SaveAmount-product-template" class="product-single__save-amount">
-                                                    <span class="money">$100.00</span>
+                                                    
                                                 </span>
-                                                <span class="off">(<span>16</span>%)</span>
-                                            </span> --}}
+                                               
+                                                 <span class="off"><span style="text-decoration: line-through;">{{product.OldPrice}}</span></span>
+                                            </span>
                                             <div class="product__policies rte" data-product-policies="">Tax included.</div>
                                         </div>
                                         <!-- End Product Price -->

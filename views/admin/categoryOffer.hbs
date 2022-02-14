@@ -1,144 +1,138 @@
 <body>
-    <section class="">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-8 col-xl-6">
-        <div class="card rounded-3">
-         
-          <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Category Offers</h3>
+  <section class="">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
 
-            <form method="post" action="/offerManagement/add-categoryOffer" class="px-md-2">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Category Offers</h3>
 
-              <div class="form-outline mb-4">
-                <input type="number" id="form3Example1q" name="discount" class="form-control" />
-                <label class="form-label" for="form3Example1q">Offers In Percentage</label>
-              </div>
+              <form method="post" action="/offerManagement/add-categoryOffer" class="px-md-2">
 
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                 <input type="text" value="category" name="offertype" hidden>
-                  <div class="form-outline datepicker">
-                    <input
-                      type="date"
-                      name="validity"
-                      class="form-control"
-                      id="exampleDatepicker1"
-                    />
-                    <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                <div class="form-outline mb-4">
+                  <input type="number" id="form3Example1q" name="discount" class="form-control" />
+                  <label class="form-label" for="form3Example1q">Offers In Percentage</label>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <input type="text" value="category" name="offertype" hidden>
+                    <div class="form-outline datepicker">
+                      <input type="date" name="validity" class="form-control" id="exampleDatepicker1" />
+                      <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                    </div>
+
                   </div>
+                  <div class="col-md-6 mb-4">
 
-                </div>
-                <div class="col-md-6 mb-4">
-
-                  <select name="offercategory" class="select">
+                    <select name="offercategory" class="select">
                       {{#each category}}
-                  
-                    <option value="{{this._id}}">{{this.categoryName}}</option>
-                    {{/each}}
-                  </select>
 
+                      <option value="{{this.categoryName}}">{{this.categoryName}}</option>
+                      {{/each}}
+                    </select>
+
+                  </div>
                 </div>
-              </div>
 
-              
 
-              
-              <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
 
-            </form>
 
+                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+
+              </form>
+
+            </div>
           </div>
         </div>
       </div>
+
     </div>
-   
+  </section>
+  <div class="container">
+    {{#if CategotyOffer}}
+
+    <table style="text-align: center;" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Offer Type</th>
+          <th scope="col">Category</th>
+          <th scope="col">Validity</th>
+          <th scope="col">Discount</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      {{#each CategotyOffer}}
+      <tbody>
+
+        <tr>
+
+          <th scope="row">{{this.offertype}}</th>
+          <td>{{this.offercategory}}</td>
+          <td>{{this.validity}}</td>
+          <td style="color: green;">{{this.discount}}%</td>
+          <td>
+            <button class="btn btn-danger"
+              onclick="removeCategoryOffer('{{this._id}}','{{this.offercategory}}')">Delete</button>
+          </td>
+
+        </tr>
+
+
+      </tbody>
+      {{/each}}
+    </table>
+    {{else}}
+    {{/if}}
   </div>
-</section>
-<div class="container">
-{{#if CategotyOffer}}
-
- <table style="text-align: center;" class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Offer Type</th>
-      <th scope="col">Category</th>
-      <th scope="col">Validity</th>
-      <th scope="col">Discount</th>
-       <th scope="col"></th>
-    </tr>
-  </thead>
-  {{#each CategotyOffer}}
-  <tbody>
-    
-    <tr>
-
-      <th scope="row">{{this.offertype}}</th>
-      <td>{{this.offercategory}}</td>
-      <td>{{this.validity}}</td>
-      <td style="color: green;" >{{this.discount}}%</td>
-        <td>
-          <button class="btn btn-danger" onclick="removeCategoryOffer('{{this._id}}')" >Delete</button> </td>
-          
-    </tr>
-    
-    
-  </tbody>
-  {{/each}}
-</table>
-{{else}}
-{{/if}}
-</div>
 </body>
 
 <style>
-
-CSS
-@media (min-width: 1025px) {
-  .h-custom {
-    height: 100vh !important;
+  CSS @media (min-width: 1025px) {
+    .h-custom {
+      height: 100vh !important;
+    }
   }
-}
-    </style>
+</style>
 
 
 
 
 <script>
-  function removeCategoryOffer(OfferID){
-  
-    Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.isConfirmed) {
-
-    $.ajax({
-      url:'/offer/removeCategoryOffer/'+OfferID,
-      method:'get',
-      success:(response)=>{
-        console.log(response)
-        if(response.status){
-          location.reload()
-        }
-
-
-      }
-      
-
+  function removeCategoryOffer(OfferID, categoryName) {
+    alert("hey")
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-    
-  }
-})
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            url: "/offerManagement/delete-categoryOffer",
+            type: "POST",
+            data: {
+              id: OfferID,
+              name: categoryName,
+            },
+
+            success: (response) => {
+              if (response.status) {
+                location.reload()
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                });
+              }
+            },
+
+          });
+
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
   }
 </script>
