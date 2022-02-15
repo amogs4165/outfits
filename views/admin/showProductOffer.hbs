@@ -1,0 +1,73 @@
+ <div style="margin-top: 5%;" class="container">
+    
+
+    <table style="text-align: center;" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Offer Type</th>
+          <th scope="col">Product</th>
+          <th scope="col">Validity</th>
+          <th scope="col">Discount</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      {{#each productOffer}}
+      <tbody>
+
+        <tr>
+
+          <th scope="row">{{this.offertype}}</th>
+          <td>{{this.proId}}</td>
+          <td>{{this.validity}}</td>
+          <td style="color: green;">{{this.discount}}%</td>
+          <td>
+            <button class="btn btn-danger"
+              onclick="removeProductOffer('{{this._id}}','{{this.proId}}')">Delete</button>
+          </td>
+
+        </tr>
+
+
+      </tbody>
+      {{/each}}
+    </table>
+  </div>
+
+
+  <script>
+  function removeProductOffer(OfferID, productId) {
+    
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            url: "/offerManagement/delete-productOffer",
+            type: "POST",
+            data: {
+              id: OfferID,
+              proId: productId,
+            },
+
+            success: (response) => {
+              if (response.status) {
+                location.reload()
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                });
+              }
+            },
+
+          });
+
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+  }
+</script>

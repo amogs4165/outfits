@@ -48,8 +48,15 @@ router.post('/add-productOffer',verifyLogin,(req,res)=>{
     let offer = req.body
     helper.insertProductOffer(offer.proId,offer.discount,offer.validity).then((resp)=>{
         helper.addProductOffer(offer).then(()=>{
-            res.redirect('/offerManagement')
+            res.redirect('/offerManagement/getProductoffer')
         })
+    })
+})
+
+router.get('/getProductoffer',verifyLogin,(req,res)=>{
+    helper.getProductOffer().then((resp)=>{
+        let productOffer = resp;
+        res.render('admin/showProductOffer',{productOffer,admin:true})
     })
 })
 
@@ -63,10 +70,16 @@ router.post('/delete-categoryOffer',verifyLogin,(req,res)=>{
     })
 })
 
-router.get('/delete-productOffer',verifyLogin,(req,res)=>{
-    console.log("hey her its produt delte")
-    // helper.deleteproOffer().then(()=>{
-    //     console.log
-    // })
+router.post('/delete-productOffer',verifyLogin,(req,res)=>{
+    console.log("hey her its produt delte",req.body)
+    let id = req.body.id;
+    let proId = req.body.proId;
+    helper.deleteProductOffer(id,proId).then(()=>{
+        console.log
+    })
+})
+
+router.get('/add-coupon',verifyLogin,(req,res)=>{
+    res.render('admin/addCoupon')
 })
 module.exports = router;
