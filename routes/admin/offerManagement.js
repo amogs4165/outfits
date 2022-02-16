@@ -79,7 +79,51 @@ router.post('/delete-productOffer',verifyLogin,(req,res)=>{
     })
 })
 
-router.get('/add-coupon',verifyLogin,(req,res)=>{
-    res.render('admin/addCoupon')
+router.get('/add-coupon',verifyLogin,async (req,res)=>{
+    let coupon = await helper.getCoupon()
+    res.render('admin/addCoupon',{admin:true,coupon})
 })
+
+router.post('/add-couponOffer',verifyLogin,(req,res)=>{
+    console.log(req.body)
+    let details = req.body
+    helper.insertCouponOffer(details).then(()=>{
+        res.redirect('/offerManagement/add-coupon')
+    })
+})
+
+router.post('/delete-couponOffer',verifyLogin,(req,res)=>{
+    console.log("hey her its produt delte",req.body)
+    let id = req.body.id;
+    let proId = req.body.proId;
+    helper.deletecouponOffer(id).then(()=>{
+        res.send({status:true})
+    })
+})
+
+router.post('/couponCheck',(req,res)=>{
+    console.log(req.body);
+    let coupon = req.body.couponCode;
+    let userId = req.session.user._id
+    console.log(coupon);
+    console.log(userId);
+    helper.checkCoupon(userId,coupon).then((resp)=>{
+        if(resp.status){
+
+            let statuss = resp.status
+            let msg = resp.msg
+            let coupon = resp.coupon
+            let subTotal = req.body.total
+            let totalAmount = req.body.total- resp.coupon.discount
+            res.json({statuss,msg,coupon,totalAmount,subTotal})
+        }else{
+            let msg = resp.msg
+            let statuss = resp.status
+            res.json({statuss,msg})
+        }
+    })
+
+    
+})
+
 module.exports = router;

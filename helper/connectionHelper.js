@@ -346,7 +346,7 @@ module.exports = {
             let checkCart = await dB.get().collection('cart').findOne({ user: ObjectId(userId) })
             return resolve(checkCart)
         })
-    },
+    },  
 
     userCart: (userId) => {
         return new Promise(async (resolve, reject) => {
@@ -1150,6 +1150,47 @@ module.exports = {
                    
             }
             
+        })
+    },
+    insertCouponOffer:(details)=>{
+        return new Promise(async(resolve,reject)=>{
+            let check = await dB.get().collection('couponOffer').findOne({couponCode:details.discount})
+            if(check == null){
+                dB.get().collection('couponOffer').insertOne({...details,user:[]})
+                resolve()
+            }else{
+                resolve()
+            }
+        })
+    },
+    getCoupon:()=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('couponOffer').find().toArray().then((resp)=>{
+                resolve(resp)
+            })
+        })
+    },
+    deletecouponOffer:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('couponOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+                resolve()
+            })
+        })
+    },
+    checkCoupon:(userId,coupon)=>{
+        return new Promise(async(resolve,reject)=>{
+            let couponCheck = await dB.get().collection('couponOffer').findOne({couponCode:coupon})
+            if(couponCheck){
+               
+                let userExist = couponCheck.user.filter((user)=>user.toString()==userId.toString())
+                if(userExist.length>0){
+                    resolve({status:false,msg:"coupon already used"})
+                }else{
+                    resolve({status:true,coupon:couponCheck, msg:"Coupon Applied"})
+                }
+            }else{
+                resolve({status:false, msg:"no coupon found"})
+            }
         })
     }
 

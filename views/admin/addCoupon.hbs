@@ -6,11 +6,13 @@
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Add Coupon</h3>
 
-                        <form method="post" action="/offerManagement/add-categoryOffer" class="px-md-2">
+                        <form method="post" action="/offerManagement/add-couponOffer" class="px-md-2">
 
                             <div class="form-outline mb-4">
-                                <input type="number" id="form3Example1q" name="discount" class="form-control" />
-                                <label class="form-label" for="form3Example1q">Offers In Percentage</label>
+                                <input type="number" id="" name="discount" class="form-control" />
+                                <label class="form-label" for="form3Example1q">Discount Amount</label>
+                                <input type="text" id="" name="couponCode" class="form-control" />
+                                <label class="form-label" for="form3Example1q">Coupon Code</label>
                             </div>
 
                             <div class="row">
@@ -23,16 +25,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-6 mb-4">
-
-                                    <select name="offercategory" class="select">
-                                        {{#each category}}
-
-                                        <option value="{{this.categoryName}}">{{this.categoryName}}</option>
-                                        {{/each}}
-                                    </select>
-
-                                </div>
+                            
                             </div>
                             <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
                         </form>
@@ -42,3 +35,88 @@
         </div>
     </div>
 </section>
+<div class="container">
+    {{#if coupon}}
+
+    <table style="text-align: center;" class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Coupon Code</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Validity</th>
+        
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      {{#each coupon}}
+      <tbody>
+
+        <tr>
+
+          <th scope="row">{{this.couponCode}}</th>
+          <td style="color: green;">{{this.discount}}%</td>
+          <td>{{this.validity}}</td>
+          <td>
+            <button class="btn btn-danger"
+              onclick="removeCouponOffer('{{this._id}}')">Delete</button>
+          </td>
+
+        </tr>
+
+
+      </tbody>
+      {{/each}}
+    </table>
+    {{else}}
+    {{/if}}
+  </div>
+
+
+<style>
+  CSS @media (min-width: 1025px) {
+    .h-custom {
+      height: 100vh !important;
+    }
+  }
+</style>
+
+
+
+
+<script>
+  function removeCouponOffer(OfferID) {
+    
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            url: "/offerManagement/delete-couponOffer",
+            type: "POST",
+            data: {
+              id: OfferID,
+            
+            },
+
+            success: (response) => {
+              if (response.status) {
+                location.reload()
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                });
+              }
+            },
+
+          });
+
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+  }
+</script>

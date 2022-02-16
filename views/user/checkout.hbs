@@ -216,16 +216,25 @@
                                                 <td class="text-start">{{this.productname}}</td>
                                                 <td>{{this.productprice}}</td>
                                                 <td>{{this.quantity}}</td>
-                                                <td>{{this.productprice}}</td>
+                                                <td>{{this.total}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>
                                         <tfoot class="font-weight-600">
                                             
-                                            <tr>
-                                                <td colspan="4" class="text-end">Total</td>
-                                                <td>{{total}}</td>
+                                            <tr id="hidden1" style="visibility: hidden;">
+                                                 <td colspan="4" class="text-end" >Offer Applied</td>
+                                                <td id="offerDiscount"></td>
+                                            </tr >
+                                               <tr id="hidden2" style="visibility: hidden;">
+                                                 <td colspan="4" class="text-end">Sub Total</td>
+                                                <td id="subTotal"></td>
+                                            </tr > 
+                                               <tr>
+                                                 <td colspan="4"  class="text-end">Total</td>
+                                                <td id="total">{{total}}</td>
                                             </tr>
+                                            
                                         </tfoot>
                                     </table>
                                 </div>
@@ -235,7 +244,10 @@
                                         <h2>Apply Couponcode</h2>
                                         <label class="text-uppercase">Enter Coupon code:</label>
                                         <div class="form-flex">
-                                            <div class="form-group"><input type="text" class="form-control"></div><button type="submit" class="btn btn--form btn--alt">Apply</button>
+                                    <form id="couponCheck">
+                                        <input value="{{total}}" name="total" hidden>
+                                            <div class="form-group"><input  type="text" name="couponCode" class="form-control"><p class="text-danger" id="couponErr"></p></div><button id="couponButton" type="button" class="btn ">Apply</button>
+                                    </form>
                                         </div>
                                     </div>
                                 </div>
@@ -582,4 +594,32 @@
         nodes[i].hidden = false;
         }
     }
+
+    
+    $("#couponButton").click((e)=>{
+    
+        e.preventDefault()
+        $.ajax({
+            
+            url:'/offerManagement/couponCheck',
+            method:'post',
+            data:$('#couponCheck').serialize(),
+            success:(resp)=>{
+         
+                if(resp.statuss){
+                    document.getElementById("couponErr").textContent = resp.msg
+                    document.getElementById("hidden1").style.visibility = "visible"
+                    document.getElementById("hidden2").style.visibility = "visible"
+                    document.getElementById("offerDiscount").textContent = -resp.coupon.discount
+                    document.getElementById("subTotal").textContent = resp.subTotal
+                    document.getElementById("total").textContent = resp.totalAmount
+                    
+                }else{
+                    document.getElementById("couponErr").textContent = resp.msg
+                }
+            }
+        })
+    })
+      
+
 </script>

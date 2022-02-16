@@ -11,6 +11,7 @@ router.get('/',(req,res)=>{
             console.log((response.status));
             console.log(("sucessssssssssssssssssss"));
             req.session.status=true;
+            req.session.user = response.user
             console.log(response.user)
             res.redirect('/')
         }
