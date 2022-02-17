@@ -108,18 +108,35 @@ router.post('/couponCheck',(req,res)=>{
     console.log(coupon);
     console.log(userId);
     helper.checkCoupon(userId,coupon).then((resp)=>{
-        if(resp.status){
+        let subTotal = req.body.total
+        if(subTotal-100>resp.coupon.discount){
 
-            let statuss = resp.status
-            let msg = resp.msg
-            let coupon = resp.coupon
-            let subTotal = req.body.total
-            let totalAmount = req.body.total- resp.coupon.discount
-            res.json({statuss,msg,coupon,totalAmount,subTotal})
+            if(resp.status){
+    
+                let statuss = resp.status
+                let msg = resp.msg
+                let couponDetail = resp.coupon
+                
+                let totalAmount = req.body.total- resp.coupon.discount
+                res.json({statuss,msg,coupon,couponDetail,totalAmount,subTotal})
+            }else{
+                let subTotal = req.body.total
+                let msg = resp.msg
+                let statuss = resp.status
+                res.json({statuss,msg,subTotal})
+            }
         }else{
-            let msg = resp.msg
-            let statuss = resp.status
-            res.json({statuss,msg})
+            if(resp.status){
+                let subTotal = req.body.total
+                let msg = "Should have Min.Rs.100 difference"
+                let statuss = false;
+                res.json({statuss,msg,subTotal})
+            }else{
+                let subTotal = req.body.total
+                let msg = resp.msg
+                let statuss = resp.status
+                res.json({statuss,msg,subTotal})
+            }
         }
     })
 

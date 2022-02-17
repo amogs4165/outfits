@@ -20,13 +20,15 @@ const verifyLogin = (req,res,next) =>{
 
 router.post('/',verifyLogin,async (req,res)=>{
     
-    console.log("check is here",req.body);
+    console.log("check is here",req.body.totalAmount);
     let address = req.body.address;
     let paymentMode = req.body.paymentMode;
     let check = req.body.check
+    let coupon = req.body.couponCode
+    req.session.coupon = coupon;
     
     if(check== 'false'){
-        console.log("heyre")
+        console.log("heyre",coupon)
         if(paymentMode =='COD'){
             if(address!=''){
                 let userId = req.session.user._id;
@@ -40,9 +42,10 @@ router.post('/',verifyLogin,async (req,res)=>{
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
+                let total =  req.body.totalAmount
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
+                    helper.addUserCoupon(userId,coupon)
                     helper.removeCart(userId).then(()=>{
                         res.json({status:true})
                     })
@@ -57,13 +60,15 @@ router.post('/',verifyLogin,async (req,res)=>{
                 )
                 let date = new Date();
                 let status = "placed";
+                let OrderStatus = "Getting ready"
                 let products = await helper.userCart(userId);
                 products.forEach(record => {
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then(()=>{
+                let total =  req.body.totalAmount
+                helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then(()=>{
+                    helper.addUserCoupon(userId,coupon)
                     helper.removeCart(userId).then(()=>{
                         res.json({status:true})
                     })
@@ -86,7 +91,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
+                let total =  req.body.totalAmount
                 console.log("its here",total);
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                     console.log("resp details.....",resp)
@@ -111,7 +116,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
+                let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
                     let orderId = ""+resp.insertedId
                     helper.generateRazorpay(orderId,total).then((response)=>{
@@ -135,7 +140,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
+                let total =  req.body.totalAmount
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
                 // let totalPrice = totalAmount.toString();
@@ -206,14 +211,14 @@ router.post('/',verifyLogin,async (req,res)=>{
                     helper.quantityDecrement(record.productId,record.quantity);
                    
                 });
-                let total = await helper.totalPrice(userId);
+                let total =  req.body.totalAmount
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
                 // let totalPrice = totalAmount.toString();
                 console.log("tottal Price:",totalAmount)
                 
                 req.session.total = totalAmount;
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
+                helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
                   
                     console.log("resp details.....",resp)
                     let orderId = ""+resp.insertedId
@@ -282,12 +287,15 @@ router.post('/',verifyLogin,async (req,res)=>{
                 products[0].quantity = parseInt(qty);
                 console.log("this is new products",products)
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.total
+                let total =  req.body.totalAmount
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
-                    helper.removeCart(userId).then(()=>{
+                    helper.addUserCoupon(userId,coupon).then(()=>{
+
                         res.json({status:true})
                     })
+                    
+                    
                     
                 })
             }
@@ -298,15 +306,17 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let address = Object.fromEntries(
                     Object.entries(details).slice(1, 12)
                 )
+                let OrderStatus = "Getting ready"
                 let date = new Date();
                 let status = "placed";
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.total
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then(()=>{
-                    helper.removeCart(userId).then(()=>{
+                let total =  req.body.totalAmount
+                helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then(()=>{
+                    helper.addUserCoupon(userId,coupon).then(()=>{
+
                         res.json({status:true})
                     })
                     
@@ -327,7 +337,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.productprice
+                let total =  req.body.totalAmount
                 console.log("its here",total);
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                     console.log("resp details.....",resp)
@@ -345,14 +355,15 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let address = Object.fromEntries(
                     Object.entries(details).slice(1, 12)
                 )
+                let OrderStatus = "Getting ready"
                 let date = new Date();
                 let status = "pending";
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.productprice
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then((response)=>{
+                let total =  req.body.totalAmount
+                helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((response)=>{
                   
                     helper.generateRazorpay(orderId,total).then((response)=>{
                         res.json({status:false,response})
@@ -373,7 +384,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.productprice
+                let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
                 console.log("tottal Price:",totalAmount)
@@ -438,19 +449,20 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let address = Object.fromEntries(
                     Object.entries(details).slice(1, 12)
                 )
+                let OrderStatus = "Getting ready"
                 let date = new Date();
                 let status = "pending";
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
                 helper.quantityDecrement(proId,qty);
-                let total = req.body.productprice
+                let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
                 console.log("tottal Price:",totalAmount)
                 
                 req.session.total = totalAmount;
-                helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
+                helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                   
                     console.log("resp details.....",resp)
                     let orderId = ""+resp.insertedId
@@ -509,7 +521,10 @@ router.post('/verify-payment',verifyLogin,(req,res)=>{
     console.log("verify payment",req.body);
     helper.verifyPayment(req.body).then(()=>{
         let crrStatus = "placed"
+        let userId = req.session.user._id;
+        let coupon = req.session.coupon;
         helper.changePaymentStatus(req.body['order[receipt]'],crrStatus).then((resp)=>{
+            helper.addUserCoupon(userId,coupon)
             console.log(resp);
             console.log("payment succesful");
             res.json({status:true})
@@ -549,9 +564,12 @@ router.get('/order-success',verifyLogin,(req,res)=>{
             } else {
                 console.log("get payment response")
                 console.log(JSON.stringify(payment));
+                let coupon = req.session.coupon
                 let crrStatus = "placed"
+                let userId = req.session.user._id;
                 let orderId = req.session.orderId
                 helper.changePaymentStatus(orderId,crrStatus).then(()=>{
+                    helper.addUserCoupon(userId,coupon)
                     res.render('user/checkout-success',{orderId})
                 })
                 

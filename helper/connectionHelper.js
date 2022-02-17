@@ -219,6 +219,8 @@ module.exports = {
     addProduct: (product, callback) => {
         let price = parseInt(product.productprice);
         product.productprice = price;
+        let qty = parseInt(product.manufacturerquantity);
+        product.manufacturerquantity = qty;
 
         dB.get().collection('products').insertOne(product).then((data) => {
             console.log(data);
@@ -267,7 +269,7 @@ module.exports = {
                     manufacturerbrand: productDetails.manufacturerbrand,
                     productsize: productDetails.productsize,
                     productprice: price,
-                    manufacturerquantity: productDetails.manufacturerquantity,
+                    manufacturerquantity: parseInt(productDetails.manufacturerquantity) ,
                     description: productDetails.description
                 }
             }).then((response) => {
@@ -727,8 +729,16 @@ module.exports = {
         })
     },
     updateOrderStatus: (id, value) => {
-        return new Promise((resolve, reject) => {
-            dB.get().collection('orders').updateOne({ _id: ObjectId(id) }, { $set: { OrderStatus: value } });
+        return new Promise(async(resolve, reject) => {
+            let check = await dB.get().collection('orders').findOne({_id:ObjectId(id),OrderStatus:"Delivered"})
+            console.log(check,"heyeheyh")
+            if(check == null){
+
+                dB.get().collection('orders').updateOne({ _id: ObjectId(id) }, { $set: { OrderStatus: value } });
+                resolve()
+            }else{
+                resolve()
+            }
         })
     },
     generateRazorpay: (orderId, total) => {
@@ -1110,7 +1120,7 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             let products = await dB.get().collection('products').findOne({ _id: ObjectId(proId)  })
            console.log(products,"this is products");
-           let discount = products.productDiscount;
+           let discount = products.categoryDiscount;
            let productprice = products.OldPrice;
             if(products.categoryOffer=='true'){
                 let OfferPrice = productprice - ((productprice * discount) / 100)
@@ -1121,8 +1131,8 @@ module.exports = {
                     {
                         $set: {
                             productprice: OfferPrice,
-                            categoryOffer: 'false',
-                            categoryDiscount: ""
+                            productOffer: 'false',
+                            productDiscount: ""
                         }
                     }).then(()=>{
                         dB.get().collection('productOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
@@ -1138,8 +1148,8 @@ module.exports = {
                     {
                         $set: {
                             productprice: productprice,
-                            categoryOffer: 'false',
-                            categoryDiscount: ""
+                            productOffer: 'false',
+                            productDiscount: ""
                         }
                     }).then(()=>{
                         dB.get().collection('productOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
@@ -1154,7 +1164,7 @@ module.exports = {
     },
     insertCouponOffer:(details)=>{
         return new Promise(async(resolve,reject)=>{
-            let check = await dB.get().collection('couponOffer').findOne({couponCode:details.discount})
+            let check = await dB.get().collection('couponOffer').findOne({couponCode:details.couponCode})
             if(check == null){
                 dB.get().collection('couponOffer').insertOne({...details,user:[]})
                 resolve()
@@ -1191,6 +1201,13 @@ module.exports = {
             }else{
                 resolve({status:false, msg:"no coupon found"})
             }
+        })
+    },
+    addUserCoupon:(userId,coupon)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('couponOffer').updateOne({couponCode:coupon},{ $push: { user: userId }}).then(()=>{
+                resolve()
+            })
         })
     }
 

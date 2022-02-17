@@ -21,6 +21,8 @@
                                         {{#each products}}
                                         <input name="qty" value={{this.quantity}} hidden>
                                         {{/each }}
+                                        <input id="totalAmount" name="totalAmount" value="{{total}}" hidden>
+                                        <input id="couponCode" name="couponCode" value="null" hidden>
                                         
                                         {{#each address.address}}
                                         <div class="row">
@@ -488,7 +490,7 @@
 
     $("#checkout_btn").click((e)=>{
         console.log('entered')
-        alert('success')
+        
         console.log($('#checkout-form').serialize())
         e.preventDefault()
         $.ajax({
@@ -496,7 +498,7 @@
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
-                alert(response)
+                
                 if(response.status){
                     location.href='/placeOrder/order-success'
                 }else{
@@ -505,7 +507,7 @@
                         location.href = response.url
                     }
                     else{
-                        alert("ueppp")
+                       
                          razorpay(response.response)
                     }
                     
@@ -525,9 +527,7 @@
             "image": "https://example.com/your_logo",
             "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature)
+                
 
                 verifyPayment(response,order);
             },
@@ -561,7 +561,7 @@
                     location.href = '/placeOrder/order-success';
                 }
                 else{
-                    alert(response.status);
+                  
                     location.href = '/'
                 }
             }
@@ -610,12 +610,21 @@
                     document.getElementById("couponErr").textContent = resp.msg
                     document.getElementById("hidden1").style.visibility = "visible"
                     document.getElementById("hidden2").style.visibility = "visible"
-                    document.getElementById("offerDiscount").textContent = -resp.coupon.discount
+                    document.getElementById("offerDiscount").textContent = -resp.couponDetail.discount
                     document.getElementById("subTotal").textContent = resp.subTotal
                     document.getElementById("total").textContent = resp.totalAmount
+                    document.getElementById("totalAmount").value = resp.totalAmount
+                    document.getElementById("couponCode").value = resp.coupon
+                    
                     
                 }else{
+                    
+                    document.getElementById("hidden1").style.visibility = "hidden"
+                    document.getElementById("hidden2").style.visibility = "hidden"
+                    document.getElementById("total").textContent = resp.subTotal
                     document.getElementById("couponErr").textContent = resp.msg
+                    document.getElementById("totalAmount").value = resp.subTotal
+                    document.getElementById("couponCode").value = "null"
                 }
             }
         })

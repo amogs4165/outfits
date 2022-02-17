@@ -17,11 +17,15 @@ router.post('/',verifyLogin,(req,res)=>{
     let userId = req.session.user._id;
     let userStatus = true;
     let check= true;
-    let products = [req.body];
+    let details = req.body
+    details.total = req.body.quantity*req.body.productprice;
+    let total = details.total;
+    let products = [details];
+    console.log(products);
     helper.findAddress(userId).then((resp)=>{
         let address = resp;
         console.log("this is address",address);
-        res.render('user/checkout',{products,userStatus,userId,address,check})
+        res.render('user/checkout',{products,userStatus,userId,address,check,total})
     })
     
 })

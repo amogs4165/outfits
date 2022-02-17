@@ -35,6 +35,7 @@ var orderManagement = require('./routes/admin/orderManagement');
 var buyProduct = require('./routes/user/buyProduct');
 var wishlist = require('./routes/user/wishlist');
 var offerManagement = require('./routes/admin/offerManagement');
+var report = require('./routes/admin/report');
 
 var dataBase = require('./config/connection');
 
@@ -87,6 +88,7 @@ app.use('/orderManagement', orderManagement);
 app.use('/buyProduct', buyProduct);
 app.use('/wishlist', wishlist);
 app.use('/offerManagement',offerManagement);
+app.use('/report', report);
 
 
 
