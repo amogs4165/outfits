@@ -285,6 +285,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let qty = req.body.qty;
                 console.log("this is products",products)
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 console.log("this is new products",products)
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
@@ -312,6 +313,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then(()=>{
@@ -336,6 +338,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 console.log("its here",total);
@@ -361,6 +364,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((response)=>{
@@ -383,6 +387,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;
@@ -455,6 +460,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
+                products[0].proId = proId
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;

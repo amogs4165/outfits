@@ -53,7 +53,7 @@
                             <ul class="nav flex-column dashboard-list mb-4 mb-lg-0" role="tablist">
                                 <li><a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Referal Bonus</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Edit details</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
@@ -79,7 +79,7 @@
                                                 <div class="img"><img src="/profile-image/{{user._id}}image1.jpg" alt="profile" width="65" /></div>
                                                 <div class="detail ms-3">
                                                     <h5 class="mb-1">{{user.firstName}}</h5>
-                                                    <p>Balance: <strong>$500</strong></p>
+                                                    <p>Balance: <strong>{{user.wallet}}</strong></p>
                                                 </div>
                                                 <div class="lbl">SILVER USER</div>
                                             </div>
@@ -172,44 +172,17 @@
 
                                 <!-- Downloads -->
                                 <div id="downloads" class="product-order tab-pane fade">
-                                    <h3>Downloads</h3>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Downloads remaining</th>
-                                                    <th>Expires</th>
-                                                    <th>Download</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Minerva Dress black</td>
-                                                    <td>July 22, 2018</td>
-                                                    <td>never</td>
-                                                    <td><a class="view" href="#">Click Here To Download Your File</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sueded Cotton Pant in Khaki</td>
-                                                    <td>Dec 17, 2018</td>
-                                                    <td>never</td>
-                                                    <td><a class="view" href="#">Click Here To Download Your File</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Standard chunk since</td>
-                                                    <td>June 24, 2018</td>
-                                                    <td>never</td>
-                                                    <td><a class="view" href="#">Click Here To Download Your File</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Combined with a handful</td>
-                                                    <td>July 28, 2018</td>
-                                                    <td>never</td>
-                                                    <td><a class="view" href="#">Click Here To Download Your File</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <h2>Referal Bonus</h2>
+                                        <h3>You can earn Rs.500 by refering your friends</h3>
+                                        
+                                    <div  class="mt-3 ">
+                                      <h5 class="text-primary">*The refered friend must be Signup with that link</h5>
+                                      <h5 class="text-primary">*The refered user also get bonus Rs.100</h5>
+                                      <h5 class="text-primary">*Reward will credit in your wallet</h5>
+                                      <h5 class="text-primary">*By using Wallet amount you can buy products</h5>
+                                      <h5 class="text-primary">*Wallet money only can use for buying products</h5>
+                                      <h5 class="text-primary">With this link you can refer your friend : <h6 class="text-danger" id="link">http://localhost:3000/register/{{user._id}}</h6></h5>
+                                      <button class="btn mt-1" onclick="myFunction()">Copy Link</button>
                                     </div>
                                 </div>
                                 <!-- End Downloads -->
@@ -1033,6 +1006,18 @@ var error_confirmpassword=false;
 
          });
      
+        
+        function myFunction() {
+       
+
+       const copyToClipboard = (text)=> navigator.clipboard.writeText(text)
+            
+
+        var i = $('#link').text();
+        copyToClipboard(i)
+        
+       
+        }
 
 
 </script>

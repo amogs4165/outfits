@@ -5,6 +5,8 @@ const serviceSSID = process.env.serviceSSID;
 const accountSID = process.env.accountSID;//username
 const authToken = process.env.authToken;//password
 const client = require('twilio')(accountSID, authToken);
+const helper = require('../../helper/connectionHelper')
+const { ObjectId, Db } = require('mongodb');
 
 
 router.get('/', (req, res) => {
@@ -15,7 +17,39 @@ router.get('/', (req, res) => {
         res.redirect('/')
     }
     else{
-        res.render('user/register')
+        let err = req.session.errorss
+        res.render('user/register',{err})
+       
+    }
+    
+});
+
+router.get('/:id', (req, res) => {
+    let id = req.params.id
+ 
+    let userStatus = req.session.status;
+    
+
+    if(userStatus){
+        res.redirect('/')
+    }
+    else{
+        if(ObjectId.isValid(id)){
+
+            helper.getUser(id).then((resp)=>{
+                console.log(resp)
+                if(resp){
+                    console.log("true")
+                    req.session.referal = id;
+                    res.render('user/register')
+                }else{
+                    console.log("falswe");
+                    res.render('user/register')
+                }
+            })
+        }else{
+            res.render('user/register')
+        }
     }
     
 });

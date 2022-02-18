@@ -29,12 +29,26 @@ router.post('/', (req, res) => {
             if (resp.valid) {
 
                 helper.userRegistration(userData).then((userStatus) => {
-                    if (userStatus) {
+                    if (userStatus.status) {
+                        console.log("heeeee---------------------------------",userStatus.resp)
                         req.session.status = true;
-                        res.redirect('/')
+                        let id = userStatus.resp.insertedId
+                        helper.getUser(id).then((resp)=>{
+                        if(req.session.referal){
+                            helper.incrementAmount(req.session.referal,500)
+                            helper.incrementAmount(id,100)
+                            req.session.user = resp
+                            res.redirect('/')
+                        }else{
+
+                            req.session.user = resp
+                            res.redirect('/')
+                        }
+                        })
                     }
+                 
                     else {
-                        req.session.err = "this number is not registered"
+                        req.session.errorss = "this number is already registered with another account please register with another number"
                         res.redirect('/register')
                     }
                 })

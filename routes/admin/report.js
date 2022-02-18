@@ -11,12 +11,19 @@ const verifyLogin = (req,res,next)=>{
     }
 }
 
-router.get('/',verifyLogin,(req,res)=>{
-    console.log("hey")
+router.get('/',verifyLogin, async(req,res)=>{
+    let sales = await helper.salesReport()
+    console.log(sales);
+    res.render('admin/salesReport',{admin:true,sales})
 })
 
-router.get('/stock',verifyLogin,(req,res)=>{
-    res.render('admin/stockReport',{admin:true})
+router.get('/stock',verifyLogin,async (req,res)=>{
+    let stock = await helper.stockReport()
+    console.log(stock)
+  
+    res.render('admin/stockReport',{admin:true,stock})
 })
+
+
 
 module.exports = router;

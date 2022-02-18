@@ -12,20 +12,20 @@
                         <tr>
                             <th>No</th>
                             <th>Product Name</th>
-                            <th>Category&Sub Category</th>
-                            <th>Current Stock</th>
+                            <th>Sold Quantity</th>
                             <th>Product Price</th>
+                            <th>Total</th>
                            
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each stock}}
+                        {{#each sales}}
                         <tr>
                             <td></td>
-                            <td>{{this.productname}}</td>
-                            <td>{{this.id}}</td>
-                            <td>{{this.manufacturerquantity}}</td>
-                            <td>{{this.productprice}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.quantity}}</td>
+                            <td>{{this.subTotal}}</td>
+                            <td>{{this.total}}</td>
                         </tr>
                         {{/each}}
 

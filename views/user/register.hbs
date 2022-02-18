@@ -24,6 +24,9 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 box">	
                             <div class="mb-4">
+                                {{#if err}}
+                                <p class="text-danger">{{err}}</p>
+                                {{/if}}
                                 <h3>Personal Information</h3>
                                 <form id="signupform" method="post" action="/register/userDetail" accept-charset="UTF-8" class="customer-form">
                                     <div class="row">

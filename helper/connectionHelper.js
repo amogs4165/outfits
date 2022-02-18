@@ -11,14 +11,22 @@ const instance = new Razorpay({
 module.exports = {
 
     userRegistration: (userData) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
+            let amnt = 0
             userData.status = true;
-            dB.get().collection('userData').insertOne(userData).then(() => {
-                return resolve(true)
-            })
-                .catch(() => {
-                    return reject(false)
+            userData.wallet = parseInt(amnt)
+            let check = await dB.get().collection('userData').findOne({phoneNumber:userData.phoneNumber})
+            if(check==null){
+
+                dB.get().collection('userData').insertOne(userData).then((resp) => {
+                    return resolve({status:true,resp})
                 })
+                    .catch(() => {
+                        return reject(false)
+                    })
+            }else{
+                resolve({msg:"exist"})
+            }
         })
     },
     userVerify: (loginCredential) => {
@@ -269,7 +277,7 @@ module.exports = {
                     manufacturerbrand: productDetails.manufacturerbrand,
                     productsize: productDetails.productsize,
                     productprice: price,
-                    manufacturerquantity: parseInt(productDetails.manufacturerquantity) ,
+                    manufacturerquantity: parseInt(productDetails.manufacturerquantity),
                     description: productDetails.description
                 }
             }).then((response) => {
@@ -348,7 +356,7 @@ module.exports = {
             let checkCart = await dB.get().collection('cart').findOne({ user: ObjectId(userId) })
             return resolve(checkCart)
         })
-    },  
+    },
 
     userCart: (userId) => {
         return new Promise(async (resolve, reject) => {
@@ -414,7 +422,7 @@ module.exports = {
                     //     }
                     // }
                 ]).toArray()
-               
+
                 resolve(cartItems)
             } else {
                 resolve(null)
@@ -729,14 +737,14 @@ module.exports = {
         })
     },
     updateOrderStatus: (id, value) => {
-        return new Promise(async(resolve, reject) => {
-            let check = await dB.get().collection('orders').findOne({_id:ObjectId(id),OrderStatus:"Delivered"})
-            console.log(check,"heyeheyh")
-            if(check == null){
+        return new Promise(async (resolve, reject) => {
+            let check = await dB.get().collection('orders').findOne({ _id: ObjectId(id), OrderStatus: "Delivered" })
+            console.log(check, "heyeheyh")
+            if (check == null) {
 
                 dB.get().collection('orders').updateOne({ _id: ObjectId(id) }, { $set: { OrderStatus: value } });
                 resolve()
-            }else{
+            } else {
                 resolve()
             }
         })
@@ -890,14 +898,14 @@ module.exports = {
         })
     },
     addCategoryOffer: (details) => {
-        return new Promise(async(resolve, reject) => {
-            let check = await dB.get().collection('categoryOffer').findOne({offercategory:details.offercategory})
-            if(check==null){
+        return new Promise(async (resolve, reject) => {
+            let check = await dB.get().collection('categoryOffer').findOne({ offercategory: details.offercategory })
+            if (check == null) {
 
                 dB.get().collection('categoryOffer').insertOne(details).then(() => {
                     resolve()
                 })
-            }else{
+            } else {
                 resolve()
             }
         })
@@ -922,7 +930,7 @@ module.exports = {
                 OfferPrice = parseInt(OfferPrice.toFixed(2))
                 let proId = pro._id;
 
-                if(pro.categoryOffer=='false'&&pro.productOffer=='false'){
+                if (pro.categoryOffer == 'false' && pro.productOffer == 'false') {
 
                     await dB.get().collection('products').updateOne(
                         {
@@ -936,15 +944,15 @@ module.exports = {
                                 categoryDiscount: parseInt(discount)
                             }
                         })
-                        resolve({status:true})
+                    resolve({ status: true })
                 }
-                else if(pro.categoryOffer=='false'&&pro.productOffer=='true'){
+                else if (pro.categoryOffer == 'false' && pro.productOffer == 'true') {
 
                     let productprice = pro.OldPrice
                     let OfferPrice = productprice - ((productprice * discount) / 100);
                     OfferPrice = parseInt(OfferPrice.toFixed(2))
 
-                    if(OfferPrice< pro.productprice){
+                    if (OfferPrice < pro.productprice) {
 
                         await dB.get().collection('products').updateOne(
                             {
@@ -958,28 +966,28 @@ module.exports = {
                                     categoryDiscount: parseInt(discount)
                                 }
                             })
-                            resolve({status:true})
-                    }else{
+                        resolve({ status: true })
+                    } else {
                         await dB.get().collection('products').updateOne(
                             {
                                 _id: ObjectId(proId)
                             },
                             {
                                 $set: {
-                                    
+
                                     categoryOffer: 'true',
-                                    
+
                                     categoryDiscount: parseInt(discount)
                                 }
                             })
-                            resolve({status:true})
+                        resolve({ status: true })
                     }
 
                 }
-                else{
+                else {
                     console.log("already have")
                     let msg = "Category offer already added"
-                    resolve({status:true,msg})
+                    resolve({ status: true, msg })
                 }
 
             })
@@ -988,14 +996,14 @@ module.exports = {
         })
     },
     addProductOffer: (details) => {
-        return new Promise(async(resolve, reject) => {
-            let check = await dB.get().collection('productOffer').findOne({proId:details.proId})
-            if(check == null){
+        return new Promise(async (resolve, reject) => {
+            let check = await dB.get().collection('productOffer').findOne({ proId: details.proId })
+            if (check == null) {
 
                 dB.get().collection('productOffer').insertOne(details).then(() => {
                     resolve()
                 })
-            }else{
+            } else {
                 resolve()
             }
         })
@@ -1008,12 +1016,12 @@ module.exports = {
     },
     insertProductOffer: (proId, discount, validity) => {
         return new Promise(async (resolve, reject) => {
-            let pro = await dB.get().collection('products').findOne({_id: ObjectId(proId)})
+            let pro = await dB.get().collection('products').findOne({ _id: ObjectId(proId) })
             let productprice = pro.productprice
-                let OfferPrice = productprice - ((productprice * discount) / 100);
-                OfferPrice = parseInt(OfferPrice.toFixed(2))
-                console.log("productttttofferr",pro.categoryOffer,pro.productOffer);
-            if(pro.categoryOffer=='false'&&pro.productOffer=='false'){
+            let OfferPrice = productprice - ((productprice * discount) / 100);
+            OfferPrice = parseInt(OfferPrice.toFixed(2))
+            console.log("productttttofferr", pro.categoryOffer, pro.productOffer);
+            if (pro.categoryOffer == 'false' && pro.productOffer == 'false') {
                 await dB.get().collection('products').updateOne(
                     {
                         _id: ObjectId(proId)
@@ -1026,13 +1034,13 @@ module.exports = {
                             productDiscount: parseInt(discount)
                         }
                     })
-                    resolve({status:true})
+                resolve({ status: true })
             }
-            else if(pro.categoryOffer=='true'&&pro.productOffer=='false'){
+            else if (pro.categoryOffer == 'true' && pro.productOffer == 'false') {
                 let productprice = pro.OldPrice
                 let OfferPrice = productprice - ((productprice * discount) / 100);
                 OfferPrice = parseInt(OfferPrice.toFixed(2))
-                if(OfferPrice< pro.productprice){
+                if (OfferPrice < pro.productprice) {
 
                     await dB.get().collection('products').updateOne(
                         {
@@ -1046,36 +1054,36 @@ module.exports = {
                                 productDiscount: parseInt(discount)
                             }
                         })
-                        resolve({status:true})
-                }else{
+                    resolve({ status: true })
+                } else {
                     await dB.get().collection('products').updateOne(
                         {
                             _id: ObjectId(proId)
                         },
                         {
                             $set: {
-                                
+
                                 productOffer: true,
                                 productDiscount: parseInt(discount)
                             }
                         })
-                        resolve({status:true})
+                    resolve({ status: true })
                 }
             }
-            else{
+            else {
                 console.log("product offer already added")
                 let msg = "Category offer already added"
-                    resolve({status:true,msg})
+                resolve({ status: true, msg })
             }
         })
     },
-    deleteCategoryOffer:(ctgry,id)=>{
-        return new Promise(async(resolve,reject)=>{
+    deleteCategoryOffer: (ctgry, id) => {
+        return new Promise(async (resolve, reject) => {
             let products = await dB.get().collection('products').find({ id: ctgry }).toArray()
-            products.map(async(pro)=>{
+            products.map(async (pro) => {
                 let proId = pro._id
                 let productprice = pro.OldPrice;
-                if(pro.productOffer=='true'){
+                if (pro.productOffer == 'true') {
                     let discount = pro.productDiscount;
                     let OfferPrice = productprice - ((productprice * discount) / 100)
                     await dB.get().collection('products').updateOne(
@@ -1088,41 +1096,41 @@ module.exports = {
                                 categoryOffer: 'false',
                                 categoryDiscount: ""
                             }
-                        }).then(()=>{
-                            dB.get().collection('categoryOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+                        }).then(() => {
+                            dB.get().collection('categoryOffer').deleteOne({ _id: ObjectId(id) }).then(() => {
 
-                                resolve({status:true})
+                                resolve({ status: true })
                             })
                         })
-                }else{
+                } else {
                     await dB.get().collection('products').updateOne(
                         {
                             _id: ObjectId(proId)
                         },
-                        {       
+                        {
                             $set: {
                                 productprice: productprice,
                                 categoryOffer: 'false',
                                 categoryDiscount: ""
                             }
-                        }).then(()=>{
-                            dB.get().collection('categoryOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+                        }).then(() => {
+                            dB.get().collection('categoryOffer').deleteOne({ _id: ObjectId(id) }).then(() => {
 
-                                resolve({status:true})
+                                resolve({ status: true })
                             })
                         })
-                        
+
                 }
             })
         })
     },
-    deleteProductOffer:(id,proId)=>{
-        return new Promise(async(resolve,reject)=>{
-            let products = await dB.get().collection('products').findOne({ _id: ObjectId(proId)  })
-           console.log(products,"this is products");
-           let discount = products.categoryDiscount;
-           let productprice = products.OldPrice;
-            if(products.categoryOffer=='true'){
+    deleteProductOffer: (id, proId) => {
+        return new Promise(async (resolve, reject) => {
+            let products = await dB.get().collection('products').findOne({ _id: ObjectId(proId) })
+            console.log(products, "this is products");
+            let discount = products.categoryDiscount;
+            let productprice = products.OldPrice;
+            if (products.categoryOffer == 'true') {
                 let OfferPrice = productprice - ((productprice * discount) / 100)
                 await dB.get().collection('products').updateOne(
                     {
@@ -1134,13 +1142,13 @@ module.exports = {
                             productOffer: 'false',
                             productDiscount: ""
                         }
-                    }).then(()=>{
-                        dB.get().collection('productOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+                    }).then(() => {
+                        dB.get().collection('productOffer').deleteOne({ _id: ObjectId(id) }).then(() => {
 
-                            resolve({status:true})
+                            resolve({ status: true })
                         })
                     })
-            }else{
+            } else {
                 await dB.get().collection('products').updateOne(
                     {
                         _id: ObjectId(proId)
@@ -1151,64 +1159,129 @@ module.exports = {
                             productOffer: 'false',
                             productDiscount: ""
                         }
-                    }).then(()=>{
-                        dB.get().collection('productOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+                    }).then(() => {
+                        dB.get().collection('productOffer').deleteOne({ _id: ObjectId(id) }).then(() => {
 
-                            resolve({status:true})
+                            resolve({ status: true })
                         })
                     })
-                   
+
             }
-            
+
         })
     },
-    insertCouponOffer:(details)=>{
-        return new Promise(async(resolve,reject)=>{
-            let check = await dB.get().collection('couponOffer').findOne({couponCode:details.couponCode})
-            if(check == null){
-                dB.get().collection('couponOffer').insertOne({...details,user:[]})
+    insertCouponOffer: (details) => {
+        return new Promise(async (resolve, reject) => {
+            let check = await dB.get().collection('couponOffer').findOne({ couponCode: details.couponCode })
+            if (check == null) {
+                dB.get().collection('couponOffer').insertOne({ ...details, user: [] })
                 resolve()
-            }else{
+            } else {
                 resolve()
             }
         })
     },
-    getCoupon:()=>{
-        return new Promise((resolve,reject)=>{
-            dB.get().collection('couponOffer').find().toArray().then((resp)=>{
+    getCoupon: () => {
+        return new Promise((resolve, reject) => {
+            dB.get().collection('couponOffer').find().toArray().then((resp) => {
                 resolve(resp)
             })
         })
     },
-    deletecouponOffer:(id)=>{
-        return new Promise((resolve,reject)=>{
-            dB.get().collection('couponOffer').deleteOne({_id:ObjectId(id)}).then(()=>{
+    deletecouponOffer: (id) => {
+        return new Promise((resolve, reject) => {
+            dB.get().collection('couponOffer').deleteOne({ _id: ObjectId(id) }).then(() => {
                 resolve()
             })
         })
     },
-    checkCoupon:(userId,coupon)=>{
-        return new Promise(async(resolve,reject)=>{
-            let couponCheck = await dB.get().collection('couponOffer').findOne({couponCode:coupon})
-            if(couponCheck){
-               
-                let userExist = couponCheck.user.filter((user)=>user.toString()==userId.toString())
-                if(userExist.length>0){
-                    resolve({status:false,msg:"coupon already used"})
-                }else{
-                    resolve({status:true,coupon:couponCheck, msg:"Coupon Applied"})
+    checkCoupon: (userId, coupon) => {
+        return new Promise(async (resolve, reject) => {
+            let couponCheck = await dB.get().collection('couponOffer').findOne({ couponCode: coupon })
+            if (couponCheck) {
+
+                let userExist = couponCheck.user.filter((user) => user.toString() == userId.toString())
+                if (userExist.length > 0) {
+                    resolve({ status: false, msg: "coupon already used" })
+                } else {
+                    resolve({ status: true, coupon: couponCheck, msg: "Coupon Applied" })
                 }
-            }else{
-                resolve({status:false, msg:"no coupon found"})
+            } else {
+                resolve({ status: false, msg: "no coupon found" })
             }
         })
     },
-    addUserCoupon:(userId,coupon)=>{
-        return new Promise((resolve,reject)=>{
-            dB.get().collection('couponOffer').updateOne({couponCode:coupon},{ $push: { user: userId }}).then(()=>{
+    addUserCoupon: (userId, coupon) => {
+        return new Promise((resolve, reject) => {
+            dB.get().collection('couponOffer').updateOne({ couponCode: coupon }, { $push: { user: userId } }).then(() => {
                 resolve()
             })
         })
+    },
+    salesReport: () => {
+        return new Promise(async (resolve, reject) => {
+            let sales = await dB.get().collection('orders').aggregate([
+                {
+                    $match: { OrderStatus: "Delivered" }
+                },
+                {
+                    $unwind: '$products'
+                },
+                {
+                    $project: {
+                        proId: '$products.productId',
+                        productName: '$products.productname',
+                        saledQuantity: '$products.quantity',
+                        price: '$products.productprice'
+                    }
+                },
+                {
+                    $group: {
+                        _id: { _id: '$proId', name: '$productName', subTotal: '$price' },
+                        quantity: { $sum: '$saledQuantity' },
+                        total: { $sum: { $multiply: ['$saledQuantity', '$price'] } }
+
+                    }
+                },
+                {
+                    $replaceRoot: {
+                        newRoot: {
+                            $mergeObjects: ['$$ROOT', '$_id']
+                        }
+                    }
+                }
+
+
+
+
+            ]).toArray()
+            console.log(sales, "htihs")
+            resolve(sales)
+        })
+    },
+    stockReport:()=>{
+        return new Promise((resolve,reject)=>{
+            let stock = dB.get().collection('products').find().toArray()
+            resolve(stock);
+        })
+    },
+    referalAmount:(id,amount)=>{
+        let amnt = parseInt(amount)
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('userData').updateOne({_id:ObjectId(id)},{$set:{
+                wallet:amnt
+            }})
+        })
+    },
+    incrementAmount:(id,amount)=>{
+        let amnt = parseInt(amount)
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('userData').updateOne(
+                {_id:ObjectId(id)},
+                { $inc: { wallet: amnt} }
+             )
+        })
     }
+    
 
 }
