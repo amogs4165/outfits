@@ -37,8 +37,8 @@ router.post('/add-categoryOffer',verifyLogin, (req,res)=>{
 
 router.get('/addProductOffer/:id',verifyLogin,(req,res)=>{
     let userId = req.params.id;
-    let productOffer = helper.getProductOffer()
-    res.render('admin/addProductOffer',{userId,productOffer});
+    
+    res.render('admin/addProductOffer',{userId,admin:true});
 
 })
 
@@ -109,38 +109,75 @@ router.post('/couponCheck',(req,res)=>{
     console.log(userId);
     helper.checkCoupon(userId,coupon).then((resp)=>{
         let subTotal = req.body.total
-        if(subTotal-100>resp.coupon.discount){
+        if(resp.coupon){
 
-            if(resp.status){
+            if(subTotal-100>resp.coupon.discount){
     
-                let statuss = resp.status
-                let msg = resp.msg
-                let couponDetail = resp.coupon
-                
-                let totalAmount = req.body.total- resp.coupon.discount
-                res.json({statuss,msg,coupon,couponDetail,totalAmount,subTotal})
+                if(resp.status){
+        
+                    let statuss = resp.status
+                    let msg = resp.msg
+                    let couponDetail = resp.coupon
+                    
+                    let totalAmount = req.body.total- resp.coupon.discount
+                    res.json({statuss,msg,coupon,couponDetail,totalAmount,subTotal})
+                }else{
+                    let subTotal = req.body.total
+                    let msg = resp.msg
+                    let statuss = resp.status
+                    res.json({statuss,msg,subTotal})
+                }
             }else{
-                let subTotal = req.body.total
-                let msg = resp.msg
-                let statuss = resp.status
-                res.json({statuss,msg,subTotal})
+                if(resp.status){
+                    let subTotal = req.body.total
+                    let msg = "Should have Min.Rs.100 difference"
+                    let statuss = false;
+                    res.json({statuss,msg,subTotal})
+                }else{
+                    let subTotal = req.body.total
+                    let msg = resp.msg
+                    let statuss = resp.status
+                    res.json({statuss,msg,subTotal})
+                }
             }
         }else{
-            if(resp.status){
-                let subTotal = req.body.total
-                let msg = "Should have Min.Rs.100 difference"
-                let statuss = false;
-                res.json({statuss,msg,subTotal})
-            }else{
-                let subTotal = req.body.total
-                let msg = resp.msg
-                let statuss = resp.status
-                res.json({statuss,msg,subTotal})
-            }
+            let subTotal = req.body.total
+            let msg = resp.msg
+            let statuss = resp.status
+            res.json({statuss,msg,subTotal})
         }
     })
 
     
+})
+
+router.post('/wallet',(req,res)=>{
+   
+    if(req.body.checked == "true"){
+        let id = req.session.user._id
+        let balance = req.session.user.wallet
+        let price = parseInt(req.body.price) 
+        
+        if(balance>price){
+            let amount = parseInt(0)
+            req.session.wAmount = price;
+            let status = true;
+            res.json({status,balance,amount})
+
+        }else{
+            let status = true;
+            let amount = price-balance
+            req.session.wAmount = balance;
+            res.json({status,balance,amount})
+        }
+        
+
+       
+    }else{
+        let amount = parseInt(req.body.price)
+        let status = false;
+        res.json({status,amount})
+    }
 })
 
 module.exports = router;

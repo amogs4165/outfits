@@ -20,8 +20,8 @@
                     <input type="text" value="{{userId}}" name="proId" hidden>
                     <input type="text" value="product" name="offertype" hidden>
                     <div class="form-outline datepicker">
-                      <input type="date" name="validity" class="form-control" id="exampleDatepicker1" />
-                      <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                     <input type="datepicker" name="validity" readonly="readonly" class=" mydate" id="exampleDatepicker1" />
+                      <label for="exampleDatepicker1" >Select a date</label>
                     </div>
 
                   </div>
@@ -51,41 +51,10 @@
 
     </div>
   </section>
-  <div class="container">
-    {{#if productOffer}}
-
-    <table style="text-align: center;" class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Offer Type</th>
-          <th scope="col">Category</th>
-          <th scope="col">Validity</th>
-          <th scope="col">Discount</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      {{#each productOffer}}
-      <tbody>
-
-        <tr>
-
-          <th scope="row">{{this.offertype}}</th>
-          <td>{{this.offercategory}}</td>
-          <td>{{this.validity}}</td>
-          <td style="color: green;">{{this.discount}}%</td>
-          <td>
-            <button class="btn btn-danger" onclick="removeCategoryOffer('{{this._id}}')">Delete</button>
-          </td>
-
-        </tr>
-
-
-      </tbody>
-      {{/each}}
-    </table>
-    {{else}}
-    {{/if}}
-  </div>
+  
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 </body>
 
 <style>
@@ -100,6 +69,17 @@
 
 
 <script>
+
+    $(".mydate").datepicker({
+      showOn: 'button',
+      buttonImageOnly: true,
+       buttonImage: 'images/calendar.gif',
+       format:'yyyy-mm-dd',
+       autoclose: true,
+       minDate: 0,   
+});
+
+
   function removeCategoryOffer(OfferID) {
 
     Swal.fire({

@@ -19,8 +19,8 @@
                   <div class="col-md-6 mb-4">
                     <input type="text" value="category" name="offertype" hidden>
                     <div class="form-outline datepicker">
-                      <input type="date" name="validity" class="form-control" id="exampleDatepicker1" />
-                      <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                      <input type="datepicker" name="validity" readonly="readonly" class=" mydate" id="exampleDatepicker1" />
+                      <label for="exampleDatepicker1"  class="form-label">Select a date</label>
                     </div>
 
                   </div>
@@ -86,6 +86,10 @@
     {{else}}
     {{/if}}
   </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    
 </body>
 
 <style>
@@ -100,39 +104,51 @@
 
 
 <script>
-  function removeCategoryOffer(OfferID, categoryName) {
-    
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          $.ajax({
-            url: "/offerManagement/delete-categoryOffer",
-            type: "POST",
-            data: {
-              id: OfferID,
-              name: categoryName,
-            },
 
-            success: (response) => {
-              if (response.status) {
-                location.reload()
-                swal("Poof! Your imaginary file has been deleted!", {
-                  icon: "success",
-                });
-              }
-            },
+  
+    $(".mydate").datepicker({
+      showOn: 'button',
+      buttonImageOnly: true,
+       buttonImage: 'images/calendar.gif',
+       format:'yyyy-mm-dd',
+       autoclose: true,
+       minDate: 0,   
+});
 
-          });
 
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
-  }
+function removeCategoryOffer(OfferID, categoryName) {
+
+swal({
+title: "Are you sure?",
+text: "Once deleted, you will not be able to recover this imaginary file!",
+icon: "warning",
+buttons: true,
+dangerMode: true,
+})
+.then((willDelete) => {
+if (willDelete) {
+$.ajax({
+url: "/offerManagement/delete-categoryOffer",
+type: "POST",
+data: {
+id: OfferID,
+name: categoryName,
+},
+
+success: (response) => {
+if (response.status) {
+location.reload()
+swal("Poof! Your imaginary file has been deleted!", {
+icon: "success",
+});
+}
+},
+
+});
+
+} else {
+swal("Your imaginary file is safe!");
+}
+});
+}
 </script>

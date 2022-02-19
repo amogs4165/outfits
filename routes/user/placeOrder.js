@@ -46,6 +46,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
                     helper.addUserCoupon(userId,coupon)
+                    helper.incrementAmount(userId,-req.session.wAmount)
                     helper.removeCart(userId).then(()=>{
                         res.json({status:true})
                     })
@@ -69,6 +70,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then(()=>{
                     helper.addUserCoupon(userId,coupon)
+                    helper.incrementAmount(userId,-req.session.wAmount)
                     helper.removeCart(userId).then(()=>{
                         res.json({status:true})
                     })
@@ -292,7 +294,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then(()=>{
                     helper.addUserCoupon(userId,coupon).then(()=>{
-
+                        helper.incrementAmount(userId,-req.session.wAmount)
                         res.json({status:true})
                     })
                     
@@ -318,7 +320,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then(()=>{
                     helper.addUserCoupon(userId,coupon).then(()=>{
-
+                        helper.incrementAmount(userId,-req.session.wAmount)
                         res.json({status:true})
                     })
                     
@@ -531,6 +533,7 @@ router.post('/verify-payment',verifyLogin,(req,res)=>{
         let coupon = req.session.coupon;
         helper.changePaymentStatus(req.body['order[receipt]'],crrStatus).then((resp)=>{
             helper.addUserCoupon(userId,coupon)
+            helper.incrementAmount(userId,-req.session.wAmount)
             console.log(resp);
             console.log("payment succesful");
             res.json({status:true})
@@ -576,6 +579,7 @@ router.get('/order-success',verifyLogin,(req,res)=>{
                 let orderId = req.session.orderId
                 helper.changePaymentStatus(orderId,crrStatus).then(()=>{
                     helper.addUserCoupon(userId,coupon)
+                    helper.incrementAmount(userId,-req.session.wAmount)
                     res.render('user/checkout-success',{orderId})
                 })
                 

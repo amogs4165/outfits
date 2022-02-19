@@ -240,6 +240,13 @@
                                         </tfoot>
                                     </table>
                                 </div>
+                                <div>
+                                    <label id="walletBalance"></label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" value="{{total}}" name="wallet" id="checkboxWallet">
+                                    <label class="custom-control-label" for="customCheck1">Use Wallet Balance</label>
+                                </div>
                                 <div class="mt-2"></div>
                                 <div class="card card--grey">
                                     <div class="card-body">
@@ -247,7 +254,7 @@
                                         <label class="text-uppercase">Enter Coupon code:</label>
                                         <div class="form-flex">
                                     <form id="couponCheck">
-                                        <input value="{{total}}" name="total" hidden>
+                                        <input id="couponTotalCheck" value="{{total}}" name="total" hidden>
                                             <div class="form-group"><input  type="text" name="couponCode" class="form-control"><p class="text-danger" id="couponErr"></p></div><button id="couponButton" type="button" class="btn ">Apply</button>
                                     </form>
                                         </div>
@@ -615,6 +622,7 @@
                     document.getElementById("total").textContent = resp.totalAmount
                     document.getElementById("totalAmount").value = resp.totalAmount
                     document.getElementById("couponCode").value = resp.coupon
+                    document.getElementById("checkboxWallet").value=resp.totalAmount
                     
                     
                 }else{
@@ -624,11 +632,50 @@
                     document.getElementById("total").textContent = resp.subTotal
                     document.getElementById("couponErr").textContent = resp.msg
                     document.getElementById("totalAmount").value = resp.subTotal
+                    document.getElementById("checkboxWallet").value=resp.subTotal
                     document.getElementById("couponCode").value = "null"
                 }
             }
         })
     })
-      
+    
+        $(document).on("change", "input[name='wallet']", function () {
+            
+            var checkbox = $(this);
+            var checked = checkbox.prop('checked');
+            
+            x = document.getElementById("checkboxWallet").value
+            $.ajax({
+                url:"/offerManagement/wallet",
+                type: 'post',
+                data: {
+                    checked: checked,
+                    price: x
+                      },
+                success: function(data) {
+                    if(data.status){
+
+                        document.getElementById("walletBalance").innerHTML = "Wallet Balance:"+data.balance
+                        document.getElementById("total").textContent = data.amount
+                        document.getElementById("totalAmount").value = data.amount
+                        document.getElementById("couponTotalCheck").value = data.amount
+                    }else{
+                        document.getElementById("walletBalance").innerHTML = ""
+                        document.getElementById("total").textContent = data.amount
+                        document.getElementById("totalAmount").value = data.amount
+                        document.getElementById("couponTotalCheck").value = data.amount
+                    }
+                },
+                error: function(data) {
+                   alert(data);
+                    // Revert
+                    checkbox.attr('checked', !checked);
+                }
+            });
+        });
+
+  
+
+
 
 </script>
