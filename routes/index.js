@@ -68,4 +68,5 @@ router.post('/search',(req,res)=>{
     res.render('user/searchProducts',{products})
   })
 })
+
 module.exports = router;

@@ -1,856 +1,937 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>{{title}}</title>
-    {{!-- <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
+    {{!--
+    <link rel='stylesheet' href='/stylesheets/style.css' /> --}}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <meta name="google-signin-client_id" content="266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com">
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>OUTFITS</title>
-        <meta name="description" content="description" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Plugins CSS -->
-        <link rel="stylesheet" href="/stylesheets/plugins.css" />
-        <!-- Main Style CSS -->
-        <link rel="stylesheet" href="/stylesheets/style.css" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="/images/favicon.png" />
+    <meta name="google-signin-client_id"
+        content="266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>OUTFITS</title>
+    <meta name="description" content="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/stylesheets/plugins.css" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.png" />
 
-        {{!-- <script>src="https://checkout.razorpay.com/v1/checkout.js"</script> --}}
+    {{!--
+    <script>src = "https://checkout.razorpay.com/v1/checkout.js"</script> --}}
 
 
-        <!-- Bootstrap Css -->
-        <link href="/stylesheets/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="/stylesheets/icons.min.css" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="/stylesheets/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Css -->
+    <link href="/stylesheets/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/stylesheets/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/stylesheets/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
-		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
-		<script src="https://unpkg.com/dropzone"></script>
-		<script src="https://unpkg.com/cropperjs"></script>
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
+    <script src="https://unpkg.com/dropzone"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
 
-        {{!-- data table --}}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
-  
+    {{!-- data table --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
-        
-        
-  </head>
 
-    {{#if admin}}
 
-        <body data-sidebar="dark">
+
+</head>
+
+{{#if admin}}
+
+<body data-sidebar="dark">
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
-        <!-- Begin page -->
-        <div id="layout-wrapper">  
-            <header id="page-topbar">
-                <div class="navbar-header">
-                    <div class="d-flex">
-                        <!-- LOGO -->
-                        <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="/images/logo.svg" alt="" height="22">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="/images/logo-dark.png" alt="" height="17">
-                                </span>
-                            </a>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="/images/logo.svg" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="/images/logo-dark.png" alt="" height="17">
+                            </span>
+                        </a>
 
-                            <a href="index.html" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="/images/logo-light.svg" alt="" height="22">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="/images/logo-light.png" alt="" height="19">
-                                </span>
-                            </a>
-                        </div>
-
-                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
-                            <i class="fa fa-fw fa-bars"></i>
-                        </button>
-
-                        <!-- App Search-->
-                        <form class="app-search d-none d-lg-block">
-                            <div class="position-relative">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="bx bx-search-alt"></span>
-                            </div>
-                        </form>
-
-                        <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
-                            <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                                <span key="t-megamenu">Mega Menu</span>
-                                <i class="mdi mdi-chevron-down"></i> 
-                            </button>
-                            <div class="dropdown-menu dropdown-megamenu">
-                                <div class="row">
-                                    <div class="col-sm-8">
-    
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-rating">Rating</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-forms">Forms</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-tables">Tables</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-charts">Charts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14" key="t-applications">Applications</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-ecommerce">Ecommerce</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-calendar">Calendar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-email">Email</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-projects">Projects</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-tasks">Tasks</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-contacts">Contacts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <h5 class="font-size-14" key="t-extra-pages">Extra Pages</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-light-sidebar">Light Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-compact-sidebar">Compact Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-horizontal">Horizontal layout</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-maintenance">Maintenance</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-coming-soon">Coming Soon</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-timeline">Timeline</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-faqs">FAQs</a>
-                                                    </li>
-                            
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
-                                                <ul class="list-unstyled megamenu-list">
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-rating">Rating</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-forms">Forms</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-tables">Tables</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" key="t-charts">Charts</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-sm-5">
-                                                <div>
-                                                    <img src="/images/megamenu-img.png" alt="" class="img-fluid mx-auto d-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="/images/logo-light.svg" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="/images/logo-light.png" alt="" height="19">
+                            </span>
+                        </a>
                     </div>
 
-                    <div class="d-flex">
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
 
-                        <div class="dropdown d-inline-block d-lg-none ms-2">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi mdi-magnify"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                aria-labelledby="page-header-search-dropdown">
-        
-                                <form class="p-3">
-                                    <div class="form-group m-0">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                    <!-- App Search-->
+                    <form class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="bx bx-search-alt"></span>
+                        </div>
+                    </form>
+
+                    <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
+                        <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
+                            aria-haspopup="false" aria-expanded="false">
+                            <span key="t-megamenu">Mega Menu</span>
+                            <i class="mdi mdi-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-megamenu">
+                            <div class="row">
+                                <div class="col-sm-8">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
+                                            <ul class="list-unstyled megamenu-list">
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-rating">Rating</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-forms">Forms</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-tables">Tables</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-charts">Charts</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h5 class="font-size-14" key="t-applications">Applications</h5>
+                                            <ul class="list-unstyled megamenu-list">
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-ecommerce">Ecommerce</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-calendar">Calendar</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-email">Email</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-projects">Projects</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-tasks">Tasks</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-contacts">Contacts</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h5 class="font-size-14" key="t-extra-pages">Extra Pages</h5>
+                                            <ul class="list-unstyled megamenu-list">
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-light-sidebar">Light
+                                                        Sidebar</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-compact-sidebar">Compact
+                                                        Sidebar</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-horizontal">Horizontal
+                                                        layout</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-maintenance">Maintenance</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-coming-soon">Coming Soon</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-timeline">Timeline</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-faqs">FAQs</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
+                                            <ul class="list-unstyled megamenu-list">
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-rating">Rating</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-forms">Forms</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-tables">Tables</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" key="t-charts">Charts</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <div>
+                                                <img src="/images/megamenu-img.png" alt=""
+                                                    class="img-fluid mx-auto d-block">
                                             </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img id="header-lang-img" src="/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
-                                    <img src="/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                                    <img src="/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                                    <img src="/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                                    <img src="/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                                    <img src="/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-none d-lg-inline-block ms-1">
-                            <button type="button" class="btn header-item noti-icon waves-effect"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bx bx-customize"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                                <div class="px-lg-2">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/github.png" alt="Github">
-                                                <span>GitHub</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/bitbucket.png" alt="bitbucket">
-                                                <span>Bitbucket</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/dribbble.png" alt="dribbble">
-                                                <span>Dribbble</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/dropbox.png" alt="dropbox">
-                                                <span>Dropbox</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/mail_chimp.png" alt="mail_chimp">
-                                                <span>Mail Chimp</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="/images/brands/slack.png" alt="slack">
-                                                <span>Slack</span>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="dropdown d-none d-lg-inline-block ms-1">
-                            <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                                <i class="bx bx-fullscreen"></i>
-                            </button>
                         </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bx bx-bell bx-tada"></i>
-                                <span class="badge bg-danger rounded-pill">3</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                aria-labelledby="page-header-notifications-dropdown">
-                                <div class="p-3">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0" key="t-notifications"> Notifications </h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="#!" class="small" key="t-view-all"> View All</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div data-simplebar style="max-height: 230px;">
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="bx bx-cart"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1" key="t-your-order">Your order is placed</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-grammer">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="images/users/avatar-3.jpg"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">James Lemire</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-simplified">It will seem like simplified English.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                    <i class="bx bx-badge-check"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1" key="t-shipped">Your item is shipped</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-grammer">If several languages coalesce the grammar</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="/images/users/avatar-4.jpg"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">Salena Layfield</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-occidental">As a skeptical Cambridge friend of mine occidental.</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="p-2 border-top d-grid">
-                                    <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-                                        <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">View More..</span> 
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="/images/users/avatar-1.jpg"
-                                    alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
-                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
-                                <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
-                                <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                                <i class="bx bx-cog bx-spin"></i>
-                            </button>
-                        </div>
-        
                     </div>
                 </div>
-            </header>
 
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="vertical-menu">
+                <div class="d-flex">
 
-                <div data-simplebar class="h-100">
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-search-dropdown">
 
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-                        <!-- Left Menu Start -->
-                        <ul class="metismenu list-unstyled" id="side-menu">
-                            <li class="menu-title" key="t-menu">Menu</li>
-
-                           <li><a href="index.html" key="t-default">Dashboard</a></li>
-                            <li><a href="/orderManagement" key="t-default">Orders</a></li>
-                            <li><a href="/userManagement" key="t-default">User Management</a></li>
-                            <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
-                                    <span key="t-dashboards">Product Management</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/showProducts" key="t-default">View Products</a></li>
-                                    <li><a href="/addProduct" key="t-saas">Add Products</a></li>
-                                    <li><a href="dashboard-crypto.html" key="t-crypto">Update Products</a></li>
-                                    <li><a href="dashboard-blog.html" key="t-blog">Delete Products</a></li>
-                                    
-                                </ul>
-                            </li>
-                              <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
-                                    <span key="t-dashboards">Manage Category</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/categoryManagement/viewCategory" key="t-default">View or Delete Category</a></li>
-                                    <li><a href="/categoryManagement" key="t-saas">Add Category</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
-                                    <span key="t-dashboards">Offer Management</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/offerManagement/add-coupon" key="t-default">Manage Coupons</a></li>
-                                    <li><a href="/offerManagement" key="t-saas">Manage Category Offers</a></li>
-                                    <li><a href="/offerManagement/getProductoffer" key="t-saas">Manage Product Offers</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
-                                    <span key="t-dashboards">Banner Management</span>
-                                </a>
-                                  <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/banner/banner-1" key="t-default">Add Banner1</a></li>
-                                    <li><a href="/banner/select-banner-1" key="t-saas">View and Select Banner1</a></li>
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/banner" key="t-default">Add Banner2</a></li>
-                                    <li><a href="/banner/select-banner" key="t-saas">View and Select Banner2</a></li>
-                                </ul>
-                            </li>
-                            
-                              <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    {{!-- <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end">04</span> --}}
-                                    <span key="t-dashboards">Report</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="/report" key="t-default">Sales Report</a></li>
-                                    <li><a href="/report/stock" key="t-saas">Stock Report</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/admin/logout" key="t-default">Log Out</a></li>
-
-
-                            {{!-- <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-layout"></i>
-                                    <span key="t-layouts">Layouts</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="javascript: void(0);" class="has-arrow" key="t-vertical">Vertical</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="layouts-light-sidebar.html" key="t-light-sidebar">Light Sidebar</a></li>
-                                            <li><a href="layouts-compact-sidebar.html" key="t-compact-sidebar">Compact Sidebar</a></li>
-                                            <li><a href="layouts-icon-sidebar.html" key="t-icon-sidebar">Icon Sidebar</a></li>
-                                            <li><a href="layouts-boxed.html" key="t-boxed-width">Boxed Width</a></li>
-                                            <li><a href="layouts-preloader.html" key="t-preloader">Preloader</a></li>
-                                            <li><a href="layouts-colored-sidebar.html" key="t-colored-sidebar">Colored Sidebar</a></li>
-                                            <li><a href="layouts-scrollable.html" key="t-scrollable">Scrollable</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Horizontal</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="layouts-horizontal.html" key="t-horizontal">Horizontal</a></li>
-                                            <li><a href="layouts-hori-topbar-light.html" key="t-topbar-light">Topbar light</a></li>
-                                            <li><a href="layouts-hori-boxed-width.html" key="t-boxed-width">Boxed width</a></li>
-                                            <li><a href="layouts-hori-preloader.html" key="t-preloader">Preloader</a></li>
-                                            <li><a href="layouts-hori-colored-header.html" key="t-colored-topbar">Colored Header</a></li>
-                                            <li><a href="layouts-hori-scrollable.html" key="t-scrollable">Scrollable</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li> --}}
-
-                            
-
-                
-
-                            
-
-                            
-
-                        </ul>
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..."
+                                            aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <!-- Sidebar -->
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img id="header-lang-img" src="/images/flags/us.jpg" alt="Header Language" height="16">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
+                                <img src="/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    class="align-middle">English</span>
+                            </a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
+                                <img src="/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    class="align-middle">Spanish</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
+                                <img src="/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    class="align-middle">German</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
+                                <img src="/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    class="align-middle">Italian</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
+                                <img src="/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    class="align-middle">Russian</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-customize"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                            <div class="px-lg-2">
+                                <div class="row g-0">
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/github.png" alt="Github">
+                                            <span>GitHub</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/bitbucket.png" alt="bitbucket">
+                                            <span>Bitbucket</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/dribbble.png" alt="dribbble">
+                                            <span>Dribbble</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="row g-0">
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/dropbox.png" alt="dropbox">
+                                            <span>Dropbox</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/mail_chimp.png" alt="mail_chimp">
+                                            <span>Mail Chimp</span>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a class="dropdown-icon-item" href="#">
+                                            <img src="/images/brands/slack.png" alt="slack">
+                                            <span>Slack</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            data-bs-toggle="fullscreen">
+                            <i class="bx bx-fullscreen"></i>
+                        </button>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="bx bx-bell bx-tada"></i>
+                            <span class="badge bg-danger rounded-pill">3</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0" key="t-notifications"> Notifications </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#!" class="small" key="t-view-all"> View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 230px;">
+                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="avatar-xs me-3">
+                                            <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                                <i class="bx bx-cart"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1" key="t-your-order">Your order is placed</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1" key="t-grammer">If several languages coalesce the
+                                                    grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span
+                                                        key="t-min-ago">3 min ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <img src="images/users/avatar-3.jpg" class="me-3 rounded-circle avatar-xs"
+                                            alt="user-pic">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">James Lemire</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1" key="t-simplified">It will seem like simplified English.
+                                                </p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span
+                                                        key="t-hours-ago">1 hours ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="avatar-xs me-3">
+                                            <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                <i class="bx bx-badge-check"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1" key="t-shipped">Your item is shipped</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1" key="t-grammer">If several languages coalesce the
+                                                    grammar</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span
+                                                        key="t-min-ago">3 min ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <img src="/images/users/avatar-4.jpg" class="me-3 rounded-circle avatar-xs"
+                                            alt="user-pic">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">Salena Layfield</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1" key="t-occidental">As a skeptical Cambridge friend of
+                                                    mine occidental.</p>
+                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span
+                                                        key="t-hours-ago">1 hours ago</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2 border-top d-grid">
+                                <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                    <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">View
+                                        More..</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="/images/users/avatar-1.jpg"
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                                <span key="t-profile">Profile</span></a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My
+                                    Wallet</span></a>
+                            <a class="dropdown-item d-block" href="#"><span
+                                    class="badge bg-success float-end">11</span><i
+                                    class="bx bx-wrench font-size-16 align-middle me-1"></i> <span
+                                    key="t-settings">Settings</span></a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span
+                                    key="t-lock-screen">Lock screen</span></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i
+                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                    key="t-logout">Logout</span></a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                            <i class="bx bx-cog bx-spin"></i>
+                        </button>
+                    </div>
+
                 </div>
             </div>
-            <!-- Left Sidebar End -->
+        </header>
 
-            
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
 
-           {{{body}}}
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title" key="t-menu">Menu</li>
+
+                        <li><a href="index.html" key="t-default">Dashboard</a></li>
+                        <li><a href="/orderManagement" key="t-default">Orders</a></li>
+                        <li><a href="/userManagement" key="t-default">User Management</a></li>
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                {{!-- <i class="bx bx-home-circle"></i><span
+                                    class="badge rounded-pill bg-info float-end">04</span> --}}
+                                <span key="t-dashboards">Product Management</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/showProducts" key="t-default">View Products</a></li>
+                                <li><a href="/addProduct" key="t-saas">Add Products</a></li>
+                                <li><a href="dashboard-crypto.html" key="t-crypto">Update Products</a></li>
+                                <li><a href="dashboard-blog.html" key="t-blog">Delete Products</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                {{!-- <i class="bx bx-home-circle"></i><span
+                                    class="badge rounded-pill bg-info float-end">04</span> --}}
+                                <span key="t-dashboards">Manage Category</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/categoryManagement/viewCategory" key="t-default">View or Delete
+                                        Category</a></li>
+                                <li><a href="/categoryManagement" key="t-saas">Add Category</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                {{!-- <i class="bx bx-home-circle"></i><span
+                                    class="badge rounded-pill bg-info float-end">04</span> --}}
+                                <span key="t-dashboards">Offer Management</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/offerManagement/add-coupon" key="t-default">Manage Coupons</a></li>
+                                <li><a href="/offerManagement" key="t-saas">Manage Category Offers</a></li>
+                                <li><a href="/offerManagement/getProductoffer" key="t-saas">Manage Product Offers</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                {{!-- <i class="bx bx-home-circle"></i><span
+                                    class="badge rounded-pill bg-info float-end">04</span> --}}
+                                <span key="t-dashboards">Banner Management</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/banner/banner-1" key="t-default">Add Banner1</a></li>
+                                <li><a href="/banner/select-banner-1" key="t-saas">View and Select Banner1</a></li>
+                            </ul>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/banner" key="t-default">Add Banner2</a></li>
+                                <li><a href="/banner/select-banner" key="t-saas">View and Select Banner2</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="waves-effect">
+                                {{!-- <i class="bx bx-home-circle"></i><span
+                                    class="badge rounded-pill bg-info float-end">04</span> --}}
+                                <span key="t-dashboards">Report</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="/report" key="t-default">Sales Report</a></li>
+                                <li><a href="/report/stock" key="t-saas">Stock Report</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/admin/logout" key="t-default">Log Out</a></li>
+
+
+                        {{!-- <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bx bx-layout"></i>
+                                <span key="t-layouts">Layouts</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow" key="t-vertical">Vertical</a>
+                                    <ul class="sub-menu" aria-expanded="true">
+                                        <li><a href="layouts-light-sidebar.html" key="t-light-sidebar">Light Sidebar</a>
+                                        </li>
+                                        <li><a href="layouts-compact-sidebar.html" key="t-compact-sidebar">Compact
+                                                Sidebar</a></li>
+                                        <li><a href="layouts-icon-sidebar.html" key="t-icon-sidebar">Icon Sidebar</a>
+                                        </li>
+                                        <li><a href="layouts-boxed.html" key="t-boxed-width">Boxed Width</a></li>
+                                        <li><a href="layouts-preloader.html" key="t-preloader">Preloader</a></li>
+                                        <li><a href="layouts-colored-sidebar.html" key="t-colored-sidebar">Colored
+                                                Sidebar</a></li>
+                                        <li><a href="layouts-scrollable.html" key="t-scrollable">Scrollable</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Horizontal</a>
+                                    <ul class="sub-menu" aria-expanded="true">
+                                        <li><a href="layouts-horizontal.html" key="t-horizontal">Horizontal</a></li>
+                                        <li><a href="layouts-hori-topbar-light.html" key="t-topbar-light">Topbar
+                                                light</a></li>
+                                        <li><a href="layouts-hori-boxed-width.html" key="t-boxed-width">Boxed width</a>
+                                        </li>
+                                        <li><a href="layouts-hori-preloader.html" key="t-preloader">Preloader</a></li>
+                                        <li><a href="layouts-hori-colored-header.html" key="t-colored-topbar">Colored
+                                                Header</a></li>
+                                        <li><a href="layouts-hori-scrollable.html" key="t-scrollable">Scrollable</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li> --}}
+
+
+
+
+
+
+
+
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
         </div>
+        <!-- Left Sidebar End -->
 
-        <!-- JAVASCRIPT -->
-        <script src="/libs/jquery/jquery.min.js"></script>
-        <script src="/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/libs/metismenu/metisMenu.min.js"></script>
-        <script src="/libs/simplebar/simplebar.min.js"></script>
-        <script src="/libs/node-waves/waves.min.js"></script>
 
-        <script src="/js/app.js"></script>
-          <script>
-            var addSerialNumber = function () {
+
+        {{{body}}}
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/libs/simplebar/simplebar.min.js"></script>
+    <script src="/libs/node-waves/waves.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script>
+        var addSerialNumber = function () {
             var i = 1
             $('table tr').each(function (index) {
-             $(this).find('td:nth-child(1)').html(index);
+                $(this).find('td:nth-child(1)').html(index);
             });
-            };
-            addSerialNumber();
-        </script>
+        };
+        addSerialNumber();
+    </script>
 
-    </body>
+</body>
 
 
- {{else}}
+{{else}}
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #2B6570;" >
-    <div class="container-fluid">
-        <a class="navbar-brand" style="color: white;" href="/">OUTFITS</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <nav class="grid__item" id="AccessibleNav">
-                {{!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> --}}
-                    <ul id="siteNav" class="d-flex flex-wrap site-nav medium left ms-0 hidearrow">
-                        <li class="lvl1 parent megamenu" >
-                            <a href="#" style="color: white;">MENS <i class="an an-angle-down"></i></a>
-                            <div class="megamenu style1">
-                                <div class="row">
-                                    <div class="lvl-1 col-12 col-md-9 col-lg-9">
-                                        <ul class="row grid--uniform mmWrapper">
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Top Wear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-left-sidebar.html"
-                                                            class="site-nav">T-Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Casual Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-fullwidth.html"
-                                                            class="site-nav">Formal Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-sidebar-drawer.html"
-                                                            class="site-nav">Blazers & Coats</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Bottom Wear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Jeans</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-2.html" class="site-nav">Casual
-                                                            Trousers</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-3.html" class="site-nav">Formal
-                                                            Trousers</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-4.html"
-                                                            class="site-nav">Shorts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1 menu-title">Inner Wear and Sleep
-                                                    Wear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="wishlist.html" class="site-nav">Briefs &
-                                                            Trunks</a></li>
-                                                    <li class="lvl-2"><a href="wishlist-style2.html"
-                                                            class="site-nav">Boxers</a></li>
-                                                    <li class="lvl-2"><a href="compare.html" class="site-nav">Vests</a>
-                                                    </li>
-                                                    <li class="lvl-2"><a href="compare-style2.html"
-                                                            class="site-nav last">Sleepwear & Loungewear</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #2B6570;">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color: white;" href="/">OUTFITS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <nav class="grid__item" id="AccessibleNav">
+                    {{!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> --}}
+                        <ul id="siteNav" class="d-flex flex-wrap site-nav medium left ms-0 hidearrow">
+                            <li class="lvl1 parent megamenu">
+                                <a href="#" style="color: white;">MENS <i class="an an-angle-down"></i></a>
+                                <div class="megamenu style1">
+                                    <div class="row">
+                                        <div class="lvl-1 col-12 col-md-9 col-lg-9">
+                                            <ul class="row grid--uniform mmWrapper">
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Top Wear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-left-sidebar.html"
+                                                                class="site-nav">T-Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Casual Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-fullwidth.html"
+                                                                class="site-nav">Formal Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-sidebar-drawer.html"
+                                                                class="site-nav">Blazers & Coats</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Bottom Wear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Jeans</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-2.html"
+                                                                class="site-nav">Casual
+                                                                Trousers</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-3.html"
+                                                                class="site-nav">Formal
+                                                                Trousers</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-4.html"
+                                                                class="site-nav">Shorts</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1 menu-title">Inner Wear and Sleep
+                                                        Wear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="wishlist.html"
+                                                                class="site-nav">Briefs &
+                                                                Trunks</a></li>
+                                                        <li class="lvl-2"><a href="wishlist-style2.html"
+                                                                class="site-nav">Boxers</a></li>
+                                                        <li class="lvl-2"><a href="compare.html"
+                                                                class="site-nav">Vests</a>
+                                                        </li>
+                                                        <li class="lvl-2"><a href="compare-style2.html"
+                                                                class="site-nav last">Sleepwear & Loungewear</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="lvl1 parent megamenu">
-                            <a href="#"style="color: white;">WOMENS <i class="an an-angle-down"></i></a>
-                            <div class="megamenu style1">
-                                <div class="row">
-                                    <div class="lvl-1 col-12 col-md-9 col-lg-9">
-                                        <ul class="row grid--uniform mmWrapper">
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Indian & Fusion Wear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-left-sidebar.html"
-                                                            class="site-nav">Kurtas & Suits</a></li>
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Kurtis, Tunics & Tops</a></li>
-                                                    <li class="lvl-2"><a href="shop-fullwidth.html"
-                                                            class="site-nav">Ethnic Wear</a></li>
-                                                    <li class="lvl-2"><a href="shop-sidebar-drawer.html"
-                                                            class="site-nav">Leggings, Salwars & Churidars</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Western Wear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Dresses</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-2.html"
-                                                            class="site-nav">Tops</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-3.html"
-                                                            class="site-nav">Jeans</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-4.html" class="site-nav">Shorts
-                                                            & Skirts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1 menu-title">Lingerie & Sleepwear</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="wishlist.html" class="site-nav">Bra</a>
-                                                    </li>
-                                                    <li class="lvl-2"><a href="wishlist-style2.html"
-                                                            class="site-nav">Briefs</a></li>
-                                                    <li class="lvl-2"><a href="compare.html" class="site-nav">Sleepwear
-                                                            & Loungewear</a></li>
-                                                    <li class="lvl-2"><a href="compare-style2.html"
-                                                            class="site-nav last">Camisoles & Thermals</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                            </li>
+                            <li class="lvl1 parent megamenu">
+                                <a href="#" style="color: white;">WOMENS <i class="an an-angle-down"></i></a>
+                                <div class="megamenu style1">
+                                    <div class="row">
+                                        <div class="lvl-1 col-12 col-md-9 col-lg-9">
+                                            <ul class="row grid--uniform mmWrapper">
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Indian & Fusion Wear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-left-sidebar.html"
+                                                                class="site-nav">Kurtas & Suits</a></li>
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Kurtis, Tunics & Tops</a></li>
+                                                        <li class="lvl-2"><a href="shop-fullwidth.html"
+                                                                class="site-nav">Ethnic Wear</a></li>
+                                                        <li class="lvl-2"><a href="shop-sidebar-drawer.html"
+                                                                class="site-nav">Leggings, Salwars & Churidars</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Western Wear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Dresses</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-2.html"
+                                                                class="site-nav">Tops</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-3.html"
+                                                                class="site-nav">Jeans</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-4.html"
+                                                                class="site-nav">Shorts
+                                                                & Skirts</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1 menu-title">Lingerie &
+                                                        Sleepwear</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="wishlist.html"
+                                                                class="site-nav">Bra</a>
+                                                        </li>
+                                                        <li class="lvl-2"><a href="wishlist-style2.html"
+                                                                class="site-nav">Briefs</a></li>
+                                                        <li class="lvl-2"><a href="compare.html"
+                                                                class="site-nav">Sleepwear
+                                                                & Loungewear</a></li>
+                                                        <li class="lvl-2"><a href="compare-style2.html"
+                                                                class="site-nav last">Camisoles & Thermals</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="lvl1 parent megamenu">
-                            <a href="#"style="color: white;">KIDS <i class="an an-angle-down"></i></a>
-                            <div class="megamenu style1">
-                                <div class="row">
-                                    <div class="lvl-1 col-12 col-md-9 col-lg-9">
-                                        <ul class="row grid--uniform mmWrapper">
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Boys Clothing</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-left-sidebar.html"
-                                                            class="site-nav">T-Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-fullwidth.html"
-                                                            class="site-nav">Shorts</a></li>
-                                                    <li class="lvl-2"><a href="shop-sidebar-drawer.html"
-                                                            class="site-nav">Jeans</a></li>
-                                                    <li class="lvl-2"><a href="shop-listview-sidebar.html"
-                                                            class="site-nav">Trousers</a></li>
-                                                    <li class="lvl-2"><a href="shop-left-sidebar.html"
-                                                            class="site-nav">Innerwear & Thermals</a></li>
-                                                    <li class="lvl-2"><a href="shop-left-sidebar.html"
-                                                            class="site-nav">Nightwear & Loungewear</a></li>
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Value Pack</a>
-                                                </ul>
-                                            </li>
-                                            <li class="lvl-1 col-12 col-md-4 col-lg-4">
-                                                <a href="#" class="site-nav lvl-1">Girls Clothing</a>
-                                                <ul class="subLinks">
-                                                    <li class="lvl-2"><a href="shop-right-sidebar.html"
-                                                            class="site-nav">Dresses</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-2.html"
-                                                            class="site-nav">Tops</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-3.html"
-                                                            class="site-nav">T-Shirts</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-4.html"
-                                                            class="site-nav">Clothing Sets</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-5.html" class="site-nav">Jeans,
-                                                            Trousers & Capris</a></li>
-                                                    <li class="lvl-2"><a href="shop-grid-6.html"
-                                                            class="site-nav">Innerwear & Thermals</a></li>
-                                                    <li class="lvl-2"><a href="shop-listview.html"
-                                                            class="site-nav">Nightwear & Loungewear</a></li>
-                                                    <li class="lvl-2"><a href="shop-listview-sidebar.html"
-                                                            class="site-nav">Value Pack</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                            </li>
+                            <li class="lvl1 parent megamenu">
+                                <a href="#" style="color: white;">KIDS <i class="an an-angle-down"></i></a>
+                                <div class="megamenu style1">
+                                    <div class="row">
+                                        <div class="lvl-1 col-12 col-md-9 col-lg-9">
+                                            <ul class="row grid--uniform mmWrapper">
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Boys Clothing</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-left-sidebar.html"
+                                                                class="site-nav">T-Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-fullwidth.html"
+                                                                class="site-nav">Shorts</a></li>
+                                                        <li class="lvl-2"><a href="shop-sidebar-drawer.html"
+                                                                class="site-nav">Jeans</a></li>
+                                                        <li class="lvl-2"><a href="shop-listview-sidebar.html"
+                                                                class="site-nav">Trousers</a></li>
+                                                        <li class="lvl-2"><a href="shop-left-sidebar.html"
+                                                                class="site-nav">Innerwear & Thermals</a></li>
+                                                        <li class="lvl-2"><a href="shop-left-sidebar.html"
+                                                                class="site-nav">Nightwear & Loungewear</a></li>
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Value Pack</a>
+                                                    </ul>
+                                                </li>
+                                                <li class="lvl-1 col-12 col-md-4 col-lg-4">
+                                                    <a href="#" class="site-nav lvl-1">Girls Clothing</a>
+                                                    <ul class="subLinks">
+                                                        <li class="lvl-2"><a href="shop-right-sidebar.html"
+                                                                class="site-nav">Dresses</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-2.html"
+                                                                class="site-nav">Tops</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-3.html"
+                                                                class="site-nav">T-Shirts</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-4.html"
+                                                                class="site-nav">Clothing Sets</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-5.html"
+                                                                class="site-nav">Jeans,
+                                                                Trousers & Capris</a></li>
+                                                        <li class="lvl-2"><a href="shop-grid-6.html"
+                                                                class="site-nav">Innerwear & Thermals</a></li>
+                                                        <li class="lvl-2"><a href="shop-listview.html"
+                                                                class="site-nav">Nightwear & Loungewear</a></li>
+                                                        <li class="lvl-2"><a href="shop-listview-sidebar.html"
+                                                                class="site-nav">Value Pack</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-            </nav>
+                            </li>
+                        </ul>
+                </nav>
 
 
-            <form method="post" action="/search" class="search-bar__form d-flex position-relative bg-light" >
-                <input  class="search__input" type="search"  name="item" value="" placeholder="Search entire store..."
-                    aria-label="Search" style="width: 18rem;" autocomplete="off" />
-                <button class="go-btn search__button" type="submit" ><i class="icon an an-search" ></i></button>
-            </form>
-            {{#if userStatus}}
-            <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
-                <div class="right-action text-action d-flex-align-center justify-content-end">
-                    <!-- User Links -->
-                    <div class="item site-user-menu">
-                        <a href="/profile" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
-                                class="icon an an-user-alt me-1"></i><span class="text align-middle"style="color: white;">Profile</span></a>
+                <form method="post" action="/search" class="search-bar__form d-flex position-relative bg-light">
+                    <input class="search__input" type="search" name="item" value="" placeholder="Search entire store..."
+                        aria-label="Search" style="width: 18rem;" autocomplete="off" />
+                    <button class="go-btn search__button" type="submit"><i class="icon an an-search"></i></button>
+                </form>
+                {{#if userStatus}}
+                <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
+                    <div class="right-action text-action d-flex-align-center justify-content-end">
+                        <!-- User Links -->
+                        <div class="item site-user-menu">
+                            <a href="/profile" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
+                                    class="icon an an-user-alt me-1"></i><span class="text align-middle"
+                                    style="color: white;">Profile</span></a>
+                        </div>
+                        <!-- End User Links -->
+                        <!-- Wishlist -->
+                        <div class="item site-header-wishlist d-none d-lg-block">
+                            <a href="/wishlist" class="icon-wishlist text-capitalize" style="color: white;"><i
+                                    class="icon an an-heart me-1"></i><span
+                                    class="text align-middle">Wishlist</span><span
+                                    class="site-header-wish-count1 d-none" data-cart-render="item_count">(0)</span></a>
+                        </div>
+                        <!-- End Wishlist -->
+                        <!-- Minicart -->
+                        <div class="item site-cart d-none d-lg-block">
+                            <a href="/cart" class="icon-cart site-header-cart btn-minicart text-capitalize"
+                                style="color: white;" data-bs-toggle="modal" data-bs-target="#minicart-drawer"><i
+                                    class="icon an an-shopping-bag me-1"></i><span
+                                    class="text align-middle">Cart</span>(<span class="site-header__cart-count1"
+                                    data-cart-render="item_count">0</span>)</a>
+                        </div>
+                        <!-- End Minicart -->
                     </div>
-                    <!-- End User Links -->
-                    <!-- Wishlist -->
-                    <div class="item site-header-wishlist d-none d-lg-block">
-                        <a href="/wishlist" class="icon-wishlist text-capitalize" style="color: white;"><i
-                                class="icon an an-heart me-1"></i><span class="text align-middle">Wishlist</span><span
-                                class="site-header-wish-count1 d-none" data-cart-render="item_count">(0)</span></a>
-                    </div>
-                    <!-- End Wishlist -->
-                    <!-- Minicart -->
-                    <div class="item site-cart d-none d-lg-block" >
-                        <a href="/cart" class="icon-cart site-header-cart btn-minicart text-capitalize" style="color: white;"
-                            data-bs-toggle="modal" data-bs-target="#minicart-drawer"><i
-                                class="icon an an-shopping-bag me-1"></i><span
-                                class="text align-middle" >Cart</span>(<span class="site-header__cart-count1"
-                                data-cart-render="item_count" >0</span>)</a>
-                    </div>
-                    <!-- End Minicart -->
                 </div>
-            </div>
-            {{else}}
-            <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
-                <div class="right-action text-action d-flex-align-center justify-content-end">
-                    <!-- User Links -->
-                    <div class="item site-user-menu">
-                        <a href="/signIn" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
-                                class="icon an an-user-alt me-1"></i><span class="text align-middle"style="color: white;">LogIn</span></a>
+                {{else}}
+                <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end">
+                    <div class="right-action text-action d-flex-align-center justify-content-end">
+                        <!-- User Links -->
+                        <div class="item site-user-menu">
+                            <a href="/signIn" class="icon-login text-capitalize text-nowrap" style="color: white;"><i
+                                    class="icon an an-user-alt me-1"></i><span class="text align-middle"
+                                    style="color: white;">LogIn</span></a>
+                        </div>
                     </div>
                 </div>
+                {{/if}}
             </div>
-            {{/if}}
         </div>
-    </div>
-</nav>
+    </nav>
     {{{body}}}
+    <style>
+.footerBottom {
+   position: absolute;
+width: 100%;
+   bottom: 0;
+  
+   
+   
+   
+}
+</style>
     <script>
         function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
+            var id_token = googleUser.getAuthResponse().id_token;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/signIn/getId');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-        console.log(xhr.googleUser)
-        if(xhr.responseText=='success'){
-            signOut()
-            location.assign('/emailVerify')
-        }
-        };
-        xhr.send(JSON.stringify({token: id_token}));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/signIn/getId');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                console.log('Signed in as: ' + xhr.responseText);
+                console.log(xhr.googleUser)
+                if (xhr.responseText == 'success') {
+                    signOut()
+                    location.assign('/emailVerify')
+                }
+            };
+            xhr.send(JSON.stringify({ token: id_token }));
         }
     </script>
 
     <script>
         function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-        console.log('User signed out.');
-        });
-    }
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
     </script>
+ 
     <!-- Plugins JS -->
-        <script src="/js/plugins.js"></script>
-        <!-- Main JS -->
-        <script src="/js/main.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-         <script src="/js/validation.js"></script>
-  </body>
-  {{/if}}
+    <script src="/js/plugins.js"></script>
+    <!-- Main JS -->
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script src="/js/validation.js"></script>
+</body>
+{{/if}}
+
 </html>

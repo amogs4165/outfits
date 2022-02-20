@@ -13,11 +13,11 @@ const verifyLogin = (req,res,next)=>{
 
 router.get('/',verifyLogin,(req,res)=>{
 
-    res.render('admin/banner')
+    res.render('admin/banner',{admin:true})
 })
 
 router.get('/banner-1',verifyLogin,(req,res)=>{
-    res.render('admin/banner-1')
+    res.render('admin/banner-1',{admin:true})
 })
 
 router.post('/add-banner',verifyLogin,(req,res)=>{
