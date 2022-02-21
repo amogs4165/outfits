@@ -1,348 +1,154 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
-    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    let cod = document.getElementById("codPayment").value;
+    let razorpay = document.getElementById("razorpayPayment").value;
+    let paypal = document.getElementById("paypalPayment").value;
+    console.log("heyeh",parseInt(cod),razorpay,paypal)
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['COD', parseInt(cod)],
+      ['RAZOR PAY', parseInt(razorpay)],
+      ['PAYPAL', parseInt(paypal)]
+    ]);
 
-        <!-- Begin page -->
-        <div id="layout-wrapper">  
-            
+    var options = {
+      title: 'Payment method',
+      pieHole: 0.4,
+     width: 550,
+      height: 350,
+    };
 
-            <!-- ========== Left Sidebar Start ========== -->
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript">
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['MEN', 10],
+    
+      ['WOMEN', 10],
+      
+      ['KID', 10]
+    ]);
 
-            
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-                <div class="main-content">
+    var options = {
+      title: 'Category saled',
+      is3D: true,
+     width: 550,
+      height: 350,
+    };
 
-                    <div class="page-content">
-                        <div class="container-fluid">
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript">
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['MEN', 10],
+  
+      ['WOMEN', 10],
+    
+      ['KID', 10]
+    ]);
 
-                            <!-- start page title -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                        <h4 class="mb-sm-0 font-size-18">Under construction</h4>
+    var options = {
+      title: 'Category stock',
+      pieHole: 0.4,
+      width: 550,
+      height: 350,
+    };
 
-                                        <div class="page-title-right">
-                                            <ol class="breadcrumb m-0">
-                                                <li class="breadcrumb-item"><a href="javascript: void(0);">Blog</a></li>
-                                                <li class="breadcrumb-item active">Blog Details</li>
-                                            </ol>
-                                        </div>
+    var chart = new google.visualization.PieChart(document.getElementById('cateogryStock'));
+    chart.draw(data, options);
+  }
+</script>
 
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                
-                        <!-- end page title -->
+<script type="text/javascript">
+  window.addEventListener('resize', () => {
+    google.charts.load("current", { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(() => drawChart(document.getElementById("columnchart_values").clientWidth));
+  });
 
-                        <!-- <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="pt-3">
-                                            <div class="row justify-content-center">
-                                                <div class="col-xl-8">
-                                                    <div>
-                                                        <div class="text-center">
-                                                            <div class="mb-4">
-                                                                <a href="javascript: void(0);" class="badge bg-light font-size-12">
-                                                                    <i class="bx bx-purchase-tag-alt align-middle text-muted me-1"></i> Project
-                                                                </a>
-                                                            </div>
-                                                            <h4>Beautiful Day with Friends</h4>
-                                                            <p class="text-muted mb-4"><i class="mdi mdi-calendar me-1"></i> 10 Apr, 2020</p>
-                                                        </div>
 
-                                                        <hr>
-                                                        <div class="text-center">
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div>
-                                                                        <p class="text-muted mb-2">Categories</p>
-                                                                        <h5 class="font-size-15">Project</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="mt-4 mt-sm-0">
-                                                                        <p class="text-muted mb-2">Date</p>
-                                                                        <h5 class="font-size-15">10 Apr, 2020</h5>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="mt-4 mt-sm-0">
-                                                                        <p class="text-muted mb-2">Post by</p>
-                                                                        <h5 class="font-size-15">Gilbert Smith</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
+  google.charts.load("current", { packages: ['corechart'] });
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart(width = 0) {
+    var data = google.visualization.arrayToDataTable([
+      ["Element", "Density", { role: "style" }],
+      ["January", 21.45, "color: #e5e4e2"],
+      ["February", 8.94, "#b87333"],
+      ["March", 10.49, "silver"],
+      ["April", 19.30, "gold"],
+      ["May", 21.45, "color: #e5e4e2"],
+      ["June", 8.94, "#b87333"],
+      ["July", 10.49, "silver"],
+      ["August", 19.30, "gold"],
+      ["September", 21.45, "color: #e5e4e2"],
+      ["October", 8.94, "#b87333"],
+      ["November", 10.49, "silver"],
+      ["December", 19.30, "gold"],
+    ]);
 
-                                                        <div class="my-5">
-                                                            <img src="/images/small/img-2.jpg" alt="" class="img-thumbnail mx-auto d-block">
-                                                        </div>
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+      {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+      },
+      2]);
 
-                                                        <hr>
+    var options = {
+      title: "Monthly sales (2022)",
+      width: width || document.getElementById("columnchart_values").clientWidth,
+      height: document.getElementById("columnchart_values").clientHeight,
+      bar: { groupWidth: "95%" },
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+    chart.draw(view, options);
+  }
+</script>
+<div id="layout-wrapper">
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row ">
+          <input id="codPayment" value="{{codPayment}}" hidden>
+          <input id="razorpayPayment" value="{{razorpayPayment}}" hidden>
+          <input id="paypalPayment" value="{{paypalPayment}}" hidden>
+          <input id="" value="" hidden>
+          <input id="" value="" hidden>
+          <div class="col-lg-12 col-md-6 d-lg-flex gap-4 justify-content-evenly">
 
-                                                        <div class="mt-4">
-                                                            <div class="text-muted font-size-14">
-                                                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam enim ad minima veniam quis</p>
-                                                            
-                                                                <p class="mb-4">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea  reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt</p>
-                                                            
-                                                                <blockquote class="p-4 border-light border rounded mb-4">
-                                                                    <div class="d-flex">
-                                                                        <div class="me-3">
-                                                                            <i class="bx bxs-quote-alt-left text-dark font-size-24"></i>
-                                                                        </div>
-                                                                        <div>
-                                                                            <p class="mb-0"> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium deleniti atque corrupti quos dolores et quas molestias excepturi sint quidem rerum facilis est</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </blockquote>
+            <div id="donutchart"></div>
+            <div id="piechart_3d"></div>
+            <div id="cateogryStock"></div>
 
-                                                                <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Sed ut perspiciatis unde omnis iste natus error sit</p>
-                                                            
+            {{!-- <canvas id="categorySale" width="400" height="400"></canvas> --}}
+            {{!-- <canvas id="cateogry stock" width="400" height="400"></canvas>
+            <canvas id="total sale" width="400" height="400"></canvas> --}}
+          </div>
+          <div class="col-12 mt-5">
 
-                                                                <div class="mt-4">
-                                                                    <h5 class="mb-3">Title: </h5>
-
-                                                                    <div>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-4 col-sm-6">
-                                                                                <div>
-                                                                                    <ul class="ps-4">
-                                                                                        <li class="py-1">Donec sodales sagittis</li>
-                                                                                        <li class="py-1">Sed consequat leo eget</li>
-                                                                                        <li class="py-1">Aliquam lorem ante</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-lg-4 col-sm-6">
-                                                                                <div>
-                                                                                    <ul class="ps-4">
-                                                                                        <li class="py-1">Aenean ligula eget</li>
-                                                                                        <li class="py-1">Cum sociis natoque</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <hr>
-
-                                                            <div class="mt-5">
-                                                                <h5 class="font-size-15"><i class="bx bx-message-dots text-muted align-middle me-1"></i> Comments :</h5>
-                                                                
-                                                                <div>
-                                                                    <div class="d-flex py-3">
-                                                                        <div class="flex-shrink-0 me-3">
-                                                                            <div class="avatar-xs">
-                                                                                <div class="avatar-title rounded-circle bg-light text-primary">
-                                                                                    <i class="bx bxs-user"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="flex-grow-1">
-                                                                            <h5 class="font-size-14 mb-1">Delores Williams <small class="text-muted float-end">1 hr Ago</small></h5>
-                                                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual</p>
-                                                                            <div>
-                                                                                <a href="javascript: void(0);" class="text-success"><i class="mdi mdi-reply"></i> Reply</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex py-3 border-top">
-                                                                        <div class="flex-shrink-0 me-3">
-                                                                            <div class="avatar-xs">
-                                                                                <img src="/images/users/avatar-2.jpg" alt="" class="img-fluid d-block rounded-circle">
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        <div class="flex-grow-1">
-                                                                            <h5 class="font-size-14 mb-1">Clarence Smith <small class="text-muted float-end">2 hrs Ago</small></h5>
-                                                                            <p class="text-muted">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
-                                                                            <div>
-                                                                                <a href="javascript: void(0);" class="text-success"><i class="mdi mdi-reply"></i> Reply</a>
-                                                                            </div>
-                        
-                                                                            <div class="d-flex pt-3">
-                                                                                <div class="flex-shrink-0 me-3">
-                                                                                    <div class="avatar-xs">
-                                                                                        <div class="avatar-title rounded-circle bg-light text-primary">
-                                                                                            <i class="bx bxs-user"></i>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                                <div class="flex-grow-1">
-                                                                                    <h5 class="font-size-14 mb-1">Silvia Martinez <small class="text-muted float-end">2 hrs Ago</small></h5>
-                                                                                    <p class="text-muted">To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-                                                                                    <div>
-                                                                                        <a href="javascript: void(0);" class="text-success"><i class="mdi mdi-reply"></i> Reply</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                        
-                                                                    <div class="d-flex py-3 border-top">
-                                                                        <div class="flex-shrink-0 me-3">
-                                                                            <div class="avatar-xs">
-                                                                                <div class="avatar-title rounded-circle bg-light text-primary">
-                                                                                    <i class="bx bxs-user"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        <div class="flex-grow-1">
-                                                                            <h5 class="font-size-14 mb-1">Keith McCoy <small class="text-muted float-end">12 Aug</small></h5>
-                                                                            <p class="text-muted">Donec posuere vulputate arcu. phasellus accumsan cursus velit</p>
-                                                                            <div>
-                                                                                <a href="javascript: void(0);" class="text-success"><i class="mdi mdi-reply"></i> Reply</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                        
-                                                                </div>
-                                                            </div>
-                
-                                                            <div class="mt-4">
-                                                                <h5 class="font-size-16 mb-3">Leave a Message</h5>
-                
-                                                                <form>
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="commentname-input" class="form-label">Name</label>
-                                                                                <input type="text" class="form-control" id="commentname-input" placeholder="Enter name">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <div class="mb-3">
-                                                                                <label for="commentemail-input" class="form-label">Email</label>
-                                                                                <input type="email" class="form-control" id="commentemail-input" placeholder="Enter email">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                
-                                                                    <div class="mb-3">
-                                                                        <label for="commentmessage-input" class="form-label">Message</label>
-                                                                        <textarea class="form-control" id="commentmessage-input" placeholder="Your message..." rows="3"></textarea>
-                                                                    </div>
-                
-                                                                    <div class="text-end">
-                                                                        <button type="submit" class="btn btn-success w-sm">Submit</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                               
-                            </div>
-                           
-                        </div>
-                        
-                        
-                    </div> 
-                </div> -->
-                <!-- End Page-content -->
-
-                
-                <!-- <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Skote.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-end d-none d-sm-block">
-                                    Design & Develop by Themesbrand
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div> -->
-            <!-- end main content
-
+            <div id="columnchart_values" style="width: 100%; height: 45em;"></div>
+          </div>
         </div>
-        <!-- END layout-wrapper -->
-
-        <!-- Right Sidebar -->
-        <!-- <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title d-flex align-items-center px-3 py-4">
-            
-                    <h5 class="m-0 me-2">Settings</h5>
-
-                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                </div> -->
-
-                <!-- Settings -->
-                <!-- <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6> -->
-
-                <!-- <div class="p-4">
-                    <div class="mb-2">
-                        <img src="/images/layouts/layout-1.jpg" class="img-thumbnail" alt="layout images">
-                    </div>
-
-                    <div class="form-check form-switch mb-3">
-                        <input class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked>
-                        <label class="form-check-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="/images/layouts/layout-2.jpg" class="img-thumbnail" alt="layout images">
-                    </div>
-                    <div class="form-check form-switch mb-3">
-                        <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch">
-                        <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="/images/layouts/layout-3.jpg" class="img-thumbnail" alt="layout images">
-                    </div>
-                    <div class="form-check form-switch mb-3">
-                        <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch">
-                        <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-                    <div class="mb-2">
-                        <img src="/images/layouts/layout-4.jpg" class="img-thumbnail" alt="layout images">
-                    </div>
-                    <div class="form-check form-switch mb-5">
-                        <input class="form-check-input theme-choice" type="checkbox" id="dark-rtl-mode-switch">
-                        <label class="form-check-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
-                    </div>
-
-            
-                </div> -->
-
-            <!-- </div> end slimscroll-menu -->
-        <!-- </div> -->
-        <!-- /Right-bar -->
-
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
-
-        <!-- JAVASCRIPT -->
-       
-
-<!-- Mirrored from themesbrand.com/skote/layouts/blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Jan 2022 15:47:40 GMT -->
-</html>
+      </div>
+    </div>
+  </div>
+</div>

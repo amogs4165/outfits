@@ -1281,7 +1281,19 @@ module.exports = {
                 { $inc: { wallet: amnt} }
              )
         })
-    }
+    },
+    getpaymentmode:(paymentMode)=>{
+        return new Promise((resolve,reject)=>{
+
+            let payment = dB.get().collection('orders').find({payment:paymentMode}).toArray()
+            resolve(payment);
+        })
+    },
+    // getCattOrders:(catt)=>{
+    //     return new Promise((resolve,reject)=>{
+    //         let cattCount = dB.get().collection('orders').find({product.id[0]:})
+    //     })
+    // }
     
 
 }

@@ -11,15 +11,25 @@ const verifyLogin = (req,res,next)=>{
     }
 }
 
-router.get('/',(req,res)=>{
-    let admin = req.session.admin
-    if(admin){
-        res.render('admin/lbar',{admin})
-    }
-    else{
-        res.redirect('/admin/login')
-    }
-    
+router.get('/',verifyLogin,async (req,res)=>{
+    let admin = true;
+    let cod = await helper.getpaymentmode("COD");
+    let razorpay = await helper.getpaymentmode("razorpay");
+    let paypal = await helper.getpaymentmode("paypal");
+    let codPayment = cod.length;
+    let razorpayPayment = razorpay.length;
+    let paypalPayment = paypal.length;
+    let menOrders = await helper.getCattOrders()
+    console.log(cod.length)
+    console.log("---------------------------------------------------------")
+    console.log(razorpay.length)
+    console.log("---------------------------------------------------------")
+
+    console.log(paypal.length)
+    console.log("---------------------------------------------------------")
+
+    res.render('admin/lbar',{admin,codPayment,razorpayPayment,paypalPayment})
+
 })
 
 router.get('/orders',verifyLogin,(req,res)=>{
