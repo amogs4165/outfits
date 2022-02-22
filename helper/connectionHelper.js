@@ -11,21 +11,21 @@ const instance = new Razorpay({
 module.exports = {
 
     userRegistration: (userData) => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let amnt = 0
             userData.status = true;
             userData.wallet = parseInt(amnt)
-            let check = await dB.get().collection('userData').findOne({phoneNumber:userData.phoneNumber})
-            if(check==null){
+            let check = await dB.get().collection('userData').findOne({ phoneNumber: userData.phoneNumber })
+            if (check == null) {
 
                 dB.get().collection('userData').insertOne(userData).then((resp) => {
-                    return resolve({status:true,resp})
+                    return resolve({ status: true, resp })
                 })
                     .catch(() => {
                         return reject(false)
                     })
-            }else{
-                resolve({msg:"exist"})
+            } else {
+                resolve({ msg: "exist" })
             }
         })
     },
@@ -1259,41 +1259,120 @@ module.exports = {
             resolve(sales)
         })
     },
-    stockReport:()=>{
-        return new Promise((resolve,reject)=>{
+    stockReport: () => {
+        return new Promise((resolve, reject) => {
             let stock = dB.get().collection('products').find().toArray()
             resolve(stock);
         })
     },
-    referalAmount:(id,amount)=>{
+    referalAmount: (id, amount) => {
         let amnt = parseInt(amount)
-        return new Promise((resolve,reject)=>{
-            dB.get().collection('userData').updateOne({_id:ObjectId(id)},{$set:{
-                wallet:amnt
-            }})
+        return new Promise((resolve, reject) => {
+            dB.get().collection('userData').updateOne({ _id: ObjectId(id) }, {
+                $set: {
+                    wallet: amnt
+                }
+            })
         })
     },
-    incrementAmount:(id,amount)=>{
+    incrementAmount: (id, amount) => {
         let amnt = parseInt(amount)
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             dB.get().collection('userData').updateOne(
-                {_id:ObjectId(id)},
-                { $inc: { wallet: amnt} }
-             )
+                { _id: ObjectId(id) },
+                { $inc: { wallet: amnt } }
+            )
         })
     },
-    getpaymentmode:(paymentMode)=>{
-        return new Promise((resolve,reject)=>{
+    getpaymentmode: (paymentMode) => {
+        return new Promise((resolve, reject) => {
 
-            let payment = dB.get().collection('orders').find({payment:paymentMode}).toArray()
+            let payment = dB.get().collection('orders').find({ payment: paymentMode }).toArray()
             resolve(payment);
         })
     },
-    // getCattOrders:(catt)=>{
-    //     return new Promise((resolve,reject)=>{
-    //         let cattCount = dB.get().collection('orders').find({product.id[0]:})
-    //     })
-    // }
-    
+    getCattOrders: (catt) => {
+        return new Promise(async (resolve, reject) => {
+            let cattCount = await dB.get().collection('orders').aggregate([
+
+                {
+                    $unwind: '$products'
+                },
+                {
+                    $project: {
+                        _id: 1,
+                        products: '$products'
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'products',
+                        // let: { id: "$_id" }
+                        localField: 'products.productId',
+                        foreignField: '_id',
+                        as: 'totakecount'
+                    }
+                },
+                {
+                    $project: {
+                        totakecount: '$totakecount'
+                    }
+                },
+                {
+                    $unwind: '$totakecount'
+                },
+         
+                {
+
+                    $group: {
+                        _id: { $arrayElemAt: ['$totakecount.id', 0] },
+                        count: { $sum: 1 }
+                    }
+                }
+
+            ]).toArray()
+            cattCount = cattCount.map(cat => [cat._id, cat.count])
+            const newCattCount = [['Task', 'Hours per Day'], ...cattCount]
+            console.log(newCattCount);
+            resolve(newCattCount)
+        })
+    },
+    getCattStock:()=>{
+        return new Promise(async (resolve,reject)=>{
+            let cattStock = await dB.get().collection('products').aggregate([
+                {
+                    $project:{
+                        cattegory:{$arrayElemAt:['$id',0]},
+                        quantity:'$manufacturerquantity'
+                    }
+                },
+                {
+                    $group:{
+                        _id:'$cattegory',
+                        total: { $sum: '$quantity' } 
+                    }
+                }
+            ]).toArray()
+            cattStock = cattStock.map(cat=>[cat._id, cat.total])
+            cattStock = [['Task','Hours per Day'],...cattStock]
+            console.log(cattStock);
+            resolve(cattStock)
+        })
+    },
+    deleteOrder: (orderId) => {
+        return new Promise(async (resolve, reject) => {
+            let check = await dB.get().collection('orders').findOne({ _id: ObjectId(orderId), OrderStatus: "Delivered" })
+            console.log(check, "heyeheyh")
+            if (check == null) {
+
+                dB.get().collection('orders').deleteOne({ _id: ObjectId(orderId) });
+                resolve({ status: true })
+            } else {
+                resolve({ status: false })
+            }
+        })
+    }
+
+
 
 }

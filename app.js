@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 
 //Google Auth
-const {OAuth2Client} = require('google-auth-library');
+const { OAuth2Client } = require('google-auth-library');
 const CLIENT_ID = "266453374438-a1lkh4ckmaqsv88vgbbrf28ijh0tp8li.apps.googleusercontent.com"
 const clients = new OAuth2Client(CLIENT_ID);
 
@@ -15,6 +15,7 @@ var logger = require('morgan');
 var mongodb = require('mongodb')
 var session = require('express-session')
 var fileUpload = require('express-fileupload')
+const MongoClient = require('connect-mongo');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,10 +43,15 @@ var dataBase = require('./config/connection');
 var app = express();
 
 
-app.use(session({secret:'key',cookie:{maxAge:600000}}))
+app.use(
+  session({
+    secret: 'key',
+    store: MongoClient.create({ mongoUrl: 'mongodb://localhost:27017' }),
+    cookie: { maxAge: 600000 }
+  }))
 
-app.use((req,res,next)=>{
-  res.set('Cache-Control','no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 })
 
@@ -53,11 +59,11 @@ app.use((req,res,next)=>{
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-dataBase.connect((err)=>{
-  if(err){
+dataBase.connect((err) => {
+  if (err) {
     console.log(("***DATABASE NOT CONNECTED***"));
   }
-  else{
+  else {
     console.log("***DATABASE CONNECTED***");
   }
 })
@@ -74,7 +80,7 @@ app.use('/users', usersRouter);
 app.use('/register', userRegister);
 app.use('/signIn', userLogin);
 app.use('/verify', otpVerify);
-app.use('/emailVerify',emailVerify);
+app.use('/emailVerify', emailVerify);
 app.use('/profile', profilePage);
 app.use('/admin', admin);
 app.use('/userManagement', userManagement);
@@ -87,18 +93,18 @@ app.use('/placeOrder', placeOrder);
 app.use('/orderManagement', orderManagement);
 app.use('/buyProduct', buyProduct);
 app.use('/wishlist', wishlist);
-app.use('/offerManagement',offerManagement);
+app.use('/offerManagement', offerManagement);
 app.use('/report', report);
 
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

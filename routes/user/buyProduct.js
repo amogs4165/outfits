@@ -30,4 +30,14 @@ router.post('/',verifyLogin,(req,res)=>{
     
 })
 
+router.post('/remove',verifyLogin,(req,res)=>{
+    let orderId = req.body.orderId
+    helper.deleteOrder(orderId).then((resp)=>{
+        if(resp.status){
+            res.json({status:true})
+        }else{
+            res.json({status:false})
+        }
+    })
+})
 module.exports = router;

@@ -8,7 +8,7 @@
     let cod = document.getElementById("codPayment").value;
     let razorpay = document.getElementById("razorpayPayment").value;
     let paypal = document.getElementById("paypalPayment").value;
-    console.log("heyeh",parseInt(cod),razorpay,paypal)
+    console.log("heyeh", parseInt(cod), razorpay, paypal)
     var data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
       ['COD', parseInt(cod)],
@@ -19,7 +19,7 @@
     var options = {
       title: 'Payment method',
       pieHole: 0.4,
-     width: 550,
+      width: 550,
       height: 350,
     };
 
@@ -31,19 +31,12 @@
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['MEN', 10],
-    
-      ['WOMEN', 10],
-      
-      ['KID', 10]
-    ]);
+    var data = google.visualization.arrayToDataTable(JSON.parse(document.getElementById("category").value));
 
     var options = {
       title: 'Category saled',
       is3D: true,
-     width: 550,
+      width: 550,
       height: 350,
     };
 
@@ -55,14 +48,8 @@
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['MEN', 10],
-  
-      ['WOMEN', 10],
-    
-      ['KID', 10]
-    ]);
+   
+    var data = google.visualization.arrayToDataTable(JSON.parse(document.getElementById("stock").value));
 
     var options = {
       title: 'Category stock',
@@ -131,8 +118,8 @@
           <input id="codPayment" value="{{codPayment}}" hidden>
           <input id="razorpayPayment" value="{{razorpayPayment}}" hidden>
           <input id="paypalPayment" value="{{paypalPayment}}" hidden>
-          <input id="" value="" hidden>
-          <input id="" value="" hidden>
+          <input id="category" value="{{orders}}" hidden>
+          <input id="stock" value="{{cattStock}}" hidden>
           <div class="col-lg-12 col-md-6 d-lg-flex gap-4 justify-content-evenly">
 
             <div id="donutchart"></div>

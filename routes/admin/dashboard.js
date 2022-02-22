@@ -19,16 +19,17 @@ router.get('/',verifyLogin,async (req,res)=>{
     let codPayment = cod.length;
     let razorpayPayment = razorpay.length;
     let paypalPayment = paypal.length;
-    let menOrders = await helper.getCattOrders()
-    console.log(cod.length)
-    console.log("---------------------------------------------------------")
-    console.log(razorpay.length)
-    console.log("---------------------------------------------------------")
+    let orders = await helper.getCattOrders("mens");
+    let cattStock = await helper.getCattStock();
+    // console.log(menOrders)
+    // console.log("---------------------------------------------------------")
+    // console.log(womenOrders)
+    // console.log("---------------------------------------------------------")
 
-    console.log(paypal.length)
-    console.log("---------------------------------------------------------")
+    // console.log(kidOrders )
+    // console.log("---------------------------------------------------------")
 
-    res.render('admin/lbar',{admin,codPayment,razorpayPayment,paypalPayment})
+        res.render('admin/lbar',{admin,codPayment,razorpayPayment,paypalPayment,orders: JSON.stringify(orders),cattStock: JSON.stringify(cattStock)})
 
 })
 

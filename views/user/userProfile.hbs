@@ -1,915 +1,1067 @@
+<!-- Page Loader -->
+<div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
+<!-- End Page Loader -->
 
-        <!-- Page Loader -->
-        <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
-        <!-- End Page Loader -->
-
-        <div class="pageWrapper">
-            <!-- Body Content -->
-            <div id="page-content">
-                <!-- Page Title -->
-                <div class="page section-header text-center mb-0">
-                    <div class="page-title">
-                        <div class="wrapper"><h1 class="page-width">My Account</h1></div>
-                    </div>
-                </div>
-                <!-- End Page Title -->
-                <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
-                    <div class="container breadcrumbs">
-                        <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">My Account</span>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="dashboard-upper-info">
-                        <div class="row align-items-center g-0">
-                            <div class="col-xl-3 col-lg-3 col-sm-6">
-                                <div class="d-single-info">
-                                    <p class="user-name">Hello <span class="font-weight-600">yourmail@info</span></p>
-                                    <p>(not yourmail@info? <a class="font-weight-600" href="login.html">Log Out</a>)</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-4 col-sm-6">
-                                <div class="d-single-info">
-                                    <p>Need Assistance? Customer service at.</p>
-                                    <p>admin@yoursite.com.</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-sm-6">
-                                <div class="d-single-info">
-                                    <p>E-mail them at </p>
-                                    <p>support@yoursite.com</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-sm-6">
-                                <div class="d-single-info text-lg-center">
-                                    <a class="view-cart" href="cart.html"><i class="icon an an-shopping-bag me-1"></i>View Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4 mb-lg-5 pb-lg-5">
-                        <div class="col-xl-2 col-lg-2 col-md-12 md-margin-20px-bottom">
-                            <!-- Nav tabs -->
-                            <ul class="nav flex-column dashboard-list mb-4 mb-lg-0" role="tablist">
-                                <li><a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Referal Bonus</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Edit details</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
-                                <li><a class="nav-link" href="/logout">logout</a></li>
-                            </ul>
-                            <!-- End Nav tabs -->
-                        </div>
-
-                        <div class="col-xs-10 col-lg-10 col-md-12">
-                            <!-- Tab panes -->
-                            <div class="tab-content dashboard-content padding-30px-all md-padding-15px-all" style="">
-                                <!-- Dashboard -->
-                                <div id="dashboard" class="tab-pane fade active show">
-                                    <h3>Dashboard </h3>
-                                    <p>From your account dashboard. you can easily check &amp; view your
-                                        <a class="text-decoration-underline" href="#">recent orders</a>, manage your
-                                        <a class="text-decoration-underline" href="#">shipping and billing addresses</a> and
-                                        <a class="text-decoration-underline" href="#">edit your password and account details.</a>
-                                    </p>
-                                    <div class="row user-profile mt-4">
-                                        <div class="col-12 col-lg-6">
-                                            <div class="profile-img">
-                                                <div class="img"><img src="/profile-image/{{user._id}}image1.jpg" alt="profile" width="65" /></div>
-                                                <div class="detail ms-3">
-                                                    <h5 class="mb-1">{{user.firstName}}</h5>
-                                                    <p>Balance: <strong>{{user.wallet}}</strong></p>
-                                                </div>
-                                                <div class="lbl">SILVER USER</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-lg-6">
-                                            <ul class="profile-order mt-3 mt-lg-0">
-                                                <li>
-                                                    <h3 class="mb-1">16</h3>
-                                                    All Orders
-                                                </li>
-                                                <li>
-                                                    <h3 class="mb-1">02</h3>
-                                                    Awaiting Payments
-                                                </li>
-                                                <li>
-                                                    <h3 class="mb-1">00</h3>
-                                                    Awaiting Shipment
-                                                </li>
-                                                <li>
-                                                    <h3 class="mb-1">01</h3>
-                                                    Awaiting Delivery
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive mt-4">
-                                        <table class="table">
-                                            <thead class="alt-font">
-                                                <tr>
-                                                    <th>Order</th>
-                                                    <th>Product</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Minerva Dress black</td>
-                                                    <td>March 04, 2018</td>
-                                                    <td>Completed</td>
-                                                    <td>$165.00 for 1 item </td>
-                                                    <td><a class="view" href="cart.html">View</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- End Dashboard -->
-
-                                <!-- Orders -->
-                                <div id="orders" class="product-order tab-pane fade">
-                                    <h3>Orders</h3>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="alt-font">
-                                                <tr>
-                                                    <th>Order</th>
-                                                    <th>Product</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{#each orders}}
-                                                <tr>
-                                                    <td>1</td>
-                                                    
-                                                    <td>
-                                                        {{#each this.products}}
-                                                        {{this.productname}}<br>
-                                                        {{/each}}
-                                                    </td>
-                                                    
-                                                    <td>{{this.date2}}</td>
-                                                    <td>{{this.OrderStatus}}</td>
-                                                    <td>{{this.total}}</td>
-                                                    <td><a class="view" href="cart.html">View</a></td>
-                                                </tr>
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- End Orders -->
-
-                                <!-- Downloads -->
-                                <div id="downloads" class="product-order tab-pane fade">
-                                    <h2>Referal Bonus</h2>
-                                        <h3>You can earn Rs.500 by refering your friends</h3>
-                                        
-                                    <div  class="mt-3 ">
-                                      <h5 class="text-primary">*The refered friend must be Signup with that link</h5>
-                                      <h5 class="text-primary">*The refered user also get bonus Rs.100</h5>
-                                      <h5 class="text-primary">*Reward will credit in your wallet</h5>
-                                      <h5 class="text-primary">*By using Wallet amount you can buy products</h5>
-                                      <h5 class="text-primary">*Wallet money only can use for buying products</h5>
-                                      <h5 class="text-primary">With this link you can refer your friend : <h6 class="text-danger" id="link">http://localhost:3000/register/{{user._id}}</h6></h5>
-                                      <button class="btn mt-1" onclick="myFunction()">Copy Link</button>
-                                    </div>
-                                </div>
-                                <!-- End Downloads -->
-
-                                <!-- Address -->
-                                <div id="address" class="address tab-pane">
-                                    <h3>Addresses</h3>
-                                    <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout page by default.</p>
-
-                                            <div class="accordion add-address mt-3" id="address1">
-                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#addAddress" aria-expanded="false" aria-controls="addAddress">Add Address</button>
-                                                <div id="addAddress" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="/profile/add-address">
-                                                        <fieldset>
-                                                            <h2 class="login-title mb-3">Shipping details</h2>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-firstname1">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" value="" id="input-firstname1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" value="" id="input-lastname1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-email1">E-Mail <span class="required-f">*</span></label>
-                                                                    <input name="email" value="" id="input-email1" type="email">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" value="" id="input-telephone1" type="tel">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company1">Company</label>
-                                                                    <input name="company" value="" id="input-company1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-address-11">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1" value="" id="input-address-11" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-21">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2" value="" id="input-address-21" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-city1">City <span class="required-f">*</span></label>
-                                                                    <input name="city" value="" id="input-city1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" value="" id="input-postcode1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-country1">Country <span class="required-f">*</span></label>
-                                                                    <select name="country" id="input-country1">
-                                                                        <option value="India">India</option>
-                                                                        
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
-                                                                    <label for="input-zone1">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone1">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                           
-                                                             <button type="submit" class="btn mt-1"><span>Add Address</span></button>
-                                                            
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                    {{!-- starting --}}
-                                    
-                                    <div class="row">
-                                        {{#each address.address}}
-                                        <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Address</h4>
-                                           
-                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}</p>
-
-
-                                            <div class="accordion add-address mt-3" id="address1">
-                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Edit Address</button>
-                                                <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="profile/add-address1">
-                                                        <fieldset>
-                                                            <h2 class="login-title mb-3">Shipping details</h2>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-firstname1">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" value="{{address.address1.firstname}}" id="input-firstname1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" value="{{address.address1.lastname}}" id="input-lastname1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-email1">E-Mail <span class="required-f">*</span></label>
-                                                                    <input name="email" value="{{address.address1.email}}" id="input-email1" type="email">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" value="{{address.address1.telephone}}" id="input-telephone1" type="tel">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company1">Company</label>
-                                                                    <input name="company" value="" id="input-company1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-address-11">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1" value="" id="input-address-11" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-21">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2" value="" id="input-address-21" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-city1">City <span class="required-f">*</span></label>
-                                                                    <input name="city" value="" id="input-city1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" value="" id="input-postcode1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-country1">Country <span class="required-f">*</span></label>
-                                                                    <select name="country" id="input-country1">
-                                                                        <option value="India">India</option>
-                                                                        
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
-                                                                    <label for="input-zone1">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone1">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        
-                                                            <button type="submit" class="btn mt-1"><span>Edit Address</span></button>
-                                                         
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        {{!-- end point --}}
-                                        {{/each }}
-                                    </div>
-                                </div>
-                                <!-- End Address -->
-
-                                <!-- Account Details -->
-                                <div id="account-details" class="tab-pane fade">
-                                    <h3>Edit details </h3>
-                                    <div class="account-login-form bg-light-gray padding-20px-all">
-                                        <form action="/profile/editProfile" method="post" enctype="multipart/form-data"> 
-                                            <fieldset>
-                                               
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                                                        <input name="firstName" value="{{user.firstName}}" id="input-firstname" class="form-control" type="text">
-                                                        <span class="error_form" id="fname_error_message"></span>
-                                                    </div>
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-lastname">Last Name <span class="required-f">*</span></label>
-                                                        <input name="lastName" value="{{user.lastName}}" id="input-lastname" class="form-control" type="text">
-                                                        <span class="error_form" id="sname_error_message"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-email">E-Mail <span class="required-f">*</span></label>
-                                                        <input name="email" value="{{user.email}}" id="input-email" class="form-control" type="email">
-                                                        <span class="error_form" id="email_error_message"></span>
-                                                    </div>
-                                                    
-                                                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-telephone">Mobile Number <span class="required-f">*</span></label>
-                                                        <input name="telephone" value="{{user.phoneNumber}}" id="input-telephone" class="form-control" type="tel" disabled>
-                                                        <span class="error_form" id="mob_error_message"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                   <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-password">Password <span class="required-f">*</span></label>
-                                                        <input name="password" value="{{user.password}}" id="input-password" class="form-control" type="password">
-                                                        <span class="error_form" id="password_error_message"></span>
-                                                    </div>
-                                                   <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                        <label for="input-password">Confirm Password <span class="required-f">*</span></label>
-                                                        <input name="confirmPassword" value="{{user.confirmPassword}}" id="input-cpassword" class="form-control" type="password">
-                                                        <span class="error_form" id="retype_password_error_message"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 col-lg-12 col-xl-12 required">
-                                                        <h3>Update Profile Picture</h3>
-                                                         <img width="100px" height="auto" alt="No Profile Photo" src="profile-image/{{user._id}}image1.jpg" id="imgView1">
-                                                         <input name="image1" type="file" id="id_img1">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                            <button type="submit" class="btn margin-15px-top btn-primary">Save</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- End Account Details -->
-
-                                <!-- Downloads -->
-                                <div id="wishlist" class="product-wishlist tab-pane fade">
-                                    <h3>My Wishlist</h3>
-                                    <!-- Grid Product -->
-                                    <div class="grid-products grid--view-items wishlist-grid mt-4">
-                                        <div class="row">
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <button type="button" class="btn close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Close"><i class="icon an an-times"></i></button>
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html">
-                                                        <!-- Image -->
-                                                        <img class="primary blur-up lazyload" data-src="/images/product-images/product-image1.jpg" src="/images/product-images/product-image1.jpg" alt="image" title="product" />
-                                                        <!-- End Image -->
-                                                        <!-- Hover Image -->
-                                                        <img class="hover blur-up lazyload" data-src="/images/product-images/product-image1-1.jpg" src="/images/product-images/product-image1-1.jpg" alt="image" title="product" />
-                                                        <!-- End Hover Image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels rectangular"><span class="lbl pr-label3">Low in stock</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Edna Dress</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="old-price">$700.00</span>
-                                                        <span class="price">$600.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review">
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star-half-alt"></i>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="https://template.annimexweb.com/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart.html" class="btn btn--small product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <button type="button" class="btn close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Close"><i class="icon an an-times"></i></button>
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html">
-                                                        <!-- Image -->
-                                                        <img class="primary blur-up lazyload" data-src="/images/product-images/product-image2.jpg" src="/images/product-images/product-image2.jpg" alt="image" title="product" />
-                                                        <!-- End Image -->
-                                                        <!-- Hover Image -->
-                                                        <img class="hover blur-up lazyload" data-src="/images/product-images/product-image2-1.jpg" src="/images/product-images/product-image2-1.jpg" alt="image" title="product" />
-                                                        <!-- End Hover Image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels rectangular"><span class="lbl pr-label2">New</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Elastic Waist Dress</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="price">$748.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review">
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="https://template.annimexweb.com/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart.html" class="btn btn--small product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <button type="button" class="btn close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Close"><i class="icon an an-times"></i></button>
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html">
-                                                        <!-- Image -->
-                                                        <img class="primary blur-up lazyload" data-src="/images/product-images/product-image3.jpg" src="/images/product-images/product-image4.jpg" alt="image" title="product" />
-                                                        <!-- End Image -->
-                                                        <!-- Hover Image -->
-                                                        <img class="hover blur-up lazyload" data-src="/images/product-images/product-image3-1.jpg" src="/images/product-images/product-image4-1.jpg" alt="image" title="product" />
-                                                        <!-- End Hover Image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels rectangular"><span class="lbl on-sale">Out of stock</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">3/4 Sleeve Kimono Dress</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="price">$550.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review">
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star-half-alt"></i>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="https://template.annimexweb.com/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart.html" class="btn btn--small product-form__cart-submit soldOutBtn"><span>Out Of stock</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <button type="button" class="btn close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Close"><i class="icon an an-times"></i></button>
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html">
-                                                        <!-- Image -->
-                                                        <img class="primary blur-up lazyload" data-src="/images/product-images/product-image4.jpg" src="/images/product-images/product-image4.jpg" alt="image" title="product" />
-                                                        <!-- End Image -->
-                                                        <!-- Hover Image -->
-                                                        <img class="hover blur-up lazyload" data-src="/images/product-images/product-image4-1.jpg" src="/images/product-images/product-image4-1.jpg" alt="image" title="product" />
-                                                        <!-- End Hover Image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels"><span class="lbl pr-label1">Sale</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Cape Dress</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="old-price">$900.00</span>
-                                                        <span class="price">$788.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review">
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star"></i>
-                                                        <i class="an an-star-half-alt"></i>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="https://template.annimexweb.com/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart.html" class="btn btn--small product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Grid Product-->
-                                </div>
-                                <!-- End Downloads -->
-                            </div>
-                            <!-- End Tab panes -->
-                        </div>
-                    </div>
-                </div>
-                <!-- End Body Container -->
-            </div>
-            <!-- End Body Content -->
-
-            
-
-            <!-- Scoll Top -->
-            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
-            <!-- End Scoll Top -->
-
-            <!-- Minicart Drawer -->
-            <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="minicart-header">
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
-                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong>3</strong> items</h4>
-                        </div>
-                        <div class="minicart-body">
-                            <div class="empty-cart">
-                                <p>You have no items in your shopping cart.</p>
-                            </div>
-                            <div id="drawer-minicart" class="block block-cart">
-                                <ul class="mini-products-list">
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="/images/product-images/cape-dress-1.jpg" alt="Frayed Layered Sleeve" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Frayed Layered Sleeve</a>
-                                            <div class="variant-cart">Red / XL</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">$199.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="/images/product-images/cape-dress-2.jpg" alt="Floral Lined Jacket" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Floral Lined Jacket</a>
-                                            <div class="variant-cart">Black / M</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">$129.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="/images/product-images/cape-dress-3.jpg" alt="Fit & Flare Trim Dress" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">Fit & Flare Trim Dress</a>
-                                            <div class="variant-cart">white / XL</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">$99.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="minicart-footer minicart-action">
-                            <div class="total-in">
-                                <p class="label"><b>Subtotal:</b><span class="item product-price"><span class="money">$427.00</span></span></p>
-                                <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">$10.00</span></span></p>
-                                <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">$0.00</span></span></p>
-                                <p class="label"><b>Total:</b><span class="item product-price"><span class="totals">$437.00</span></span></p>
-                            </div>
-                            <div class="buttonSet d-flex flex-row align-items-center text-center">
-                                <a href="cart.html" class="btn btn-secondary w-50 me-3">View Cart</a>
-                                <a href="checkout.html" class="btn btn-secondary w-50">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="pageWrapper">
+    <!-- Body Content -->
+    <div id="page-content">
+        <!-- Page Title -->
+        <div class="page section-header text-center mb-0">
+            <div class="page-title">
+                <div class="wrapper">
+                    <h1 class="page-width">My Account</h1>
                 </div>
             </div>
-            <!-- End Minicart Drawer -->
-
-
-          
-
+        </div>
+        <!-- End Page Title -->
+        <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
+            <div class="container breadcrumbs">
+                <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
+                    class="title-bold">My Account</span>
+            </div>
         </div>
 
+        <div class="container">
+            <div class="dashboard-upper-info">
+                <div class="row align-items-center g-0">
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
+                        <div class="d-single-info">
+                            
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-sm-6">
+                        <div class="d-single-info">
+                            <p>Need Assistance? Customer service at.</p>
+                            <p>admin@yoursite.com.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
+                        <div class="d-single-info">
+                            <p>E-mail them at </p>
+                            <p>support@yoursite.com</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-sm-6">
+                        <div class="d-single-info text-lg-center">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4 mb-lg-5 pb-lg-5">
+                <div class="col-xl-2 col-lg-2 col-md-12 md-margin-20px-bottom">
+                    <!-- Nav tabs -->
+                    <ul class="nav flex-column dashboard-list mb-4 mb-lg-0" role="tablist">
+                        <li><a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Referal Bonus</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Edit details</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
+                        <li><a class="nav-link" href="/logout">logout</a></li>
+                    </ul>
+                    <!-- End Nav tabs -->
+                </div>
+
+                <div class="col-xs-10 col-lg-10 col-md-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content dashboard-content padding-30px-all md-padding-15px-all" style="">
+                        <!-- Dashboard -->
+                        <div id="dashboard" class="tab-pane fade active show">
+                            <h3>Dashboard </h3>
+                            <p>From your account dashboard. you can easily check &amp; view your
+                                <a class="text-decoration-underline" href="#">recent orders</a>, manage your
+                                <a class="text-decoration-underline" href="#">shipping and billing addresses</a> and
+                                <a class="text-decoration-underline" href="#">edit your password and account
+                                    details.</a>
+                            </p>
+                            <div class="row user-profile mt-4">
+                                <div class="col-12 col-lg-6">
+                                    <div class="profile-img">
+                                        <div class="img"><img src="/profile-image/{{user._id}}image1.jpg" alt="profile"
+                                                width="65" /></div>
+                                        <div class="detail ms-3">
+                                            <h5 class="mb-1">{{user.firstName}}</h5>
+                                            <p>Balance: <strong>{{user.wallet}}</strong></p>
+                                        </div>
+                                        <div class="lbl">SILVER USER</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <ul class="profile-order mt-3 mt-lg-0">
+                                        <li>
+                                            <h3 class="mb-1">16</h3>
+                                            All Orders
+                                        </li>
+                                        <li>
+                                            <h3 class="mb-1">02</h3>
+                                            Awaiting Payments
+                                        </li>
+                                        <li>
+                                            <h3 class="mb-1">00</h3>
+                                            Awaiting Shipment
+                                        </li>
+                                        <li>
+                                            <h3 class="mb-1">01</h3>
+                                            Awaiting Delivery
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="table-responsive mt-4">
+                                
+                            </div>
+                        </div>
+                        <!-- End Dashboard -->
+
+                        <!-- Orders -->
+                        <div id="orders" class="product-order tab-pane fade">
+                            <h3>Orders</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="alt-font">
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Product</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each orders}}
+                                        <tr id="{{this._id}}">
+                                            <td></td>
+
+                                            <td>
+                                                {{#each this.products}}
+                                                {{this.productname}}<br>
+                                                {{/each}}
+                                            </td>
+
+                                            <td>{{this.date}}</td>
+                                            <td>{{this.OrderStatus}}</td>
+                                            <td>{{this.total}}</td>
+                                            <td class="text-center small--hide"><a
+                                                    class="btn btn--secondary cart__remove" onclick="remove('{{this._id}}')"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Remove item"><i class="icon an an-times"></i></a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End Orders -->
+
+                        <!-- Downloads -->
+                        <div id="downloads" class="product-order tab-pane fade">
+                            <h2>Referal Bonus</h2>
+                            <h3>You can earn Rs.500 by refering your friends</h3>
+
+                            <div class="mt-3 ">
+                                <h5 class="text-primary">*The refered friend must be Signup with that link</h5>
+                                <h5 class="text-primary">*The refered user also get bonus Rs.100</h5>
+                                <h5 class="text-primary">*Reward will credit in your wallet</h5>
+                                <h5 class="text-primary">*By using Wallet amount you can buy products</h5>
+                                <h5 class="text-primary">*Wallet money only can use for buying products</h5>
+                                <h5 class="text-primary">With this link you can refer your friend : <h6
+                                        class="text-danger" id="link">http://localhost:3000/register/{{user._id}}</h6>
+                                </h5>
+                                <button class="btn mt-1" onclick="myFunction()">Copy Link</button>
+                            </div>
+                        </div>
+                        <!-- End Downloads -->
+
+                        <!-- Address -->
+                        <div id="address" class="address tab-pane">
+                            <h3>Addresses</h3>
+                            <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout
+                                page by default.</p>
+
+                            <div class="accordion add-address mt-3" id="address1">
+                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#addAddress" aria-expanded="false" aria-controls="addAddress">Add
+                                    Address</button>
+                                <div id="addAddress" class="accordion-collapse collapse" data-bs-parent="#address">
+                                    <form class="address-from mt-3" method="post" action="/profile/add-address">
+                                        <fieldset>
+                                            <h2 class="login-title mb-3">Shipping details</h2>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-firstname1">First Name <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="firstname" value="" id="input-firstname1" type="text">
+                                                </div>
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-lastname1">Last Name <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="lastname" value="" id="input-lastname1" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-email1">E-Mail <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="email" value="" id="input-email1" type="email">
+                                                </div>
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-telephone1">Telephone <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="telephone" value="" id="input-telephone1" type="tel">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                    <label for="input-company1">Company</label>
+                                                    <input name="company" value="" id="input-company1" type="text">
+                                                </div>
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-address-11">Address <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="address_1" value="" id="input-address-11" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                    <label for="input-address-21">Apartment <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="address_2" value="" id="input-address-21" type="text">
+                                                </div>
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-city1">City <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="city" value="" id="input-city1" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-postcode1">Post Code <span
+                                                            class="required-f">*</span></label>
+                                                    <input name="postcode" value="" id="input-postcode1" type="text">
+                                                </div>
+                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                    <label for="input-country1">Country <span
+                                                            class="required-f">*</span></label>
+                                                    <select name="country" id="input-country1">
+                                                        <option value="India">India</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
+                                                    <label for="input-zone1">Region / State <span
+                                                            class="required-f">*</span></label>
+                                                    <select name="zone_id" id="input-zone1">
+                                                        <option value="">Please Select</option>
+                                                        <option value="3513">Aberdeen</option>
+                                                        <option value="3514">Aberdeenshire</option>
+                                                        <option value="3515">Anglesey</option>
+                                                        <option value="3516">Angus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn mt-1"><span>Add Address</span></button>
+
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            {{!-- starting --}}
+
+                            <div class="row">
+                                {{#each address.address}}
+                                <div class="col-12 col-sm-6">
+                                    <h4 class="billing-address">Address</h4>
+
+                                    <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br>
+                                        {{address.country}}</p>
+
+
+                                    <div class="accordion add-address mt-3" id="address1">
+                                        <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#shipping" aria-expanded="false"
+                                            aria-controls="shipping">Edit Address</button>
+                                        <div id="shipping" class="accordion-collapse collapse"
+                                            data-bs-parent="#address">
+                                            <form class="address-from mt-3" method="post" action="profile/add-address1">
+                                                <fieldset>
+                                                    <h2 class="login-title mb-3">Shipping details</h2>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-firstname1">First Name <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="firstname"
+                                                                value="{{address.address1.firstname}}"
+                                                                id="input-firstname1" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-lastname1">Last Name <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="lastname" value="{{address.address1.lastname}}"
+                                                                id="input-lastname1" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-email1">E-Mail <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="email" value="{{address.address1.email}}"
+                                                                id="input-email1" type="email">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-telephone1">Telephone <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="telephone"
+                                                                value="{{address.address1.telephone}}"
+                                                                id="input-telephone1" type="tel">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-company1">Company</label>
+                                                            <input name="company" value="" id="input-company1"
+                                                                type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-address-11">Address <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="address_1" value="" id="input-address-11"
+                                                                type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-address-21">Apartment <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="address_2" value="" id="input-address-21"
+                                                                type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-city1">City <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="city" value="" id="input-city1" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-postcode1">Post Code <span
+                                                                    class="required-f">*</span></label>
+                                                            <input name="postcode" value="" id="input-postcode1"
+                                                                type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <label for="input-country1">Country <span
+                                                                    class="required-f">*</span></label>
+                                                            <select name="country" id="input-country1">
+                                                                <option value="India">India</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
+                                                            <label for="input-zone1">Region / State <span
+                                                                    class="required-f">*</span></label>
+                                                            <select name="zone_id" id="input-zone1">
+                                                                <option value="">Please Select</option>
+                                                                <option value="3513">Aberdeen</option>
+                                                                <option value="3514">Aberdeenshire</option>
+                                                                <option value="3515">Anglesey</option>
+                                                                <option value="3516">Angus</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn mt-1"><span>Edit
+                                                            Address</span></button>
+
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{!-- end point --}}
+                                {{/each }}
+                            </div>
+                        </div>
+                        <!-- End Address -->
+
+                        <!-- Account Details -->
+                        <div id="account-details" class="tab-pane fade">
+                            <h3>Edit details </h3>
+                            <div class="account-login-form bg-light-gray padding-20px-all">
+                                <form action="/profile/editProfile" method="post" enctype="multipart/form-data">
+                                    <fieldset>
+
+                                        <div class="row">
+                                            <div class="form-group">
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-firstname">First Name <span
+                                                        class="required-f">*</span></label>
+                                                <input name="firstName" value="{{user.firstName}}" id="input-firstname"
+                                                    class="form-control" type="text">
+                                                <span class="error_form" id="fname_error_message"></span>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-lastname">Last Name <span
+                                                        class="required-f">*</span></label>
+                                                <input name="lastName" value="{{user.lastName}}" id="input-lastname"
+                                                    class="form-control" type="text">
+                                                <span class="error_form" id="sname_error_message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-email">E-Mail <span
+                                                        class="required-f">*</span></label>
+                                                <input name="email" value="{{user.email}}" id="input-email"
+                                                    class="form-control" type="email">
+                                                <span class="error_form" id="email_error_message"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-telephone">Mobile Number <span
+                                                        class="required-f">*</span></label>
+                                                <input name="telephone" value="{{user.phoneNumber}}"
+                                                    id="input-telephone" class="form-control" type="tel" disabled>
+                                                <span class="error_form" id="mob_error_message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-password">Password <span
+                                                        class="required-f">*</span></label>
+                                                <input name="password" value="{{user.password}}" id="input-password"
+                                                    class="form-control" type="password">
+                                                <span class="error_form" id="password_error_message"></span>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-password">Confirm Password <span
+                                                        class="required-f">*</span></label>
+                                                <input name="confirmPassword" value="{{user.confirmPassword}}"
+                                                    id="input-cpassword" class="form-control" type="password">
+                                                <span class="error_form" id="retype_password_error_message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xl-12 required">
+                                                <h3>Update Profile Picture</h3>
+                                                <img width="100px" height="auto" alt="No Profile Photo"
+                                                    src="profile-image/{{user._id}}image1.jpg" id="imgView1">
+                                                <input name="image1" type="file" id="id_img1">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <button type="submit" class="btn margin-15px-top btn-primary">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Account Details -->
+
+                        <!-- Downloads -->
+                        <div id="wishlist" class="product-wishlist tab-pane fade">
+                            <h3>My Wishlist</h3>
+                            <!-- Grid Product -->
+                            <div class="grid-products grid--view-items wishlist-grid mt-4">
+                                <div class="row">
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
+                                        <!-- Product Image -->
+                                        <div class="product-image">
+                                            <button type="button" class="btn close-btn" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Close"><i
+                                                    class="icon an an-times"></i></button>
+                                            <!-- Product Image -->
+                                            <a href="product-layout1.html">
+                                                <!-- Image -->
+                                                <img class="primary blur-up lazyload"
+                                                    data-src="/images/product-images/product-image1.jpg"
+                                                    src="/images/product-images/product-image1.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Image -->
+                                                <!-- Hover Image -->
+                                                <img class="hover blur-up lazyload"
+                                                    data-src="/images/product-images/product-image1-1.jpg"
+                                                    src="/images/product-images/product-image1-1.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Hover Image -->
+                                                <!-- Product Label -->
+                                                <div class="product-labels rectangular"><span class="lbl pr-label3">Low
+                                                        in stock</span></div>
+                                                <!-- End Product Label -->
+                                            </a>
+                                            <!-- End Product Image -->
+                                        </div>
+                                        <!-- End Product Image -->
+
+                                        <!-- Product Details -->
+                                        <div class="product-details text-center">
+                                            <!-- Product Name -->
+                                            <div class="product-name">
+                                                <a href="product-layout1.html">Edna Dress</a>
+                                            </div>
+                                            <!-- End Product Name -->
+                                            <!-- Product Price -->
+                                            <div class="product-price">
+                                                <span class="old-price">$700.00</span>
+                                                <span class="price">$600.00</span>
+                                            </div>
+                                            <!-- End Product Price -->
+                                            <!-- Product Review -->
+                                            <div class="product-review">
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star-half-alt"></i>
+                                            </div>
+                                            <!-- End Product Review -->
+                                            <!-- Product Button -->
+                                            <form method="post" action="https://template.annimexweb.com/cart/add"
+                                                class="cart-form mt-3" enctype="multipart/form-data">
+                                                <a href="cart.html"
+                                                    class="btn btn--small product-form__cart-submit"><span>Add to
+                                                        cart</span></a>
+                                            </form>
+                                            <!-- End Product Button -->
+                                        </div>
+                                        <!-- End Product Details -->
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
+                                        <!-- Product Image -->
+                                        <div class="product-image">
+                                            <button type="button" class="btn close-btn" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Close"><i
+                                                    class="icon an an-times"></i></button>
+                                            <!-- Product Image -->
+                                            <a href="product-layout1.html">
+                                                <!-- Image -->
+                                                <img class="primary blur-up lazyload"
+                                                    data-src="/images/product-images/product-image2.jpg"
+                                                    src="/images/product-images/product-image2.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Image -->
+                                                <!-- Hover Image -->
+                                                <img class="hover blur-up lazyload"
+                                                    data-src="/images/product-images/product-image2-1.jpg"
+                                                    src="/images/product-images/product-image2-1.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Hover Image -->
+                                                <!-- Product Label -->
+                                                <div class="product-labels rectangular"><span
+                                                        class="lbl pr-label2">New</span></div>
+                                                <!-- End Product Label -->
+                                            </a>
+                                            <!-- End Product Image -->
+                                        </div>
+                                        <!-- End Product Image -->
+                                        <!-- Product Details -->
+                                        <div class="product-details text-center">
+                                            <!-- Product Name -->
+                                            <div class="product-name">
+                                                <a href="product-layout1.html">Elastic Waist Dress</a>
+                                            </div>
+                                            <!-- End Product Name -->
+                                            <!-- Product Price -->
+                                            <div class="product-price">
+                                                <span class="price">$748.00</span>
+                                            </div>
+                                            <!-- End Product Price -->
+                                            <!-- Product Review -->
+                                            <div class="product-review">
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                            </div>
+                                            <!-- End Product Review -->
+                                            <!-- Product Button -->
+                                            <form method="post" action="https://template.annimexweb.com/cart/add"
+                                                class="cart-form mt-3" enctype="multipart/form-data">
+                                                <a href="cart.html"
+                                                    class="btn btn--small product-form__cart-submit"><span>Add to
+                                                        cart</span></a>
+                                            </form>
+                                            <!-- End Product Button -->
+                                        </div>
+                                        <!-- End Product Details -->
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
+                                        <!-- Product Image -->
+                                        <div class="product-image">
+                                            <button type="button" class="btn close-btn" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Close"><i
+                                                    class="icon an an-times"></i></button>
+                                            <!-- Product Image -->
+                                            <a href="product-layout1.html">
+                                                <!-- Image -->
+                                                <img class="primary blur-up lazyload"
+                                                    data-src="/images/product-images/product-image3.jpg"
+                                                    src="/images/product-images/product-image4.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Image -->
+                                                <!-- Hover Image -->
+                                                <img class="hover blur-up lazyload"
+                                                    data-src="/images/product-images/product-image3-1.jpg"
+                                                    src="/images/product-images/product-image4-1.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Hover Image -->
+                                                <!-- Product Label -->
+                                                <div class="product-labels rectangular"><span class="lbl on-sale">Out of
+                                                        stock</span></div>
+                                                <!-- End Product Label -->
+                                            </a>
+                                            <!-- End Product Image -->
+                                        </div>
+                                        <!-- End Product Image -->
+                                        <!-- Product Details -->
+                                        <div class="product-details text-center">
+                                            <!-- Product Name -->
+                                            <div class="product-name">
+                                                <a href="product-layout1.html">3/4 Sleeve Kimono Dress</a>
+                                            </div>
+                                            <!-- End Product Name -->
+                                            <!-- Product Price -->
+                                            <div class="product-price">
+                                                <span class="price">$550.00</span>
+                                            </div>
+                                            <!-- End Product Price -->
+                                            <!-- Product Review -->
+                                            <div class="product-review">
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star-half-alt"></i>
+                                            </div>
+                                            <!-- End Product Review -->
+                                            <!-- Product Button -->
+                                            <form method="post" action="https://template.annimexweb.com/cart/add"
+                                                class="cart-form mt-3" enctype="multipart/form-data">
+                                                <a href="cart.html"
+                                                    class="btn btn--small product-form__cart-submit soldOutBtn"><span>Out
+                                                        Of stock</span></a>
+                                            </form>
+                                            <!-- End Product Button -->
+                                        </div>
+                                        <!-- End Product Details -->
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
+                                        <!-- Product Image -->
+                                        <div class="product-image">
+                                            <button type="button" class="btn close-btn" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Close"><i
+                                                    class="icon an an-times"></i></button>
+                                            <!-- Product Image -->
+                                            <a href="product-layout1.html">
+                                                <!-- Image -->
+                                                <img class="primary blur-up lazyload"
+                                                    data-src="/images/product-images/product-image4.jpg"
+                                                    src="/images/product-images/product-image4.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Image -->
+                                                <!-- Hover Image -->
+                                                <img class="hover blur-up lazyload"
+                                                    data-src="/images/product-images/product-image4-1.jpg"
+                                                    src="/images/product-images/product-image4-1.jpg" alt="image"
+                                                    title="product" />
+                                                <!-- End Hover Image -->
+                                                <!-- Product Label -->
+                                                <div class="product-labels"><span class="lbl pr-label1">Sale</span>
+                                                </div>
+                                                <!-- End Product Label -->
+                                            </a>
+                                            <!-- End Product Image -->
+                                        </div>
+                                        <!-- End Product Image -->
+
+                                        <!-- Product Details -->
+                                        <div class="product-details text-center">
+                                            <!-- Product Name -->
+                                            <div class="product-name">
+                                                <a href="product-layout1.html">Cape Dress</a>
+                                            </div>
+                                            <!-- End Product Name -->
+                                            <!-- Product Price -->
+                                            <div class="product-price">
+                                                <span class="old-price">$900.00</span>
+                                                <span class="price">$788.00</span>
+                                            </div>
+                                            <!-- End Product Price -->
+                                            <!-- Product Review -->
+                                            <div class="product-review">
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star"></i>
+                                                <i class="an an-star-half-alt"></i>
+                                            </div>
+                                            <!-- End Product Review -->
+                                            <!-- Product Button -->
+                                            <form method="post" action="https://template.annimexweb.com/cart/add"
+                                                class="cart-form mt-3" enctype="multipart/form-data">
+                                                <a href="cart.html"
+                                                    class="btn btn--small product-form__cart-submit"><span>Add to
+                                                        cart</span></a>
+                                            </form>
+                                            <!-- End Product Button -->
+                                        </div>
+                                        <!-- End Product Details -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Grid Product-->
+                        </div>
+                        <!-- End Downloads -->
+                    </div>
+                    <!-- End Tab panes -->
+                </div>
+            </div>
+        </div>
+        <!-- End Body Container -->
+    </div>
+    <!-- End Body Content -->
+
+
+
+    <!-- Scoll Top -->
+    <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+    <!-- End Scoll Top -->
+
+    <!-- Minicart Drawer -->
+    <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="minicart-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Close"></i></button>
+                    <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong>3</strong> items</h4>
+                </div>
+                <div class="minicart-body">
+                    <div class="empty-cart">
+                        <p>You have no items in your shopping cart.</p>
+                    </div>
+                    <div id="drawer-minicart" class="block block-cart">
+                        <ul class="mini-products-list">
+                            <li class="item">
+                                <a class="product-image" href="cart.html"><img
+                                        src="/images/product-images/cape-dress-1.jpg" alt="Frayed Layered Sleeve"
+                                        title=""></a>
+                                <div class="product-details">
+                                    <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                    <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                    <a class="pName" href="cart.html">Frayed Layered Sleeve</a>
+                                    <div class="variant-cart">Red / XL</div>
+                                    <div class="wrapQtyBtn clearfix">
+                                        <span class="label">Qty:</span>
+                                        <div class="qtyField clearfix">
+                                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus"
+                                                    aria-hidden="true"></i></a>
+                                            <input type="text" name="quantity" value="1"
+                                                class="product-form__input qty">
+                                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus"
+                                                    aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="priceRow clearfix">
+                                        <div class="product-price">
+                                            <span class="money">$199.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <a class="product-image" href="cart.html"><img
+                                        src="/images/product-images/cape-dress-2.jpg" alt="Floral Lined Jacket"
+                                        title=""></a>
+                                <div class="product-details">
+                                    <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                    <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                    <a class="pName" href="cart.html">Floral Lined Jacket</a>
+                                    <div class="variant-cart">Black / M</div>
+                                    <div class="wrapQtyBtn clearfix">
+                                        <span class="label">Qty:</span>
+                                        <div class="qtyField clearfix">
+                                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus"
+                                                    aria-hidden="true"></i></a>
+                                            <input type="text" name="quantity" value="1"
+                                                class="product-form__input qty">
+                                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus"
+                                                    aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="priceRow clearfix">
+                                        <div class="product-price">
+                                            <span class="money">$129.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <a class="product-image" href="cart.html"><img
+                                        src="/images/product-images/cape-dress-3.jpg" alt="Fit & Flare Trim Dress"
+                                        title=""></a>
+                                <div class="product-details">
+                                    <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
+                                    <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
+                                    <a class="pName" href="cart.html">Fit & Flare Trim Dress</a>
+                                    <div class="variant-cart">white / XL</div>
+                                    <div class="wrapQtyBtn clearfix">
+                                        <span class="label">Qty:</span>
+                                        <div class="qtyField clearfix">
+                                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="an an-minus"
+                                                    aria-hidden="true"></i></a>
+                                            <input type="text" name="quantity" value="1"
+                                                class="product-form__input qty">
+                                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="an an-plus"
+                                                    aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="priceRow clearfix">
+                                        <div class="product-price">
+                                            <span class="money">$99.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="minicart-footer minicart-action">
+                    <div class="total-in">
+                        <p class="label"><b>Subtotal:</b><span class="item product-price"><span
+                                    class="money">$427.00</span></span></p>
+                        <p class="label"><b>Shipping:</b><span class="item product-price"><span
+                                    class="shipping">$10.00</span></span></p>
+                        <p class="label"><b>Tax:</b><span class="item product-price"><span
+                                    class="tax">$0.00</span></span></p>
+                        <p class="label"><b>Total:</b><span class="item product-price"><span
+                                    class="totals">$437.00</span></span></p>
+                    </div>
+                    <div class="buttonSet d-flex flex-row align-items-center text-center">
+                        <a href="cart.html" class="btn btn-secondary w-50 me-3">View Cart</a>
+                        <a href="checkout.html" class="btn btn-secondary w-50">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Minicart Drawer -->
+
+
+
+
+</div>
+
 <script type="text/javascript">
-$("#fname_error_message").hide()
-$("#lname_error_message").hide()
-$("#email_error_message").hide()
-$("#mob_error_message").hide()
-$("#password_error_message").hide()
-$("#confirmpassword_error_message").hide()
+    $("#fname_error_message").hide()
+    $("#lname_error_message").hide()
+    $("#email_error_message").hide()
+    $("#mob_error_message").hide()
+    $("#password_error_message").hide()
+    $("#confirmpassword_error_message").hide()
 
 
-var error_fname=false;
-var error_lname=false;
-var error_email=false;
-var error_mobno=false;
-var error_password=false;
-var error_confirmpassword=false;
-   $("#input-firstname").focusout(function(){
-            check_fname();
-         });
-         $("#input-lastname").focusout(function() {
-            check_sname();
-         });
-         $("#input-email").focusout(function() {
-            check_email();
-         });
-         $("#input-telephone").focusout(function() {
-            check_mob();
-         });
-         $("#input-password").focusout(function() {
-            check_password();
-         });
-         $("#input-cpassword").focusout(function() {
-            check_retype_password();
-         });
+    var error_fname = false;
+    var error_lname = false;
+    var error_email = false;
+    var error_mobno = false;
+    var error_password = false;
+    var error_confirmpassword = false;
+    $("#input-firstname").focusout(function () {
+        check_fname();
+    });
+    $("#input-lastname").focusout(function () {
+        check_sname();
+    });
+    $("#input-email").focusout(function () {
+        check_email();
+    });
+    $("#input-telephone").focusout(function () {
+        check_mob();
+    });
+    $("#input-password").focusout(function () {
+        check_password();
+    });
+    $("#input-cpassword").focusout(function () {
+        check_retype_password();
+    });
 
-         function check_fname() {
-            var pattern = /^[a-zA-Z]*$/;
-            var fname = $("#input-firstname").val();
-            if (pattern.test(fname) && fname !== '') {
-               $("#fname_error_message").hide();
-               $("#input-firstname").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#fname_error_message").html("Should contain only Characters");
-               $("#fname_error_message").show();
-               $("#input-firstname").css("border-bottom","2px solid #F90A0A");
-               error_fname = true;
-            }
-         }
+    function check_fname() {
+        var pattern = /^[a-zA-Z]*$/;
+        var fname = $("#input-firstname").val();
+        if (pattern.test(fname) && fname !== '') {
+            $("#fname_error_message").hide();
+            $("#input-firstname").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#fname_error_message").html("Should contain only Characters");
+            $("#fname_error_message").show();
+            $("#input-firstname").css("border-bottom", "2px solid #F90A0A");
+            error_fname = true;
+        }
+    }
 
-         function check_sname() {
-            var pattern = /^[a-zA-Z]*$/;
-            var sname = $("#input-lastname").val()
-            if (pattern.test(sname) && sname !== '') {
-               $("#sname_error_message").hide();
-               $("#input-lastname").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#sname_error_message").html("Should contain only Characters");
-               $("#sname_error_message").show();
-               $("#input-lastname").css("border-bottom","2px solid #F90A0A");
-               error_sname = true;
-            }
-         }
+    function check_sname() {
+        var pattern = /^[a-zA-Z]*$/;
+        var sname = $("#input-lastname").val()
+        if (pattern.test(sname) && sname !== '') {
+            $("#sname_error_message").hide();
+            $("#input-lastname").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#sname_error_message").html("Should contain only Characters");
+            $("#sname_error_message").show();
+            $("#input-lastname").css("border-bottom", "2px solid #F90A0A");
+            error_sname = true;
+        }
+    }
 
-         function check_password() {
-            var password_length = $("#input-password").val().length;
-            if (password_length < 5) {
-               $("#password_error_message").html("Atleast 5 Characters");
-               $("#password_error_message").show();
-               $("#input-password").css("border-bottom","2px solid #F90A0A");
-               error_password = true;
-            } else {
-               $("#password_error_message").hide();
-               $("#input-password").css("border-bottom","2px solid #34F458");
-            }
-         }
+    function check_password() {
+        var password_length = $("#input-password").val().length;
+        if (password_length < 5) {
+            $("#password_error_message").html("Atleast 5 Characters");
+            $("#password_error_message").show();
+            $("#input-password").css("border-bottom", "2px solid #F90A0A");
+            error_password = true;
+        } else {
+            $("#password_error_message").hide();
+            $("#input-password").css("border-bottom", "2px solid #34F458");
+        }
+    }
 
-         function check_retype_password() {
-            var password = $("#input-password").val();
-            var retype_password = $("#input-cpassword").val();
-            if (password !== retype_password) {
-               $("#retype_password_error_message").html("Passwords Did not Matched");
-               $("#retype_password_error_message").show();
-               $("#input-cpassword").css("border-bottom","2px solid #F90A0A");
-               error_retype_password = true;
-            } else {
-               $("#retype_password_error_message").hide();
-               $("#input-cpassword").css("border-bottom","2px solid #34F458");
-            }
-         }
+    function check_retype_password() {
+        var password = $("#input-password").val();
+        var retype_password = $("#input-cpassword").val();
+        if (password !== retype_password) {
+            $("#retype_password_error_message").html("Passwords Did not Matched");
+            $("#retype_password_error_message").show();
+            $("#input-cpassword").css("border-bottom", "2px solid #F90A0A");
+            error_retype_password = true;
+        } else {
+            $("#retype_password_error_message").hide();
+            $("#input-cpassword").css("border-bottom", "2px solid #34F458");
+        }
+    }
 
-         function check_email() {
-            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-            var email = $("#input-email").val();
-            if (pattern.test(email) && email !== '') {
-               $("#email_error_message").hide();
-               $("#input-email").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#email_error_message").html("Invalid Email");
-               $("#email_error_message").show();
-               $("#input-email").css("border-bottom","2px solid #F90A0A");
-               error_email = true;
-            }
-         }
-          function check_mob() {
-            var pattern = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
-            var mob= $("#input-telephone").val();
-            if (pattern.test(mob) && mob !== ''&&mob.length==10) {
-               $("#mob_error_message").hide();
-               $("#input-telephone").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#mob_error_message").html("Invalid Mobile NO");
-               $("#mob_error_message").show();
-               $("#input-telephone").css("border-bottom","2px solid #F90A0A");
-               error_mobno = true;
-            }
-         }
+    function check_email() {
+        var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        var email = $("#input-email").val();
+        if (pattern.test(email) && email !== '') {
+            $("#email_error_message").hide();
+            $("#input-email").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#email_error_message").html("Invalid Email");
+            $("#email_error_message").show();
+            $("#input-email").css("border-bottom", "2px solid #F90A0A");
+            error_email = true;
+        }
+    }
+    function check_mob() {
+        var pattern = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+        var mob = $("#input-telephone").val();
+        if (pattern.test(mob) && mob !== '' && mob.length == 10) {
+            $("#mob_error_message").hide();
+            $("#input-telephone").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#mob_error_message").html("Invalid Mobile NO");
+            $("#mob_error_message").show();
+            $("#input-telephone").css("border-bottom", "2px solid #F90A0A");
+            error_mobno = true;
+        }
+    }
 
-         $("#registration_form").submit(function() {
-            error_fname = false;
-            error_sname = false;
-            error_email = false;
-            error_mobno=false;
-            error_password = false;
-            error_retype_password = false;
+    $("#registration_form").submit(function () {
+        error_fname = false;
+        error_sname = false;
+        error_email = false;
+        error_mobno = false;
+        error_password = false;
+        error_retype_password = false;
 
-            check_fname();
-            check_sname();
-            check_email();
-             check_mob();
-            check_password();
-            check_retype_password();
+        check_fname();
+        check_sname();
+        check_email();
+        check_mob();
+        check_password();
+        check_retype_password();
 
-            if (error_fname === false && error_sname === false && error_email === false && error_password === false && error_retype_password === false&&error_mobno===false) {
-               
-               return true;
-            } else {
-               swal("Please Fill the form Correctly");
-               return false;
-            }
+        if (error_fname === false && error_sname === false && error_email === false && error_password === false && error_retype_password === false && error_mobno === false) {
+
+            return true;
+        } else {
+            swal("Please Fill the form Correctly");
+            return false;
+        }
 
 
-         });
-     
-        
-        function myFunction() {
-       
+    });
 
-       const copyToClipboard = (text)=> navigator.clipboard.writeText(text)
-            
+
+    function myFunction() {
+
+
+        const copyToClipboard = (text) => navigator.clipboard.writeText(text)
+
 
         var i = $('#link').text();
         copyToClipboard(i)
-        
-       
-        }
+
+
+    }
+    function remove(orderId) {
+        swal({
+            title: "Are you sure?",
+            text: "Once cancelled, you can't able to undo!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/buyProduct/remove",
+                        type: "POST",
+                        data: {
+                            orderId: orderId,
+
+                        },
+
+                        success: (response) => {
+                            if (response.status) {
+                                $('#' + orderId).remove()
+                           
+                                swal("Done! Your order succesfully canceled!", {
+                                    icon: "success",
+                                });
+
+
+                            }
+
+
+                        },
+
+                    });
+
+                } else {
+                    swal("Your order is safe!");
+                }
+            });
+    }
 
 
 </script>
