@@ -256,10 +256,10 @@
                                                             class="required-f">*</span></label>
                                                     <select name="zone_id" id="input-zone1">
                                                         <option value="">Please Select</option>
-                                                        <option value="3513">Aberdeen</option>
-                                                        <option value="3514">Aberdeenshire</option>
-                                                        <option value="3515">Anglesey</option>
-                                                        <option value="3516">Angus</option>
+                                                        <option value="Kerala">Kerala</option>
+                                                        <option value="TamilNadu">TamilNadu</option>
+                                                        <option value="Karnataka">Karnataka</option>
+                                                        <option value="Goa">Goa    </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -273,7 +273,7 @@
                             {{!-- starting --}}
 
                             <div class="row">
-                                {{#each address.address}}
+                                {{#each address}}
                                 <div class="col-12 col-sm-6">
                                     <h4 class="billing-address">Address</h4>
 
@@ -283,25 +283,26 @@
 
                                     <div class="accordion add-address mt-3" id="address1">
                                         <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#shipping" aria-expanded="false"
+                                            data-bs-target="#shipping{{address._id  }}" aria-expanded="false"
                                             aria-controls="shipping">Edit Address</button>
-                                        <div id="shipping" class="accordion-collapse collapse"
+                                        <div id="shipping{{address._id}}" class="accordion-collapse collapse"
                                             data-bs-parent="#address">
-                                            <form class="address-from mt-3" method="post" action="profile/add-address1">
+                                            <form class="address-from mt-3" method="post" action="profile/update-address">
                                                 <fieldset>
                                                     <h2 class="login-title mb-3">Shipping details</h2>
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                            <input name="addressId" value="{{address._id}}" hidden>
                                                             <label for="input-firstname1">First Name <span
                                                                     class="required-f">*</span></label>
                                                             <input name="firstname"
-                                                                value="{{address.address1.firstname}}"
+                                                                value="{{address.firstname}}"
                                                                 id="input-firstname1" type="text">
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-lastname1">Last Name <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="lastname" value="{{address.address1.lastname}}"
+                                                            <input name="lastname" value="{{address.lastname}}"
                                                                 id="input-lastname1" type="text">
                                                         </div>
                                                     </div>
@@ -309,27 +310,27 @@
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-email1">E-Mail <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="email" value="{{address.address1.email}}"
+                                                            <input name="email" value="{{address.email}}"
                                                                 id="input-email1" type="email">
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-telephone1">Telephone <span
                                                                     class="required-f">*</span></label>
                                                             <input name="telephone"
-                                                                value="{{address.address1.telephone}}"
+                                                                value="{{address.telephone}}"
                                                                 id="input-telephone1" type="tel">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                             <label for="input-company1">Company</label>
-                                                            <input name="company" value="" id="input-company1"
+                                                            <input name="company" value="{{address.company}}" id="input-company1"
                                                                 type="text">
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-address-11">Address <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="address_1" value="" id="input-address-11"
+                                                            <input name="address_1" value="{{address.address_1}}" id="input-address-11"
                                                                 type="text">
                                                         </div>
                                                     </div>
@@ -337,20 +338,20 @@
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                             <label for="input-address-21">Apartment <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="address_2" value="" id="input-address-21"
+                                                            <input name="address_2" value="{{address.address_2}}" id="input-address-21"
                                                                 type="text">
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-city1">City <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="city" value="" id="input-city1" type="text">
+                                                            <input name="city" value="{{address.city}}" id="input-city1" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                             <label for="input-postcode1">Post Code <span
                                                                     class="required-f">*</span></label>
-                                                            <input name="postcode" value="" id="input-postcode1"
+                                                            <input name="postcode" value="{{address.postcode}}" id="input-postcode1"
                                                                 type="text">
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
@@ -367,16 +368,15 @@
                                                             <label for="input-zone1">Region / State <span
                                                                     class="required-f">*</span></label>
                                                             <select name="zone_id" id="input-zone1">
-                                                                <option value="">Please Select</option>
-                                                                <option value="3513">Aberdeen</option>
-                                                                <option value="3514">Aberdeenshire</option>
-                                                                <option value="3515">Anglesey</option>
-                                                                <option value="3516">Angus</option>
+                                                                <option value="Kerala">Kerala</option>
+                                                                <option value="TamilNadu">TamilNadu</option>
+                                                                <option value="Karnataka">Karnataka</option>
+                                                                <option value="Goa">Goa    </option>
                                                             </select>
                                                         </div>
                                                     </div>
 
-                                                    <button type="submit" class="btn mt-1"><span>Edit
+                                                    <button type="submit" class="btn mt-1"><span>Update
                                                             Address</span></button>
 
                                                 </fieldset>

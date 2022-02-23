@@ -24,15 +24,15 @@
                                         <input id="totalAmount" name="totalAmount" value="{{total}}" hidden>
                                         <input id="couponCode" name="couponCode" value="null" hidden>
                                         
-                                        {{#each address.address}}
+                                        {{#each address}}
                                         <div class="row">
                                             <input type="radio" name="address"  value="{{this._id}}" onclick="changeStatus()">
-                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}<br> {{this._id}}</p>
+                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}<br> </p>
                                        
                                         </div>
                                         {{/each}}
                                         <div class="row">
-                                             <input type="radio" name="address" value="" onclick="changeStatusTo()" checked="checked"><h5 class="text-primary">Add new address</h5>
+                                             <input type="radio" name="address" value="" onclick="changeStatusTo('true'); checkButton();" checked="checked"><h5 class="text-primary">Add new address</h5>
                                         </div>
                                         
                                          
@@ -47,46 +47,55 @@
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-firstname1">First Name <span class="required-f">*</span></label>
                                                                     <input name="firstname"  id="input-firstname1" type="text">
+                                                                    <span class="error_form" id="fname_error_message"></span>
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
                                                                     <input name="lastname"  id="input-lastname1" type="text">
+                                                                    <span class="error_form" id="sname_error_message"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-email1">E-Mail <span class="required-f">*</span></label>
                                                                     <input name="email"  id="input-email1" type="email">
+                                                                    <span class="error_form" id="email_error_message"></span>
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
                                                                     <input name="telephone"  id="input-telephone1" type="tel">
+                                                                    <span class="error_form" id="mob_error_message"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                                     <label for="input-company1">Company</label>
                                                                     <input name="company" id="input-company1" type="text">
+                                                   
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-address-11">Address <span class="required-f">*</span></label>
                                                                     <input name="address_1"  id="input-address-11" type="text">
+                                                                    <span class="error_form" id="address1_error_message"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                                     <label for="input-address-21">Apartment <span class="required-f">*</span></label>
                                                                     <input name="address_2"  id="input-address-21" type="text">
+                                                                    <span class="error_form" id="address2_error_message"></span>
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-city1">City <span class="required-f">*</span></label>
                                                                     <input name="city"  id="input-city1" type="text">
+                                                                    <span class="error_form" id="city_error_message"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
                                                                     <input name="postcode" id="input-postcode1" type="text">
+                                                                    <span class="error_form" id="postcode_error_message"></span>
                                                                 </div>
                                                                 <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                                                                     <label for="input-country1">Country <span class="required-f">*</span></label>
@@ -146,55 +155,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <label class="text-uppercase">Card Number</label>
-                                                <div class="form-group"><input type="text" class="form-control"></div>
+                                                
+                                            
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6"><label class="text-uppercase">Month:</label>
-                                                <div class="form-group select-wrapper">
-                                                    <select class="form-control">
-                                                        <option selected="selected" value="1">January</option>
-                                                        <option value="2">February</option>
-                                                        <option value="3">March</option>
-                                                        <option value="4">April</option>
-                                                        <option value="5">May</option>
-                                                        <option value="6">June</option>
-                                                        <option value="7">July</option>
-                                                        <option value="8">August</option>
-                                                        <option value="9">September</option>
-                                                        <option value="10">October</option>
-                                                        <option value="11">November</option>
-                                                        <option value="12">December</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6"><label class="text-uppercase">Year:</label>
-                                                <div class="form-group select-wrapper">
-                                                    <select class="form-control">
-                                                        <option value="2019">2019</option>
-                                                        <option value="2020">2020</option>
-                                                        <option value="2021">2021</option>
-                                                        <option value="2022">2022</option>
-                                                        <option value="2023">2023</option>
-                                                        <option value="2024">2024</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12"><label class="text-uppercase">CVV Code</label>
-                                                <div class="form-group"><input type="text" class="form-control"></div>
-                                            </div>
-                                        </div>
+                                        
+                                       
                                     </div>
                                 </div>
                                 <div class="mt-2"></div>
-                                <div class="card card--grey">
-                                    <div class="card-body">
-                                        <h2>Order Comment</h2><label class="text-uppercase">Write a comment here:</label> <textarea class="form-control textarea--height-200"></textarea>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="col-md-12 col-lg-4 mt-2 mt-md-0 mb-5">
                                 <h2 class="title">ORDER SUMMARY</h2>
@@ -290,9 +260,197 @@
 
 <script>
 
+    $("#fname_error_message").hide()
+    $("#lname_error_message").hide()
+    $("#email_error_message").hide()
+    $("#mob_error_message").hide()
+    $("#address1_error_message").hide()
+    $("#address2_error_message").hide()
+    $("#city_error_message").hide()
+    $("#postcode_error_message").hide()
+
+
+    var error_fname = false;
+    var error_lname = false;
+    var error_email = false;
+    var error_mobno = false;
+    var error_address1 = false;
+    var error_address2 = false;
+    var error_city = false;
+    var error_postcode = false;
+    
+    $("#input-firstname1").focusout(function () {
+        check_fname();
+    });
+    $("#input-lastname1").focusout(function () {
+        check_sname();
+    });
+    $("#input-email1").focusout(function () {
+        check_email();
+    });
+    $("#input-telephone1").focusout(function () {
+        check_mob();
+    });
+  
+        $("#input-address-11").focusout(function () {
+        check_address1();
+    });
+        $("#input-address-21").focusout(function () {
+        check_address2();
+    });
+        $("#input-city1").focusout(function () {
+        check_city();
+    });
+        $("#input-postcode1").focusout(function () {
+        check_postcode();
+    });
+
+    function check_fname() {
+        var pattern = /^[a-zA-Z]*$/;
+        var fname = $("#input-firstname1").val();
+        if (pattern.test(fname) && fname !== '') {
+            $("#fname_error_message").hide();
+            $("#input-firstname1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#fname_error_message").html("Should contain only Characters");
+            $("#fname_error_message").show();
+            $("#input-firstname1").css("border-bottom", "2px solid #F90A0A");
+            error_fname = true;
+        }
+    }
+
+    function check_sname() {
+        var pattern = /^[a-zA-Z]*$/;
+        var sname = $("#input-lastname1").val()
+        if (pattern.test(sname) && sname !== '') {
+            $("#sname_error_message").hide();
+            $("#input-lastname1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#sname_error_message").html("Should contain only Characters");
+            $("#sname_error_message").show();
+            $("#input-lastname1").css("border-bottom", "2px solid #F90A0A");
+            error_sname = true;
+        }
+    }
+
+
+
+    function check_email() {
+        var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        var email = $("#input-email1").val();
+        if (pattern.test(email) && email !== '') {
+            $("#email_error_message").hide();
+            $("#input-email1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#email_error_message").html("Invalid Email");
+            $("#email_error_message").show();
+            $("#input-email1").css("border-bottom", "2px solid #F90A0A");
+            error_email = true;
+        }
+    }
+    function check_mob() {
+        var pattern = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+        var mob = $("#input-telephone1").val();
+        if (pattern.test(mob) && mob !== '' && mob.length == 10) {
+            $("#mob_error_message").hide();
+            $("#input-telephone1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#mob_error_message").html("Invalid Mobile NO");
+            $("#mob_error_message").show();
+            $("#input-telephone1").css("border-bottom", "2px solid #F90A0A");
+            error_mobno = true;
+        }
+    }
+        function check_address1() {
+        var pattern = /^[a-zA-Z\s]*$/;
+        var sname = $("#input-address-11").val()
+        if (pattern.test(sname) && sname !== '') {
+            $("#address1_error_message").hide();
+            $("#input-address-11").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#address1_error_message").html("Should contain only Characters");
+            $("#address1_error_message").show();
+            $("#input-address-11").css("border-bottom", "2px solid #F90A0A");
+            error_address1 = true;
+        }
+    }
+        function check_address2() {
+        var pattern = /^[a-zA-Z\s]*$/;
+        var sname = $("#input-address-21").val()
+        if (pattern.test(sname) && sname !== '') {
+            $("#address2_error_message").hide();
+            $("#input-address-21").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#address2_error_message").html("Should contain only Characters");
+            $("#address2_error_message").show();
+            $("#input-address-21").css("border-bottom", "2px solid #F90A0A");
+            error_address2 = true;
+        }
+    }
+        function check_city() {
+        var pattern = /^[a-zA-Z]*$/;
+        var sname = $("#input-city1").val()
+        if (pattern.test(sname) && sname !== '') {
+            $("#city_error_message").hide();
+            $("#input-city1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#city_error_message").html("Should contain only Characters");
+            $("#city_error_message").show();
+            $("#input-city1").css("border-bottom", "2px solid #F90A0A");
+            error_city = true;
+        }
+    }
+        function check_postcode() {
+        var pattern = /^[0-9]*$/;
+        var mob = $("#input-postcode1").val();
+        if (pattern.test(mob) && mob !== '' && mob.length == 6) {
+            $("#postcode_error_message").hide();
+            $("#input-postcode1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#postcode_error_message").html("Invalid Postcode");
+            $("#postcode_error_message").show();
+            $("#input-postcode1").css("border-bottom", "2px solid #F90A0A");
+            error_postcode = true;
+        }
+    }
+
     $("#checkout_btn").click((e)=>{
         console.log('entered')
+        var getSelectedValue = document.querySelector( 'input[name="address"]:checked').value;
+        alert(getSelectedValue)
+        if(getSelectedValue == ""){
+            alert("hey");
+        error_fname = false;
+        error_sname = false;
+        error_email = false;
+        error_mobno = false;
+        error_address1 = false;
+        error_address2 = false;
+        error_city = false;
+        error_postcode = false;
         
+
+        check_fname();
+        check_sname();
+        check_email();
+        check_mob();
+        check_address1();
+        check_address2();
+        check_city();
+        check_postcode();
+        
+
+            if (error_fname === false && error_sname === false && error_email === false && error_mobno === false && error_address1 === false && error_address2 === false && error_city === false && error_postcode === false ) {
+
+                
+            } else {
+                swal("Please Fill the form Correctly");
+                return false;
+            }
+        }
+        else{
+            alert("hoi")
+        }
         console.log($('#checkout-form').serialize())
         e.preventDefault()
         $.ajax({
@@ -373,15 +531,18 @@
 
     function checkButton(){
         var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
+        alert(getSelectedValue)
         if(getSelectedValue == null) {   
            
         alert("Selected radio button values is null: ");  
          return false;
         
-        } 
+        }
+         
     }
 
     function changeStatus(){
+       
         var nodes = document.getElementById("address1").getElementsByTagName('*');
         for(var i = 0; i < nodes.length; i++){
         nodes[i].disabled = true;
@@ -389,7 +550,11 @@
         }
     }
 
-     function changeStatusTo(){
+     function changeStatusTo(check){
+          if(check == "true"){
+            alert("hey")
+            
+        }
         var nodes = document.getElementById("address1").getElementsByTagName('*');
         for(var i = 0; i < nodes.length; i++){
         nodes[i].disabled = false;

@@ -65,7 +65,7 @@
                                                      {{#if this.btnStatus}}
                                                         <a id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
                                                         {{else}}
-                                                         <a style="visibility: hidden;" id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
+                                                         <a style="visibility: ;" id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
                                                         {{/if}}
                                                        <span  class="cart__qty-input  quantity_{{this.productId}}">{{this.quantity}}</span>
                                                        
@@ -225,7 +225,7 @@
             success:(response)=>{
                   console.log(response.qty)
                 if(response.qty <= 1){
-                document.getElementById(proId).style.visibility="hidden";         
+                        
                 }
                 else{
                     document.getElementById(proId).style.visibility="visible"; 

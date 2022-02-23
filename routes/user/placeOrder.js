@@ -498,7 +498,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                         },
                         "redirect_urls": {
                             "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000/cancel"
+                            "cancel_url": "http://localhost:3000"
                         },
                         "transactions": [{
                             "item_list": {

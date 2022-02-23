@@ -20,7 +20,8 @@ router.get('/',verifyLogin,async(req,res)=>{
         let orders = await helper.ordersById(userId)
         helper.findAddress(userId).then((resp)=>{
             let address = resp;
-            console.log("this is address got here",orders);
+            
+            console.log("this is address got here",address);
             // address.addAddress1.status = true;
             res.render('user/userProfile',{userStatus,user,address,orders})
         }).catch(()=>{
@@ -41,26 +42,23 @@ router.post('/add-address',verifyLogin,(req,res)=>{
             let address = resp;
             console.log("this is address got here",address);
             address.addAddress1.status = true;
-            res.render('user/userProfile',{userStatus,user,address})
+            res.redirect('/profile')
         }).catch(()=>{
-            res.render('user/userProfile',{userStatus,user})
+            res.redirect('/profile');
         })
     })
 })
 
-router.post('/add-address2',verifyLogin,(req,res)=>{
-    let userId = req.session.user._id;
+router.post('/update-address',verifyLogin,(req,res)=>{
+    let addressId = req.body.addressId;
     let address = req.body;
-    helper.addAddress2(userId,address).then((resp)=>{
-        let user = req.session.user
-        helper.findAddress(userId).then((resp)=>{
-            let address = resp;
-            console.log("this is address got here",address);
-            res.render('user/userProfile',{userStatus,user,address})
-        }).catch(()=>{
-            res.render('user/userProfile',{userStatus,user})
-        })
+    let userId = req.session.user._id;
+    helper.updateAddress(userId,addressId,address).then((resp)=>{
+        console.log(resp)
+        res.redirect('/profile')
     })
+    console.log(addressId);
+    console.log(req.body);
 })
 
 router.post('/editProfile',verifyLogin,(req,res)=>{

@@ -563,13 +563,13 @@ module.exports = {
             let check = await dB.get().collection('address').findOne({ userId: ObjectId(userId) })
             console.log(check);
             if (check) {
-                dB.get().collection('address').updateOne({ userId: ObjectId(userId) }, { $push: { address: { _id: ObjectId(), address } } }).then((resp) => {
+                dB.get().collection('address').updateOne({ userId: ObjectId(userId) }, { $push: { address: { _id: ObjectId(), ...address } } }).then((resp) => {
                     console.log(resp)
                     return resolve(resp)
                 })
             }
             else {
-                dB.get().collection('address').insertOne({ userId: ObjectId(userId), address: [{ _id: ObjectId(), address }] }).then((resp) => {
+                dB.get().collection('address').insertOne({ userId: ObjectId(userId), address: [{ _id: ObjectId(), ...address }] }).then((resp) => {
                     console.log(resp)
                     return resolve(resp)
                 })
@@ -577,21 +577,107 @@ module.exports = {
 
         })
     },
-    // addAddress2:(userId,address)=>{
-    //     return new Promise((resolve,reject)=>{
-    //         dB.get().collection('address').updateOne({_id:ObjectId(userId)},{$set:{address2:address}}).then((resp)=>{
-    //             return resolve(resp)
+    // updateAddress:(userId,addressId,address)=>{
+    //     console.log("sldfkj",addressId);
+    //     return new Promise(async(resolve,reject)=>{
+    //         let address = await dB.get().collection('address').aggregate([{$match:{userId:ObjectId(userId)}},{$unwind:'$address'} ]).toArray();
+    //         console.log(address)
+    //         let updatedAddress = await address.map(async(address)=>{
+    //             console.log("heyeehe",address)
+    //             if(address._id == addressId){
+    //                 address.firstname = address.firstname,
+    //                 address.lastname = address.lastname,
+    //                 address.email = address.email,
+    //                 address.telephone = address.telephone,
+    //                 address.company = address.company,
+    //                 address.address_1 = address.address_1,
+    //                 address.address_2 = address.address_2,
+    //                 address.city = address.city,
+    //                 address.postcode = address.postcode,
+    //                 address.country = address.country,
+    //                 address.zone_id = address.zone_id
+    //             }
     //         })
+    //         console.log("updatedAderes",updatedAddress)
+            // dB.get().collection('address').updateOne({userId:ObjectId(userId)},{$set:{address:updatedAddress}})
     //     })
     // },
-    findAddress: (userId) => {
-        return new Promise((resolve, reject) => {
-            dB.get().collection('address').findOne({ userId: ObjectId(userId) }).then((address) => {
-                return resolve(address)
-            }).catch(() => {
-                return reject;
+    //         // {$set:
+                // {
+                //     '$address.firstname':address.firstname,
+                //     '$address.lastname':address.lastname,
+                //     '$address.email':address.email,
+                //     '$address.telephone':address.telephone,
+                //     '$address.company':address.company,
+                //     '$address.address_1':address.address_1,
+                //     '$address.address_2':address.address_2,
+                //     '$address.city':address.city,
+                //     '$address.postcode':address.postcode,
+                //     '$address.country':address.country,
+                //     '$address.zone_id':address.zone_id
+                // }
+            // }
+    //         ).then((resp)=>{
+    //             return resolve(resp)
+            // })
+        // })
+    // },
+    updateAddress:(userId,addressId,address)=>{
+        console.log("sldfkj",addressId);
+        return new Promise(async(resolve,reject)=>{
+            dB.get().collection('address').updateOne({'address._id':ObjectId(addressId) },        
+            {$set:
+            {
+                'address.$.firstname':address.firstname,
+                'address.$.lastname':address.lastname,
+                'address.$.email':address.email,
+                'address.$.telephone':address.telephone,
+                'address.$.company':address.company,
+                'address.$.address_1':address.address_1,
+                'address.$.address_2':address.address_2,
+                'address.$.city':address.city,
+                'address.$.postcode':address.postcode,
+                'address.$.country':address.country,
+                'address.$.zone_id':address.zone_id
+            }
+        }).then((resp)=>{
+                resolve((resp))
             })
-
+        })
+    },
+    findAddress: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            // dB.get().collection('address').findOne({ userId: ObjectId(userId) }).then((address) => {
+            //     return resolve(address)
+            // }).catch(() => {
+            //     return reject;
+            // })
+            let address = await  dB.get().collection('address').aggregate([
+                {
+                    $match:{
+                        userId: ObjectId(userId)
+                    }
+                },
+                {
+                    $unwind:'$address'
+                },
+                {
+                    $project:{
+                        address:'$address'
+                    }
+                },
+                // {
+                //     $project:{
+                //         id:'$faddress._id',
+                //         address:'$faddress.address'
+                //     }
+                // },
+                // {
+                //     $unwind:'$address'
+                // }
+            ]).toArray()
+            resolve(address)
+           
         })
     },
     addBanner: (info) => {
