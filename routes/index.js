@@ -72,4 +72,8 @@ router.post('/search',(req,res)=>{
   })
 })
 
+router.get('/test',(req,res)=>{
+  res.render('user/test')
+})
+
 module.exports = router;
