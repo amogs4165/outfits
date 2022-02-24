@@ -19,7 +19,7 @@ router.get('/',verifyLogin,async (req,res)=>{
     let codPayment = cod.length;
     let razorpayPayment = razorpay.length;
     let paypalPayment = paypal.length;
-    let orders = await helper.getCattOrders("mens");
+    let orders = await helper.getCattOrders();
     let cattStock = await helper.getCattStock();
     // console.log(menOrders)
     // console.log("---------------------------------------------------------")

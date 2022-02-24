@@ -3,6 +3,7 @@ const router = express.Router();
 const helper = require('../../helper/connectionHelper');
 
 const paypal = require('paypal-rest-sdk');
+const { ObjectId } = require('mongodb');
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -169,7 +170,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                         },
                         "redirect_urls": {
                             "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000/cancel"
+                            "cancel_url": "http://localhost:3000"
                         },
                         "transactions": [{
                             "item_list": {
@@ -240,7 +241,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                         },
                         "redirect_urls": {
                             "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000/cancel"
+                            "cancel_url": "http://localhost:3000"
                         },
                         "transactions": [{
                             "item_list": {
@@ -295,7 +296,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let qty = req.body.qty;
                 console.log("this is products",products)
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 console.log("this is new products",products)
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
@@ -327,7 +328,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
@@ -356,7 +357,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 console.log("its here",total);
@@ -382,7 +383,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((response)=>{
@@ -405,10 +406,11 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;
+                totalAmount = parseInt(totalAmount.toFixed(2))
                 // let totalPrice = totalAmount.toString();
                 console.log("tottal Price:",totalAmount)
                 
@@ -425,7 +427,7 @@ router.post('/',verifyLogin,async (req,res)=>{
                         },
                         "redirect_urls": {
                             "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000/cancel"
+                            "cancel_url": "http://localhost:3000/"
                         },
                         "transactions": [{
                             "item_list": {
@@ -478,11 +480,12 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
                 products[0].quantity = parseInt(qty);
-                products[0].productId = proId
+                products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
+                totalAmount = totalAmount.toFixed(2)
                 console.log("tottal Price:",totalAmount)
                 
                 req.session.total = totalAmount;

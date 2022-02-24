@@ -9,7 +9,9 @@ router.get('/', async (req, res, next) => {
 
   if (userStatus) {
     helper.getProducts().then(async (resp) => {
+      let allPro = resp
       let products = resp.slice(0, 8)
+      let secondProduct = resp.slice(8,16)
       let banner = await helper.getBanner()
       let bannerOne = await helper.getBannerOne()
       let userId = req.session.user._id
@@ -23,18 +25,19 @@ router.get('/', async (req, res, next) => {
       }
       
       
-      res.render('index', { userStatus, products, banner, bannerOne, cartProducts,total});
+      res.render('index', { userStatus, allPro, products, secondProduct, banner, bannerOne, cartProducts,total});
 
     });
   }
   else {
     helper.getProducts().then(async (resp) => {
+      let allPro = resp
       let products = resp.slice(0, 8)
-      
+      let secondProduct = resp.slice(8,16)
       let banner = await helper.getBanner()
       let bannerOne = await helper.getBannerOne()
       
-      res.render('index', {products, banner, bannerOne });
+      res.render('index', {allPro, products, secondProduct, banner, bannerOne });
     })
 
   }

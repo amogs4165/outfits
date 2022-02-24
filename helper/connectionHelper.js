@@ -1377,7 +1377,7 @@ module.exports = {
             resolve(payment);
         })
     },
-    getCattOrders: (catt) => {
+    getCattOrders: () => {
         return new Promise(async (resolve, reject) => {
             let cattCount = await dB.get().collection('orders').aggregate([
 
@@ -1387,14 +1387,15 @@ module.exports = {
                 {
                     $project: {
                         _id: 1,
-                        products: '$products'
+                        // products: '$products'
+                        proId:'$products.productId'
                     }
                 },
                 {
                     $lookup: {
                         from: 'products',
                         // let: { id: "$_id" }
-                        localField: 'products.productId',
+                        localField:  'proId',
                         foreignField: '_id',
                         as: 'totakecount'
                     }
@@ -1417,9 +1418,9 @@ module.exports = {
                 }
 
             ]).toArray()
+            console.log(cattCount,"---------------------");
             cattCount = cattCount.map(cat => [cat._id, cat.count])
             const newCattCount = [['Task', 'Hours per Day'], ...cattCount]
-            console.log(newCattCount);
             resolve(newCattCount)
         })
     },

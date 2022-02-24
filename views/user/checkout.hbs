@@ -32,7 +32,7 @@
                                         </div>
                                         {{/each}}
                                         <div class="row">
-                                             <input type="radio" name="address" value="" onclick="changeStatusTo('true'); checkButton();" checked="checked"><h5 class="text-primary">Add new address</h5>
+                                             <input type="radio" name="address" value="" onclick="changeStatusTo(); " checked="checked"><h5 class="text-primary">Add new address</h5>
                                         </div>
                                         
                                          
@@ -417,9 +417,9 @@
     $("#checkout_btn").click((e)=>{
         console.log('entered')
         var getSelectedValue = document.querySelector( 'input[name="address"]:checked').value;
-        alert(getSelectedValue)
+        
         if(getSelectedValue == ""){
-            alert("hey");
+            
         error_fname = false;
         error_sname = false;
         error_email = false;
@@ -448,9 +448,7 @@
                 return false;
             }
         }
-        else{
-            alert("hoi")
-        }
+        
         console.log($('#checkout-form').serialize())
         e.preventDefault()
         $.ajax({
@@ -531,7 +529,7 @@
 
     function checkButton(){
         var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
-        alert(getSelectedValue)
+        
         if(getSelectedValue == null) {   
            
         alert("Selected radio button values is null: ");  
@@ -552,7 +550,7 @@
 
      function changeStatusTo(check){
           if(check == "true"){
-            alert("hey")
+            
             
         }
         var nodes = document.getElementById("address1").getElementsByTagName('*');
@@ -627,7 +625,7 @@
                     }
                 },
                 error: function(data) {
-                   alert(data);
+                   
                     // Revert
                     checkbox.attr('checked', !checked);
                 }
