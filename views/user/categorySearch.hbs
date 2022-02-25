@@ -1,0 +1,237 @@
+<div class="template-index diva home3-classic">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
+    <!-- End Page Loader -->
+
+    <!-- Page Wrapper -->
+    <div class="pageWrapper">
+        <!-- Body Content -->
+        <div id="page-content">
+            <!-- Home Banner slider -->
+
+            <!-- End Home Banner slider -->
+
+
+            <div class="product-rows section">
+                <div class="container">
+                    {{#if products}}
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="section-header text-center">
+                                <h2 class="h2">{{catt}}</h2>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid Product -->
+                    <div class="grid-products grid--view-items product-three-load-more">
+                        <div class="row">
+                            {{#each products}}
+
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                <!-- Product Image -->
+
+                                <div class="product-image">
+                                    <!-- Product Image -->
+                                    <a href="/productShow/{{this._id}}">
+                                        <!-- Image -->
+                                        <img class="primary blur-up lazyload"
+                                            data-src="/product-images/{{this._id}}image1.jpg"
+                                            src="/product-images/{{this._id}}image1.jpg" alt="image" title="product" />
+                                        <!-- End Image -->
+                                        <!-- Hover Image -->
+                                        <img class="hover blur-up lazyload"
+                                            data-src="/product-images/{{this._id}}image2.jpg"
+                                            src="/product-images/{{this._id}}image2.jpg" alt="image" title="product" />
+                                        <!-- End Hover Image -->
+                                        <!-- Product Label -->
+                                        <div class="product-labels"><span class="lbl pr-label3">Popular</span></div>
+                                        <!-- End Product Label -->
+                                    </a>
+                                    <!-- End Product Image -->
+
+                                    <!-- Product Button -->
+                                    <div class="button-set">
+                                        <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="quick view">
+                                            <a href="#open-quickview-popup{{this._id}}"
+                                                class="btn quick-view-popup quick-view"><i
+                                                    class="icon an an-search"></i></a>
+                                        </div>
+                                        <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="add to cart">
+
+                                            <a href="/cart/cart-add/{{this._id}}"
+                                                class="btn cartIcon btn-addto-cart "><i
+                                                    class="icon an an-shopping-bag"></i></a>
+
+                                        </div>
+                                        <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="add to wishlist">
+                                            <a href="#open-wishlist-popup"
+                                                class="btn open-wishlist-popup wishlist add-to-wishlist"><i
+                                                    class="icon an an-heart"></i></a>
+                                        </div>
+
+                                    </div>
+                                    <!-- End product button -->
+                                </div>
+                                <!-- End Product Image -->
+
+                                <!-- Product Details -->
+                                <div class="product-details text-center">
+                                    <!-- Product Name -->
+                                    <div class="product-name">
+                                        <a href="/productShow/{{this._id}}">{{this.productname}}</a>
+                                    </div>
+                                    <!-- End Product Name -->
+                                    <!-- Product Price -->
+                                    <div class="product-price">
+                                        <span class="price">₹{{this.productprice}}</span>
+                                    </div>
+                                    <!-- End Product Price -->
+                                    <!-- Product Review -->
+                                    <div class="product-review">
+                                        <i class="an an-star"></i>
+                                        <i class="an an-star"></i>
+                                        <i class="an an-star"></i>
+                                        <i class="an an-star"></i>
+                                        <i class="an an-star-half-alt"></i>
+                                    </div>
+                                    <!-- End Product Review -->
+                                </div>
+                                <!-- End Product Details -->
+                            </div>
+
+
+
+
+
+
+
+
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div id="page-content">
+                <!-- Page Title -->
+                
+                <!-- End Page Title -->
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Main Content -->
+                        <div class="col-sm-12 text-center empty-page mb-5">
+                            <i class="icon an an-search"></i>
+                            <h2>Your Search Returns to Results!</h2>
+                            <p class="mb-3 pb-1">Search results for <b>{{search}}</b></p>
+                            <a href="/" class="btn btn-primary">continue shopping</a>
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                </div>
+            </div>
+                    {{/if}}
+                    <!-- End Grid Product -->
+                </div>
+            </div>
+            <!-- End Let's Get Personal -->
+
+
+
+
+
+            <!-- Quick View popup -->
+            {{#each products}}
+            <div id="open-quickview-popup{{this._id}}" class="quickview-popup magnific-popup mfp-hide">
+                <div id="ProductSection-product-template" class="product-template__container prstyle1">
+                    <div class="product-singles">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="quickview-details mb-3 mb-md-0">
+                                    <!-- Thumbnails Single -->
+                                    <div class="quickview-details-img quickview-thumbnails-single">
+                                        <div class="item">
+                                            <img src="/product-images/{{this._id}}image1.jpg"
+                                                data-src="/product-images/{{this._id}}image1.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img src="/product-images/{{this._id}}image2.jpg"
+                                                data-src="/product-images/{{this._id}}image2.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img src="/product-images/{{this._id}}image3.jpg"
+                                                data-src="/product-images/{{this._id}}image3.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img src="/product-images/{{this._id}}image4.jpg"
+                                                data-src="/product-images/{{this._id}}image4.jpg" alt="image" />
+                                        </div>
+
+                                    </div>
+                                    <!-- End Thumbnails Single -->
+                                    <!-- Thumbnail Lists -->
+                                    <div class="product-thumb-lists quickview-thumbnail-items">
+                                        <div class="item">
+                                            <img class="blur-up lazyload" src="/product-images/{{this._id}}image1.jpg"
+                                                data-src="/product-images/{{this._id}}image1.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img class="blur-up lazyload" src="/product-images/{{this._id}}image2.jpg"
+                                                data-src="/product-images/{{this._id}}image2.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img class="blur-up lazyload" src="/product-images/{{this._id}}image3.jpg"
+                                                data-src="/product-images/{{this._id}}image3.jpg" alt="image" />
+                                        </div>
+                                        <div class="item">
+                                            <img class="blur-up lazyload" src="/product-images/{{this._id}}image4.jpg"
+                                                data-src="/product-images/{{this._id}}image4.jpg" alt="image" />
+                                        </div>
+                                    </div>
+                                    <!-- End Thumbnail Lists -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="product-single__meta">
+                                    <h2 class="product-single__title">Product Quick View Popup</h2>
+                                    <div class="prInfoRow">
+                                        <div class="product-stock"> <span class="instock ">In
+                                                Stock</span> <span class="outstock hide">Unavailable</span> </div>
+
+                                    </div>
+                                    <p class="product-single__price product-single__price-product-template">
+
+                                        <span
+                                            class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                            <span id="ProductPrice-product-template"><span
+                                                    class="money">{{this.productprice}}</span></span>
+                                        </span>
+                                    </p>
+                                    <div class="product-single__description rte">
+                                        {{this.productname}}
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--End-product-single-->
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <!-- End Quick View Popup -->
+
+
+            <!-- End Footer -->
+
+            <!-- Scoll Top -->
+            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+            <!-- End Scoll Top -->
+
+        </div>
+        <!-- End Page Wrapper -->
+    </div>

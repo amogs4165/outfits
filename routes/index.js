@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
       const[banner,bannerOne,cartProducts,category] = await Promise.all([
         helper.getBanner(),helper.getBannerOne(),helper.userCart(userId),helper.getCategory()
       ])
-      
+      req.session.category = category
       let length 
      
       if(cartProducts==null){
@@ -42,7 +42,7 @@ router.get('/', async (req, res, next) => {
       const[banner,bannerOne,category] = await Promise.all([
         helper.getBanner(), helper.getBannerOne(), helper.getCategory()
       ])
-     
+      req.session.category = category
       
       res.render('index', {allPro, products, secondProduct, banner, bannerOne, category });
     })

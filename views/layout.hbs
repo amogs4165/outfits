@@ -757,11 +757,10 @@
                                         <ul id="siteNav" class="d-flex flex-wrap site-nav medium center hidearrow">
                                             {{#each category}}
                                             <li class="lvl1 parent dropdown">
-                                                <a href="#">{{this.categoryName}} <i class="an an-angle-down"></i></a>
+                                                <a href="/sort/{{this.categoryName}}">{{this.categoryName}} <i class="an an-angle-down"></i></a>
                                                 <ul class="dropdown">
-                                                    <li><a href="index.html" class="site-nav">Layout 1 - Classic 01</a></li>
-                                                    <li><a href="home2-default.html" class="site-nav">Layout 2 - Default</a></li>
-                                                    <li><a href="home3-classic.html" class="site-nav">Layout 3 - Classic 02</a></li>
+                                                    <li><a href="#" class="site-nav">dresses</a></li>
+                                                  
                                                     
                                                 </ul>
                                             </li>
@@ -838,7 +837,7 @@
                 <ul id="MobileNav" class="mobile-nav">
                     {{#each category}}
                     <li class="lvl1 parent megamenu">
-                        <a href="index.html">{{this.categoryName}} <i class="an an-plus"></i></a>
+                        <a href="/sort/{{this.categoryName}}">{{this.categoryName}} <i class="an an-plus"></i></a>
                         <ul>
                             <li><a href="index.html" class="site-nav">Layout 1 - Classic 01</a></li>
                             <li><a href="home2-default.html" class="site-nav">Layout 2 - Default</a></li>
@@ -851,17 +850,6 @@
             </div>
             <!-- End Mobile Menu -->
 
-            <!-- Body Content -->
-            
-            <!-- End Body Content -->
-
-            <!-- Footer -->
-            
-            <!-- End Footer -->
-
-            <!-- Scoll Top -->
-           
-            <!-- End Scoll Top -->
 
             <!-- Minicart Drawer -->
             <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
@@ -890,7 +878,7 @@
                                                 class="an an-times" aria-hidden="true"></i></a>
 
                                         <a class="pName" href="/cart">{{this.productname}}</a>
-                                        <div class="variant-cart">Red / XL</div>
+                                        
                                         <div class="wrapQtyBtn clearfix">
                                             <span class="label">Qty:</span>
                                             <div class="qtyField clearfix">

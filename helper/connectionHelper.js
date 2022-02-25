@@ -1456,7 +1456,7 @@ module.exports = {
     deleteOrder: (orderId) => {
         return new Promise(async (resolve, reject) => {
             let check = await dB.get().collection('orders').findOne({ _id: ObjectId(orderId), OrderStatus: "Delivered" })
-            console.log(check, "heyeheyh")
+            
             if (check == null) {
 
                 dB.get().collection('orders').deleteOne({ _id: ObjectId(orderId) });
@@ -1465,7 +1465,14 @@ module.exports = {
                 resolve({ status: false })
             }
         })
+    },
+    categoryWise:(catt)=>{
+        return new Promise(async(resolve,reject)=>{
+            let products = await dB.get().collection('products').find({id:catt}).toArray()
+            resolve(products)
+        })
     }
+
 
 
 
