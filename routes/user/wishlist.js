@@ -55,8 +55,17 @@ router.post('/',verifyLogin,(req,res)=>{
 router.post('/remove',verifyLogin,(req,res)=>{
     let userId = req.session.user._id
     let proId = req.body.product
-    helper.removeWishlist(userId,proId).then(()=>{
-        res.send({status:true})
+    helper.removeWishlist(userId,proId).then(async()=>{
+        let wishlist = await helper.WishlistCheck(userId)
+        
+        let check
+        if(wishlist.product.length <= 1){
+            check = true;
+        }else{
+            check = false;
+        }
+        
+        res.send({status:true,check})
     })
 })
 

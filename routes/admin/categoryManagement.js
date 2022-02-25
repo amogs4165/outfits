@@ -10,7 +10,7 @@ const verifyLogin = (req,res,next)=>{
     else{
         res.redirect('/admin/login')
     }
-}
+}    
 
 router.get('/',verifyLogin,(req,res)=>{
     console.log("hehwhweuhrfjcsia")

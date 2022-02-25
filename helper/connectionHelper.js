@@ -929,6 +929,12 @@ module.exports = {
             })
         })
     },
+    WishlistCheck:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let check = await dB.get().collection('wishlist').findOne({ userId: ObjectId(userId) })
+            resolve(check)
+        })
+    },
     getWishlistProducts: (userId) => {
         return new Promise(async (resolve, reject) => {
             let wishlist = await dB.get().collection('wishlist').aggregate([
@@ -983,6 +989,7 @@ module.exports = {
             resolve()
         })
     },
+    
     addCategoryOffer: (details) => {
         return new Promise(async (resolve, reject) => {
             let check = await dB.get().collection('categoryOffer').findOne({ offercategory: details.offercategory })

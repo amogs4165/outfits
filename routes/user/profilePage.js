@@ -1,4 +1,5 @@
 let express = require('express');
+const { getOrders } = require('../../helper/connectionHelper');
 let router = express.Router();
 let helper = require('../../helper/connectionHelper')
 
@@ -16,8 +17,10 @@ router.get('/',verifyLogin,async(req,res)=>{
         
         console.log("user here",req.session.user)
         let userId = req.session.user._id
-        let user = await helper.getUser(userId)
-        let orders = await helper.ordersById(userId)
+        
+        const [user, orders] = await Promise.all([
+            helper.getUser(userId), helper.ordersById(userId)
+        ])
         helper.findAddress(userId).then((resp)=>{
             let address = resp;
             

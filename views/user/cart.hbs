@@ -1,245 +1,205 @@
+<!-- Page Loader -->
+<div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
+<!-- End Page Loader -->
 
-        <!-- Page Loader -->
-        <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
-        <!-- End Page Loader -->
+<div class="pageWrapper">
+    <!-- Promotion Bar -->
 
-        <div class="pageWrapper">
-            <!-- Promotion Bar -->
-            
-            <!-- End Promotion Bar -->
+    <!-- End Promotion Bar -->
 
-            <!-- Search Form Drawer -->
-            
-            <!-- End Mobile Menu -->
+    <!-- Search Form Drawer -->
 
-            <!-- Body Content -->
-            <div id="page-content">
-                <!-- Page Title -->
-                <div class="page section-header text-center">
-                    <div class="page-title">
-                        <div class="wrapper"><h1 class="page-title">Cart Page Style1</h1></div>
-                    </div>
-                </div>
-                <!-- End Page Title -->
+    <!-- End Mobile Menu -->
 
-                <div class="container">
-                    <div class="row">
-                        <!-- Main Content -->
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
-                            <div class="alert alert-success text-uppercase" role="alert">
-                                <i class="icon an an-truck icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
-                            </div>
-                            <form action="#" method="post" class="cart style2">
-                                <table>
-                                    <thead class="cart__row cart__header">
-                                        <tr>
-                                            <th colspan="2" class="text-center">Product</th>
-                                            <th class="text-center">Price</th>
-                                            <th class="text-center">Quantity</th>
-                                            <th class="text-center">Total</th>
-                                            <th class="action">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody id="mytable">
-                                              {{#each products}}
-                                        <tr id="{{this._id}}{{this.productId}}" class="cart__row border-bottom line1 cart-flex border-top">
-                                     
-                                            <td class="cart__image-wrapper cart-flex-item">
-                                                <a href="product-layout1.html"><img class="cart__image blur-up lazyload" data-src="/product-images/{{this.productId}}image1.jpg"  src="/product-images/{{this.productId}}image2.jpg" alt="Elastic Waist Dress - Navy / Small" /></a>
-                                            </td>
-                                            <td class="cart__meta small--text-left cart-flex-item">
-                                                <div class="list-view-item__title">
-                                                    <a href="product-layout1.html">{{this.productname}}</a>
-                                                </div>
-                                                <div class="cart__meta-text">
-                                                    Color: Navy<br>Size: Small<br>
-                                                </div>
-                                            </td>
-                                            <td class="cart__price-wrapper cart-flex-item text-center">
-                                                <span class="money">{{this.productprice}}</span>
-                                            </td>
-                                            <td class="cart__update-wrapper cart-flex-item text-center">
-                                                <div class="cart__qty text-center">
-                                                    <div class="qtyField">
-                                                     {{#if this.btnStatus}}
-                                                        <a id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
-                                                        {{else}}
-                                                         <a style="visibility: ;" id="{{this.productId}}" class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',-1)"><i class="icon an an-minus"></i></a>
-                                                        {{/if}}
-                                                       <span  class="cart__qty-input  quantity_{{this.productId}}">{{this.quantity}}</span>
-                                                       
-                                                        <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.productId}}',+1)"><i class="icon an an-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            
-                                            <td class="small--hide cart-price text-center">
-                                                <span class="money total_{{ this.productId }}">{{this.total}}</span>
-                                            </td>
-                                           
-                                            <td class="text-center small--hide"><a class="btn btn--secondary cart__remove"  onclick="remove('{{this._id}}','{{this.productId}}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i class="icon an an-times"></i></a></td>
-                                        
-                                        </tr>
-                                             {{/each}}
-                                     
-                                    </tbody>
-                                    
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="3" class="text-start"><a href="#" class="btn btn--link btn--small cart-continue"><i class="icon an an-chevron-circle-left"></i> Continue shopping</a></td>
-                                            <td colspan="3" class="text-end">
-                                                <button type="submit" name="clear" class="btn btn--link btn--small small--hide"><i class="icon an an-times"></i> Clear Shoping Cart</button>
-                                                <button  type="submit"  class="btn  btn--small cart-continue ml-2"><i class="icon an an-sync"></i> Update Cart</button>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table> 
-                            </form>                   
-                        </div>
-
-                        <div class="container mt-4">
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
-                                   
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
-                                    
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer mb-5">
-                                    <div class="solid-border">	
-                                     
-                                        <div class="row border-bottom pb-2 pt-2">
-                                            <span class="col-12 col-sm-6 cart__subtotal-title">Shipping</span>
-                                            <span class="col-12 col-sm-6 text-right">Free shipping</span>
-                                        </div>
-                                        <div class="row border-bottom pb-2 pt-2">
-                                            <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Grand Total</strong></span>
-                                            <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money totalPrice_">{{total}}</span></span>
-                                        </div>
-                                        <div class="cart__shipping">payments are highly secured</div>
-                                        <div class="customCheckbox cart_tearm">
-                                            <input type="checkbox" value="allen-vela" id="1532947863384-0">
-                                            <label for="1532947863384-0">I agree with the terms and conditions</label>
-                                        </div>
-                                        <a href="/cart/checkout" id="cartCheckout" class="btn btn--small-wide checkout">Proceed To Checkout</a>
-                                        <div class="paymnet-img"><img src="/images/payment-img.jpg" alt="Payment" /></div>
-                                 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Main Content -->
-                    </div>
+    <!-- Body Content -->
+    <div id="page-content">
+        <!-- Page Title -->
+        <div class="page section-header text-center">
+            <div class="page-title">
+                <div class="wrapper">
+                    <h1 class="page-title">CART</h1>
                 </div>
             </div>
-            <!-- End Body Content -->
-
-            
-
-            <!-- Scoll Top -->
-            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
-            <!-- End Scoll Top -->
-
-            <!-- Minicart Drawer -->
-            <div class="minicart-right-drawer right modal fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="minicart-header">
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></button>
-                            <h4 class="modal-title" id="myModalLabel2">Shopping Cart <strong>3</strong> items</h4>
-                        </div>
-                        <div class="minicart-body">
-                            <div class="empty-cart">
-                                <p>You have no items in your shopping cart.</p>
-                            </div>
-                            <div id="drawer-minicart" class="block block-cart">
-                                <ul class="mini-products-list">
-                                    {{#each products}}
-                                    <li class="item">
-                                        <a class="product-image" href="cart.html"><img src="/product-images/{{this.products._id}}image1.jpg" alt="Frayed Layered Sleeve" title=""></a>
-                                        <div class="product-details">
-                                            <a href="#" class="remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="an an-times" aria-hidden="true"></i></a>
-                                            <a href="#" class="edit-i remove" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="an an-edit" aria-hidden="true"></i></a>
-                                            <a class="pName" href="cart.html">{{this.products.productname}}</a>
-                                            <div class="variant-cart">Red / XL</div>
-                                            <div class="wrapQtyBtn clearfix">
-                                                <span class="label">Qty:</span>
-                                                <div class="qtyField clearfix">
-                                                    <div id="minuss">
-                                                    <a class="qtyBtn minus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',-1)"><i class="an an-minus" aria-hidden="true"></i></a>
-                                                    </div>
-                                                    <input type="text" name="quantity" value="{{this.quantity}}" class="product-form__input qty">
-                                                    <a class="qtyBtn plus" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',+1)"><i class="an an-plus" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="priceRow clearfix">
-                                                <div class="product-price">
-                                                    <span class="money">{{this.products.productprice}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    {{/each}}
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="minicart-footer minicart-action">
-                            <div class="total-in">
-                                <p class="label"><b>Subtotal:</b><span class="item product-price"><span class="money">$427.00</span></span></p>
-                                <p class="label"><b>Shipping:</b><span class="item product-price"><span class="shipping">$10.00</span></span></p>
-                                <p class="label"><b>Tax:</b><span class="item product-price"><span class="tax">$0.00</span></span></p>
-                                <p class="label"><b>Total:</b><span class="item product-price"><span class="totals">$437.00</span></span></p>
-                            </div>
-                            <div class="buttonSet d-flex flex-row align-items-center text-center">
-                                <a href="cart.html" class="btn btn-secondary w-50 me-3">View Cart</a>
-                                <a href="checkout.html" class="btn btn-secondary w-50">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Minicart Drawer -->
-
-
-        
-
         </div>
+        <!-- End Page Title -->
+
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                {{#if cartProducts}}
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                    <div class="alert alert-success text-uppercase" role="alert">
+                        <i class="icon an an-truck icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got
+                        free shipping!
+                    </div>
+                    <form action="#" method="post" class="cart style2">
+                        <table>
+                            <thead class="cart__row cart__header">
+                                <tr>
+                                    <th colspan="2" class="text-center">Product</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="action">&nbsp;</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="mytable">
+                                {{#each products}}
+                                <tr id="{{this._id}}{{this.productId}}123"
+                                    class="cart__row border-bottom line1 cart-flex border-top">
+
+                                    <td class="cart__image-wrapper cart-flex-item">
+                                        <a href="/productShow/{{this.productId}}"><img
+                                                class="cart__image blur-up lazyload"
+                                                data-src="/product-images/{{this.productId}}image1.jpg"
+                                                src="/product-images/{{this.productId}}image2.jpg"
+                                                alt="Elastic Waist Dress - Navy / Small" /></a>
+                                    </td>
+                                    <td class="cart__meta small--text-left cart-flex-item">
+                                        <div class="list-view-item__title">
+                                            <a href="/productShow/{{this.productId}}">{{this.productname}}</a>
+                                        </div>
+                                        <div class="cart__meta-text">
+                                            Color: Navy<br>Size: Small<br>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price-wrapper cart-flex-item text-center">
+                                        <span class="money">{{this.productprice}}</span>
+                                    </td>
+                                    <td class="cart__update-wrapper cart-flex-item text-center">
+                                        <div class="cart__qty text-center">
+                                            <div class="qtyField">
+                                                {{#if this.btnStatus}}
+                                                <a id="{{this.productId}}" class="qtyBtn minus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',-1)"><i
+                                                        class="icon an an-minus"></i></a>
+                                                {{else}}
+                                                <a style="visibility: ;" id="{{this.productId}}" class="qtyBtn minus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',-1)"><i
+                                                        class="icon an an-minus"></i></a>
+                                                {{/if}}
+                                                <span
+                                                    class="cart__qty-input  quantity_{{this.productId}}">{{this.quantity}}</span>
+
+                                                <a class="qtyBtn plus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',+1)"><i
+                                                        class="icon an an-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="small--hide cart-price text-center">
+                                        <span class="money total_{{ this.productId }}">{{this.total}}</span>
+                                    </td>
+
+                                    <td class="text-center small--hide"><a class="btn btn--secondary cart__remove"
+                                            onclick="removeCart('{{this._id}}','{{this.productId}}')"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Remove item"><i
+                                                class="icon an an-times"></i></a></td>
+
+                                </tr>
+                                {{/each}}
+
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-start"><a href="/"
+                                            class="btn btn--link btn--small cart-continue"><i
+                                                class="icon an an-chevron-circle-left"></i> Continue shopping</a></td>
+                                    <td colspan="3" class="text-end">
+
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
+
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4 cart-col">
+
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 cart__footer mb-5">
+                            <div class="solid-border">
+
+                                <div class="row border-bottom pb-2 pt-2">
+                                    <span class="col-12 col-sm-6 cart__subtotal-title">Shipping</span>
+                                    <span class="col-12 col-sm-6 text-right">Free shipping</span>
+                                </div>
+                                <div class="row border-bottom pb-2 pt-2">
+                                    <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Grand
+                                            Total</strong></span>
+                                    <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span
+                                            class="money totalPrice_">{{total}}</span></span>
+                                </div>
+                                <div class="cart__shipping">payments are highly secured</div>
+
+                                <a href="/cart/checkout" id="cartCheckout" class="btn btn--small-wide checkout">Proceed
+                                    To Checkout</a>
+                                <div class="paymnet-img"><img src="/images/payment-img.jpg" alt="Payment" /></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="col-sm-12 text-center empty-page mb-5">
+                    <i class="icon an an-cart-arrow-down"></i>
+                    <h2>Your shopping cart is empty!</h2>
+                    <p class="mb-3 pb-1">You have no items in your shopping cart.</p>
+                    <a href="/" class="btn btn-primary">continue shopping</a>
+                </div>
+
+                {{/if}}
+
+                <!-- End Main Content -->
+            </div>
+        </div>
+        <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+    </div>
+    <!-- End Body Content -->
+</div>
 
 <script>
-   
-    function changeQuantity(cartId,proId,count){
-        
+
+    function changeCartQuantity(cartId, proId, count) {
+
         $.ajax({
-            
-            url:'/cart/change-product-quantity',
-            data:{
-                cart:cartId,
-                product:proId,
-                count:count
-               
-                
+
+            url: '/cart/change-product-quantity',
+            data: {
+                cart: cartId,
+                product: proId,
+                count: count
+
+
             },
-            method:'post',
-            success:(response)=>{
-                  console.log(response.qty)
-                if(response.qty <= 1){
-                        
+            method: 'post',
+            success: (response) => {
+                console.log(response.qty)
+                if (response.qty <= 1) {
+
                 }
-                else{
-                    document.getElementById(proId).style.visibility="visible"; 
+                else {
+                    document.getElementById(proId).style.visibility = "visible";
                 }
-                $('.total_'+ proId).html(response.newPrice);
+                $('.total_' + proId).html(response.newPrice);
                 $('.totalPrice_').html(response.total);
-                $('.quantity_'+ proId).html(response.qty);
-              
+                $('.quantity_' + proId).html(response.qty);
+
             }
         })
-        
+
     }
 
-    function remove(cartId,proId) {
+    function removeCart(cartId, proId) {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -253,31 +213,39 @@
                         url: "/cart/remove",
                         type: "POST",
                         data: {
-                            cart:cartId,
-                            product:proId
+                            cart: cartId,
+                            product: proId
                         },
+                        success: async (response) => {
+                            if (response.status) {
+                                if (response.quantityCheck) {
 
-                        success: (response)=>{
-                             if(response.status){
-                                $('#'+cartId+proId).remove()
-                                $('.totalPrice_').html(response.total);
-                            swal("Poof! Your imaginary file has been deleted!", {
-                                icon: "success",
-                            });
+                                    await swal("Poof! Your imaginary file has been deleted!", {
+                                        icon: "success",
+                                    });
+                                    location.reload()
 
-                            
-                             }
-                           
-                           
+                                } else {
+                                    $('#' + cartId + proId + '123').remove()
+                                    $('.totalPrice_').html(response.total);
+                                    swal("Poof! Your imaginary file has been deleted!", {
+                                        icon: "success",
+                                    });
+
+
+                                }
+
+                            }
+
+
                         },
-
                     });
-
                 } else {
                     swal("Your imaginary file is safe!");
                 }
             });
     }
+
 
 
 </script>

@@ -1,262 +1,289 @@
+<!-- Page Loader -->
+<div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
+<!-- End Page Loader -->
 
-        <!-- Page Loader -->
-        <div id="pre-loader"><img src="/images/loader.gif" alt="Loading..." /></div>
-        <!-- End Page Loader -->
+<div class="pageWrapper">
+    <div id="page-content">
+        <!-- Promotion Bar -->
 
-        <div class="pageWrapper">
-            <!-- Promotion Bar -->
-            
-            <!-- Mobile Menu -->
-            
+        <!-- Mobile Menu -->
 
-                <div class="container mb-5" style="margin-top: 8rem;">
-                    <!-- Main Content -->
-                    <form method="post" action="/hey" id="checkout-form">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card card--grey">
-                                    <div class="card-body">
-                                        <h2>SHIPPING ADDRESS</h2>
-                                        <input name="check" value={{check}} hidden>
-                                        {{#each products}}
-                                        <input name="qty" value={{this.quantity}} hidden>
-                                        {{/each }}
-                                        <input id="totalAmount" name="totalAmount" value="{{total}}" hidden>
-                                        <input id="couponCode" name="couponCode" value="null" hidden>
-                                        
-                                        {{#each address}}
-                                        <div class="row">
-                                            <input type="radio" name="address"  value="{{this._id}}" onclick="changeStatus()">
-                                            <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br> {{address.country}}<br> </p>
-                                       
-                                        </div>
-                                        {{/each}}
-                                        <div class="row">
-                                             <input type="radio" name="address" value="" onclick="changeStatusTo(); " checked="checked"><h5 class="text-primary">Add new address</h5>
-                                        </div>
-                                        
-                                         
-                                         <div class="accordion add-address mt-3" id="address1">
-                                                <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
-                                                
-                                                <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" name="newAddress" action="/placeOrder/newAddress">
-                                                        {{!-- <fieldset name="newadress"> --}}
-                                                                   
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-firstname1">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname"  id="input-firstname1" type="text">
-                                                                    <span class="error_form" id="fname_error_message"></span>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-lastname1">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname"  id="input-lastname1" type="text">
-                                                                    <span class="error_form" id="sname_error_message"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-email1">E-Mail <span class="required-f">*</span></label>
-                                                                    <input name="email"  id="input-email1" type="email">
-                                                                    <span class="error_form" id="email_error_message"></span>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-telephone1">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone"  id="input-telephone1" type="tel">
-                                                                    <span class="error_form" id="mob_error_message"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company1">Company</label>
-                                                                    <input name="company" id="input-company1" type="text">
-                                                   
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-address-11">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1"  id="input-address-11" type="text">
-                                                                    <span class="error_form" id="address1_error_message"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-21">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2"  id="input-address-21" type="text">
-                                                                    <span class="error_form" id="address2_error_message"></span>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-city1">City <span class="required-f">*</span></label>
-                                                                    <input name="city"  id="input-city1" type="text">
-                                                                    <span class="error_form" id="city_error_message"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-postcode1">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" id="input-postcode1" type="text">
-                                                                    <span class="error_form" id="postcode_error_message"></span>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
-                                                                    <label for="input-country1">Country <span class="required-f">*</span></label>
-                                                                    <select name="country" id="input-country1">
-                                                                        <option value="India">India</option>
-                                                                        
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
-                                                                    <label for="input-zone1">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone1">
-                                                                        <option value="">Please Select</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        
-                                                            <button type="submit" class="btn mt-1"><span>Save and Delivere here</span></button>
-                                                         
-                                                        {{!-- </fieldset> --}}
-                                                    </form>
+
+        <div class="container mb-5">
+            <!-- Main Content -->
+            <form method="post" action="#" id="checkout-form">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card--grey">
+                            <div class="card-body">
+                                <h2>SHIPPING ADDRESS</h2>
+                                <input name="check" value={{check}} hidden>
+                                {{#each products}}
+                                <input name="qty" value={{this.quantity}} hidden>
+                                {{/each }}
+                                <input id="totalAmount" name="totalAmount" value="{{total}}" hidden>
+                                <input id="couponCode" name="couponCode" value="null" hidden>
+
+                                {{#each address}}
+                                <div class="row">
+                                    <input type="radio" name="address" value="{{this._id}}" onclick="changeStatus()">
+                                    <p>{{address.address_1}} <br> {{address.city}}, <br> {{address.postcode}}, <br>
+                                        {{address.country}}<br> </p>
+
+                                </div>
+                                {{/each}}
+                                <div class="row">
+                                    <input type="radio" name="address" value="" onclick="changeStatusTo(); "
+                                        checked="checked">
+                                    <h5 class="text-primary">Add new address</h5>
+                                </div>
+
+
+                                <div class="accordion add-address mt-3" id="address1">
+                                    <button class="collapsed btn btn--small" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add
+                                        Address</button>
+
+                                    <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
+                                        <form class="address-from mt-3" method="post" name="newAddress"
+                                            action="/placeOrder/newAddress">
+                                            {{!-- <fieldset name="newadress"> --}}
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-firstname1">First Name <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="firstname" id="input-firstname1" type="text">
+                                                        <span class="error_form" id="fname_error_message"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-lastname1">Last Name <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="lastname" id="input-lastname1" type="text">
+                                                        <span class="error_form" id="sname_error_message"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                         
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="col-md-6 col-lg-4 mt-2 mt-md-0">
-                              
-                                <div class="mt-2"></div>
-                                <div class="card card--grey">
-                                    <div class="card-body">
-                                        <h2>PAYMENT METHOD</h2>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio" checked="checked" > 
-                                                    <label for="formcheckoutRadio4">COD</label></div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio5" value="paypal" name="paymentMode" type="radio" > 
-                                                    <label for="formcheckoutRadio5">Paypal</label>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-email1">E-Mail <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="email" id="input-email1" type="email">
+                                                        <span class="error_form" id="email_error_message"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-telephone1">Telephone <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="telephone" id="input-telephone1" type="tel">
+                                                        <span class="error_form" id="mob_error_message"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                             <div class="col-4">
-                                                <div class="customRadio clearfix">
-                                                    <input id="formcheckoutRadio6" value="razorpay" name="paymentMode" type="radio" > 
-                                                    <label for="formcheckoutRadio6">Razorpay</label></div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                
-                                            
-                                            </div>
-                                        </div>
-                                        
-                                       
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="input-company1">Company</label>
+                                                        <input name="company" id="input-company1" type="text">
+
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-address-11">Address <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="address_1" id="input-address-11" type="text">
+                                                        <span class="error_form" id="address1_error_message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="input-address-21">Apartment <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="address_2" id="input-address-21" type="text">
+                                                        <span class="error_form" id="address2_error_message"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-city1">City <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="city" id="input-city1" type="text">
+                                                        <span class="error_form" id="city_error_message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-postcode1">Post Code <span
+                                                                class="required-f">*</span></label>
+                                                        <input name="postcode" id="input-postcode1" type="text">
+                                                        <span class="error_form" id="postcode_error_message"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                        <label for="input-country1">Country <span
+                                                                class="required-f">*</span></label>
+                                                        <select name="country" id="input-country1">
+                                                            <option value="India">India</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-12 col-lg-12 col-xl-12 required">
+                                                        <label for="input-zone1">Region / State <span
+                                                                class="required-f">*</span></label>
+                                                        <select name="zone_id" id="input-zone1">
+                                                            <option value="">Please Select</option>
+                                                            <option value="Kerala">Kerala</option>
+                                                            <option value="TamilNadu">TamilNadu</option>
+                                                            <option value="Karnataka">Karnataka</option>
+                                                            <option value="Goa">Goa</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+                                                {{!--
+                                            </fieldset> --}}
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="mt-2"></div>
-                               
-                            </div>
-                            <div class="col-md-12 col-lg-4 mt-2 mt-md-0 mb-5">
-                                <h2 class="title">ORDER SUMMARY</h2>
-                                <div class="table-responsive-sm order-table"> 
-                                    <table class="bg-white table table-bordered table-hover text-center">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-start"></th>
-                                                <th class="text-start">Product Name</th>
-                                                <th>Price</th>
-                                                <th>Qty</th>
-                                                <th>Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{#each products}}
-                                            <input name="proId" value="{{this.productId}}" hidden>
-                                            <input name="productprice" value="{{this.productprice}}" hidden>
-                                            <tr>
-                                                <td><a href="#;" class="thumb"><img class="cart__image" src="/product-images/{{this.productId}}image1.jpg" alt=""></a></td>
-                                                <td class="text-start">{{this.productname}}</td>
-                                                <td>{{this.productprice}}</td>
-                                                <td>{{this.quantity}}</td>
-                                                <td>{{this.total}}</td>
-                                            </tr>
-                                            {{/each}}
-                                        </tbody>
-                                        <tfoot class="font-weight-600">
-                                            
-                                            <tr id="hidden1" style="visibility: hidden;">
-                                                 <td colspan="4" class="text-end" >Offer Applied</td>
-                                                <td id="offerDiscount"></td>
-                                            </tr >
-                                               <tr id="hidden2" style="visibility: hidden;">
-                                                 <td colspan="4" class="text-end">Sub Total</td>
-                                                <td id="subTotal"></td>
-                                            </tr > 
-                                               <tr>
-                                                 <td colspan="4"  class="text-end">Total</td>
-                                                <td id="total">{{total}}</td>
-                                            </tr>
-                                            
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <div>
-                                    <label id="walletBalance"></label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" value="{{total}}" name="wallet" id="checkboxWallet">
-                                    <label class="custom-control-label" for="customCheck1">Use Wallet Balance</label>
-                                </div>
-                                <div class="mt-2"></div>
-                                <div class="card card--grey">
-                                    <div class="card-body">
-                                        <h2>Apply Couponcode</h2>
-                                        <label class="text-uppercase">Enter Coupon code:</label>
-                                        <div class="form-flex">
-                                    <form id="couponCheck">
-                                        <input id="couponTotalCheck" value="{{total}}" name="total" hidden>
-                                            <div class="form-group"><input  type="text" name="couponCode" class="form-control"><p class="text-danger" id="couponErr"></p></div><button id="couponButton" type="button" class="btn ">Apply</button>
-                                    </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-2"></div>
-                                <div class="clearfix"><button type="button" id="checkout_btn"  class="btn btn-large btn--lg w-100">Place order</button></div>
+
                             </div>
                         </div>
-                    </form>
-                    <!-- End Main Content -->        
+
+                    </div>
+                    <div class="col-md-6 col-lg-4 mt-2 mt-md-0">
+
+                        <div class="mt-2"></div>
+                        <div class="card card--grey">
+                            <div class="card-body">
+                                <h2>PAYMENT METHOD</h2>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="customRadio clearfix">
+                                            <input id="formcheckoutRadio4" value="COD" name="paymentMode" type="radio"
+                                                checked="checked">
+                                            <label for="formcheckoutRadio4">COD</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="customRadio clearfix">
+                                            <input id="formcheckoutRadio5" value="paypal" name="paymentMode"
+                                                type="radio">
+                                            <label for="formcheckoutRadio5">Paypal</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="customRadio clearfix">
+                                            <input id="formcheckoutRadio6" value="razorpay" name="paymentMode"
+                                                type="radio">
+                                            <label for="formcheckoutRadio6">Razorpay</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="mt-2"></div>
+
+                    </div>
+                    <div class="col-md-12 col-lg-4 mt-2 mt-md-0 mb-5">
+                        <h2 class="title">ORDER SUMMARY</h2>
+                        <div class="table-responsive-sm order-table">
+                            <table class="bg-white table table-bordered table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start"></th>
+                                        <th class="text-start">Product Name</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each products}}
+                                    <input name="proId" value="{{this.productId}}" hidden>
+                                    <input name="productprice" value="{{this.productprice}}" hidden>
+                                    <tr>
+                                        <td><a href="#;" class="thumb"><img class="cart__image"
+                                                    src="/product-images/{{this.productId}}image1.jpg" alt=""></a></td>
+                                        <td class="text-start">{{this.productname}}</td>
+                                        <td>{{this.productprice}}</td>
+                                        <td>{{this.quantity}}</td>
+                                        <td>{{this.total}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                                <tfoot class="font-weight-600">
+
+                                    <tr id="hidden1" style="visibility: hidden;">
+                                        <td colspan="4" class="text-end">Offer Applied</td>
+                                        <td id="offerDiscount"></td>
+                                    </tr>
+                                    <tr id="hidden2" style="visibility: hidden;">
+                                        <td colspan="4" class="text-end">Sub Total</td>
+                                        <td id="subTotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-end">Total</td>
+                                        <td id="total">{{total}}</td>
+                                    </tr>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div>
+                            <label id="walletBalance"></label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" value="{{total}}" name="wallet"
+                                id="checkboxWallet">
+                            <label class="custom-control-label" for="customCheck1">Use Wallet Balance</label>
+                        </div>
+                        <div class="mt-2"></div>
+                        <div class="card card--grey">
+                            <div class="card-body">
+                                <h2>Apply Couponcode</h2>
+                                <label class="text-uppercase">Enter Coupon code:</label>
+                                <div class="form-flex">
+                                    <form id="couponCheck">
+                                        <input id="couponTotalCheck" value="{{total}}" name="total" hidden>
+                                        <div class="form-group"><input type="text" name="couponCode"
+                                                class="form-control">
+                                            <p class="text-danger" id="couponErr"></p>
+                                        </div><button id="couponButton" type="button" class="btn ">Apply</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2"></div>
+                        <div class="clearfix"><button type="button" id="checkout_btn"
+                                class="btn btn-large btn--lg w-100">Place order</button></div>
+                    </div>
                 </div>
-                
-            </div>
-            <!-- End Body Content -->
-
-
-            <!-- Scoll Top -->
-            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
-            <!-- End Scoll Top -->
-
-            <!-- Minicart Drawer -->
-            
-            <!-- End Minicart Drawer -->
-
-
-            <!-- Including Javascript -->
-          
-
+            </form>
+            <!-- End Main Content -->
         </div>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+    </div>
+</div>
+<!-- End Body Content -->
+
+
+<!-- Scoll Top -->
+<!-- End Scoll Top -->
+
+<!-- Minicart Drawer -->
+
+<!-- End Minicart Drawer -->
+
+
+<!-- Including Javascript -->
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
 
@@ -278,7 +305,7 @@
     var error_address2 = false;
     var error_city = false;
     var error_postcode = false;
-    
+
     $("#input-firstname1").focusout(function () {
         check_fname();
     });
@@ -291,17 +318,17 @@
     $("#input-telephone1").focusout(function () {
         check_mob();
     });
-  
-        $("#input-address-11").focusout(function () {
+
+    $("#input-address-11").focusout(function () {
         check_address1();
     });
-        $("#input-address-21").focusout(function () {
+    $("#input-address-21").focusout(function () {
         check_address2();
     });
-        $("#input-city1").focusout(function () {
+    $("#input-city1").focusout(function () {
         check_city();
     });
-        $("#input-postcode1").focusout(function () {
+    $("#input-postcode1").focusout(function () {
         check_postcode();
     });
 
@@ -361,7 +388,7 @@
             error_mobno = true;
         }
     }
-        function check_address1() {
+    function check_address1() {
         var pattern = /^[a-zA-Z\s]*$/;
         var sname = $("#input-address-11").val()
         if (pattern.test(sname) && sname !== '') {
@@ -374,7 +401,7 @@
             error_address1 = true;
         }
     }
-        function check_address2() {
+    function check_address2() {
         var pattern = /^[a-zA-Z\s]*$/;
         var sname = $("#input-address-21").val()
         if (pattern.test(sname) && sname !== '') {
@@ -387,7 +414,7 @@
             error_address2 = true;
         }
     }
-        function check_city() {
+    function check_city() {
         var pattern = /^[a-zA-Z]*$/;
         var sname = $("#input-city1").val()
         if (pattern.test(sname) && sname !== '') {
@@ -400,7 +427,7 @@
             error_city = true;
         }
     }
-        function check_postcode() {
+    function check_postcode() {
         var pattern = /^[0-9]*$/;
         var mob = $("#input-postcode1").val();
         if (pattern.test(mob) && mob !== '' && mob.length == 6) {
@@ -414,68 +441,68 @@
         }
     }
 
-    $("#checkout_btn").click((e)=>{
+    $("#checkout_btn").click((e) => {
         console.log('entered')
-        var getSelectedValue = document.querySelector( 'input[name="address"]:checked').value;
-        
-        if(getSelectedValue == ""){
-            
-        error_fname = false;
-        error_sname = false;
-        error_email = false;
-        error_mobno = false;
-        error_address1 = false;
-        error_address2 = false;
-        error_city = false;
-        error_postcode = false;
-        
+        var getSelectedValue = document.querySelector('input[name="address"]:checked').value;
 
-        check_fname();
-        check_sname();
-        check_email();
-        check_mob();
-        check_address1();
-        check_address2();
-        check_city();
-        check_postcode();
-        
+        if (getSelectedValue == "") {
 
-            if (error_fname === false && error_sname === false && error_email === false && error_mobno === false && error_address1 === false && error_address2 === false && error_city === false && error_postcode === false ) {
+            error_fname = false;
+            error_sname = false;
+            error_email = false;
+            error_mobno = false;
+            error_address1 = false;
+            error_address2 = false;
+            error_city = false;
+            error_postcode = false;
 
-                
+
+            check_fname();
+            check_sname();
+            check_email();
+            check_mob();
+            check_address1();
+            check_address2();
+            check_city();
+            check_postcode();
+
+
+            if (error_fname === false && error_sname === false && error_email === false && error_mobno === false && error_address1 === false && error_address2 === false && error_city === false && error_postcode === false) {
+
+
             } else {
                 swal("Please Fill the form Correctly");
                 return false;
             }
         }
-        
+
         console.log($('#checkout-form').serialize())
         e.preventDefault()
         $.ajax({
-            url:'/placeOrder',
-            method:'post',
-            data:$('#checkout-form').serialize(),
-            success:(response)=>{
-                
-                if(response.status){
-                    location.href='/placeOrder/order-success'
-                }else{
-                    if(response.mode == "paypal"){
+            url: '/placeOrder',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+
+                if (response.status) {
+                    location.href = '/placeOrder/order-success'
+                } else {
+                    if (response.mode == "paypal") {
                         console.log(response.url)
                         location.href = response.url
                     }
-                    else{
-                       
-                         razorpay(response.response)
+                    else {
+
+                        razorpay(response.response)
                     }
-                    
+
                 }
             }
         })
     })
-    
-    function razorpay(order){
-        
+
+    function razorpay(order) {
+
         var options = {
             "key": "rzp_test_nUVcKdOUWrUXIZ", // Enter the Key ID generated from the Dashboard
             "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -484,10 +511,10 @@
             "description": "Test Transaction",
             "image": "https://example.com/your_logo",
             "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response){
-                
+            "handler": function (response) {
 
-                verifyPayment(response,order);
+
+                verifyPayment(response, order);
             },
             "prefill": {
                 "name": "Outfits",
@@ -500,78 +527,78 @@
             "theme": {
                 "color": "#3399cc"
             }
-    };
-    var rzp1 = new Razorpay(options);
-    rzp1.open();
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
 
     }
 
-    function verifyPayment(payment,order){
+    function verifyPayment(payment, order) {
         $.ajax({
-            url:'/placeOrder/verify-payment',
-            data:{
+            url: '/placeOrder/verify-payment',
+            data: {
                 payment,
                 order
             },
-            method:'post',
-            success:(response)=>{
-                if(response.status){
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
                     location.href = '/placeOrder/order-success';
                 }
-                else{
-                  
+                else {
+
                     location.href = '/'
                 }
             }
-          
+
         })
     }
 
-    function checkButton(){
-        var getSelectedValue = document.querySelector( 'input[name="address"]:checked');   
-        
-        if(getSelectedValue == null) {   
-           
-        alert("Selected radio button values is null: ");  
-         return false;
-        
+    function checkButton() {
+        var getSelectedValue = document.querySelector('input[name="address"]:checked');
+
+        if (getSelectedValue == null) {
+
+            alert("Selected radio button values is null: ");
+            return false;
+
         }
-         
+
     }
 
-    function changeStatus(){
-       
+    function changeStatus() {
+
         var nodes = document.getElementById("address1").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-        nodes[i].disabled = true;
-        nodes[i].hidden = true;
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].disabled = true;
+            nodes[i].hidden = true;
         }
     }
 
-     function changeStatusTo(check){
-          if(check == "true"){
-            
-            
+    function changeStatusTo(check) {
+        if (check == "true") {
+
+
         }
         var nodes = document.getElementById("address1").getElementsByTagName('*');
-        for(var i = 0; i < nodes.length; i++){
-        nodes[i].disabled = false;
-        nodes[i].hidden = false;
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].disabled = false;
+            nodes[i].hidden = false;
         }
     }
 
-    
-    $("#couponButton").click((e)=>{
-    
+
+    $("#couponButton").click((e) => {
+
         e.preventDefault()
         $.ajax({
-            
-            url:'/offerManagement/couponCheck',
-            method:'post',
-            data:$('#couponCheck').serialize(),
-            success:(resp)=>{
-         
-                if(resp.statuss){
+
+            url: '/offerManagement/couponCheck',
+            method: 'post',
+            data: $('#couponCheck').serialize(),
+            success: (resp) => {
+
+                if (resp.statuss) {
                     document.getElementById("couponErr").textContent = resp.msg
                     document.getElementById("hidden1").style.visibility = "visible"
                     document.getElementById("hidden2").style.visibility = "visible"
@@ -580,59 +607,59 @@
                     document.getElementById("total").textContent = resp.totalAmount
                     document.getElementById("totalAmount").value = resp.totalAmount
                     document.getElementById("couponCode").value = resp.coupon
-                    document.getElementById("checkboxWallet").value=resp.totalAmount
-                    
-                    
-                }else{
-                    
+                    document.getElementById("checkboxWallet").value = resp.totalAmount
+
+
+                } else {
+
                     document.getElementById("hidden1").style.visibility = "hidden"
                     document.getElementById("hidden2").style.visibility = "hidden"
                     document.getElementById("total").textContent = resp.subTotal
                     document.getElementById("couponErr").textContent = resp.msg
                     document.getElementById("totalAmount").value = resp.subTotal
-                    document.getElementById("checkboxWallet").value=resp.subTotal
+                    document.getElementById("checkboxWallet").value = resp.subTotal
                     document.getElementById("couponCode").value = "null"
                 }
             }
         })
     })
-    
-        $(document).on("change", "input[name='wallet']", function () {
-            
-            var checkbox = $(this);
-            var checked = checkbox.prop('checked');
-            
-            x = document.getElementById("checkboxWallet").value
-            $.ajax({
-                url:"/offerManagement/wallet",
-                type: 'post',
-                data: {
-                    checked: checked,
-                    price: x
-                      },
-                success: function(data) {
-                    if(data.status){
 
-                        document.getElementById("walletBalance").innerHTML = "Wallet Balance:"+data.balance
-                        document.getElementById("total").textContent = data.amount
-                        document.getElementById("totalAmount").value = data.amount
-                        document.getElementById("couponTotalCheck").value = data.amount
-                    }else{
-                        document.getElementById("walletBalance").innerHTML = ""
-                        document.getElementById("total").textContent = data.amount
-                        document.getElementById("totalAmount").value = data.amount
-                        document.getElementById("couponTotalCheck").value = data.amount
-                    }
-                },
-                error: function(data) {
-                   
-                    // Revert
-                    checkbox.attr('checked', !checked);
+    $(document).on("change", "input[name='wallet']", function () {
+
+        var checkbox = $(this);
+        var checked = checkbox.prop('checked');
+
+        x = document.getElementById("checkboxWallet").value
+        $.ajax({
+            url: "/offerManagement/wallet",
+            type: 'post',
+            data: {
+                checked: checked,
+                price: x
+            },
+            success: function (data) {
+                if (data.status) {
+
+                    document.getElementById("walletBalance").innerHTML = "Wallet Balance:" + data.balance
+                    document.getElementById("total").textContent = data.amount
+                    document.getElementById("totalAmount").value = data.amount
+                    document.getElementById("couponTotalCheck").value = data.amount
+                } else {
+                    document.getElementById("walletBalance").innerHTML = ""
+                    document.getElementById("total").textContent = data.amount
+                    document.getElementById("totalAmount").value = data.amount
+                    document.getElementById("couponTotalCheck").value = data.amount
                 }
-            });
-        });
+            },
+            error: function (data) {
 
-  
+                // Revert
+                checkbox.attr('checked', !checked);
+            }
+        });
+    });
+
+
 
 
 
