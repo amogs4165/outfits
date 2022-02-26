@@ -160,6 +160,16 @@ module.exports = {
             })
         })
     },
+    deleteCategory:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('category').deleteOne({_id:ObjectId(id)}).then(()=>{
+                dB.get().collection('subcategory').deleteMany({category:ObjectId(id)}).then(()=>{
+                  
+                    resolve()
+                })
+            })
+        })
+    },
     getCategory: () => {
         return new Promise((resolve, reject) => {
             let catt = dB.get().collection('category').find().toArray();
@@ -175,6 +185,13 @@ module.exports = {
                 return resolve();
             }).catch(() => {
                 return reject();
+            })
+        })
+    },
+    deleteSubCategory:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('subcategory').deleteOne({_id:ObjectId(id)}).then(()=>{
+                resolve()
             })
         })
     },

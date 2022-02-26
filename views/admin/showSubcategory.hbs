@@ -24,13 +24,13 @@
                                         <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
-                                        <tbody >
+                                        <tbody id="myTable">
                                             {{#each cattDetails}}
-                                                <tr class="align-middle">
+                                                <tr id="{{this._id}}" class="align-middle">
                                                     <td></td>
                                                     <td>{{this.subCategory}}</td>
                                                     <td>
-                                                        <a class="btn btn-danger mt-2 "  href="/userMement/delete/{{this._id}}" onclick="return confirm('click Ok to confirm Delete {{this.categoryName}}')" type="submit">Delete</a>
+                                                        <a class="btn btn-danger mt-2 " onclick="removeSubCategory('{{this._id}}')" type="submit">Delete</a>
                                                     </td>
                                                 </tr>
                                             {{/each}}
@@ -48,11 +48,40 @@
 
 
 
-{{!-- 
-<div class="container">
-    <div class="row">
-        
-    </div>
-</div> --}}
+<script>
+    function removeSubCategory(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Category!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/categoryManagement/deleteSubCategory",
+                        type: "POST",
+                        data: {
+                            id: id
+                        },
+
+                        success:  ()=> {
+                             $('#' + id).remove()
+                             swal("Category has been deleted!", {
+                                icon: "success",
+                            });
+                      
+                        },
+
+                    });
+
+                } else {
+                    swal("Category not deleted!");
+                }
+            });
+    }
+    
+</script>
 
 

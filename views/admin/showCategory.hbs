@@ -24,14 +24,14 @@
                                         <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
-                                        <tbody >
+                                        <tbody id="myTable">
                                             {{#each cattDetails}}
-                                                <tr class="align-middle">
+                                                <tr id="{{this._id}}" class="align-middle">
                                                     <td></td>
                                                     <td>{{this.categoryName}}</td>
                                                     <td><a href="/categoryManagement/viewSubcategory/{{this._id}}">View Subcategories</a></td>
                                                     <td>
-                                                        <a class="btn btn-danger mt-2 "   onclick="sweetAlert()" type="submit">Delete</a>
+                                                        <a class="btn btn-danger mt-2 "   onclick="confirmDelete('{{this._id}}')" type="submit">Delete</a>
                                                     </td>
                                                 </tr>
                                             {{/each}}
@@ -50,23 +50,37 @@
 
 
 <script>
-    function sweetAlert(){
-    swal({
-    title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this imaginary file!",
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-    })
-    .then((willDelete) => {
-    if (willDelete) {
-        swal("Poof! Your imaginary file has been deleted!", {
-        icon: "success",
-        });
-    } else {
-        swal("Your imaginary file is safe!");
-    }
-    });
+    function confirmDelete(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Category!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "/categoryManagement/deleteCategory",
+                        type: "POST",
+                        data: {
+                            id: id
+                        },
+
+                        success:  ()=> {
+                             $('#' + id).remove()
+                             swal("Category has been deleted!", {
+                                icon: "success",
+                            });
+                      
+                        },
+
+                    });
+
+                } else {
+                    swal("Category not deleted!");
+                }
+            });
     }
     
 </script>

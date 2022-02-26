@@ -22,62 +22,35 @@
                                     <!-- Product Images -->
                                     <div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            <a data-image="/images/product-detail-page/men-dress-1.jpg"
+                                            <a data-image="/product-images/{{product._id}}image1.jpg"
                                                 data-zoom-image="/product-images/{{product._id}}image1.jpg"
                                                 class="slick-slide slick-cloned active" data-slick-index="-4"
                                                 aria-hidden="true" tabindex="-1">
                                                 <img class="blur-up lazyload"
-                                                    src="/product-images/{{product._id}}image1.jpg" alt="" />
+                                                    src="/product-images/{{product._id}}image2.jpg" alt="" />
                                             </a>
-                                            <a data-image="/images/product-detail-page/men-dress-2.jpg"
+                                            <a data-image="/product-images/{{product._id}}image2.jpg"
                                                 data-zoom-image="/product-images/{{product._id}}image2.jpg"
                                                 class="slick-slide slick-cloned" data-slick-index="-3"
                                                 aria-hidden="true" tabindex="-1">
                                                 <img class="blur-up lazyload"
                                                     src="/product-images/{{product._id}}image2.jpg" alt="" />
                                             </a>
-                                            <a data-image="/images/product-detail-page/men-dress-3.jpg"
+                                            <a data-image="/product-images/{{product._id}}image3.jpg"
                                                 data-zoom-image="/product-images/{{product._id}}image3.jpg"
                                                 class="slick-slide slick-cloned" data-slick-index="-2"
                                                 aria-hidden="true" tabindex="-1">
                                                 <img class="blur-up lazyload"
                                                     src="/product-images/{{product._id}}image3.jpg" alt="" />
                                             </a>
-                                            <a data-image="/images/product-detail-page/men-dress-4.jpg"
+                                            <a data-image="/product-images/{{product._id}}image4.jpg"
                                                 data-zoom-image="/product-images/{{product._id}}image4.jpg"
                                                 class="slick-slide slick-cloned" data-slick-index="-1"
                                                 aria-hidden="true" tabindex="-1">
                                                 <img class="blur-up lazyload"
                                                     src="/product-images/{{product._id}}image4.jpg" alt="" />
                                             </a>
-                                            {{!-- <a data-image="/images/product-detail-page/men-dress-5.jpg"
-                                                data-zoom-image="/images/product-detail-page/men-dress-5.jpg"
-                                                class="slick-slide slick-cloned" data-slick-index="0" aria-hidden="true"
-                                                tabindex="-1">
-                                                <img class="blur-up lazyload"
-                                                    src="/images/product-detail-page/men-dress-5.jpg" alt="" />
-                                            </a>
-                                            <a data-image="/images/product-detail-page/men-dress-6.jpg"
-                                                data-zoom-image="/images/product-detail-page/men-dress-6.jpg"
-                                                class="slick-slide slick-cloned" data-slick-index="1" aria-hidden="true"
-                                                tabindex="-1">
-                                                <img class="blur-up lazyload"
-                                                    src="/images/product-detail-page/men-dress-6.jpg" alt="" />
-                                            </a>
-                                            <a data-image="/images/product-detail-page/men-dress-7.jpg"
-                                                data-zoom-image="/images/product-detail-page/men-dress-7.jpg"
-                                                class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true"
-                                                tabindex="-1">
-                                                <img class="blur-up lazyload"
-                                                    src="/images/product-detail-page/men-dress-7.jpg" alt="" />
-                                            </a>
-                                            <a data-image="/images/product-detail-page/men-dress-8.jpg"
-                                                data-zoom-image="/images/product-detail-page/men-dress-8.jpg"
-                                                class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true"
-                                                tabindex="-1">
-                                                <img class="blur-up lazyload"
-                                                    src="/images/product-detail-page/men-dress-8.html" alt="" />
-                                            </a> --}}
+                                        
                                         </div>
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right pl-20">
@@ -95,12 +68,7 @@
                                         <a href="/product-images/{{product._id}}image2.jpg" data-size="1462x2048"></a>
                                         <a href="/product-images/{{product._id}}image3.jpg" data-size="1462x2048"></a>
                                         <a href="/product-images/{{product._id}}image4.jpg" data-size="1462x2048"></a>
-                                        {{!-- <a href="/images/product-detail-page/men-dress-5.jpg"
-                                            data-size="1462x2048"></a>
-                                        <a href="/images/product-detail-page/men-dress-6.jpg" data-size="1462x2048"></a>
-                                        <a href="/images/product-detail-page/men-dress-7.jpg" data-size="731x1024"></a>
-                                        <a href="/images/product-detail-page/men-dress-8.html" data-size="731x1024"></a>
-                                        --}}
+                                      
                                     </div>
                                     <!-- End Product Images -->
                                     <!-- Wishlist - Share -->
@@ -219,10 +187,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-form__item--submit">
-                                                {{!-- <button type="button" name="add"
-                                                    class="btn product-form__cart-submit"><span>Add to
-                                                        cart</span></button>
-                                                --}}
+                                               
                                                 <a href="/cart/cart-add/{{product._id}}" name="add"
                                                     class="btn product-form__cart-submit"><span>Add to cart</span></a>
 

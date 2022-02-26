@@ -89,4 +89,18 @@ router.get('/viewSubcategory/:id',verifyLogin,(req,res)=>{
     })
 })
 
+router.post('/deleteCategory',verifyLogin,(req,res)=>{
+    let id = req.body.id
+    helper.deleteCategory(id).then(()=>{
+        res.json({status:true})
+    })
+})
+
+router.post('/deleteSubCategory',verifyLogin,(req,res)=>{
+    let id = req.body.id
+    helper.deleteSubCategory(id).then(()=>{
+        res.json({status:true})
+    })
+})
+
 module.exports = router;

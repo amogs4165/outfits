@@ -56,13 +56,30 @@
                                                 data-src="/product-images/{{this.productId}}image1.jpg"
                                                 src="/product-images/{{this.productId}}image2.jpg"
                                                 alt="Elastic Waist Dress - Navy / Small" /></a>
+                                                
                                     </td>
                                     <td class="cart__meta small--text-left cart-flex-item">
                                         <div class="list-view-item__title">
                                             <a href="/productShow/{{this.productId}}">{{this.productname}}</a>
                                         </div>
-                                        <div class="cart__meta-text">
-                                            Color: Navy<br>Size: Small<br>
+                                        <div class="pt-3 d-xl-none d-lg-none d-md-none d-sm-block d-xs-none">
+                                            <div class="qtyField ">
+                                                {{#if this.btnStatus}}
+                                                <a id="{{this.productId}}" class="qtyBtn minus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',-1)"><i
+                                                        class="icon an an-minus"></i></a>
+                                                {{else}}
+                                                <a style="visibility: ;" id="{{this.productId}}" class="qtyBtn minus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',-1)"><i
+                                                        class="icon an an-minus"></i></a>
+                                                {{/if}}
+                                                <span
+                                                    class="cart__qty-input  quantity_{{this.productId}}">{{this.quantity}}</span>
+
+                                                <a class="qtyBtn plus"
+                                                    onclick="changeCartQuantity('{{this._id}}','{{this.productId}}',+1)"><i
+                                                        class="icon an an-plus"></i></a>
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="cart__price-wrapper cart-flex-item text-center">
