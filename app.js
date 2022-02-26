@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var dotenv = require('dotenv');
 
 //Google Auth
 const { OAuth2Client } = require('google-auth-library');
@@ -39,6 +40,8 @@ var offerManagement = require('./routes/admin/offerManagement');
 var report = require('./routes/admin/report');
 var sort = require('./routes/user/sort')
 
+dotenv.config();
+
 var dataBase = require('./config/connection');
 
 var app = express();
@@ -47,7 +50,7 @@ var app = express();
 app.use(
   session({
     secret: 'key',
-    store: MongoClient.create({ mongoUrl: 'mongodb://localhost:27017' }),
+    store: MongoClient.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: { maxAge: 600000 }
   }))
 
