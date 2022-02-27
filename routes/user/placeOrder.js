@@ -169,8 +169,8 @@ router.post('/',verifyLogin,async (req,res)=>{
                             "payment_method": "paypal"
                         },
                         "redirect_urls": {
-                            "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000"
+                            "return_url": "http://youroutfits.site/placeOrder/order-success",
+                            "cancel_url": "http://youroutfits.site"
                         },
                         "transactions": [{
                             "item_list": {
@@ -240,8 +240,8 @@ router.post('/',verifyLogin,async (req,res)=>{
                             "payment_method": "paypal"
                         },
                         "redirect_urls": {
-                            "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000"
+                            "return_url": "http://youroutfits.site/placeOrder/order-success",
+                            "cancel_url": "http://youroutfits.site"
                         },
                         "transactions": [{
                             "item_list": {
@@ -426,8 +426,8 @@ router.post('/',verifyLogin,async (req,res)=>{
                             "payment_method": "paypal"
                         },
                         "redirect_urls": {
-                            "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000/"
+                            "return_url": "http://youroutfits.site/placeOrder/order-success",
+                            "cancel_url": "http://youroutfits.site/"
                         },
                         "transactions": [{
                             "item_list": {
@@ -500,8 +500,8 @@ router.post('/',verifyLogin,async (req,res)=>{
                             "payment_method": "paypal"
                         },
                         "redirect_urls": {
-                            "return_url": "http://localhost:3000/placeOrder/order-success",
-                            "cancel_url": "http://localhost:3000"
+                            "return_url": "http://youroutfits.site/placeOrder/order-success",
+                            "cancel_url": "http://youroutfits.site"
                         },
                         "transactions": [{
                             "item_list": {

@@ -594,51 +594,7 @@ module.exports = {
 
         })
     },
-    // updateAddress:(userId,addressId,address)=>{
-    //     console.log("sldfkj",addressId);
-    //     return new Promise(async(resolve,reject)=>{
-    //         let address = await dB.get().collection('address').aggregate([{$match:{userId:ObjectId(userId)}},{$unwind:'$address'} ]).toArray();
-    //         console.log(address)
-    //         let updatedAddress = await address.map(async(address)=>{
-    //             console.log("heyeehe",address)
-    //             if(address._id == addressId){
-    //                 address.firstname = address.firstname,
-    //                 address.lastname = address.lastname,
-    //                 address.email = address.email,
-    //                 address.telephone = address.telephone,
-    //                 address.company = address.company,
-    //                 address.address_1 = address.address_1,
-    //                 address.address_2 = address.address_2,
-    //                 address.city = address.city,
-    //                 address.postcode = address.postcode,
-    //                 address.country = address.country,
-    //                 address.zone_id = address.zone_id
-    //             }
-    //         })
-    //         console.log("updatedAderes",updatedAddress)
-            // dB.get().collection('address').updateOne({userId:ObjectId(userId)},{$set:{address:updatedAddress}})
-    //     })
-    // },
-    //         // {$set:
-                // {
-                //     '$address.firstname':address.firstname,
-                //     '$address.lastname':address.lastname,
-                //     '$address.email':address.email,
-                //     '$address.telephone':address.telephone,
-                //     '$address.company':address.company,
-                //     '$address.address_1':address.address_1,
-                //     '$address.address_2':address.address_2,
-                //     '$address.city':address.city,
-                //     '$address.postcode':address.postcode,
-                //     '$address.country':address.country,
-                //     '$address.zone_id':address.zone_id
-                // }
-            // }
-    //         ).then((resp)=>{
-    //             return resolve(resp)
-            // })
-        // })
-    // },
+   
     updateAddress:(userId,addressId,address)=>{
         console.log("sldfkj",addressId);
         return new Promise(async(resolve,reject)=>{
@@ -759,12 +715,7 @@ module.exports = {
             resolve(banner);
         })
     },
-    // getShippingAddress:(userId,addressId)=>{
-    //     return new Promise((resolve,reject)=>{
-    //         let shippingAddress = dB.get().collection('address').findOne({userId:ObjectId(userId),address:{$elemMatch:{_id:ObjectId(addressId)}}})
-    //         return resolve(shippingAddress)
-    //     })
-    // },
+  
     getShippingAddress: (userId, addressId) => {
         return new Promise((resolve, reject) => {
             let shippingAddress = dB.get().collection('address').aggregate([
@@ -981,11 +932,7 @@ module.exports = {
     removeWishlist: (userId, proId) => {
         return new Promise((resolve, reject) => {
 
-            // dB.get().collection('cart').updateOne({userId:ObjectId(userId)},{$pull:{'product':ObjectId(proId)}}).then(()=>{
-            //     return resolve();
-            // })
-
-
+    
             dB.get().collection('wishlist').findOne({
                 userId: ObjectId(userId)
             }).then((doc) => {
