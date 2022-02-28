@@ -1229,10 +1229,16 @@ module.exports = {
     },
     insertCouponOffer: (details) => {
         return new Promise(async (resolve, reject) => {
+            details.validity = new Date(details.validity)
             let check = await dB.get().collection('couponOffer').findOne({ couponCode: details.couponCode })
             if (check == null) {
-                dB.get().collection('couponOffer').insertOne({ ...details, user: [] })
-                resolve()
+                dB.get().collection('couponOffer').insertOne({ ...details, user: [] }).then(()=>{
+                    dB.get().collection("couponOffer").createIndex( { validity: 1 }, { expireAfterSeconds: 0 } ).then(()=>{
+                        resolve()
+                    })
+
+                })
+               
             } else {
                 resolve()
             }

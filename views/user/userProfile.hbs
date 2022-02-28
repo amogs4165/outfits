@@ -26,13 +26,13 @@
                     <div class="col-xl-4 col-lg-4 col-sm-6">
                         <div class="d-single-info">
                             <p>Need Assistance? Customer service at.</p>
-                            <p>admin@yoursite.com.</p>
+                            <p>amogsonlineservices@gmail.com</p>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-sm-6">
                         <div class="d-single-info">
                             <p>E-mail them at </p>
-                            <p>support@yoursite.com</p>
+                            <p>amogsonlineservices@gmail.com</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-2 col-sm-6">
@@ -50,6 +50,7 @@
                         <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
                         <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Referal Bonus</a></li>
                         <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
+                        <li><a class="nav-link" data-bs-toggle="tab" href="#coupons">Coupons</a></li>
                         <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">Edit details</a></li>
                         <li><a class="nav-link" href="/logout">logout</a></li>
                     </ul>
@@ -77,7 +78,7 @@
                                             <h5 class="mb-1">{{user.firstName}}</h5>
                                             <p>Balance: <strong>{{user.wallet}}</strong></p>
                                         </div>
-                                        <div class="lbl">SILVER USER</div>
+                                        <div class="lbl"></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -160,7 +161,7 @@
                                 <h5 class="text-primary">*By using Wallet amount you can buy products</h5>
                                 <h5 class="text-primary">*Wallet money only can use for buying products</h5>
                                 <h5 class="text-primary">With this link you can refer your friend : <h6
-                                        class="text-danger" id="link">http://localhost:3000/register/{{user._id}}</h6>
+                                        class="text-danger" id="link">https://youroutfits.site/register/{{user._id}}</h6>
                                 </h5>
                                 <button class="btn mt-1" onclick="myFunction()">Copy Link</button>
                             </div>
@@ -383,6 +384,48 @@
                         </div>
                         <!-- End Address -->
 
+                        <!-- Coupon -->
+
+                        <div id="orders" class="product-order tab-pane fade">
+                            <h3>Orders</h3>
+                            <div class="table-responsive ScrollStyle">
+                                <table class="table">
+                                    <thead class="alt-font">
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Product</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each orders}}
+                                        <tr id="{{this._id}}">
+                                            <td></td>
+
+                                            <td>
+                                                {{#each this.products}}
+                                                {{this.productname}}<br>
+                                                {{/each}}
+                                            </td>
+
+                                            <td>{{this.date}}</td>
+                                            <td>{{this.OrderStatus}}</td>
+                                            <td>{{this.total}}</td>
+                                            <td class="text-center small--hide"><a
+                                                    class="btn btn--secondary cart__remove" onclick="remove('{{this._id}}')"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Remove item"><i class="icon an an-times"></i></a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+
                         <!-- Account Details -->
                         <div id="account-details" class="tab-pane fade">
                             <h3>Edit details </h3>
@@ -462,6 +505,41 @@
 
                         <!-- Downloads -->
                         
+                        <div id="coupons" class="product-order tab-pane fade">
+                            <h3>Coupons</h3>
+                            <div class="table-responsive ScrollStyle">
+                                <table class="table">
+                                    <thead class="alt-font">
+                                        <tr>
+                                            <th>Coupon code</th>
+                                            <th>Discount Amount</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each coupons}}
+                                        <tr id="{{this._id}}">
+                                            <td></td>
+
+                                            <td>
+                                                {{#each this.products}}
+                                                {{this.productname}}<br>
+                                                {{/each}}
+                                            </td>
+
+                                            <td>{{this.date}}</td>
+                                            <td>{{this.OrderStatus}}</td>
+                                            <td>{{this.total}}</td>
+                                            <td class="text-center small--hide"><a
+                                                    class="btn btn--secondary cart__remove" onclick="remove('{{this._id}}')"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Remove item"><i class="icon an an-times"></i></a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <!-- End Downloads -->
                     </div>
                     <!-- End Tab panes -->
