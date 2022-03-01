@@ -518,22 +518,14 @@
                                     </thead>
                                     <tbody>
                                         {{#each coupons}}
-                                        <tr id="{{this._id}}">
-                                            <td></td>
+                                        <tr >
+                                            
 
                                             <td>
-                                                {{#each this.products}}
-                                                {{this.productname}}<br>
-                                                {{/each}}
+                                             {{this.couponCode}}
                                             </td>
 
-                                            <td>{{this.date}}</td>
-                                            <td>{{this.OrderStatus}}</td>
-                                            <td>{{this.total}}</td>
-                                            <td class="text-center small--hide"><a
-                                                    class="btn btn--secondary cart__remove" onclick="remove('{{this._id}}')"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Remove item"><i class="icon an an-times"></i></a></td>
+                                            <td>{{this.discount}}</td>  
                                         </tr>
                                         {{/each}}
                                     </tbody>

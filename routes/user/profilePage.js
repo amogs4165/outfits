@@ -18,15 +18,15 @@ router.get('/',verifyLogin,async(req,res)=>{
         console.log("user here",req.session.user)
         let userId = req.session.user._id
         
-        const [user, orders] = await Promise.all([
-            helper.getUser(userId), helper.ordersById(userId)
+        const [user, orders, coupons] = await Promise.all([
+            helper.getUser(userId), helper.ordersById(userId), helper.getCoupon()
         ])
         helper.findAddress(userId).then((resp)=>{
             let address = resp;
             
-            console.log("this is address got here",address);
+           
             // address.addAddress1.status = true;
-            res.render('user/userProfile',{userStatus,user,address,orders})
+            res.render('user/userProfile',{userStatus,user,address,orders,coupons})
         }).catch(()=>{
             res.render('user/userProfile',{userStatus,user})
         })

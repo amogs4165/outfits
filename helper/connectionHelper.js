@@ -1441,7 +1441,40 @@ module.exports = {
             let products = await dB.get().collection('products').find({id:catt}).toArray()
             resolve(products)
         })
+    },
+    getCategorywithSubcategory:()=>{
+        return new Promise(async(resolve,reject)=>{
+            category = await dB.get().collection('category').aggregate([
+                {
+                    $lookup:{
+                        from:'subcategory',
+                        localField:'_id',
+                        foreignField:'category',
+                        as:'allcategory'
+                    }
+                },
+                {
+                    $unwind:'$allcategory'
+                },
+                {
+                    $project:{
+                        categoryName:'$categoryName',
+                        subCategory:'$allcategory.subCategory'
+                    }
+                },
+                {
+                    $group:{
+                        _id:'$categoryName',
+                        subCategory:{$push:'$subCategory'}
+                        
+                    }
+                }
+            ]).toArray()
+            console.log("catagory d",category,"category got here");
+            resolve(category)
+        })
     }
+
 
 
 

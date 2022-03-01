@@ -52,15 +52,13 @@
       <tbody id="myTable">
 
         <tr>
-
           <th scope="row">{{this.couponCode}}</th>
-          <td style="color: green;">{{this.discount}}%</td>
+          <td style="color: green;">₹{{this.discount}}</td>
           <td>{{this.validity}}</td>
           <td>
             <button class="btn btn-danger"
               onclick="removeCouponOffer('{{this._id}}')">Delete</button>
           </td>
-
         </tr>
 
 
@@ -88,7 +86,7 @@
     
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+      text: "Once deleted, you will not be able to recover the coupon!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -106,7 +104,7 @@
             success: (response) => {
               if (response.status) {
                 location.reload()
-                swal("Poof! Your imaginary file has been deleted!", {
+                swal("Coupon is deleted", {
                   icon: "success",
                 });
               }
@@ -115,7 +113,7 @@
           });
 
         } else {
-          swal("Your imaginary file is safe!");
+          swal("Coupon is safe!");
         }
       });
   }
