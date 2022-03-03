@@ -14,20 +14,19 @@ const verifyLogin = (req,res,next)=>{
 
 router.get('/',verifyLogin,(req,res)=>{
     
-    console.log("heyyyyyy");
     let admin = req.session.admin;
     helper.getProducts().then((products)=>{
-        console.log("heyeheeuheuh",products);
+      
         res.render('admin/showProducts',{products,admin});
     })
     
 })
 
 router.get('/edit/:id',verifyLogin,async(req,res)=>{
-    console.log(req.params.id)
+  
     let admin = req.session.admin;
     let product = await helper.getProductDetailsById(req.params.id)
-    console.log(product);
+
     res.render('admin/editProduct',{product,admin})
 })
 

@@ -21,13 +21,7 @@ router.get('/',verifyLogin,async (req,res)=>{
     let paypalPayment = paypal.length;
     let orders = await helper.getCattOrders();
     let cattStock = await helper.getCattStock();
-    // console.log(menOrders)
-    // console.log("---------------------------------------------------------")
-    // console.log(womenOrders)
-    // console.log("---------------------------------------------------------")
-
-    // console.log(kidOrders )
-    // console.log("---------------------------------------------------------")
+   
 
         res.render('admin/lbar',{admin,codPayment,razorpayPayment,paypalPayment,orders: JSON.stringify(orders),cattStock: JSON.stringify(cattStock)})
 

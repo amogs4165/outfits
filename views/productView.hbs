@@ -59,8 +59,7 @@
                                                 data-zoom-image="/product-images/{{product._id}}image1.jpg" alt=""
                                                 src="/product-images/{{product._id}}image1.jpg" />
                                         </div>
-                                        <div class="product-labels"><span class="lbl pr-label1">new</span><span
-                                                class="lbl on-sale">Exclusive</span></div>
+                                        
 
                                     </div>
                                     <div class="lightboximages">
@@ -110,16 +109,7 @@
 
                                     </div>
                                     <!-- Product Reviews -->
-                                    <div class="prInfoRow d-flex flex-wrap">
-                                        <div class="product-review">
-                                            <a class="reviewLink d-flex flex-wrap align-items-center" href="#tab2">
-                                                <i class="an an-star"></i><i class="an an-star"></i><i
-                                                    class="an an-star"></i><i class="an an-star"></i><i
-                                                    class="an an-star-half-alt"></i>
-                                                <span class="spr-badge-caption">6 reviews</span>
-                                            </a>
-                                        </div>
-                                    </div>
+                                   
                                     <!-- End Product Reviews -->
                                     <!-- Product Price -->
                                     <div class="product-single__price product-single__price-product-template">
@@ -153,7 +143,9 @@
                                     </div>
                                     <!-- End Product Description -->
                                     <!-- Product Quantity -->
-                                    <div id="quantity_message">Hurry! Only <span class="items">15</span> left in stock.
+                                    {{#if product.stock}}
+                                    <div id="quantity_message">Hurry! Only <span class="items">{{product.manufacturerquantity}}</span> left in stock.
+                                    {{/if}}
                                     </div>
                                     <!-- End Product Quantity -->
                                     <!-- Countdown -->
@@ -173,6 +165,13 @@
                                         <!-- End Image Swatch -->
 
                                         <!-- Product Action -->
+                                        {{#if product.outofstock}}
+                                        <div class="product-action clearfix px-0">
+                                                <div class="product-form__item--submit out-of-stock-btn">
+                                                    <button type="button" name="add" class="btn product-form__cart-submit"><span>Out of Stock</span></button>
+                                                </div>
+                                            </div>
+                                        {{else}}
                                         <div class="product-action clearfix">
                                             <div class="product-form__item--quantity">
                                                 <div class="wrapQtyBtn">
@@ -206,6 +205,7 @@
                                                         to cart</span></a> --}}
                                             </div>
                                         </div>
+                                        {{/if}}
 
                                         <!-- End Product Action -->
                                         <!-- Wishlist - Compare -->

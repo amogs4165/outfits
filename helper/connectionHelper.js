@@ -43,35 +43,35 @@ module.exports = {
     loginUserdetailWithNum: (number) => {
         return new Promise(async (resolve, reject) => {
             await dB.get().collection('userData').findOne({ phoneNumber: number }).then((user) => {
-                console.log(user, "heey this is the user detials logged in by number")
+                
                 return resolve(user)
             })
         })
     },
     verifyMobileNum: (number) => {
         return new Promise(async (resolve, reject) => {
-            console.log("hey" + number.phoneNumber)
+            
             let user = await dB.get().collection('userData').findOne({ phoneNumber: number.phoneNumber, status: true })
             if (user) {
-                console.log("got it sucees")
+               
                 return resolve({ status: true, user })
             }
             else {
-                console.log("got it failure");
+                ;
                 return resolve({ status: false })
             }
         })
     },
     checkEmail: (email) => {
         return new Promise(async (resolve, reject) => {
-            console.log("heyeyeyeyey" + email)
+           
             let user = await dB.get().collection('userData').findOne({ email: email, status: true })
             if (user) {
-                console.log("hey got it ");
+               
                 return resolve({ status: true, user })
             }
             else {
-                console.log("got it but failure");
+               
                 return resolve({ status: false })
             }
         })
@@ -135,10 +135,10 @@ module.exports = {
     },
     checkCategory: (category) => {
         return new Promise(async (resolve, reject) => {
-            console.log(category.categoryName);
+           
 
             await dB.get().collection('category').findOne({ categoryName: category.categoryName }).then((catt) => {
-                console.log("hii", catt);
+               
                 if (catt) {
                     return resolve(true)
                 }
@@ -180,7 +180,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             let id = data.category;
             let subCategory = data.subCategoryName;
-            console.log(id, subCategory);
+            
             dB.get().collection('subcategory').insertOne({ subCategory, category: ObjectId(id) }).then(() => {
                 return resolve();
             }).catch(() => {
@@ -197,7 +197,7 @@ module.exports = {
     },
     checkSubCategory: (data) => {
         return new Promise((resolve, reject) => {
-            console.log(data)
+           
             dB.get().collection('subcategory').findOne({ subCategory: data }).then((ifData) => {
                 if (ifData) {
                     return resolve(true);
@@ -248,17 +248,17 @@ module.exports = {
         product.manufacturerquantity = qty;
 
         dB.get().collection('products').insertOne(product).then((data) => {
-            console.log(data);
+           
             callback(data.insertedId)
         })
 
     },
     getProducts: () => {
-        console.log('im here 1')
+       
         return new Promise(async (resolve, reject) => {
             let products = await dB.get().collection('products').find().toArray()
 
-            console.log((products));
+           
             if (products) {
                 return resolve(products)
             }
@@ -326,10 +326,9 @@ module.exports = {
             let userCart = await dB.get().collection('cart').findOne({ user: ObjectId(userId) })
 
             if (userCart) {
-                console.log("helloooooooooooooo")
+                
                 let proExist = userCart.products.findIndex(product => product.item == productId);
-                console.log("heyyyyyyyyyyyy")
-                console.log(proExist)
+                
                 if (proExist != -1) {
                     dB.get().collection('cart')
                         .updateOne({ user: ObjectId(userId), 'products.item': ObjectId(productId) },
@@ -378,7 +377,7 @@ module.exports = {
     userCart: (userId) => {
         return new Promise(async (resolve, reject) => {
             let checkCart = await dB.get().collection('cart').findOne({ user: ObjectId(userId) })
-            console.log(checkCart)
+            
 
             if (checkCart != null) {
                 let cartItems = await dB.get().collection('cart').aggregate([
@@ -548,9 +547,9 @@ module.exports = {
 
     },
     changeProductQuantity: (details) => {
-        console.log(details.product);
+        
         let count = parseInt(details.count)
-        console.log(count)
+        
         return new Promise((resolve, reject) => {
             dB.get().collection('cart')
                 .updateOne({ _id: ObjectId(details.cart), 'products.item': ObjectId(details.product) },
@@ -578,16 +577,16 @@ module.exports = {
     addAddress: (userId, address) => {
         return new Promise(async (resolve, reject) => {
             let check = await dB.get().collection('address').findOne({ userId: ObjectId(userId) })
-            console.log(check);
+           
             if (check) {
                 dB.get().collection('address').updateOne({ userId: ObjectId(userId) }, { $push: { address: { _id: ObjectId(), ...address } } }).then((resp) => {
-                    console.log(resp)
+                   
                     return resolve(resp)
                 })
             }
             else {
                 dB.get().collection('address').insertOne({ userId: ObjectId(userId), address: [{ _id: ObjectId(), ...address }] }).then((resp) => {
-                    console.log(resp)
+                   
                     return resolve(resp)
                 })
             }
@@ -596,7 +595,7 @@ module.exports = {
     },
    
     updateAddress:(userId,addressId,address)=>{
-        console.log("sldfkj",addressId);
+       
         return new Promise(async(resolve,reject)=>{
             dB.get().collection('address').updateOne({'address._id':ObjectId(addressId) },        
             {$set:
@@ -742,7 +741,7 @@ module.exports = {
 
 
             ]).toArray()
-            console.log(shippingAddress)
+           
             return resolve(shippingAddress)
         })
     },
@@ -793,7 +792,7 @@ module.exports = {
     updateOrderStatus: (id, value) => {
         return new Promise(async (resolve, reject) => {
             let check = await dB.get().collection('orders').findOne({ _id: ObjectId(id), OrderStatus: "Delivered" })
-            console.log(check, "heyeheyh")
+           
             if (check == null) {
 
                 dB.get().collection('orders').updateOne({ _id: ObjectId(id) }, { $set: { OrderStatus: value } });
@@ -816,7 +815,7 @@ module.exports = {
                     console.log(err);
                 }
                 else {
-                    console.log("New Order:", order);
+                    
                     resolve(order);
                 }
 
@@ -825,7 +824,7 @@ module.exports = {
     },
     verifyPayment: (details) => {
         return new Promise((resolve, reject) => {
-            console.log(details);
+            
             const crypto = require('crypto');
             let hmac = crypto.createHmac('sha256', 'JCCNkRAJ4RRAe0opTVGwdhW8');
             hmac.update(details['payment[razorpay_order_id]'] + '|' + details['payment[razorpay_payment_id]']);
@@ -839,10 +838,10 @@ module.exports = {
         })
     },
     changePaymentStatus: (orderId, crrStatus) => {
-        console.log(orderId);
+       
         return new Promise((resolve, reject) => {
             dB.get().collection('orders').updateOne({ _id: ObjectId(orderId) }, { $set: { status: crrStatus } }).then((resp) => {
-                console.log(resp);
+                
                 resolve(resp)
             })
         })
@@ -867,9 +866,9 @@ module.exports = {
 
 
             if (checkWishlist != null) {
-                console.log("hey::::::::::");
+               
                 checkWishlist.product.forEach(document => {
-                    console.log("this is document", document)
+                   
                     if (document == proId) {
                         checkWishlist = "alreadyHave";
                     }
@@ -946,7 +945,7 @@ module.exports = {
                 if (index > -1) {
                     doc.product.splice(index, 1); // 2nd parameter means remove one item only
                 }
-                console.log(doc);
+                
 
                 dB.get().collection('wishlist').updateOne({ userId: ObjectId(userId) }, { $set: { product: doc.product } })
             })
@@ -974,16 +973,16 @@ module.exports = {
         })
     },
     insertCategoryOffer: (ctgry, discount, validity) => {
-        console.log(ctgry, discount, validity)
+       
         return new Promise(async (resolve, reject) => {
             let products = await dB.get().collection('products').find({ id: ctgry }).toArray()
 
 
             products.map(async (pro) => {
-                console.log(pro, "first")
+              
                 let productprice = pro.productprice
                 let OfferPrice = productprice - ((productprice * discount) / 100)
-                console.log(pro, "second")
+               
                 OfferPrice = parseInt(OfferPrice.toFixed(2))
                 let proId = pro._id;
 
@@ -1042,7 +1041,7 @@ module.exports = {
 
                 }
                 else {
-                    console.log("already have")
+                   
                     let msg = "Category offer already added"
                     resolve({ status: true, msg })
                 }
@@ -1077,7 +1076,7 @@ module.exports = {
             let productprice = pro.productprice
             let OfferPrice = productprice - ((productprice * discount) / 100);
             OfferPrice = parseInt(OfferPrice.toFixed(2))
-            console.log("productttttofferr", pro.categoryOffer, pro.productOffer);
+           
             if (pro.categoryOffer == 'false' && pro.productOffer == 'false') {
                 await dB.get().collection('products').updateOne(
                     {
@@ -1128,7 +1127,7 @@ module.exports = {
                 }
             }
             else {
-                console.log("product offer already added")
+
                 let msg = "Category offer already added"
                 resolve({ status: true, msg })
             }
@@ -1184,7 +1183,7 @@ module.exports = {
     deleteProductOffer: (id, proId) => {
         return new Promise(async (resolve, reject) => {
             let products = await dB.get().collection('products').findOne({ _id: ObjectId(proId) })
-            console.log(products, "this is products");
+
             let discount = products.categoryDiscount;
             let productprice = products.OldPrice;
             if (products.categoryOffer == 'true') {
@@ -1318,7 +1317,7 @@ module.exports = {
 
 
             ]).toArray()
-            console.log(sales, "htihs")
+            
             resolve(sales)
         })
     },
@@ -1395,7 +1394,7 @@ module.exports = {
                 }
 
             ]).toArray()
-            console.log(cattCount,"---------------------");
+           
             cattCount = cattCount.map(cat => [cat._id, cat.count])
             const newCattCount = [['Task', 'Hours per Day'], ...cattCount]
             resolve(newCattCount)
@@ -1419,7 +1418,7 @@ module.exports = {
             ]).toArray()
             cattStock = cattStock.map(cat=>[cat._id, cat.total])
             cattStock = [['Task','Hours per Day'],...cattStock]
-            console.log(cattStock);
+           
             resolve(cattStock)
         })
     },
@@ -1470,7 +1469,7 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log("catagory d",category,"category got here");
+           
             resolve(category)
         })
     }

@@ -13,13 +13,20 @@ router.get('/', async (req, res, next) => {
       let userId = req.session.user._id
       let userStatus = req.session.user.status
       let allPro = resp
-      let products = resp.slice(0, 8)
-      let secondProduct = resp.slice(8,16)
-      const[banner,bannerOne,cartProducts,category] = await Promise.all([
-        helper.getBanner(),helper.getBannerOne(),helper.userCart(userId),helper.getCategory()
+      
+      allPro.map((pro)=>{
+        if(pro.manufacturerquantity == 0){
+          pro.outofstock = "true";
+        }
+      })
+    
+      let products = allPro.slice(0, 8)
+      let secondProduct = allPro.slice(8,16)
+      const[banner,bannerOne,cartProducts,allCategory] = await Promise.all([
+        helper.getBanner(), helper.getBannerOne(), helper.userCart(userId), helper.getCategorywithSubcategory()
       ])
-      let allCategory = helper.getCategorywithSubcategory();
-      req.session.category = category
+   
+      req.session.allCategory = allCategory
       let length 
      
       if(cartProducts==null){
@@ -31,20 +38,27 @@ router.get('/', async (req, res, next) => {
       }
       
       
-      res.render('index', { userStatus, category, allPro, products, secondProduct, banner, bannerOne, cartProducts,total,length});
+      res.render('index', { userStatus, allCategory, allPro, products, secondProduct, banner, bannerOne, cartProducts,total,length});
 
     });
   }
   else {
     helper.getProducts().then(async (resp) => {
       let allPro = resp
-      let products = resp.slice(0, 8)
-      let secondProduct = resp.slice(8,16)
+
+      allPro.map((pro)=>{
+        if(pro.manufacturerquantity == 0){
+          pro.outofstock = "true";
+        }
+      })
+
+      let products = allPro.slice(0, 8)
+      let secondProduct = allPro.slice(8,16)
       
-      const[banner,bannerOne,category,allCategory] = await Promise.all([
-        helper.getBanner(), helper.getBannerOne(), helper.getCategory(), helper.getCategorywithSubcategory()
+      const[banner,bannerOne,allCategory] = await Promise.all([
+        helper.getBanner(), helper.getBannerOne(), helper.getCategorywithSubcategory()
       ])
-      req.session.category = category
+      req.session.allCategory = allCategory
       
       res.render('index', {allPro, products, secondProduct, banner, bannerOne, category, allCategory });
     })
@@ -68,6 +82,15 @@ router.get('/productShow/:id', (req, res) => {
     let userStatus = req.session.status
     helper.getSpecificProduct(id).then((resp) => {
       let product = resp;
+
+     
+      if(product.manufacturerquantity <= 20 && product.manufacturerquantity >= 1){
+        product.stock = "true";
+      }
+      if(product.manufacturerquantity == 0){
+        product.outofstock = "true";
+      }
+     
   
       res.render('productView', { userStatus, product })
     })
@@ -78,10 +101,15 @@ router.get('/productShow/:id', (req, res) => {
 })
 
 router.post('/search',(req,res)=>{
-  console.log(req.body.item)
+  
   let search = req.body.item
   helper.searchProduct(search).then((resp)=>{
     let products = resp;
+    products.map((pro)=>{
+      if(pro.manufacturerquantity == 0){
+        pro.outofstock = "true";
+      }
+    })
     res.render('user/searchProducts',{products,search})
   })
 })

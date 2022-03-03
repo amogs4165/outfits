@@ -11,26 +11,21 @@ const client = require('twilio')(accountSID, authToken)
 
 
 router.post('/', (req, res) => {
-    console.log("hee");
-    console.log(req.body);
+   
     const { otp } = req.body;
 
     var userData = req.session.userDetails
-    console.log("heyeyeyey" + userData);
     var number = userData.phoneNumber
-    console.log("helloomynumber" + number)
     client.verify.services(serviceSSID)
         .verificationChecks.create({
             to: `+91${number}`,
             code: otp
         }).then((resp) => {
-            console.log("otp res", resp);
 
             if (resp.valid) {
 
                 helper.userRegistration(userData).then((userStatus) => {
                     if (userStatus.status) {
-                        console.log("heeeee---------------------------------",userStatus.resp)
                         req.session.status = true;
                         let id = userStatus.resp.insertedId
                         helper.getUser(id).then((resp)=>{

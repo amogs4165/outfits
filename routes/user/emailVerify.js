@@ -8,15 +8,14 @@ router.get('/',(req,res)=>{
     email = req.session.email;
     helper.checkEmail(email).then((response)=>{
         if(response.status){
-            console.log((response.status));
-            console.log(("sucessssssssssssssssssss"));
+          
             req.session.status=true;
             req.session.user = response.user
-            console.log(response.user)
+        
             res.redirect('/')
         }
         else{
-            console.log("failureeeeeeeeeeeeeeeeeeeee");
+            req.session.err = "No account registered with this email"
             res.redirect('/signIn')
         }
     })

@@ -17,19 +17,15 @@ router.get('/',verifyLogin,async(req,res)=>{
         let userStatus = req.session.user.status
         let products = await helper.userCart(userId)
         let cartProducts = await helper.userCart(userId)
-        
-        console.log(cartProducts)
+        let allCategory = req.session.allCategory
+      
         if(cartProducts==null){
           var total = null;
         }else{
           var total = await helper.totalPrice(userId)
         }
         
-        
-        console.log("this is total price",total)
-      
-        console.log(products,"hey this is carts products")
-            res.render('user/cart',{products,cartProducts,userStatus,total,userId});
+            res.render('user/cart',{products,cartProducts,allCategory,userStatus,total,userId});
     }else{
         res.redirect('/')
     }
@@ -37,7 +33,7 @@ router.get('/',verifyLogin,async(req,res)=>{
 })
 
 router.get('/cart-add/:id',verifyLogin,(req,res)=>{
-    console.log(req.params.id)
+   
     let userId = req.session.user._id;
     let productId = req.params.id;
 
@@ -47,7 +43,7 @@ router.get('/cart-add/:id',verifyLogin,(req,res)=>{
 })
 
 router.post('/change-product-quantity',verifyLogin,async(req,res,next)=>{
-    console.log(req.body)
+ 
     let userId = req.session.user._id
     let productId = req.body.product
     let crrQuantity = await helper.quantity(userId,productId)
@@ -63,10 +59,9 @@ router.post('/change-product-quantity',verifyLogin,async(req,res,next)=>{
         let total = await helper.totalPrice(userId)
         let quantity = await helper.quantity(userId,productId)
     
-        console.log(productId)
         let currQty = Object.values(quantity)
         let qty = currQty[0];
-        console.log(qty);
+       
         if(qty<=1){
             helper.changeButtonStatus(userId,productId).then(()=>{
                 res.send({status : true, newPrice,total,qty})
@@ -98,14 +93,12 @@ router.post('/remove',verifyLogin,async(req,res)=>{
     let cartId = req.body.cart
     let productId = req.body.product
     helper.removeFromCart(cartId,productId).then(async()=>{
-        console.log("herre ");
+     
         let checkCart = await helper.checkCart(userId)
-        console.log(checkCart.products.length,"here")
+     
         if(checkCart.products.length != 0){
             let cartProducts = await helper.userCart(userId)
             
-            // let p = {...cartProducts}
-            // console.log("heey it is sahe", p)
             if(cartProducts==null){
               var total = null;
             
@@ -132,13 +125,12 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
        
     let userId = req.session.user._id
     let products = await helper.userCart(userId)
-   
+    let allCategory = req.session.allCategory
     let total = await helper.totalPrice(userId)
     let check= false;
     helper.findAddress(userId).then((resp)=>{
         let address = resp;
-        console.log("this is address",address);
-        res.render('user/checkout',{products,userStatus,total,userId,address,check})
+        res.render('user/checkout',{products,userStatus,allCategory,total,userId,address,check})
     })
         
     

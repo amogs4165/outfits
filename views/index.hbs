@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="add to wishlist">
-                                            <a onclick="wishlist('{{this._id}}')" class="btn add-to-wishlist"><i
+                                            <a onclick="wishlist('{{this._id}}')" class="btn open-wishlist-popup wishlist add-to-wishlist"><i
                                                     class="icon an an-heart"></i></a>
                                         </div>
 
@@ -119,13 +119,7 @@
                                     </div>
                                     <!-- End Product Price -->
                                     <!-- Product Review -->
-                                    <div class="product-review">
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star-half-alt"></i>
-                                    </div>
+                                  
                                     <!-- End Product Review -->
                                 </div>
                                 <!-- End Product Details -->
@@ -271,6 +265,9 @@
 
                                 <div class="product-image">
                                     <!-- Product Image -->
+                                    {{#if this.outofstock}}
+                                     <div class="product-labels"><span class="lbl on-sale">Sold out</span></div>
+                                     {{/if}}
                                     <a href="/productShow/{{this._id}}">
                                         <!-- Image -->
                                         <img class="primary blur-up lazyload"
@@ -319,7 +316,7 @@
                                 <div class="product-details text-center">
                                     <!-- Product Name -->
                                     <div class="product-name">
-                                        <a href="product-layout3.html">{{this.productname}}</a>
+                                        <a href="/productShow/{{this._id}}">{{this.productname}}</a>
                                     </div>
                                     <!-- End Product Name -->
                                     <!-- Product Price -->
@@ -328,13 +325,7 @@
                                     </div>
                                     <!-- End Product Price -->
                                     <!-- Product Review -->
-                                    <div class="product-review">
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star-half-alt"></i>
-                                    </div>
+                                 
                                     <!-- End Product Review -->
                                 </div>
                                 <!-- End Product Details -->
@@ -398,6 +389,9 @@
                     } else {
                         swal("Item already added")
                     }
+                },
+                error: ()  =>{
+                    swal("Please LogIn")
                 }
             })
         }

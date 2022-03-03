@@ -17,7 +17,7 @@ router.get('/',verifyLogin,(req,res)=>{
         let cattDetails = resp.cattDetails;
         helper.getSCategoryDetails().then((response)=>{
             let scattDetails = response.cattDetails;
-            console.log(scattDetails);
+           
             res.render('admin/addProduct',{admin,scattDetails,cattDetails})
         })
             
@@ -26,14 +26,13 @@ router.get('/',verifyLogin,(req,res)=>{
 })
 
 router.post('/add',verifyLogin,(req,res)=>{
-    console.log(req.body);
-    console.log(req.files.image);
+   
     helper.addProduct(req.body,(id)=>{
         let image1 = req.files.image1
         let image2 = req.files.image2
         let image3 = req.files.image3
         let image4 = req.files.image4
-        console.log(id);
+       
         image1.mv('./public/product-images/'+id+'image1.jpg',(err,done)=>{
             if(!err){
                 image2.mv('./public/product-images/'+id+'image2.jpg',(err,done)=>{

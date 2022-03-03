@@ -46,7 +46,9 @@
                                             src="/product-images/{{this._id}}image2.jpg" alt="image" title="product" />
                                         <!-- End Hover Image -->
                                         <!-- Product Label -->
-                                        <div class="product-labels"><span class="lbl pr-label3">Popular</span></div>
+                                        {{#if this.outofstock}}
+                                         <div class="product-labels"><span class="lbl on-sale">Sold out</span></div>
+                                         {{/if}}
                                         <!-- End Product Label -->
                                     </a>
                                     <!-- End Product Image -->
@@ -92,13 +94,7 @@
                                     </div>
                                     <!-- End Product Price -->
                                     <!-- Product Review -->
-                                    <div class="product-review">
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star-half-alt"></i>
-                                    </div>
+                                    
                                     <!-- End Product Review -->
                                 </div>
                                 <!-- End Product Details -->

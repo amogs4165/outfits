@@ -16,7 +16,6 @@ router.get('/',verifyLogin,async (req,res)=>{
 
     let CategotyOffer = await helper.getCategoryOffer()
     helper.getCategoryDetails().then((resp)=>{
-        console.log(resp);
         let category = resp.cattDetails
         res.render('admin/categoryOffer',{admin, category,CategotyOffer})
     })
@@ -25,7 +24,6 @@ router.get('/',verifyLogin,async (req,res)=>{
 router.post('/add-categoryOffer',verifyLogin, (req,res)=>{
     let admin = true;
     
-    console.log(req.body)
     let offer = req.body
     helper.insertCategoryOffer(offer.offercategory,offer.discount,offer.validity).then(()=>{
 
@@ -44,7 +42,6 @@ router.get('/addProductOffer/:id',verifyLogin,(req,res)=>{
 
 router.post('/add-productOffer',verifyLogin,(req,res)=>{
     
-    console.log("request body",req.body)
     let offer = req.body
     helper.insertProductOffer(offer.proId,offer.discount,offer.validity).then((resp)=>{
         helper.addProductOffer(offer).then(()=>{
@@ -61,17 +58,17 @@ router.get('/getProductoffer',verifyLogin,(req,res)=>{
 })
 
 router.post('/delete-categoryOffer',verifyLogin,(req,res)=>{
-    console.log(req.body)
+  
     let name = req.body.name;
     let id = req.body.id
-    console.log("hey her its catt delte")
+  
     helper.deleteCategoryOffer(name,id).then(()=>{
         res.send({status:true})
     })
 })
 
 router.post('/delete-productOffer',verifyLogin,(req,res)=>{
-    console.log("hey her its produt delte",req.body)
+  
     let id = req.body.id;
     let proId = req.body.proId;
     helper.deleteProductOffer(id,proId).then(()=>{
@@ -85,7 +82,7 @@ router.get('/add-coupon',verifyLogin,async (req,res)=>{
 })
 
 router.post('/add-couponOffer',verifyLogin,(req,res)=>{
-    console.log(req.body)
+   
     let details = req.body
     helper.insertCouponOffer(details).then(()=>{
         res.redirect('/offerManagement/add-coupon')
@@ -93,7 +90,7 @@ router.post('/add-couponOffer',verifyLogin,(req,res)=>{
 })
 
 router.post('/delete-couponOffer',verifyLogin,(req,res)=>{
-    console.log("hey her its produt delte",req.body)
+
     let id = req.body.id;
     let proId = req.body.proId;
     helper.deletecouponOffer(id).then(()=>{
@@ -102,11 +99,10 @@ router.post('/delete-couponOffer',verifyLogin,(req,res)=>{
 })
 
 router.post('/couponCheck',(req,res)=>{
-    console.log(req.body);
+ 
     let coupon = req.body.couponCode;
     let userId = req.session.user._id
-    console.log(coupon);
-    console.log(userId);
+
     helper.checkCoupon(userId,coupon).then((resp)=>{
         let subTotal = req.body.total
         if(resp.coupon){

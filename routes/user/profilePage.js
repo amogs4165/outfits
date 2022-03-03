@@ -14,8 +14,6 @@ const verifyLogin = (req,res,next) =>{
 router.get('/',verifyLogin,async(req,res)=>{
     let userStatus = req.session.status
    
-        
-        console.log("user here",req.session.user)
         let userId = req.session.user._id
         
         const [user, orders, coupons] = await Promise.all([
@@ -39,11 +37,11 @@ router.post('/add-address',verifyLogin,(req,res)=>{
     let userId = req.session.user._id;
     let address = req.body
     let userStatus = req.session.status
-    console.log(req.body)
+ 
     helper.addAddress(userId,address).then(()=>{
         helper.findAddress(userId).then((resp)=>{
             let address = resp;
-            console.log("this is address got here",address);
+           
             address.addAddress1.status = true;
             res.redirect('/profile')
         }).catch(()=>{
@@ -57,19 +55,18 @@ router.post('/update-address',verifyLogin,(req,res)=>{
     let address = req.body;
     let userId = req.session.user._id;
     helper.updateAddress(userId,addressId,address).then((resp)=>{
-        console.log(resp)
+     
         res.redirect('/profile')
     })
-    console.log(addressId);
-    console.log(req.body);
+
 })
 
 router.post('/editProfile',verifyLogin,(req,res)=>{
-    console.log(req.body);
+ 
     let id = req.session.user._id
     let profileImg = req.files.image1
     let details = req.body
-    console.log(id);
+   
     profileImg.mv('./public/profile-image/'+id+'image1.jpg')
     helper.editUserDetail(id,details).then(()=>{
         res.redirect('/profile')

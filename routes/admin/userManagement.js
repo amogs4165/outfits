@@ -16,7 +16,6 @@ router.get('/',verifyLogin,(req,res)=>{
 
     helper.getuserDetails().then((response)=>{
 
-        console.log(response.userDetails)
         var userDetails = response.userDetails;
 
         res.render('admin/userManagement',{userDetails,admin})
@@ -25,7 +24,7 @@ router.get('/',verifyLogin,(req,res)=>{
 })
 
 router.get('/delete/:id',verifyLogin,function(req,res,next){
-    console.log(req.params.id)
+
     var id=req.params.id;
     helper.userDelete(id).then((response)=>{
         if(response){

@@ -23,8 +23,6 @@ router.get('/',verifyLogin,(req,res)=>{
 
 router.post('/',verifyLogin,(req,res)=>{
 
-    console.log("heyyyyy")
-    console.log(req.body)
     let id = req.body.id;
     let status = req.body.status
     helper.updateOrderStatus(id,status).then(()=>{
@@ -34,18 +32,3 @@ router.post('/',verifyLogin,(req,res)=>{
 module.exports = router;
 
 
-// timestamp date converting codde
-
-// db.collection.aggregate([
-//     { "$project": {
-//       "_id": {
-//         "$toDate": {
-//           "$toLong": "$_id"
-//         }
-//       }
-//     }},
-//     { "$group": {
-//       "_id": { "$dateToString": { "format": "%Y-%m-%d", "date": "$_id" } },
-//       "count": { "$sum": 1 }
-//     }}
-//   ])

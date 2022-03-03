@@ -15,7 +15,7 @@
                 <div class="row">
 
 
-                    <table class="table" id="adminTable">
+                    <table class="table" id="adminTable" >
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -67,6 +67,26 @@
 
 
 <script>
+
+    function queryParams() {
+    return {
+      type: 'owner',
+      sort: 'updated',
+      direction: 'desc',
+      per_page: 100,
+      page: 1
+    };
+  }
+  function rowStyle(row, index) {
+    var classes = ['active', 'success', 'info', 'warning', 'danger'];
+    if (index % 2 === 0 && index / 2 < classes.length) {
+      return {
+        classes: classes[index / 2]
+      };
+    }
+    return {};
+  }
+
     function confirmDelete(id) {
         swal({
             title: "Are you sure?",

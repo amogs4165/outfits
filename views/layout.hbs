@@ -372,14 +372,14 @@
                                 <!-- Desktop Menu -->
                                 <nav class="grid__item" id="AccessibleNav">
                                     <ul id="siteNav" class="d-flex flex-wrap site-nav medium center hidearrow">
-                                        {{#each category}}
+                                        {{#each allCategory}}
                                         <li class="lvl1 parent dropdown">
-                                            <a href="/sort/{{this.categoryName}}">{{this.categoryName}} <i
+                                            <a href="/sort/{{this._id}}">{{this._id}} <i
                                                     class="an an-angle-down"></i></a>
                                             <ul class="dropdown">
-                                                <li><a href="#" class="site-nav">dresses</a></li>
-
-
+                                                {{#each this.subCategory}}
+                                                <li><a href="/sort/{{this}}" class="site-nav">{{this}}</a></li>
+                                                {{/each}}
                                             </ul>
                                         </li>
                                         {{/each}}
@@ -465,12 +465,13 @@
         <div class="mobile-nav-wrapper" role="navigation">
             <div class="closemobileMenu"><i class="icon an an-times-circle closemenu"></i> Close Menu</div>
             <ul id="MobileNav" class="mobile-nav">
-                {{#each category}}
+                {{#each allCategory}}
                 <li class="lvl1 parent megamenu">
-                    <a href="/sort/{{this.categoryName}}">{{this.categoryName}} <i class="an an-plus"></i></a>
+                    <a href="/sort/{{this._id}}">{{this._id}} <i class="an an-plus"></i></a>
                     <ul>
-                        <li><a href="/" class="site-nav">sub categories</a></li>
-
+                        {{#each this.subCategory}}
+                        <li><a href="/sort/{{this}}" class="site-nav">{{this}}</a></li>
+                        {{/each}}
                     </ul>
                 </li>
                 {{/each}}
@@ -636,8 +637,7 @@
             xhr.open('POST', '/signIn/getId');
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function () {
-                console.log('Signed in as: ' + xhr.responseText);
-                console.log(xhr.googleUser)
+              
                 if (xhr.responseText == 'success') {
                     signOut()
                     location.assign('/emailVerify')

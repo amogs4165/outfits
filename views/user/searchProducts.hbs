@@ -46,7 +46,9 @@
                                             src="/product-images/{{this._id}}image2.jpg" alt="image" title="product" />
                                         <!-- End Hover Image -->
                                         <!-- Product Label -->
-                                        <div class="product-labels"><span class="lbl pr-label3">Popular</span></div>
+                                        {{#if this.outofstock}}
+                                         <div class="product-labels"><span class="lbl on-sale">Sold out</span></div>
+                                         {{/if}}
                                         <!-- End Product Label -->
                                     </a>
                                     <!-- End Product Image -->
@@ -69,8 +71,7 @@
                                         </div>
                                         <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="add to wishlist">
-                                            <a href="#open-wishlist-popup"
-                                                class="btn open-wishlist-popup wishlist add-to-wishlist"><i
+                                            <a onclick="wishlist('{{this._id}}')" class="btn open-wishlist-popup wishlist add-to-wishlist"><i
                                                     class="icon an an-heart"></i></a>
                                         </div>
 
@@ -92,13 +93,7 @@
                                     </div>
                                     <!-- End Product Price -->
                                     <!-- Product Review -->
-                                    <div class="product-review">
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star"></i>
-                                        <i class="an an-star-half-alt"></i>
-                                    </div>
+                                   
                                     <!-- End Product Review -->
                                 </div>
                                 <!-- End Product Details -->
@@ -125,7 +120,7 @@
                         <!-- Main Content -->
                         <div class="col-sm-12 text-center empty-page mb-5">
                             <i class="icon an an-search"></i>
-                            <h2>Your Search Returns to Results!</h2>
+                            <h2>No results found !</h2>
                             <p class="mb-3 pb-1">Search results for <b>{{search}}</b></p>
                             <a href="/" class="btn btn-primary">continue shopping</a>
                         </div>
@@ -249,3 +244,26 @@
         </div>
         <!-- End Page Wrapper -->
     </div>
+
+    <script>
+        function wishlist(proId) {
+
+            $.ajax({
+                url: '/wishlist',
+                data: {
+                    proId: proId
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        swal("Item added to wishlist")
+                    } else {
+                        swal("Item already added")
+                    }
+                },
+                error: ()  =>{
+                    swal("Please LogIn")
+                }
+            })
+        }
+    </script>

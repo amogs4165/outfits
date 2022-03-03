@@ -27,7 +27,7 @@
 
     $('#validateMobile').submit(function (e) {
         let phone = document.getElementById('phoneNumber').value
-        console.log(phone)
+     
         if (!phone.match(/^\d{10}$/)) {
             document.getElementById("errr").style.visibility="visible"
             e.preventDefault();

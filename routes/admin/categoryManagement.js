@@ -13,10 +13,10 @@ const verifyLogin = (req,res,next)=>{
 }    
 
 router.get('/',verifyLogin,(req,res)=>{
-    console.log("hehwhweuhrfjcsia")
+  
     let admin =true;
     helper.getCategory().then((response)=>{
-        console.log(response);
+       
         let catt = response;
         res.render('admin/categoryManagement',{admin,catt})
     })
@@ -26,7 +26,6 @@ router.get('/',verifyLogin,(req,res)=>{
 router.post('/addCategory',verifyLogin,(req,res)=>{
     
     let category = req.body
-    console.log(category);
     helper.checkCategory(category).then((response)=>{
        if(response){
            res.send("already exist")
@@ -46,7 +45,6 @@ router.post('/addCategory',verifyLogin,(req,res)=>{
 
 router.post('/addSubCategory',verifyLogin,(req,res)=>{
   
-    console.log(req.body);
     let cattDetails = req.body;
     let subCategory = req.body.subCategoryName;
     helper.checkSubCategory(subCategory).then((response)=>{

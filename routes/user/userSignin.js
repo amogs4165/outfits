@@ -15,8 +15,7 @@ const clients = new OAuth2Client(CLIENT_ID);
 router.get('/', (req, res) => {
 
     let userStatus = req.session.status;
-   
-    console.log('in signin', userStatus)
+
 
     if(userStatus){
         res.redirect('/')
@@ -52,24 +51,22 @@ router.get('/signInwithnumber', (req, res) => {
 })
 router.post('/getnumber', (req, res) => {
     req.session.userDetails = req.body
-    console.log(req.body);
+
     let number = req.body;
     helper.verifyMobileNum(number).then((response)=>{
         if(response.status){
-            console.log('im here');
-            console.log(serviceSSID);
-            console.log(accountSID);
+
                 client.verify
             .services(serviceSSID)
             .verifications.create({
                 to: `+91${req.body.phoneNumber}`,
                 channel: "sms"
             }).then((resp) => {
-                console.log("response",resp);
+               
                 res.redirect('/signIn/otpSigninVerify')
                 
             }).catch((resp) => {
-                console.log("response",resp);
+               
                 res.send("something went wrongggg")
             })
 
@@ -88,16 +85,16 @@ router.post('/otpverify',(req,res)=>{
     const { otp } = req.body;
 
     var userData = req.session.userDetails
-    console.log("heyeyeyey" + userData);
+
     var number = userData.phoneNumber
-    console.log("helloomynumber" + number)
+
 
     client.verify.services(serviceSSID)
         .verificationChecks.create({
             to: `+91${number}`,
             code: otp
         }).then((resp) => {
-            console.log("otp res", resp);
+        
 
             if (resp.valid) {
                 helper.loginUserdetailWithNum(number).then((resp)=>{
@@ -118,7 +115,6 @@ router.post('/otpverify',(req,res)=>{
 router.post('/getId',(req,res)=>{
     let token = req.body.token;
 
-    console.log(token);
     async function verify() {
     const ticket = await clients.verifyIdToken({
         idToken: token,
@@ -130,13 +126,13 @@ router.post('/getId',(req,res)=>{
     const userid = payload['sub'];
     // If request specified a G Suite domain:
     // const domain = payload['hd'];
-    console.log(payload)
+
     req.session.email = payload.email;
     
 
 }
 verify().then(()=>{
-    // console.log("hey")
+ 
     res.cookie('success',token)
     res.send('success')
     

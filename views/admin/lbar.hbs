@@ -8,7 +8,7 @@
     let cod = document.getElementById("codPayment").value;
     let razorpay = document.getElementById("razorpayPayment").value;
     let paypal = document.getElementById("paypalPayment").value;
-    console.log("heyeh", parseInt(cod), razorpay, paypal)
+   
     var data = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
       ['COD', parseInt(cod)],
@@ -132,7 +132,7 @@
           </div>
           <div class="col-12 mt-5">
 
-            <div id="columnchart_values" style="width: 100%; height: 45em;"></div>
+            {{!-- <div id="columnchart_values" style="width: 100%; height: 45em;"></div> --}}
           </div>
         </div>
       </div>

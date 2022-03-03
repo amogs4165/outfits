@@ -37,13 +37,13 @@ router.get('/:id', (req, res) => {
         if(ObjectId.isValid(id)){
 
             helper.getUser(id).then((resp)=>{
-                console.log(resp)
+               
                 if(resp){
-                    console.log("true")
+                   
                     req.session.referal = id;
                     res.render('user/register')
                 }else{
-                    console.log("falswe");
+                    
                     res.render('user/register')
                 }
             })
@@ -55,21 +55,20 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/userDetail', (req, res) => {
-    // console.log(req.body)
-    console.log(req.body.phoneNumber);
+
     req.session.userDetails = req.body;
     details = req.session.userDetails
-    console.log(details);
+
     client.verify
         .services(serviceSSID)
         .verifications.create({
             to: `+91${req.body.phoneNumber}`,
             channel: "sms"
         }).then((resp) => {
-            console.log("response",resp);
+           
             res.render('user/otpVerification')
         }).catch((resp) => {
-            console.log("response",resp);
+          
             res.send("something went wrongggg")
         })
 

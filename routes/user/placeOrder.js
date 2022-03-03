@@ -21,7 +21,6 @@ const verifyLogin = (req,res,next) =>{
 
 router.post('/',verifyLogin,async (req,res)=>{
     
-    console.log("check is here",req.body.totalAmount);
     let address = req.body.address;
     let paymentMode = req.body.paymentMode;
     let check = req.body.check
@@ -29,7 +28,7 @@ router.post('/',verifyLogin,async (req,res)=>{
     req.session.coupon = coupon;
     
     if(check== 'false'){
-        console.log("heyre",coupon)
+
         if(paymentMode =='COD'){
             if(address!=''){
                 let userId = req.session.user._id;
@@ -44,7 +43,6 @@ router.post('/',verifyLogin,async (req,res)=>{
                    
                 });
                 let total =  req.body.totalAmount
-                console.log("its here");
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                     let orderId = ""+resp.insertedId
                     helper.addUserCoupon(userId,coupon)
@@ -90,7 +88,7 @@ router.post('/',verifyLogin,async (req,res)=>{
             
 
             if(address!=''){
-                console.log("here");
+            
                 let userId = req.session.user._id;
                 let date = new Date();
                 let status = "pending";
@@ -103,9 +101,9 @@ router.post('/',verifyLogin,async (req,res)=>{
                    
                 });
                 let total =  req.body.totalAmount
-                console.log("its here",total);
+         
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
-                    console.log("resp details.....",resp)
+                   
                     let orderId = ""+resp.insertedId
                     helper.generateRazorpay(orderId,total).then((response)=>{
                         res.json({status:false,response})
@@ -155,12 +153,12 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
                 // let totalPrice = totalAmount.toString();
-                console.log("tottal Pricess:",totalAmount)
+               
                 
                 req.session.total = totalAmount;
                 
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
-                    console.log("resp details.....",resp)
+                   
                     let orderId = ""+resp.insertedId
                     req.session.orderId = resp.insertedId
                     const create_payment_json = {
@@ -193,12 +191,11 @@ router.post('/',verifyLogin,async (req,res)=>{
                         if (error) {
                             throw error;
                         } else {
-                            console.log("create paynm resp");
-                            console.log(payment);
+                          
                             
                             for(let i = 0;i < payment.links.length;i++){
                               if(payment.links[i].rel === 'approval_url'){
-                                  console.log(payment.links[i].href);
+                                 
                                   let redirecturl = payment.links[i].href
                                 res.json({status:false,mode:"paypal",url:redirecturl});
                               }
@@ -226,12 +223,11 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let totalPrice = total/75;
                 let totalAmount = parseInt(totalPrice);
                 // let totalPrice = totalAmount.toString();
-                console.log("tottal Price:",totalAmount)
+            
                 
                 req.session.total = totalAmount;
                 helper.orders(userId,{address},products,total,paymentMode,date,status).then((resp)=>{
                   
-                    console.log("resp details.....",resp)
                     let orderId = ""+resp.insertedId
                     req.session.orderId = resp.insertedId
                     const create_payment_json = {
@@ -264,12 +260,9 @@ router.post('/',verifyLogin,async (req,res)=>{
                         if (error) {
                             throw error;
                         } else {
-                            console.log("create paynm resp");
-                            console.log(payment);
                             
                             for(let i = 0;i < payment.links.length;i++){
                               if(payment.links[i].rel === 'approval_url'){
-                                  console.log(payment.links[i].href);
                                   let redirecturl = payment.links[i].href
                                 res.json({status:false,mode:"paypal",url:redirecturl});
                               }
@@ -284,7 +277,7 @@ router.post('/',verifyLogin,async (req,res)=>{
        
         if(paymentMode =='COD'){  //cod
             if(address!=''){
-                console.log("here it is",req.body)
+              
                 let proId = req.body.proId
                 let userId = req.session.user._id;
                 let date = new Date();
@@ -294,13 +287,13 @@ router.post('/',verifyLogin,async (req,res)=>{
                 const [shippingAddress] = shippingAddress1;
                 let products = [await helper.getProductDetailsById(proId)];
                 let qty = req.body.qty;
-                console.log("this is products",products)
+            
                 products[0].quantity = parseInt(qty);
                 products[0].productId = ObjectId(proId) 
-                console.log("this is new products",products)
+             
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
-                console.log("its here");
+       
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                     let orderId = ""+resp.insertedId
                     helper.addUserCoupon(userId,coupon).then(()=>{
@@ -360,9 +353,9 @@ router.post('/',verifyLogin,async (req,res)=>{
                 products[0].productId = ObjectId(proId) 
                 helper.quantityDecrement(proId,qty);
                 let total =  req.body.totalAmount
-                console.log("its here",total);
+              
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
-                    console.log("resp details.....",resp)
+                
                     let orderId = ""+resp.insertedId
                     helper.generateRazorpay(orderId,total).then((response)=>{
                         res.json({status:false,response})
@@ -412,12 +405,12 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let totalAmount = parseInt(total)/75;
                 totalAmount = parseInt(totalAmount.toFixed(2))
                 // let totalPrice = totalAmount.toString();
-                console.log("tottal Price:",totalAmount)
+           
                 
                 req.session.total = totalAmount;
-                console.log("its here",total);
+             
                 helper.orders(userId,{...shippingAddress},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
-                    console.log("resp details.....",resp)
+                   
                     let orderId = ""+resp.insertedId
                     req.session.orderId = resp.insertedId
                     const create_payment_json = {
@@ -450,12 +443,11 @@ router.post('/',verifyLogin,async (req,res)=>{
                         if (error) {
                             throw error;
                         } else {
-                            console.log("create paynm resp");
-                            console.log(payment);
+                       
                             
                             for(let i = 0;i < payment.links.length;i++){
                               if(payment.links[i].rel === 'approval_url'){
-                                  console.log(payment.links[i].href);
+                              
                                   let redirecturl = payment.links[i].href
                                 res.json({status:false,mode:"paypal",url:redirecturl});
                               }
@@ -486,12 +478,12 @@ router.post('/',verifyLogin,async (req,res)=>{
                 let totalAmount = parseInt(total)/75;
                 // let totalPrice = totalAmount.toString();
                 totalAmount = totalAmount.toFixed(2)
-                console.log("tottal Price:",totalAmount)
+           
                 
                 req.session.total = totalAmount;
                 helper.orders(userId,{address},products,total,paymentMode,date,status,OrderStatus).then((resp)=>{
                   
-                    console.log("resp details.....",resp)
+                 
                     let orderId = ""+resp.insertedId
                     req.session.orderId = resp.insertedId
                     const create_payment_json = {
@@ -524,12 +516,11 @@ router.post('/',verifyLogin,async (req,res)=>{
                         if (error) {
                             throw error;
                         } else {
-                            console.log("create paynm resp");
-                            console.log(payment);
+                           
                             
                             for(let i = 0;i < payment.links.length;i++){
                               if(payment.links[i].rel === 'approval_url'){
-                                  console.log(payment.links[i].href);
+                                
                                   let redirecturl = payment.links[i].href
                                 res.json({status:false,mode:"paypal",url:redirecturl});
                               }
@@ -545,7 +536,7 @@ router.post('/',verifyLogin,async (req,res)=>{
 })
 
 router.post('/verify-payment',verifyLogin,(req,res)=>{
-    console.log("verify payment",req.body);
+  
     helper.verifyPayment(req.body).then(()=>{
         let crrStatus = "placed"
         let userId = req.session.user._id;
@@ -556,19 +547,17 @@ router.post('/verify-payment',verifyLogin,(req,res)=>{
 
                 helper.incrementAmount(userId,-req.session.wAmount)
             }
-            console.log(resp);
-            console.log("payment succesful");
+ 
             res.json({status:true})
         })
     }).catch((err)=>{
-        console.log(err)
+    
         res.json({status:'Paymentfailed'})
     })
 })
 
 router.get('/order-success',verifyLogin,(req,res)=>{
     
-    console.log("paypal test",req.query)
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
 
@@ -591,11 +580,9 @@ router.get('/order-success',verifyLogin,(req,res)=>{
           paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
                 
-                console.log(error.response);
                 throw error;
             } else {
-                console.log("get payment response")
-                console.log(JSON.stringify(payment));
+
                 let coupon = req.session.coupon
                 let crrStatus = "placed"
                 let userId = req.session.user._id;
@@ -615,9 +602,4 @@ router.get('/order-success',verifyLogin,(req,res)=>{
     
 })
 
-
-
-// router.post('/newAddress',(req,res)=>{
-//     console.log(req.body);
-// })
 module.exports = router;

@@ -442,7 +442,7 @@
     }
 
     $("#checkout_btn").click((e) => {
-        console.log('entered')
+      
         var getSelectedValue = document.querySelector('input[name="address"]:checked').value;
 
         if (getSelectedValue == "") {
@@ -476,7 +476,7 @@
             }
         }
 
-        console.log($('#checkout-form').serialize())
+       
         e.preventDefault()
         $.ajax({
             url: '/placeOrder',
@@ -488,7 +488,7 @@
                     location.href = '/placeOrder/order-success'
                 } else {
                     if (response.mode == "paypal") {
-                        console.log(response.url)
+                       
                         location.href = response.url
                     }
                     else {
