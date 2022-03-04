@@ -56,12 +56,15 @@
                                         <td class="product-price text-center"><span
                                                 class="amount">{{this.wishlistProducts.productprice}}</span></td>
                                         <td class="stock text-center">
-
+                                            {{#if this.outofstock}}
+                                            <span class="out-stock">out of stock</span>
+                                            {{else}}
                                             <span class="in-stock">in stock</span>
+                                            {{/if}}
 
                                         </td>
                                         <td class="product-subtotal text-center"><a href="/cart/cart-add/{{this.wishlistProducts._id}}"
-                                                class="btn btn-small">Add To Cart</a></td>
+                                                class="btn btn-dark">Move To Cart</a></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>

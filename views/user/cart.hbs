@@ -219,7 +219,7 @@
     function removeCart(cartId, proId) {
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
+            text: "Once deleted, you will not be able to recover this item!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -237,7 +237,7 @@
                             if (response.status) {
                                 if (response.quantityCheck) {
 
-                                    await swal("Poof! Your imaginary file has been deleted!", {
+                                    await swal("Item has been deleted!", {
                                         icon: "success",
                                     });
                                     location.reload()
@@ -245,7 +245,7 @@
                                 } else {
                                     $('#' + cartId + proId + '123').remove()
                                     $('.totalPrice_').html(response.total);
-                                    swal("Poof! Your imaginary file has been deleted!", {
+                                    swal("Item has been deleted!", {
                                         icon: "success",
                                     });
 
@@ -258,7 +258,7 @@
                         },
                     });
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("Your cart item is not removed!");
                 }
             });
     }

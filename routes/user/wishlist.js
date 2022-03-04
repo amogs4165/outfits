@@ -10,7 +10,7 @@ const verifyLogin = (req,res,next) =>{
     }
 }
 
-router.get('/',verifyLogin,(req,res)=>{
+router.get('/',verifyLogin, (req,res)=>{
     let userId = req.session.user._id
     helper.getWishlist(userId).then((resp)=>{
      
@@ -20,10 +20,15 @@ router.get('/',verifyLogin,(req,res)=>{
           
             helper.getWishlistProducts(userId).then((resp)=>{
               
-                let product = resp
-              
-                
-                res.render('user/wishlist',{product})
+            let product = resp
+                 product.map((pro)=>{
+                     console.log("outofstock",pro);
+                    if(pro.wishlistProducts.manufacturerquantity == 0){
+                    pro.outofstock = "true";
+                    }
+                })
+            
+            res.render('user/wishlist',{product})
             })
 
         }

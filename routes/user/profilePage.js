@@ -64,22 +64,19 @@ router.post('/update-address',verifyLogin,(req,res)=>{
 router.post('/editProfile',verifyLogin,(req,res)=>{
  
     let id = req.session.user._id
-    let profileImg = req.files.image1
+    if(req.files){
+
+        let profileImg = req.files.image1
+        profileImg.mv('./public/profile-image/'+id+'image1.jpg')
+    }
     let details = req.body
+    console.log(id,details,req.files);
    
-    profileImg.mv('./public/profile-image/'+id+'image1.jpg')
     helper.editUserDetail(id,details).then(()=>{
         res.redirect('/profile')
     })
     
 })
 
-// router.get('/'),(req,res)=>{
-//     res.render('user/userProfile')
-// }
-
-// router.get('/'),(req,res)=>{
-//     res.render('user/userProfile')
-// }
 
 module.exports = router;
