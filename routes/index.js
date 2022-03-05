@@ -22,10 +22,10 @@ router.get('/', async (req, res, next) => {
     
       let products = allPro.slice(0, 8)
       let secondProduct = allPro.slice(8,16)
-      const[banner,bannerOne,cartProducts,allCategory] = await Promise.all([
-        helper.getBanner(), helper.getBannerOne(), helper.userCart(userId), helper.getCategorywithSubcategory()
+      const[banner,bannerOne,cartProducts] = await Promise.all([
+        helper.getBanner(), helper.getBannerOne(), helper.userCart(userId)
       ])
-   
+      let allCategory = await helper.getCategorywithSubcategory()
       req.session.allCategory = allCategory
       let length 
      
@@ -55,9 +55,10 @@ router.get('/', async (req, res, next) => {
       let products = allPro.slice(0, 8)
       let secondProduct = allPro.slice(8,16)
       
-      const[banner,bannerOne,allCategory] = await Promise.all([
-        helper.getBanner(), helper.getBannerOne(), helper.getCategorywithSubcategory()
+      const[banner,bannerOne] = await Promise.all([
+        helper.getBanner(), helper.getBannerOne()
       ])
+      let allCategory = await helper.getCategorywithSubcategory()
       req.session.allCategory = allCategory
       
       res.render('index', {allPro, products, secondProduct, banner, bannerOne, category, allCategory });
