@@ -58,6 +58,7 @@ router.get('/', async (req, res, next) => {
       const[banner,bannerOne,allCategory] = await Promise.all([
         helper.getBanner(), helper.getBannerOne(), helper.getCategorywithSubcategory()
       ])
+      console.log(allCategory)
       req.session.allCategory = allCategory
       
       res.render('index', {allPro, products, secondProduct, banner, bannerOne, category, allCategory });

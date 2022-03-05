@@ -372,6 +372,7 @@
                                 <!-- Desktop Menu -->
                                 <nav class="grid__item" id="AccessibleNav">
                                     <ul id="siteNav" class="d-flex flex-wrap site-nav medium center hidearrow">
+                                        {{#if allCategory}}
                                         {{#each allCategory}}
                                         <li class="lvl1 parent dropdown">
                                             <a href="/sort/{{this._id}}">{{this._id}} <i
@@ -383,6 +384,10 @@
                                             </ul>
                                         </li>
                                         {{/each}}
+                                        {{else}}
+                                        <p>testing for nav bar on maintainance</p>
+                                        {{/if}}
+
                                     </ul>
                                 </nav>
                                 <!-- End Desktop Menu -->
