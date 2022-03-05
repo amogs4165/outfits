@@ -103,6 +103,7 @@ router.get('/productShow/:id', (req, res) => {
 router.post('/search',(req,res)=>{
   
   let search = req.body.item
+  const allCategory = req.session.allCategory
   helper.searchProduct(search).then((resp)=>{
     let products = resp;
     products.map((pro)=>{
@@ -110,7 +111,7 @@ router.post('/search',(req,res)=>{
         pro.outofstock = "true";
       }
     })
-    res.render('user/searchProducts',{products,search})
+    res.render('user/searchProducts',{products,search,allCategory})
   })
 })
 
