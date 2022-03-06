@@ -682,17 +682,21 @@ module.exports = {
     },
     selectBanner: (id) => {
         return new Promise(async (resolve, reject) => {
-            dB.get().collection('banner').updateMany({}, { $set: { status: false } })
-            let banner = await dB.get().collection('banner').updateOne({ _id: ObjectId(id) }, { $set: { status: true } })
-            return resolve(banner)
+            dB.get().collection('banner').updateMany({}, { $set: { status: false } }).then(()=>{
+
+                dB.get().collection('banner').updateOne({ _id: ObjectId(id) }, { $set: { status: true } })
+                resolve()
+            })
 
         })
     },
     selectBannerOne: (id) => {
         return new Promise(async (resolve, reject) => {
-            dB.get().collection('bannerOne').updateMany({}, { $set: { status: false } })
-            let banner = await dB.get().collection('bannerOne').updateOne({ _id: ObjectId(id) }, { $set: { status: true } })
-            return resolve(banner)
+            dB.get().collection('bannerOne').updateMany({}, { $set: { status: false } }).then(()=>{
+
+                dB.get().collection('bannerOne').updateOne({ _id: ObjectId(id) }, { $set: { status: true } })
+                resolve()
+            })
 
         })
     },
@@ -714,7 +718,18 @@ module.exports = {
             resolve(banner);
         })
     },
-  
+    removeBanner:(id) =>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('banner').deleteOne({_id:ObjectId(id)})
+            resolve()
+        })
+    },
+    removeBannerOne:(id)=>{
+        return new Promise((resolve,reject)=>{
+            dB.get().collection('bannerOne').deleteOne({_id:ObjectId(id)})
+            resolve()
+        })
+    },
     getShippingAddress: (userId, addressId) => {
         return new Promise((resolve, reject) => {
             let shippingAddress = dB.get().collection('address').aggregate([

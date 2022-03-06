@@ -1,87 +1,124 @@
-<div id="layout-wrapper">  
-            
+<div id="layout-wrapper">
 
-            <!-- ========== Left Sidebar Start ========== -->
 
-            
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-                <div class="main-content">
+    <!-- ========== Left Sidebar Start ========== -->
 
-                    <div class="page-content">
-                        {{!-- <div class="container-fluid"> --}}
 
-                            <!-- start page title -->
-                            <div class="row">
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
 
-                                
-        <table class="table" id="adminTable" >
-            <thead>
-                <tr >
-                <th scope="col">No</th>
-                 <th scope="col">Name</th>
-                <th scope="col">Banner Image</th>
-                <th scope="col">Top</th>
-                <th scope="col">Middle</th>
-                <th scope="col">Bottom</th>
-                <th scope="col">Action</th>
-                <th scope="col">Remove</th>
-                
-                </tr>
-            </thead>
-                <tbody id="myTable">
-                    {{#each banner}}
-                        <tr class="align-middle">
-                            <td></td>
-                            <td>{{this.info.bannername}}</td>
-                            <td><img src="/banner-images1/{{this._id}}image1.jpg" style="width: 15rem; height: auto;" ></td>
-                            <td>{{this.info.topContent}}</td>
-                            <td>{{this.info.middleContent}}</td>
-                            <td>{{this.info.bottomContent}}</td>
-                            <td>
-                                {{#if this.status}}
-                                <a class="btn btn-primary mt-2 "  >Using</a>
-                                {{else}}
-                                 <a class="btn btn-primary mt-2 " href=""  onclick="selectBanner('{{this._id}}')" type="submit">Select</a>
-                                {{/if}}
-                            </td>
-                            <td><a class="btn btn-danger mt-2 " href=""  onclick="return confirm('click Ok to confirm Delete')" type="submit">Delete</a></td>
-                            
-                        </tr>
-                    {{/each}}
-                    
-                </tbody>
-        </table>
+        <div class="page-content">
+            {{!-- <div class="container-fluid"> --}}
 
-                            </div>
-                        </div>
-                    </div>
+                <!-- start page title -->
+                <div class="row">
+
+
+                    <table class="table" id="adminTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Banner Image</th>
+                                <th scope="col">Top</th>
+                                <th scope="col">Middle</th>
+                                <th scope="col">Bottom</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Remove</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            {{#each banner}}
+                            <tr class="align-middle">
+                                <td></td>
+                                <td>{{this.info.bannername}}</td>
+                                <td><img src="/banner-images1/{{this._id}}image1.jpg"
+                                        style="width: 15rem; height: auto;"></td>
+                                <td>{{this.info.topContent}}</td>
+                                <td>{{this.info.middleContent}}</td>
+                                <td>{{this.info.bottomContent}}</td>
+                                <td>
+                                    {{#if this.status}}
+                                    <a class="btn btn-primary mt-2 ">Using</a>
+                                    {{else}}
+                                    <a class="btn btn-primary mt-2 " onclick="selectBanner('{{this._id}}')"
+                                        type="submit">Select</a>
+                                    {{/if}}
+                                </td>
+                                <td><a class="btn btn-danger mt-2 " 
+                                        onclick="bannerDelete('{{this._id}}')" >Delete</a>
+                                </td>
+
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+
                 </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <script>
-    function selectBanner(id){
+    function selectBanner(id) {
         $.ajax({
-            url:'/banner/selectBanner-1',
-            data:{
-              
-                id:id
+            url: '/banner/selectBanner-1',
+            data: {
+
+                id: id
             },
-            method:'post',
-            success:(response)=>{
-                
+            method: 'post',
+            success: (response) => {
+                location.reload()
             }
         })
+    }
+
+    function bannerDelete(id){
+        
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this item!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/banner/removebannerOne",
+                    type: "POST",
+                    data: {
+                        id:id
+                    },
+                    success: async (response) => {
+                        if (response.status) {
+                            await swal("Item has been deleted!", {
+                                    icon: "success",
+                                });
+                                location.reload()
+
+                        }
+                    },
+                });
+            } else {
+                swal("Your cart item is not removed!");
+            }
+        });
+
+        
     }
 </script>
 
 
-{{!-- 
+{{!--
 <div class="container">
     <div class="row">
-        
+
     </div>
 </div> --}}
-
-

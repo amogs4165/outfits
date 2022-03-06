@@ -42,10 +42,10 @@
                                 {{#if this.status}}
                                 <a class="btn btn-primary mt-2 "  >Using</a>
                                 {{else}}
-                                 <a class="btn btn-primary mt-2 " href=""  onclick="selectBanner('{{this._id}}')" type="submit">Select</a>
+                                 <a class="btn btn-primary mt-2 " onclick="selectBanner('{{this._id}}')" >Select</a>
                                 {{/if}}
                             </td>
-                            <td><a class="btn btn-danger mt-2 " href=""  onclick="return confirm('click Ok to confirm Delete')" type="submit">Delete</a></td>
+                            <td><a class="btn btn-danger mt-2 " onclick="bannerDelete('{{this._id}}')" >Delete</a></td>
                             
                         </tr>
                     {{/each}}
@@ -70,10 +70,41 @@
             },
             method:'post',
             success:(response)=>{
-
+                   window.location = '/';
             }
         })
     }
+    function bannerDelete(id){
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this item!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/banner/removebanner",
+                            type: "POST",
+                            data: {
+                                id:id
+                            },
+                            success: async (response) => {
+                                if (response.status) {
+                                    await swal("Item has been deleted!", {
+                                            icon: "success",
+                                        });
+                                        location.reload()
+
+                                }
+                            },
+                        });
+                    } else {
+                        swal("Your cart item is not removed!");
+                    }
+                });
+        }
 </script>
 
 

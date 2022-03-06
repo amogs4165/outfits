@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const helper = require('../../helper/connectionHelper')
+const helper = require('../../helper/connectionHelper');
+const fs = require('fs');
 
 const verifyLogin = (req,res,next)=>{
     if(req.session.admin){
@@ -28,7 +29,7 @@ router.post('/add-banner',verifyLogin,(req,res)=>{
         let id = resp.insertedId
         image1.mv('./public/banner-images/'+id+'image1.jpg',(err,done)=>{
             if(!err){
-                res.send('sucess')
+                res.redirect('/banner/select-banner')
             }
         })
     })
@@ -42,7 +43,7 @@ router.post('/add-banner-1',verifyLogin,(req,res)=>{
         let id = resp.insertedId
         image1.mv('./public/banner-images1/'+id+'image1.jpg',(err,done)=>{
             if(!err){
-                res.send('sucess')
+                res.redirect('/banner/select-banner-1')
             }
         })
     })
@@ -66,22 +67,39 @@ router.get('/select-banner-1',verifyLogin,(req,res)=>{
     })
 })
 
-router.post('/selectBanner',verifyLogin,async (req,res)=>{
- 
-    id=req.body.id
-
-   
-    let banner = await helper.selectBanner(id)
-   
-    // helper.selectBanner(info)
-    // res.send('success')
+router.post('/selectBanner-1',verifyLogin,async (req,res)=>{
+    
+    let id=req.body.id
+    helper.selectBannerOne(id).then(async(resp)=>{
+        let response = await resp
+        res.json({status:true})
+    })
 
 })
 
-router.post('/selectBanner-1',verifyLogin,async (req,res)=>{
+router.post('/selectBanner',verifyLogin,async (req,res)=>{
  
-    id=req.body.id
-    let banner = await helper.selectBannerOne(id)
+    let id=req.body.id
+    helper.selectBanner(id).then(async(resp)=>{
+        let response = await resp
+        res.json({status:true})
+    })
 
+})
+router.post('/removebannerOne',verifyLogin,(req,res)=>{
+    let id = req.body.id
+    helper.removeBannerOne(id).then(()=>{
+        var path = './public/banner-images1/'+id+'image1.jpg'
+            fs.unlinkSync(path);
+            res.json({status:true});
+    })
+})
+router.post('/removebanner',verifyLogin,(req,res)=>{
+    let id = req.body.id
+    helper.removeBanner(id).then(()=>{
+        var path = './public/banner-images/'+id+'image1.jpg'
+        fs.unlinkSync(path);
+        res.json({status:true});
+    })
 })
 module.exports = router;
