@@ -61,4 +61,21 @@ router.post('/', (req, res) => {
 
 })
 
+router.get('/userOtp',(req,res)=>{
+
+    client.verify
+    .services(serviceSSID)
+    .verifications.create({
+        to: `+91${req.session.mobNum}`,
+        channel: "sms"
+    }).then((resp) => {
+       
+        res.render('user/otpVerification')
+    }).catch((resp) => {
+      
+        res.send("something went wrongggg")
+    })
+
+})
+
 module.exports = router;

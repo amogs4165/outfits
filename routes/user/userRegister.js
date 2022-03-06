@@ -59,26 +59,10 @@ router.post('/userDetail', (req, res) => {
     req.session.userDetails = req.body;
     details = req.session.userDetails;
     req.session.mobNum = req.body.phoneNumber
-    res.redirect('/register/sendOtp');
+    res.redirect('/verify/userOtp');
 
 })
 
-router.get('/sendOtp',(req,res)=>{
-
-    client.verify
-    .services(serviceSSID)
-    .verifications.create({
-        to: `+91${req.session.mobNum}`,
-        channel: "sms"
-    }).then((resp) => {
-       
-        res.render('user/otpVerification')
-    }).catch((resp) => {
-      
-        res.send("something went wrongggg")
-    })
-
-})
 
 module.exports = router;
 
